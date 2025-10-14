@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Business Structures & Ownership | CFA Corporate Issuers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .section-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .active-step .step-circle {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: #667eea;
+            color: white;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin: 2rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        td {
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title::before {
+            content: '';
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+        
+        .nav-link {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateX(8px);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin: 0.5rem 0;
+        }
+        
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chapter-navigation {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-purple-100">
+    <!-- Navigation Sidebar -->
+    <div class="fixed left-0 top-0 h-full w-80 sidebar z-40 overflow-y-auto">
+        <div class="p-6">
+            <div class="mb-8">
+                <a href="index.html" class="flex items-center text-xl font-bold text-gray-800">
+                    <i class="fas fa-arrow-left mr-3"></i>
+                    CFA Corporate Issuers
+                </a>
+            </div>
+            
+            <div class="mb-6">
+                <div class="text-sm text-gray-600 mb-2">Chapter 1 Progress</div>
+                <div class="bg-gray-200 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-300" style="width: 20%"></div>
+                </div>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="#section-1" class="nav-link active flex items-center text-gray-700">
+                    <i class="fas fa-building w-5 mr-3"></i>
+                    Business Forms
+                </a>
+                <a href="#section-2" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-cogs w-5 mr-3"></i>
+                    Corporate Features
+                </a>
+                <a href="#section-3" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-chart-bar w-5 mr-3"></i>
+                    Public vs Private
+                </a>
+                <a href="#section-4" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-sync-alt w-5 mr-3"></i>
+                    Lifecycle
+                </a>
+                <a href="#section-5" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-users w-5 mr-3"></i>
+                    Ownership Varieties
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-80 min-h-screen">
+        <div class="max-w-5xl mx-auto px-8 py-12">
+            <!-- Chapter Header -->
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h1 class="text-4xl font-bold mb-4">Business Structures & Ownership</h1>
+                <p class="text-xl opacity-90">Understanding organizational forms, corporate features, and ownership structures</p>
+            </div>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="index.html" class="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                        <i class="fas fa-home mr-2"></i>
+                        Back to Overview
+                    </a>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-500">Chapter 1 of 7</span>
+                        <a href="chapter2.html" class="flex items-center text-purple-600 hover:text-purple-800 font-semibold">
+                            Next: Corporate Governance
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="progress-step active-step">
+                    <div class="step-circle">1</div>
+                    <div class="text-sm font-medium">Business Forms</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">2</div>
+                    <div class="text-sm font-medium">Corporate Features</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">3</div>
+                    <div class="text-sm font-medium">Public vs Private</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">4</div>
+                    <div class="text-sm font-medium">Lifecycle</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">5</div>
+                    <div class="text-sm font-medium">Ownership</div>
+                </div>
+            </div>
+
+            <!-- Section 1: Organizational Forms of Business -->
+            <div id="section-1" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Organizational Forms of Business</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Businesses can be structured in several ways, each with distinct characteristics regarding liability, taxation, and access to capital.</p>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Sole Proprietorship</th>
+                                <th>General Partnership</th>
+                                <th>Limited Partnership</th>
+                                <th>Corporation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold">Legal Status</td>
+                                <td>No separate legal entity</td>
+                                <td>No separate legal entity</td>
+                                <td>No separate legal entity</td>
+                                <td class="bg-blue-50 font-semibold">Separate legal entity</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Owner/Operator</td>
+                                <td>Owner-operated</td>
+                                <td>Partners-operated</td>
+                                <td>GP-operated, LP-invested</td>
+                                <td class="bg-blue-50">Board & Management</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Liability</td>
+                                <td class="bg-red-50 font-semibold">Unlimited personal liability</td>
+                                <td class="bg-red-50 font-semibold">Unlimited joint liability</td>
+                                <td>Unlimited for GPs, Limited for LPs</td>
+                                <td class="bg-green-50 font-semibold">Limited liability for shareholders</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Taxation</td>
+                                <td>Pass-through to owner</td>
+                                <td>Pass-through to partners</td>
+                                <td>Pass-through to partners</td>
+                                <td class="bg-red-50 font-semibold">Dual-level taxation (corporate & dividend)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Capital Access</td>
+                                <td>Limited to owner's resources</td>
+                                <td>Restricted by partners' resources</td>
+                                <td>Determined by GPs/LPs</td>
+                                <td class="bg-green-50 font-semibold">Unrestricted (can issue equity/debt)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Section 2: Key Features of Corporate Issuers -->
+            <div id="section-2" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Key Features of Corporate Issuers</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Corporations are the most common form of issuer in global financial markets due to a unique combination of features that facilitate growth and investment.</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card">
+                        <h3 class="card-title">Separate Legal Entity</h3>
+                        <p>A corporation is legally an "individual," meaning it can enter contracts, own assets, and be sued, separate from its owners.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Separation of Ownership and Management</h3>
+                        <p>Shareholders own the company, but professional managers run the daily operations. This separation allows for specialized expertise in management and attracts passive investors.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Limited Liability</h3>
+                        <p>This is a cornerstone of corporate structure. A shareholder's financial risk is limited to the amount they have invested in the company's shares. Personal assets are not at risk.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Abundant Access to Capital</h3>
+                        <p>Corporations can raise large amounts of capital by issuing equity (shares) and debt (bonds) to a wide range of investors, fueling growth potential.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Taxation</h3>
+                        <p>Corporate profits are often subject to "double taxation." The corporation pays taxes on its profits, and then shareholders pay taxes again on the dividends they receive. This is a trade-off for the benefits of limited liability and access to capital.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Publicly vs. Privately Owned Corporate Issuers -->
+            <div id="section-3" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Publicly vs. Privately Owned Corporate Issuers</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">The distinction between public and private companies is crucial for investors, affecting liquidity, transparency, and regulation.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Public Companies -->
+                    <div class="card">
+                        <h3 class="card-title">Public Companies</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Exchange Listing & Liquidity:</strong> Shares are traded on public stock exchanges, making them highly liquid and easy to buy and sell.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-line text-blue-500 mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Price Transparency:</strong> Share prices are continuously updated and publicly available.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-coins text-yellow-500 mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Share Issuance:</strong> Can issue additional shares in public capital markets to raise large sums from a diverse investor base.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-purple-500 mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Regulation:</strong> Subject to extensive disclosure, compliance, and regulatory requirements to protect investors.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Private Companies -->
+                    <div class="card">
+                        <h3 class="card-title">Private Companies</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <div>
+                                    <strong>No Exchange Listing:</strong> Shares are difficult to buy and sell, as there is no public market.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-eye-slash text-gray-500 mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Limited Price Transparency:</strong> Sale prices are privately negotiated between owners.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-user-friends text-indigo-500 mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Financing:</strong> Rely on private debt or equity from a smaller number of investors (e.g., private placements to accredited investors).
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-lock text-orange-500 mr-3 mt-1"></i>
+                                <div>
+                                    <strong>"Locked" Investments:</strong> Shareholders often have to wait for an exit event like a sale or an IPO to realize their gains.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-teal-500 mr-3 mt-1"></i>
+                                <div>
+                                    <strong>Regulation:</strong> Face far less disclosure and regulatory scrutiny.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: The Lifecycle: Going Public and Going Private -->
+            <div id="section-4" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">The Lifecycle: Going Public and Going Private</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">Going Public</h3>
+                        <p class="mb-6 text-gray-700">Companies go public to raise capital and provide liquidity for early investors. The main methods are:</p>
+                        
+                        <div class="space-y-4">
+                            <div class="card">
+                                <h3 class="card-title">Initial Public Offering (IPO)</h3>
+                                <p>The most common method, where a company hires investment banks to underwrite and sell new shares to the public.</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="card-title">Direct Listing (DL)</h3>
+                                <p>No new shares are created. Existing shareholders (like employees and early investors) are allowed to sell their shares directly on an exchange.</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="card-title">Acquisition/SPAC</h3>
+                                <p>A private company can become public by being acquired by an already-listed public company or a Special Purpose Acquisition Company (SPAC).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">Going Private</h3>
+                        <p class="mb-6 text-gray-700">This involves an investor group (often private equity firms or company management) acquiring all of a public company's outstanding shares and delisting it from the stock exchange, often using significant debt financing (a leveraged buyout).</p>
+                        
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl">
+                            <h4 class="font-bold text-lg mb-3 text-blue-800">Motivations for going private include:</h4>
+                            <ul class="space-y-2 text-blue-700">
+                                <li class="flex items-center">
+                                    <i class="fas fa-arrow-right text-blue-500 mr-2"></i>
+                                    Belief that the company is undervalued.
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-arrow-right text-blue-500 mr-2"></i>
+                                    Desire to escape the costs and scrutiny of being a public company.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 5: The Varieties of Corporate Owners -->
+            <div id="section-5" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">The Varieties of Corporate Owners</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Ownership of corporations is diverse, including:</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-university text-4xl text-purple-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Institutional Investors</h3>
+                        <p>Mutual funds, pension funds, insurance companies.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-user text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Individual Investors</h3>
+                        <p>Retail investors who buy shares for their personal portfolios.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-building text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Other Corporations</h3>
+                        <p>Companies holding strategic stakes in other firms.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-landmark text-4xl text-red-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Governments</h3>
+                        <p>Through Government-Owned Enterprises (GOEs) or sovereign wealth funds.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-hands-helping text-4xl text-yellow-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Non-profit Organizations</h3>
+                        <p>Endowments and foundations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter Navigation Footer -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="index.html" class="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Back to Overview
+                    </a>
+                    <div class="text-center">
+                        <div class="text-sm text-gray-500 mb-1">Next Chapter</div>
+                        <a href="chapter2.html" class="flex items-center text-purple-600 hover:text-purple-800 font-semibold text-lg">
+                            Corporate Governance
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav">
+        <a href="#" id="scroll-top" class="nav-button mb-2">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+        <a href="chapter2.html" class="nav-button">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation based on scroll
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const progressSteps = document.querySelectorAll('.progress-step');
+
+        function updateActiveSection() {
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    // Update sidebar navigation
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    if (navLinks[index]) {
+                        navLinks[index].classList.add('active');
+                    }
+                    
+                    // Update progress steps
+                    progressSteps.forEach((step, stepIndex) => {
+                        if (stepIndex <= index) {
+                            step.classList.add('active-step');
+                        } else {
+                            step.classList.remove('active-step');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveSection);
+
+        // Scroll to top functionality
+        document.getElementById('scroll-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mark chapter as completed when user reaches the end
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+            
+            if (scrollPosition + windowHeight >= documentHeight - 100) {
+                let completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '[]');
+                if (!completedChapters.includes(1)) {
+                    completedChapters.push(1);
+                    localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+                }
+            }
+        });
+    </script>
+</body>
+</html>

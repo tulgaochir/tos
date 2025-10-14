@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Risk Management | CFA Corporate Issuers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .section-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .active-step .step-circle {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border-color: #ff6b6b;
+            color: white;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title::before {
+            content: '';
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+        
+        .risk-category {
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border-left: 6px solid;
+        }
+        
+        .strategic-risk {
+            background-color: #fef5e7;
+            border-left-color: #f6ad55;
+        }
+        
+        .operational-risk {
+            background-color: #e6fffa;
+            border-left-color: #38b2ac;
+        }
+        
+        .financial-risk {
+            background-color: #fbb6ce;
+            border-left-color: #ed64a6;
+        }
+        
+        .compliance-risk {
+            background-color: #e9d8fd;
+            border-left-color: #9f7aea;
+        }
+        
+        .risk-management-process {
+            counter-increment: risk-counter;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            padding-left: 5rem;
+        }
+        
+        .risk-management-process::before {
+            content: counter(risk-counter);
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .nav-link {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            transform: translateX(8px);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin: 0.5rem 0;
+        }
+        
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chapter-navigation {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .completion-message {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-red-100 to-teal-100">
+    <!-- Navigation Sidebar -->
+    <div class="fixed left-0 top-0 h-full w-80 sidebar z-40 overflow-y-auto">
+        <div class="p-6">
+            <div class="mb-8">
+                <a href="index.html" class="flex items-center text-xl font-bold text-gray-800">
+                    <i class="fas fa-arrow-left mr-3"></i>
+                    CFA Corporate Issuers
+                </a>
+            </div>
+            
+            <div class="mb-6">
+                <div class="text-sm text-gray-600 mb-2">Chapter 7 Progress</div>
+                <div class="bg-gray-200 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-red-500 to-teal-500 h-3 rounded-full transition-all duration-300" style="width: 20%"></div>
+                </div>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="#section-1" class="nav-link active flex items-center text-gray-700">
+                    <i class="fas fa-info-circle w-5 mr-3"></i>
+                    What is Risk Management?
+                </a>
+                <a href="#section-2" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-exclamation-triangle w-5 mr-3"></i>
+                    Types of Business Risks
+                </a>
+                <a href="#section-3" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-cogs w-5 mr-3"></i>
+                    Risk Management Process
+                </a>
+                <a href="#section-4" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-shield-alt w-5 mr-3"></i>
+                    Risk Mitigation Strategies
+                </a>
+                <a href="#section-5" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-chart-line w-5 mr-3"></i>
+                    Benefits & Best Practices
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-80 min-h-screen">
+        <div class="max-w-5xl mx-auto px-8 py-12">
+            <!-- Chapter Header -->
+            <div class="section-header">
+                <div class="section-number">7</div>
+                <h1 class="text-4xl font-bold mb-4">Risk Management</h1>
+                <p class="text-xl opacity-90">Identifying, assessing, and managing various types of business risks</p>
+            </div>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="chapter6.html" class="flex items-center text-gray-600 hover:text-red-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Previous: Business Models
+                    </a>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-500">Chapter 7 of 7</span>
+                        <span class="text-green-600 font-semibold">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Final Chapter
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="progress-step active-step">
+                    <div class="step-circle">1</div>
+                    <div class="text-sm font-medium">Definition</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">2</div>
+                    <div class="text-sm font-medium">Risk Types</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">3</div>
+                    <div class="text-sm font-medium">Process</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">4</div>
+                    <div class="text-sm font-medium">Mitigation</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">5</div>
+                    <div class="text-sm font-medium">Best Practices</div>
+                </div>
+            </div>
+
+            <!-- Section 1: What is Risk Management? -->
+            <div id="section-1" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">What is Risk Management?</h2>
+                
+                <div class="bg-gradient-to-r from-red-50 to-teal-50 p-8 rounded-2xl border border-red-200 mb-8">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shield-alt text-4xl text-red-600 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Risk Management Definition</h3>
+                            <p class="text-lg text-gray-700">Risk management is the systematic process of identifying, analyzing, evaluating, and responding to potential risks that could negatively impact an organization's operations, financial performance, reputation, or strategic objectives. It involves implementing strategies and controls to minimize the likelihood and impact of adverse events while maximizing opportunities for positive outcomes.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-target text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Objectives of Risk Management</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Protect shareholder value and stakeholder interests</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Ensure business continuity and operational resilience</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Optimize risk-return trade-offs in decision making</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span>Enhance regulatory compliance and governance</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-lightbulb text-4xl text-yellow-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Key Principles</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mr-2 mt-1"></i>
+                                <span>Risk management should be proactive, not reactive</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mr-2 mt-1"></i>
+                                <span>It requires enterprise-wide integration and coordination</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mr-2 mt-1"></i>
+                                <span>Risk appetite should align with business strategy</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mr-2 mt-1"></i>
+                                <span>Continuous monitoring and improvement is essential</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 2: Types of Business Risks -->
+            <div id="section-2" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Types of Business Risks</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Business risks can be categorized into several types, each requiring different management approaches and mitigation strategies.</p>
+                
+                <div class="space-y-6">
+                    <div class="risk-category strategic-risk">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-chess text-4xl text-orange-600 mr-4"></i>
+                            <h3 class="text-2xl font-bold text-orange-800">Strategic Risks</h3>
+                        </div>
+                        <p class="text-orange-700 mb-4">Risks that affect the organization's ability to achieve its long-term objectives and strategic goals.</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-users text-orange-600 mr-2"></i>
+                                    <span class="text-orange-800 font-semibold">Market and competitive risks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-lightbulb text-orange-600 mr-2"></i>
+                                    <span class="text-orange-800 font-semibold">Technology and innovation risks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-handshake text-orange-600 mr-2"></i>
+                                    <span class="text-orange-800 font-semibold">Merger and acquisition risks</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-globe text-orange-600 mr-2"></i>
+                                    <span class="text-orange-800 font-semibold">Reputation and brand risks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-chart-line text-orange-600 mr-2"></i>
+                                    <span class="text-orange-800 font-semibold">Business model disruption</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map text-orange-600 mr-2"></i>
+                                    <span class="text-orange-800 font-semibold">Strategic planning failures</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-category operational-risk">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-cogs text-4xl text-teal-600 mr-4"></i>
+                            <h3 class="text-2xl font-bold text-teal-800">Operational Risks</h3>
+                        </div>
+                        <p class="text-teal-700 mb-4">Risks arising from inadequate or failed internal processes, people, systems, or external events.</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-tools text-teal-600 mr-2"></i>
+                                    <span class="text-teal-800 font-semibold">Process and system failures</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-tie text-teal-600 mr-2"></i>
+                                    <span class="text-teal-800 font-semibold">Human resource risks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-laptop text-teal-600 mr-2"></i>
+                                    <span class="text-teal-800 font-semibold">Information technology risks</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-truck text-teal-600 mr-2"></i>
+                                    <span class="text-teal-800 font-semibold">Supply chain disruptions</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-exclamation-triangle text-teal-600 mr-2"></i>
+                                    <span class="text-teal-800 font-semibold">Natural disasters and accidents</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-shield-alt text-teal-600 mr-2"></i>
+                                    <span class="text-teal-800 font-semibold">Cybersecurity threats</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-category financial-risk">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-dollar-sign text-4xl text-pink-600 mr-4"></i>
+                            <h3 class="text-2xl font-bold text-pink-800">Financial Risks</h3>
+                        </div>
+                        <p class="text-pink-700 mb-4">Risks related to the financial structure and financial management of the organization.</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-percentage text-pink-600 mr-2"></i>
+                                    <span class="text-pink-800 font-semibold">Interest rate risk</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-exchange-alt text-pink-600 mr-2"></i>
+                                    <span class="text-pink-800 font-semibold">Foreign exchange risk</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-credit-card text-pink-600 mr-2"></i>
+                                    <span class="text-pink-800 font-semibold">Credit and counterparty risk</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-tint text-pink-600 mr-2"></i>
+                                    <span class="text-pink-800 font-semibold">Liquidity risk</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-chart-bar text-pink-600 mr-2"></i>
+                                    <span class="text-pink-800 font-semibold">Market risk</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-balance-scale text-pink-600 mr-2"></i>
+                                    <span class="text-pink-800 font-semibold">Capital structure risk</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-category compliance-risk">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-gavel text-4xl text-purple-600 mr-4"></i>
+                            <h3 class="text-2xl font-bold text-purple-800">Compliance and Legal Risks</h3>
+                        </div>
+                        <p class="text-purple-700 mb-4">Risks arising from violations of laws, regulations, prescribed practices, or ethical standards.</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-book text-purple-600 mr-2"></i>
+                                    <span class="text-purple-800 font-semibold">Regulatory compliance risks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-shield text-purple-600 mr-2"></i>
+                                    <span class="text-purple-800 font-semibold">Data privacy and protection</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-handshake text-purple-600 mr-2"></i>
+                                    <span class="text-purple-800 font-semibold">Contract and legal risks</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-balance-scale-right text-purple-600 mr-2"></i>
+                                    <span class="text-purple-800 font-semibold">Intellectual property risks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-users text-purple-600 mr-2"></i>
+                                    <span class="text-purple-800 font-semibold">Employment law compliance</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-globe-americas text-purple-600 mr-2"></i>
+                                    <span class="text-purple-800 font-semibold">International regulatory risks</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Risk Management Process -->
+            <div id="section-3" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Risk Management Process</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Effective risk management follows a structured process that enables organizations to systematically address risks across all business areas.</p>
+                
+                <div class="space-y-4" style="counter-reset: risk-counter;">
+                    <div class="risk-management-process">
+                        <h4 class="text-xl font-bold mb-3 text-gray-800">Risk Identification</h4>
+                        <p class="text-gray-700 mb-3">Systematically identify all potential risks that could affect the organization's objectives.</p>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• Conduct comprehensive risk assessments across all business units</li>
+                            <li>• Use tools like SWOT analysis, brainstorming sessions, and expert interviews</li>
+                            <li>• Review historical data and industry benchmarks</li>
+                            <li>• Monitor emerging risks and trends</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="risk-management-process">
+                        <h4 class="text-xl font-bold mb-3 text-gray-800">Risk Assessment and Analysis</h4>
+                        <p class="text-gray-700 mb-3">Evaluate the likelihood and potential impact of identified risks.</p>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• Assess probability of risk occurrence</li>
+                            <li>• Estimate potential financial and operational impact</li>
+                            <li>• Create risk maps and heat maps for visualization</li>
+                            <li>• Prioritize risks based on severity and likelihood</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="risk-management-process">
+                        <h4 class="text-xl font-bold mb-3 text-gray-800">Risk Response and Mitigation</h4>
+                        <p class="text-gray-700 mb-3">Develop and implement strategies to address identified risks.</p>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• Accept: Acknowledge and monitor risks within acceptable tolerance</li>
+                            <li>• Avoid: Eliminate or withdraw from risk-generating activities</li>
+                            <li>• Mitigate: Reduce likelihood or impact through controls and procedures</li>
+                            <li>• Transfer: Shift risk to third parties through insurance or contracts</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="risk-management-process">
+                        <h4 class="text-xl font-bold mb-3 text-gray-800">Risk Monitoring and Reporting</h4>
+                        <p class="text-gray-700 mb-3">Continuously monitor risk levels and communicate status to stakeholders.</p>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• Establish key risk indicators (KRIs) and monitoring systems</li>
+                            <li>• Regular risk reporting to management and board</li>
+                            <li>• Conduct periodic risk assessments and updates</li>
+                            <li>• Maintain risk registers and documentation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="risk-management-process">
+                        <h4 class="text-xl font-bold mb-3 text-gray-800">Risk Governance and Culture</h4>
+                        <p class="text-gray-700 mb-3">Establish appropriate governance structures and risk-aware culture.</p>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• Define clear roles and responsibilities for risk management</li>
+                            <li>• Establish risk committees and governance frameworks</li>
+                            <li>• Promote risk awareness training and education</li>
+                            <li>• Integrate risk considerations into decision-making processes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Risk Mitigation Strategies -->
+            <div id="section-4" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Risk Mitigation Strategies</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Organizations can employ various strategies and tools to mitigate different types of risks effectively.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-tools text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Internal Controls</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <span>Segregation of duties and authorization limits</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <span>Documentation and approval procedures</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <span>Regular internal audits and reviews</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                <span>Performance monitoring and reporting</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-shield-alt text-4xl text-purple-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Insurance and Risk Transfer</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-umbrella text-purple-500 mr-2 mt-1"></i>
+                                <span>Property and casualty insurance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-user-shield text-purple-500 mr-2 mt-1"></i>
+                                <span>Directors and officers (D&O) insurance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-laptop-code text-purple-500 mr-2 mt-1"></i>
+                                <span>Cyber liability insurance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-handshake text-purple-500 mr-2 mt-1"></i>
+                                <span>Contractual risk transfer mechanisms</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-chart-line text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Financial Risk Management</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-exchange-alt text-green-500 mr-2 mt-1"></i>
+                                <span>Hedging with derivatives and forwards</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-coins text-green-500 mr-2 mt-1"></i>
+                                <span>Diversification of revenue streams</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-piggy-bank text-green-500 mr-2 mt-1"></i>
+                                <span>Maintaining adequate cash reserves</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-credit-card text-green-500 mr-2 mt-1"></i>
+                                <span>Credit facilities and backup financing</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-cogs text-4xl text-orange-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Operational Risk Controls</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-clipboard-check text-orange-500 mr-2 mt-1"></i>
+                                <span>Business continuity and disaster recovery plans</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-users text-orange-500 mr-2 mt-1"></i>
+                                <span>Redundancy in critical processes and personnel</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-network-wired text-orange-500 mr-2 mt-1"></i>
+                                <span>Supply chain diversification</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-graduation-cap text-orange-500 mr-2 mt-1"></i>
+                                <span>Employee training and development programs</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Benefits and Best Practices -->
+            <div id="section-5" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Benefits and Best Practices</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Effective risk management provides significant benefits to organizations and stakeholders when implemented following industry best practices.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="card bg-green-50 border-l-6 border-green-500">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-trophy text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-green-800">Key Benefits</h3>
+                        <ul class="space-y-3 text-green-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                <span>Enhanced decision-making through better risk understanding</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-line text-green-600 mr-3 mt-1"></i>
+                                <span>Improved financial performance and operational efficiency</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-check text-green-600 mr-3 mt-1"></i>
+                                <span>Better regulatory compliance and reduced legal exposure</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-handshake text-green-600 mr-3 mt-1"></i>
+                                <span>Increased stakeholder confidence and trust</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-dollar-sign text-green-600 mr-3 mt-1"></i>
+                                <span>Lower cost of capital and insurance premiums</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card bg-blue-50 border-l-6 border-blue-500">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-star text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800">Best Practices</h3>
+                        <ul class="space-y-3 text-blue-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-600 mr-3 mt-1"></i>
+                                <span>Integrate risk management into strategic planning</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-users-cog text-blue-600 mr-3 mt-1"></i>
+                                <span>Ensure strong tone at the top and board oversight</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-sync-alt text-blue-600 mr-3 mt-1"></i>
+                                <span>Maintain dynamic and adaptive risk processes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-bar text-blue-600 mr-3 mt-1"></i>
+                                <span>Use technology and data analytics for risk insights</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-graduation-cap text-blue-600 mr-3 mt-1"></i>
+                                <span>Foster a risk-aware organizational culture</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-8 rounded-2xl border border-yellow-200">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-lightbulb text-4xl text-orange-600 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Key Insight for Financial Analysts</h3>
+                            <p class="text-lg text-gray-700">When evaluating companies, analysts should assess the quality and comprehensiveness of risk management frameworks. Strong risk management capabilities often correlate with better long-term performance, lower volatility, and more sustainable competitive advantages.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completion Message -->
+            <div class="completion-message">
+                <div class="flex items-center justify-center mb-6">
+                    <i class="fas fa-graduation-cap text-6xl mr-4"></i>
+                    <div>
+                        <h2 class="text-3xl font-bold">Congratulations!</h2>
+                        <p class="text-xl">You have completed the CFA Corporate Issuers guide</p>
+                    </div>
+                </div>
+                <p class="text-lg opacity-90 mb-6">
+                    You now have a comprehensive understanding of business structures, corporate governance, 
+                    working capital management, capital allocation, capital structure, business models, and risk management.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="index.html" class="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-home mr-2"></i>
+                        Return to Overview
+                    </a>
+                    <button onclick="window.print()" class="bg-green-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Certificate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chapter Navigation Footer -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="chapter6.html" class="flex items-center text-gray-600 hover:text-red-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Previous: Business Models
+                    </a>
+                    <div class="text-center">
+                        <div class="text-sm text-gray-500 mb-1">Course Complete</div>
+                        <a href="index.html" class="flex items-center text-green-600 hover:text-green-800 font-semibold text-lg">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Back to Overview
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav">
+        <a href="#" id="scroll-top" class="nav-button mb-2">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+        <a href="chapter6.html" class="nav-button mb-2">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="index.html" class="nav-button">
+            <i class="fas fa-home"></i>
+        </a>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation based on scroll
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const progressSteps = document.querySelectorAll('.progress-step');
+
+        function updateActiveSection() {
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    // Update sidebar navigation
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    if (navLinks[index]) {
+                        navLinks[index].classList.add('active');
+                    }
+                    
+                    // Update progress steps
+                    progressSteps.forEach((step, stepIndex) => {
+                        if (stepIndex <= index) {
+                            step.classList.add('active-step');
+                        } else {
+                            step.classList.remove('active-step');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveSection);
+
+        // Scroll to top functionality
+        document.getElementById('scroll-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mark chapter as completed when user reaches the end
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+            
+            if (scrollPosition + windowHeight >= documentHeight - 100) {
+                let completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '[]');
+                if (!completedChapters.includes(7)) {
+                    completedChapters.push(7);
+                    localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+                }
+            }
+        });
+
+        // Celebration effect when course is completed
+        window.addEventListener('load', function() {
+            const completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '[]');
+            if (completedChapters.length === 7) {
+                // Add some celebration animation or confetti here if desired
+                console.log('🎉 Congratulations! Course completed!');
+            }
+        });
+    </script>
+</body>
+</html>
