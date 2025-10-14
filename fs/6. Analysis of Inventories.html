@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chapter 6: Analysis of Inventories</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -228,7 +227,6 @@
 </head>
 <body class="bg-gray-50">
 
-  <!-- Header -->
   <div class="gradient-bg text-white">
     <div class="max-w-6xl mx-auto px-6 py-16 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">Chapter 6: Analysis of Inventories</h1>
@@ -236,7 +234,6 @@
     </div>
   </div>
 
-  <!-- Navigation Breadcrumb -->
   <div class="bg-white border-b border-gray-200">
     <div class="max-w-6xl mx-auto px-6 py-3">
       <div class="flex items-center space-x-2 text-sm text-gray-600">
@@ -250,7 +247,6 @@
   <div class="max-w-6xl mx-auto px-6 py-8">
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
       
-      <!-- Table of Contents (Sidebar) -->
       <div class="lg:col-span-1">
         <div class="toc">
           <h3>📚 Table of Contents</h3>
@@ -263,10 +259,8 @@
         </div>
       </div>
 
-      <!-- Main Content -->
       <div class="lg:col-span-3">
 
-        <!-- Section 1 -->
         <div id="section-1" class="content-section">
           <div class="section-header">
             <div class="section-number">1</div>
@@ -364,7 +358,6 @@
           </div>
         </div>
 
-        <!-- Section 2 -->
         <div id="section-2" class="content-section">
           <div class="section-header">
             <div class="section-number">2</div>
@@ -406,9 +399,76 @@
               <li>• Positively impacts activity ratios like inventory turnover, which may falsely suggest improved efficiency.</li>
             </ul>
           </div>
-        </div>
+          
+          <div class="subsection">
+            <h3 class="pt-4 border-t border-gray-200">🔍 Key Valuation Concepts Breakdown</h3>
+            
+            <div class="info-box">
+                This section breaks down the terms used in inventory valuation, especially the "Lower of Cost or Market" rule under US GAAP.
+            </div>
 
-        <!-- Section 3 -->
+            <h4>1. Lower of Cost or Market (LCM) – The Core Principle</h4>
+            <p>This accounting rule dictates that inventory must be recorded at whichever value is lower: its original <span class="key-term">cost</span> or its current <span class="key-term">market value</span>. This prevents companies from overstating the value of their assets.</p>
+            <div class="example-box">
+                <h4>🧮 Example</h4>
+                <p>You bought a product for <strong>$100</strong> (cost).<br>
+                • If its market value drops to $80, you must record the inventory at <strong>$80</strong>.<br>
+                • If its market value rises to $120, you still record it at its original cost of <strong>$100</strong>.</p>
+            </div>
+
+            <h4>2. Net Realizable Value (NRV) – The "Ceiling"</h4>
+            <p>NRV is the estimated selling price of an item, minus any costs required to complete and sell it. It represents the maximum value the inventory can be reported at (the ceiling).</p>
+            <div class="formula-box">
+                NRV = Selling Price − Costs to Sell
+            </div>
+            <div class="example-box">
+                <h4>🧮 Example</h4>
+                <p>You expect to sell an item for $150, but it will cost $20 to ship and process the sale.<br>
+                <strong>NRV</strong> = $150 - $20 = <strong>$130</strong></p>
+            </div>
+            
+            <h4>3. Market Value (US GAAP) – A Three-Step Process</h4>
+            <p>Under US GAAP (for LIFO/retail methods), "market value" isn't just one number. It's determined by finding the middle value among three figures:</p>
+            <ul class="list-disc pl-5 my-4 space-y-2">
+                <li><strong>Ceiling:</strong> The Net Realizable Value (NRV).</li>
+                <li><strong>Floor:</strong> The NRV minus a normal profit margin.</li>
+                <li><strong>Replacement Cost:</strong> What it would cost to buy the item again today.</li>
+            </ul>
+            <div class="example-box">
+                <h4>🧮 Example</h4>
+                <p>Given the following values:<br>
+                • NRV = <strong>$130</strong> (this is the Ceiling)<br>
+                • Normal Profit Margin = $30<br>
+                • Replacement Cost = <strong>$110</strong></p>
+                <p>First, calculate the Floor: $130 (NRV) - $30 (Profit) = <strong>$100</strong>.</p>
+                <p>Now, compare the three values: Ceiling ($130), Floor ($100), and Replacement Cost ($110). The designated <span class="key-term">Market Value</span> is the middle one: <strong>$110</strong>.</p>
+            </div>
+
+            <h4>Summary Table: IFRS vs. US GAAP</h4>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Standard</th>
+                        <th>Inventory Valuation Method</th>
+                        <th>Write-up Allowed?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>IFRS</strong></td>
+                        <td>Lower of <strong>Cost</strong> or <strong>NRV</strong></td>
+                        <td><span class="text-green-600 font-semibold">✅ Yes</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>US GAAP</strong></td>
+                        <td>Lower of <strong>Cost</strong> or <strong>Market</strong> (for LIFO/Retail) or <strong>NRV</strong> (for others)</td>
+                        <td><span class="text-red-600 font-semibold">❌ No</span></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+          </div>
+
         <div id="section-3" class="content-section">
           <div class="section-header">
             <div class="section-number">3</div>
@@ -458,7 +518,6 @@
           </div>
         </div>
 
-        <!-- Section 4 -->
         <div id="section-4" class="content-section">
           <div class="section-header">
             <div class="section-number">4</div>
@@ -505,7 +564,6 @@
           </table>
         </div>
 
-        <!-- Navigation -->
         <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
           <a href="5. Advanced Analysis of Cash Flow Statements.html" class="flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
             ← Chapter 5: Advanced Cash Flow Analysis
@@ -519,7 +577,6 @@
     </div>
   </div>
 
-  <!-- Back to Menu Button -->
   <div class="fixed bottom-6 left-6 z-50">
     <a href="index.html" class="flex items-center px-4 py-3 bg-indigo-600 text-white rounded-lg shadow-lg hover:bg-indigo-700 transition-colors">
       ← Back to Menu
