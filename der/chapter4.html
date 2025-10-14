@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Arbitrage, Replication, and Cost of Carry | Study Session 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="readingProgress"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-number">Chapter 4</div>
+            <h1 class="chapter-title">Arbitrage, Replication, and Cost of Carry</h1>
+            <p class="chapter-subtitle">Master arbitrage principles and the cost of carry model for pricing derivatives</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="index.html" class="nav-home">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <div class="nav-chapters">
+                <a href="chapter1.html" class="nav-chapter">1</a>
+                <a href="chapter2.html" class="nav-chapter">2</a>
+                <a href="chapter3.html" class="nav-chapter">3</a>
+                <a href="chapter4.html" class="nav-chapter active">4</a>
+                <a href="chapter5.html" class="nav-chapter">5</a>
+                <a href="chapter6.html" class="nav-chapter">6</a>
+                <a href="chapter7.html" class="nav-chapter">7</a>
+                <a href="chapter8.html" class="nav-chapter">8</a>
+                <a href="chapter9.html" class="nav-chapter">9</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Section 1: Arbitrage -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">4.1</div>
+                <h2 class="section-title">Arbitrage</h2>
+            </div>
+            <div class="section-content">
+                <p>Arbitrage is the practice of simultaneously buying and selling identical or similar assets in different markets to profit from a price difference. This situation arises when the fundamental economic principle known as the "law of one price" does not hold. An individual who engages in arbitrage is called an arbitrageur.</p>
+                
+                <p>The actions of arbitrageurs are crucial for market efficiency. By exploiting price discrepancies, they force prices to converge across markets, thereby eliminating the arbitrage opportunity itself.</p>
+
+                <div class="example">
+                    <h4><i class="fas fa-lightbulb"></i> Illustrative Example</h4>
+                    <p>Imagine a stock is trading for $50.00 on the New York Stock Exchange and, at the exact same moment, for $50.05 on the London Stock Exchange. An arbitrageur could simultaneously buy 10,000 shares in New York and sell 10,000 shares in London, locking in a risk-free profit of $0.05 per share—$500 total—minus transaction costs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Replication -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">4.2</div>
+                <h2 class="section-title">Replication</h2>
+            </div>
+            <div class="section-content">
+                <p>Replication is the process of creating a portfolio using an underlying asset and borrowing or lending funds to exactly duplicate the cash flows of a derivative. According to the principle of no-arbitrage, the price of the derivative must equal the cost of constructing its replicating portfolio.</p>
+                
+                <p>If the derivative's market price deviates from the cost of replication, an arbitrage opportunity arises. Traders can exploit this by buying the cheaper alternative and selling the more expensive one, earning a risk-free profit until prices realign.</p>
+
+                <p>For example, the cash flows of a long forward contract can be replicated by borrowing money today to purchase the underlying asset. The forward price must then equal the spot price of the asset plus the cost of carrying that asset (e.g., financing cost) until the delivery date.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Cost of Carry Model -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">4.3</div>
+                <h2 class="section-title">The Cost of Carry Model</h2>
+            </div>
+            <div class="section-content">
+                <p>The cost of carry is a foundational concept in pricing forward and futures contracts. It represents the net total of all costs and benefits associated with holding or "carrying" an asset until a future date.</p>
+
+                <h3><i class="fas fa-list-ul"></i> Components of Holding an Asset</h3>
+                <ul>
+                    <li><strong>Opportunity Cost (Risk-Free Rate, r):</strong> This reflects the cost of capital tied up in the asset. Instead of buying the asset, the funds could have been invested at the risk-free rate.</li>
+                    <li><strong>Storage and Ownership Costs (C, c):</strong> These are direct expenses related to holding physical assets, such as storage, insurance, and maintenance—common for commodities like gold, oil, or wheat.</li>
+                    <li><strong>Benefits and Yield (I, i):</strong> These are cash flows or non-monetary advantages from owning the asset.
+                        <ul>
+                            <li><strong>Cash Flows:</strong> Examples include dividends from stocks or interest payments from bonds.</li>
+                            <li><strong>Convenience Yield:</strong> A non-monetary benefit of holding the physical asset. For instance, a manufacturer with inventory of a key raw material avoids production disruptions during supply shortages.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3><i class="fas fa-calculator"></i> The No-Arbitrage Forward Price</h3>
+                <p>The forward price must reflect the spot price adjusted for the future value of the net cost of carry. This ensures no arbitrage opportunities exist.</p>
+                
+                <div class="formula">
+                    F₀(T) = (S₀ + PV₀(Costs) – PV₀(Benefits)) × (1 + r)ᵀ
+                </div>
+
+                <p>In simpler terms, the forward price equals the spot price compounded at the risk-free rate, plus the future value of any costs, minus the future value of any benefits received during the holding period.</p>
+            </div>
+        </section>
+
+        <!-- Section 4: FX Forward Contracts -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">4.4</div>
+                <h2 class="section-title">Forward Contracts on Foreign Currencies (FX)</h2>
+            </div>
+            <div class="section-content">
+                <p>The principles of no-arbitrage and cost of carry are essential in determining the fair value of currency forward contracts.</p>
+
+                <h3><i class="fas fa-exchange-alt"></i> Key Concepts</h3>
+                <ul>
+                    <li><strong>Exchange Rate:</strong> The price of one currency (the foreign currency) expressed in terms of another (the domestic currency). The spot rate is denoted as S<sub>f/d</sub>, meaning units of domestic currency per one unit of foreign currency.</li>
+                    <li><strong>Currency Forward Contract:</strong> A binding agreement to buy or sell a specified amount of a foreign currency at a predetermined exchange rate on a future date.</li>
+                </ul>
+
+                <h3><i class="fas fa-formula"></i> Currency Forward Pricing Formula</h3>
+                <p>The no-arbitrage forward exchange rate is determined by the spot rate and the risk-free interest rates of the two currencies involved.</p>
+                
+                <div class="formula">
+                    F₀,f/d = S₀,f/d × 
+                    <span class="fraction">
+                        <span class="fraction-num">1 + r<sub>f</sub></span>
+                        <span class="fraction-line"></span>
+                        <span class="fraction-den">1 + r<sub>d</sub></span>
+                    </span>
+                </div>
+
+                <p><strong>Where:</strong></p>
+                <ul>
+                    <li>F₀,f/d: Forward exchange rate (domestic currency per foreign currency)</li>
+                    <li>S₀,f/d: Spot exchange rate</li>
+                    <li>r<sub>f</sub>: Risk-free interest rate of the foreign currency</li>
+                    <li>r<sub>d</sub>: Risk-free interest rate of the domestic currency</li>
+                </ul>
+
+                <div class="example">
+                    <h4><i class="fas fa-chart-bar"></i> Numerical Example</h4>
+                    <p><strong>Scenario:</strong> The spot exchange rate for EUR/USD is 1.0800. The US one-year risk-free rate (r<sub>d</sub>) is 5%, and the Eurozone one-year risk-free rate (r<sub>f</sub>) is 3%.</p>
+                    
+                    <p><strong>Calculation:</strong></p>
+                    <div class="formula">
+                        F₀,f/d = 1.0800 × 
+                        <span class="fraction">
+                            <span class="fraction-num">1.03</span>
+                            <span class="fraction-line"></span>
+                            <span class="fraction-den">1.05</span>
+                        </span> ≈ 1.0594
+                    </div>
+                    
+                    <p><strong>Result:</strong> The one-year forward rate is approximately 1.0594 USD per EUR.</p>
+                </div>
+
+                <h3><i class="fas fa-arrows-alt-h"></i> Relationship Between Forward and Spot Rates</h3>
+                <p>The difference between the forward and spot rates is driven by the interest rate differential between the two countries (r<sub>f</sub> – r<sub>d</sub>).</p>
+                <ul>
+                    <li><strong>Forward Premium:</strong> When the foreign interest rate is lower than the domestic rate (r<sub>f</sub> < r<sub>d</sub>), the forward rate is lower than the spot rate (F<sub>f/d</sub> < S<sub>f/d</sub>). In this case, the foreign currency is said to trade at a <strong>forward premium</strong>, and the domestic currency at a <strong>forward discount</strong>.</li>
+                    <li><strong>Forward Discount:</strong> When the foreign interest rate is higher than the domestic rate (r<sub>f</sub> > r<sub>d</sub>), the forward rate exceeds the spot rate (F<sub>f/d</sub> > S<sub>f/d</sub>). Here, the foreign currency trades at a <strong>forward discount</strong>, and the domestic currency at a <strong>forward premium</strong>.</li>
+                </ul>
+
+                <div class="note">
+                    <h4>Important Note</h4>
+                    <p>The terms "premium" and "discount" can be counterintuitive—they refer to whether the forward rate is higher or lower than the spot rate, not the value of the currency itself.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter Navigation -->
+        <div class="chapter-nav">
+            <a href="chapter3.html" class="nav-button prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Benefits & Risks</span>
+            </a>
+            <a href="chapter5.html" class="nav-button next">
+                <span>Next: Forward Pricing</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <style>
+        /* Chapter Navigation */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <script>
+        // Reading progress bar
+        function updateReadingProgress() {
+            const article = document.querySelector('main');
+            const scrollTop = window.pageYOffset;
+            const docHeight = article.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            const scrollPercentRounded = Math.round(scrollPercent * 100);
+            
+            document.getElementById('readingProgress').style.width = Math.min(scrollPercentRounded, 100) + '%';
+        }
+
+        // Scroll animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('scroll', function() {
+            updateReadingProgress();
+            handleScrollAnimations();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            handleScrollAnimations();
+            
+            // Mark this chapter as completed
+            const completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '[]');
+            if (!completedChapters.includes(4)) {
+                completedChapters.push(4);
+                localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+            }
+        });
+    </script>
+</body>
+</html>

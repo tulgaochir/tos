@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Pricing and Valuation of Forward Contracts | Study Session 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="readingProgress"></div></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-number">Chapter 5</div>
+            <h1 class="chapter-title">Pricing and Valuation of Forward Contracts</h1>
+            <p class="chapter-subtitle">Understanding pricing vs. valuation, FRAs, and forward rate calculations</p>
+        </div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="index.html" class="nav-home"><i class="fas fa-home"></i> Home</a>
+            <div class="nav-chapters">
+                <a href="chapter1.html" class="nav-chapter">1</a>
+                <a href="chapter2.html" class="nav-chapter">2</a>
+                <a href="chapter3.html" class="nav-chapter">3</a>
+                <a href="chapter4.html" class="nav-chapter">4</a>
+                <a href="chapter5.html" class="nav-chapter active">5</a>
+                <a href="chapter6.html" class="nav-chapter">6</a>
+                <a href="chapter7.html" class="nav-chapter">7</a>
+                <a href="chapter8.html" class="nav-chapter">8</a>
+                <a href="chapter9.html" class="nav-chapter">9</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="container">
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">5.1</div>
+                <h2 class="section-title">Pricing and Valuation of Forward Commitments</h2>
+            </div>
+            <div class="section-content">
+                <p>Understanding the difference between pricing and valuation is fundamental for forward commitments like forwards, futures, and swaps.</p>
+
+                <h3><i class="fas fa-balance-scale"></i> Pricing vs. Valuation</h3>
+                <ul>
+                    <li><strong>Pricing</strong> a forward contract means determining the forward price (F₀(T)). This is the price agreed upon at the initiation of the contract for the future transaction. The forward price is calculated so that the initial value of the contract to both parties is zero.</li>
+                    <li><strong>Valuation</strong> of a forward contract means determining its market value (Vₜ(T)) at some point in time (t) during its life. As market conditions (like the spot price of the underlying) change, the value of the contract will fluctuate, becoming positive for one party and negative for the other.</li>
+                </ul>
+
+                <h3><i class="fas fa-calculator"></i> General Pricing and Valuation Formulas (No Costs or Benefits)</h3>
+                
+                <h4>Forward Contract Pricing</h4>
+                <p>The no-arbitrage forward price is the spot price compounded at the risk-free rate over the life of the contract.</p>
+                <div class="formula">
+                    F₀(T) = S₀(1 + r)ᵀ
+                </div>
+                <p><strong>Where:</strong></p>
+                <ul>
+                    <li>F₀(T): The forward price agreed to at time 0 for delivery at time T</li>
+                    <li>S₀: The spot price of the underlying asset at time 0</li>
+                    <li>r: The risk-free interest rate</li>
+                    <li>T: The time to maturity of the contract</li>
+                </ul>
+
+                <h4>Forward Contract Valuation</h4>
+                <p>The value of a forward contract changes over time. For the long position:</p>
+                <ul>
+                    <li><strong>At initiation (t=0):</strong> The value is zero by design. The forward price is set to make it a fair deal, so V₀(T) = S₀ – F₀(T)/(1+r)ᵀ = 0.</li>
+                    <li><strong>During the life of the contract (t < T):</strong> The value is the current spot price minus the present value of the agreed-upon forward price.
+                        <div class="formula">
+                            Vₜ(T) = Sₜ – 
+                            <span class="fraction">
+                                <span class="fraction-num">F₀(T)</span>
+                                <span class="fraction-line"></span>
+                                <span class="fraction-den">(1 + r)^(T-t)</span>
+                            </span>
+                        </div>
+                    </li>
+                    <li><strong>At expiration (t=T):</strong> The value is simply the spot price minus the forward price, which is the contract's payoff.
+                        <div class="formula">
+                            Vₜ(T) = Sₜ – F₀(T)
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="example">
+                    <h4><i class="fas fa-chart-line"></i> Numerical Example: Valuation During Contract Life</h4>
+                    <p><strong>Scenario:</strong> You enter a one-year (T=1) forward contract to buy a stock at F₀(T) = $105. The initial spot price was S₀ = $100 and the risk-free rate is 5%. Six months later (t=0.5), the stock's spot price has risen to Sₜ = $110.</p>
+                    
+                    <p><strong>Calculation:</strong></p>
+                    <div class="formula">
+                        V₀.₅(1) = $110 – 
+                        <span class="fraction">
+                            <span class="fraction-num">$105</span>
+                            <span class="fraction-line"></span>
+                            <span class="fraction-den">(1 + 0.05)^(1–0.5)</span>
+                        </span>
+                        = $110 – $102.47 = $7.53
+                    </div>
+                    
+                    <p><strong>Result:</strong> Your contract now has a positive value of $7.53.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">5.2</div>
+                <h2 class="section-title">Pricing and Valuation of Interest Rate Forward Contracts</h2>
+            </div>
+            <div class="section-content">
+                <p>This category of derivatives is based on interest rates themselves. Key instruments include Forward Rate Agreements (FRAs).</p>
+
+                <h3><i class="fas fa-percentage"></i> Spot and Forward Rates</h3>
+                <ul>
+                    <li><strong>Spot Rates</strong>: Also known as "zero rates," these are the yields-to-maturity on zero-coupon bonds. They represent the pure interest rate for a specific maturity, starting from today.</li>
+                    <li><strong>Bootstrapping</strong>: This is a method used to derive the spot rate curve. It works by sequentially calculating spot rates for various maturities using the yields of coupon-paying government bonds (like Treasury bonds).</li>
+                    <li><strong>Forward Rates</strong>: A forward rate is an interest rate for a future period. It is the breakeven rate that equates the return from investing in a short-term bond versus investing in a long-term bond over the same period. The notation "2y5y" refers to a 5-year interest rate that begins 2 years from now.</li>
+                </ul>
+
+                <h3><i class="fas fa-handshake"></i> Forward Rate Agreements (FRAs)</h3>
+                <p>An FRA is an over-the-counter (OTC) forward contract where the underlying is an interest rate. FRAs are used to lock in an interest rate for a future borrowing or lending period.</p>
+                <p>The contract involves two counterparties:</p>
+                <ol>
+                    <li><strong>Long Position</strong>: The party that is a fixed-rate payer and a market reference rate (MRR) receiver. The long position profits if the market interest rate rises above the fixed rate in the contract.</li>
+                    <li><strong>Short Position</strong>: The party that is an MRR payer and a fixed-rate receiver. The short position profits if the market interest rate falls below the fixed rate in the contract.</li>
+                </ol>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter4.html" class="nav-button prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Arbitrage & Replication</span>
+            </a>
+            <a href="chapter6.html" class="nav-button next">
+                <span>Next: Futures Pricing</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <style>
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <script src="js/chapter-template.js"></script>
+    <script>new ChapterManager(5);</script>
+</body>
+</html>

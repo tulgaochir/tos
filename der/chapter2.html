@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Forward Commitments and Contingent Claims | Study Session 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="readingProgress"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-number">Chapter 2</div>
+            <h1 class="chapter-title">Forward Commitment and Contingent Claim Features</h1>
+            <p class="chapter-subtitle">Deep dive into forward contracts, futures, swaps, and options with payoff calculations</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="index.html" class="nav-home">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <div class="nav-chapters">
+                <a href="chapter1.html" class="nav-chapter">1</a>
+                <a href="chapter2.html" class="nav-chapter active">2</a>
+                <a href="chapter3.html" class="nav-chapter">3</a>
+                <a href="chapter4.html" class="nav-chapter">4</a>
+                <a href="chapter5.html" class="nav-chapter">5</a>
+                <a href="chapter6.html" class="nav-chapter">6</a>
+                <a href="chapter7.html" class="nav-chapter">7</a>
+                <a href="chapter8.html" class="nav-chapter">8</a>
+                <a href="chapter9.html" class="nav-chapter">9</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Section 1: Forward Contracts -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">2.1</div>
+                <h2 class="section-title">Forward Contracts</h2>
+            </div>
+            <div class="section-content">
+                <p>A forward contract is a type of firm commitment. It's a customized agreement between two parties to buy or sell an underlying asset at a specified price on a future date. Because they are customized, they trade in the over-the-counter (OTC) market.</p>
+
+                <h3><i class="fas fa-users"></i> Key Terminology</h3>
+                <ul>
+                    <li><strong>Long Position</strong>: The party who agrees to <em>buy</em> the underlying asset. This position profits when the asset price increases.</li>
+                    <li><strong>Short Position</strong>: The party who agrees to <em>sell</em> the underlying asset. This position profits when the asset price decreases.</li>
+                </ul>
+
+                <h3><i class="fas fa-calculator"></i> Payoff at Expiration</h3>
+                <p>The value or payoff of a forward contract at expiration is a zero-sum game; the long's gain is the short's loss, and vice-versa.</p>
+                
+                <p>The payoff for the <strong>long position</strong> (the buyer) is:</p>
+                <div class="formula">
+                    Payoff<sub>Long</sub> = S<sub>T</sub> – F<sub>0</sub>(T)
+                </div>
+                
+                <p>The payoff for the <strong>short position</strong> (the seller) is:</p>
+                <div class="formula">
+                    Payoff<sub>Short</sub> = F<sub>0</sub>(T) – S<sub>T</sub>
+                </div>
+                
+                <p><strong>Where:</strong></p>
+                <ul>
+                    <li>S<sub>T</sub>: The spot price of the underlying asset at the contract's expiration (time T)</li>
+                    <li>F<sub>0</sub>(T): The forward price agreed upon at the start of the contract (time 0) for delivery at time T</li>
+                </ul>
+
+                <h4><i class="fas fa-chart-line"></i> Numerical Example</h4>
+                <div class="example">
+                    <p><strong>Scenario:</strong> An investor goes long a forward contract to buy 1,000 barrels of oil in three months at a forward price F<sub>0</sub>(T) of $80 per barrel.</p>
+                    <p><strong>Scenario 1: Price Rises</strong><br>
+                    At expiration, the spot price of oil S<sub>T</sub> is $85. The long position's payoff is:<br>
+                    $85 – $80 = $5 per barrel. Total payoff = $5 × 1000 = $5,000. The short position loses $5,000.</p>
+                    
+                    <p><strong>Scenario 2: Price Falls</strong><br>
+                    At expiration, the spot price of oil S<sub>T</sub> is $77. The long position's payoff is:<br>
+                    $77 – $80 = –$3 per barrel. Total payoff = –$3 × 1000 = –$3,000. The short position gains $3,000.</p>
+                </div>
+
+                <h3><i class="fas fa-balance-scale"></i> Settlement Scenarios</h3>
+                <p>The outcome for each party depends on how the spot price at expiration compares to the agreed-upon forward price.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>If at Expiration...</th>
+                            <th>Buyer's Payoff (Long)</th>
+                            <th>Seller's Payoff (Short)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S<sub>T</sub> > F<sub>0</sub>(T) (Spot price is higher)</td>
+                            <td>Positive</td>
+                            <td>Negative</td>
+                        </tr>
+                        <tr>
+                            <td>S<sub>T</sub> < F<sub>0</sub>(T) (Spot price is lower)</td>
+                            <td>Negative</td>
+                            <td>Positive</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 2: Futures Contracts -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">2.2</div>
+                <h2 class="section-title">Futures Contracts</h2>
+            </div>
+            <div class="section-content">
+                <p>Futures are similar to forwards but with key distinctions. They are standardized contracts traded on an exchange, which introduces several important features.</p>
+                
+                <h3><i class="fas fa-cogs"></i> Key Features of Futures</h3>
+                <ul>
+                    <li><strong>Daily Settlement of Gains/Losses</strong>: Unlike forwards that are settled only at expiration, futures positions are "marked-to-market" (MTM) daily. Gains and losses are calculated and settled every single day.</li>
+                    <li><strong>Clearinghouse Guarantee</strong>: A central clearinghouse guarantees the transaction, effectively eliminating counterparty credit risk for both parties.</li>
+                    <li><strong>Margin Requirements</strong>: To protect the clearinghouse, both parties must deposit an amount of money called a margin.
+                        <ul>
+                            <li><strong>Initial Margin</strong>: The amount that must be deposited when opening the position</li>
+                            <li><strong>Maintenance Margin</strong>: The minimum amount that must be maintained in the trading account. If the balance falls below this level, a margin call is triggered</li>
+                            <li><strong>Margin Call</strong>: A demand for additional funds to bring the account balance back up to the initial margin level</li>
+                            <li><strong>Variation Margin</strong>: The additional money deposited to meet a margin call</li>
+                        </ul>
+                    </li>
+                    <li><strong>Open Interest</strong>: This refers to the total number of outstanding (unsettled) futures contracts at any given point in time.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 3: Swaps -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">2.3</div>
+                <h2 class="section-title">Swaps</h2>
+            </div>
+            <div class="section-content">
+                <p>A swap is a firm derivative contract in which two parties agree to exchange a series of cash flows over a period of time.</p>
+                <ul>
+                    <li>Swaps are typically customized contracts that trade in the OTC market</li>
+                    <li>Conceptually, a swap can be viewed as a portfolio, or a "strip," of forward contracts bundled together</li>
+                    <li>A swap that involves only a single payment exchange is equivalent to a single forward contract</li>
+                    <li>A common example is an <strong>interest rate swap</strong>, where one party agrees to pay a fixed interest rate on a notional amount in exchange for receiving a floating interest rate from the other party</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 4: Options -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">2.4</div>
+                <h2 class="section-title">Options</h2>
+            </div>
+            <div class="section-content">
+                <p>Options are contingent claims, meaning they give the holder a right, but not an obligation. One party has the option to decide whether a trade will be executed based on the underlying asset's value. Options can be traded on exchanges (ETD) or in the OTC market.</p>
+                
+                <h3><i class="fas fa-list"></i> Types of Options</h3>
+                <ul>
+                    <li><strong>Call Option</strong>: Gives the option holder the <em>right to buy</em> an underlying asset at a specified price (the strike price)</li>
+                    <li><strong>Put Option</strong>: Gives the option holder the <em>right to sell</em> an underlying asset at a specified price</li>
+                </ul>
+
+                <h3><i class="fas fa-clock"></i> Exercise Styles</h3>
+                <ul>
+                    <li><strong>European Options</strong>: Can be exercised by the holder only on the expiration date</li>
+                    <li><strong>American Options</strong>: Can be exercised by the holder at any time up to and including the expiration date</li>
+                </ul>
+
+                <h3><i class="fas fa-chart-bar"></i> Option Payoff and Profit Formulas</h3>
+                <p>The payoff is the value of the option at expiration, while the profit also accounts for the initial premium paid or received.</p>
+                
+                <p><strong>Formula Components:</strong></p>
+                <ul>
+                    <li>S<sub>T</sub>: The spot price of the underlying asset at expiration</li>
+                    <li>X: The exercise or strike price of the option</li>
+                    <li>c<sub>0</sub>: The premium (price) paid by the buyer for a call option</li>
+                    <li>p<sub>0</sub>: The premium (price) paid by the buyer for a put option</li>
+                </ul>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Payoff Formula</th>
+                            <th>Profit Formula</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Call Buyer (Long Call)</strong></td>
+                            <td>max(0, S<sub>T</sub> – X)</td>
+                            <td>max(0, S<sub>T</sub> – X) – c<sub>0</sub></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Call Seller (Short Call)</strong></td>
+                            <td>–max(0, S<sub>T</sub> – X)</td>
+                            <td>–max(0, S<sub>T</sub> – X) + c<sub>0</sub></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Put Buyer (Long Put)</strong></td>
+                            <td>max(0, X – S<sub>T</sub>)</td>
+                            <td>max(0, X – S<sub>T</sub>) – p<sub>0</sub></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Put Seller (Short Put)</strong></td>
+                            <td>–max(0, X – S<sub>T</sub>)</td>
+                            <td>–max(0, X – S<sub>T</sub>) + p<sub>0</sub></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4><i class="fas fa-lightbulb"></i> Numerical Example (Long Call)</h4>
+                <div class="example">
+                    <p><strong>Scenario:</strong> An investor buys a call option on a stock with a strike price X of $50 for a premium c<sub>0</sub> of $4.</p>
+                    
+                    <p><strong>Scenario 1: Stock Price Rises</strong><br>
+                    At expiration, the stock's spot price S<sub>T</sub> is $60.
+                    <ul>
+                        <li>Payoff = max(0, $60 – $50) = $10</li>
+                        <li>Profit = $10 – $4 = $6</li>
+                    </ul>
+                    </p>
+                    
+                    <p><strong>Scenario 2: Stock Price Falls</strong><br>
+                    At expiration, the stock's spot price S<sub>T</sub> is $45.
+                    <ul>
+                        <li>Payoff = max(0, $45 – $50) = $0 (The option expires worthless)</li>
+                        <li>Profit = $0 – $4 = –$4 (The loss is limited to the premium paid)</li>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Credit Derivatives -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">2.5</div>
+                <h2 class="section-title">Credit Derivatives</h2>
+            </div>
+            <div class="section-content">
+                <p>Credit derivatives are contracts that transfer credit risk (the risk of default) from one party to another. The two parties are known as the credit protection buyer and the credit protection seller.</p>
+                <ul>
+                    <li><strong>Credit Default Swap (CDS)</strong>: This is the most common type. The credit protection buyer makes periodic payments to the seller. In return, the seller agrees to pay the buyer a lump sum only if a specified "credit event," such as a default or bankruptcy, occurs.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 6: Comparison -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">2.6</div>
+                <h2 class="section-title">Forward Commitments vs. Contingent Claims</h2>
+            </div>
+            <div class="section-content">
+                <h3><i class="fas fa-trending-up"></i> Directional Views</h3>
+                <p>Different derivative positions can be used to express a bullish view (i.e., you expect the underlying's price to rise). The following positions all benefit from a rise in the price of the underlying asset:</p>
+                <ul>
+                    <li><strong>Long Call Option</strong>: The right to buy at a fixed price becomes more valuable as the market price rises</li>
+                    <li><strong>Short Put Option</strong>: As the price rises, it becomes less likely that the put will be exercised, allowing the seller to keep the premium as profit</li>
+                    <li><strong>Long Forward Position</strong>: The obligation to buy at a fixed price becomes profitable as the market price rises above that fixed price</li>
+                </ul>
+
+                <h3><i class="fas fa-equals"></i> Profit Equivalence</h3>
+                <p>The following formulas illustrate the relationship between the profit on a forward contract and the premium of an option, often used to understand breakeven points or synthetic positions.</p>
+                <ul>
+                    <li>Equivalence of forward profit to a call option premium:
+                        <div class="formula">
+                            S<sub>T</sub> – F<sub>0</sub>(T) = c<sub>0</sub>
+                        </div>
+                    </li>
+                    <li>Equivalence of forward profit to a put option premium:
+                        <div class="formula">
+                            S<sub>T</sub> – F<sub>0</sub>(T) = p<sub>0</sub>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Chapter Navigation -->
+        <div class="chapter-nav">
+            <a href="chapter1.html" class="nav-button prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Derivative Instruments</span>
+            </a>
+            <a href="chapter3.html" class="nav-button next">
+                <span>Next: Benefits and Risks</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <style>
+        /* Chapter Navigation */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <script>
+        // Reading progress bar
+        function updateReadingProgress() {
+            const article = document.querySelector('main');
+            const scrollTop = window.pageYOffset;
+            const docHeight = article.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            const scrollPercentRounded = Math.round(scrollPercent * 100);
+            
+            document.getElementById('readingProgress').style.width = Math.min(scrollPercentRounded, 100) + '%';
+        }
+
+        // Scroll animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('scroll', function() {
+            updateReadingProgress();
+            handleScrollAnimations();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            handleScrollAnimations();
+            
+            // Mark this chapter as completed
+            const completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '[]');
+            if (!completedChapters.includes(2)) {
+                completedChapters.push(2);
+                localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+            }
+        });
+    </script>
+</body>
+</html>

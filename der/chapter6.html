@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Pricing and Valuation of Futures Contracts | Study Session 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="readingProgress"></div></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-number">Chapter 6</div>
+            <h1 class="chapter-title">Pricing and Valuation of Futures Contracts</h1>
+            <p class="chapter-subtitle">Understanding futures pricing differences, MTM mechanics, and interest rate futures</p>
+        </div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="index.html" class="nav-home"><i class="fas fa-home"></i> Home</a>
+            <div class="nav-chapters">
+                <a href="chapter1.html" class="nav-chapter">1</a>
+                <a href="chapter2.html" class="nav-chapter">2</a>
+                <a href="chapter3.html" class="nav-chapter">3</a>
+                <a href="chapter4.html" class="nav-chapter">4</a>
+                <a href="chapter5.html" class="nav-chapter">5</a>
+                <a href="chapter6.html" class="nav-chapter active">6</a>
+                <a href="chapter7.html" class="nav-chapter">7</a>
+                <a href="chapter8.html" class="nav-chapter">8</a>
+                <a href="chapter9.html" class="nav-chapter">9</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="container">
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">6.1</div>
+                <h2 class="section-title">Key Distinctions in Forward vs. Futures Valuation</h2>
+            </div>
+            <div class="section-content">
+                <p>While forwards and futures are similar forward commitments, their valuation and risk profiles are affected by three key structural differences.</p>
+                <ul>
+                    <li><strong>Daily settlement of gains and losses</strong>: Futures contracts are "marked-to-market" daily, meaning profits and losses are settled in cash at the end of each trading day. Forwards are typically settled only at expiration.</li>
+                    <li><strong>Guarantee against default risk</strong>: Futures contracts are guaranteed by a central clearinghouse, which eliminates counterparty credit risk for participants. Traditional OTC forwards carry the risk that the other party will default.</li>
+                    <li><strong>Standardization and regulation</strong>: Futures contracts have standardized terms (size, maturity, quality) and trade on regulated exchanges, whereas forwards are customized private contracts.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">6.2</div>
+                <h2 class="section-title">MTM Valuation: Forwards vs. Futures</h2>
+            </div>
+            <div class="section-content">
+                <p>The concept of "marking-to-market" (MTM) exists for both instruments, but the cash flow implications are very different.</p>
+                <p>For a <strong>forward contract</strong>, the MTM value is the change in value from the current spot price to the present value of the originally agreed-upon forward price (PVₜ[F₀(T)]). Crucially, this calculated gain or loss is not settled in cash until the contract matures. This delay in receiving gains creates counterparty credit risk.</p>
+                <p>For a <strong>futures contract</strong>, the daily MTM calculation results in an actual cash settlement, eliminating this type of credit risk.</p>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">6.3</div>
+                <h2 class="section-title">Interest Rate Futures vs. Forward Contracts (FRAs)</h2>
+            </div>
+            <div class="section-content">
+                <p>Like Forward Rate Agreements (FRAs), interest rate futures are based on a market reference rate (MRR) for a hypothetical deposit at a future date. However, a key difference is that interest rate futures are traded on a <strong>price basis</strong>.</p>
+                <p>The price is calculated using the following formula:</p>
+                <div class="formula">
+                    f<sub>A, B–A</sub> = 100 – (100 × MRR<sub>A, B–A</sub>)
+                </div>
+                <p><strong>Where:</strong></p>
+                <ul>
+                    <li>f<sub>A, B–A</sub>: The price of the interest rate futures contract</li>
+                    <li>MRR<sub>A, B–A</sub>: The annualized Market Reference Rate (e.g., SOFR), expressed as a decimal, for the underlying period</li>
+                </ul>
+                <p>This formula means the futures price moves inversely to the interest rate. A higher interest rate leads to a lower futures price, and vice-versa.</p>
+                
+                <div class="example">
+                    <h4><i class="fas fa-calculator"></i> Numerical Example</h4>
+                    <p>If the 3-month MRR for a future period is expected to be 3.5% (or 0.035), the price of the interest rate futures contract would be:</p>
+                    <div class="formula">
+                        Price = 100 – (100 × 0.035) = 100 – 3.5 = 96.50
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">6.4</div>
+                <h2 class="section-title">General Forward and Futures Price Differences</h2>
+            </div>
+            <div class="section-content">
+                <p>The daily settlement feature of futures can cause their prices to diverge from the prices of otherwise identical forward contracts. The difference depends on the correlation between futures prices and interest rates.</p>
+                <ul>
+                    <li>If there is <strong>no correlation</strong> between futures prices and interest rates, the prices of forwards and futures will be the same.</li>
+                    <li>If futures prices are <strong>positively correlated</strong> with interest rates, the futures price will be higher than the forward price. This is because gains on the futures position (from rising prices) can be reinvested at higher interest rates, which is an advantage for the long position.</li>
+                    <li>If futures prices are <strong>negatively correlated</strong> with interest rates, the futures price will be lower than the forward price. This is because gains on the futures position occur when interest rates are low, making the reinvestment of those gains less attractive.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">6.5</div>
+                <h2 class="section-title">Interest Rate Forward and Futures Price Differences</h2>
+            </div>
+            <div class="section-content">
+                <p>A specific pricing difference arises between interest rate forwards (FRAs) and interest rate futures due to a "convexity bias."</p>
+                <p><strong>Convexity</strong> is the degree to which an asset's interest rate sensitivity changes when interest rates themselves change. The valuation of an FRA involves discounting, and this feature introduces a convexity bias into its pricing. This bias becomes more significant for longer time periods. Because futures are settled daily, they do not have this same discounting-related bias, leading to a small but systematic difference in prices between FRAs and interest rate futures.</p>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">6.6</div>
+                <h2 class="section-title">Effect of Central Clearing on OTC Derivatives</h2>
+            </div>
+            <div class="section-content">
+                <p>The market structure for derivatives is evolving. The advancement of central clearing for OTC derivatives has led to the implementation of futures-like margining requirements for many OTC dealers who sell products like forwards to end-users. This development has reduced the practical differences between OTC and exchange-traded derivatives, particularly concerning counterparty risk management and cash-flow requirements.</p>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter5.html" class="nav-button prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Forward Pricing</span>
+            </a>
+            <a href="chapter7.html" class="nav-button next">
+                <span>Next: Swap Pricing</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <style>
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <script src="js/chapter-template.js"></script>
+    <script>new ChapterManager(6);</script>
+</body>
+</html>

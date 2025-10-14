@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Pricing and Valuation of Options | Study Session 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="readingProgress"></div></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-number">Chapter 8</div>
+            <h1 class="chapter-title">Pricing and Valuation of Options</h1>
+            <p class="chapter-subtitle">Master option components, moneyness, and factors affecting option prices</p>
+        </div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="index.html" class="nav-home"><i class="fas fa-home"></i> Home</a>
+            <div class="nav-chapters">
+                <a href="chapter1.html" class="nav-chapter">1</a>
+                <a href="chapter2.html" class="nav-chapter">2</a>
+                <a href="chapter3.html" class="nav-chapter">3</a>
+                <a href="chapter4.html" class="nav-chapter">4</a>
+                <a href="chapter5.html" class="nav-chapter">5</a>
+                <a href="chapter6.html" class="nav-chapter">6</a>
+                <a href="chapter7.html" class="nav-chapter">7</a>
+                <a href="chapter8.html" class="nav-chapter active">8</a>
+                <a href="chapter9.html" class="nav-chapter">9</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="container">
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">8.1</div>
+                <h2 class="section-title">Introduction to Options</h2>
+            </div>
+            <div class="section-content">
+                <p>An option is a derivative contract that gives the holder the right, but not the obligation, to transact in an underlying asset at a predetermined price on or before a future date.</p>
+                <ul>
+                    <li>A <strong>call option</strong> gives the holder the right to <em>buy</em> the underlying asset</li>
+                    <li>A <strong>put option</strong> gives the holder the right to <em>sell</em> the underlying asset</li>
+                </ul>
+
+                <h3><i class="fas fa-calendar-alt"></i> Option Exercise Styles</h3>
+                <p>There are two primary styles for exercising an option:</p>
+                <ul>
+                    <li><strong>European Options</strong>: Can be exercised only on the expiration date</li>
+                    <li><strong>American Options</strong>: Can be exercised at any time up to and including the expiration date</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">8.2</div>
+                <h2 class="section-title">Components of an Option's Value</h2>
+            </div>
+            <div class="section-content">
+                <p>The total price of an option can be broken down into three key components: its exercise value, moneyness, and time value.</p>
+
+                <h3><i class="fas fa-gem"></i> Exercise Value (Intrinsic Value)</h3>
+                <p>The exercise value is the payoff an investor would receive from exercising the option immediately. It can never be less than zero.</p>
+                
+                <h4>Call Option Exercise Value</h4>
+                <ul>
+                    <li><strong>At expiration (t=T)</strong>, the value is the underlying price minus the exercise price, or zero.
+                        <div class="formula">
+                            C<sub>T</sub> = max(0, S<sub>T</sub> – X)
+                        </div>
+                    </li>
+                    <li><strong>Before expiration (t < T)</strong>, the value is the underlying price minus the present value of the exercise price, or zero.
+                        <div class="formula">
+                            c<sub>t</sub> = max
+                            <span class="fraction">
+                                <span class="fraction-num">S<sub>t</sub> – X</span>
+                                <span class="fraction-line"></span>
+                                <span class="fraction-den">(1 + r)^(T–t)</span>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+
+                <h4>Put Option Exercise Value</h4>
+                <ul>
+                    <li><strong>At expiration (t=T)</strong>, the value is the exercise price minus the underlying price, or zero.
+                        <div class="formula">
+                            P<sub>T</sub> = max(0, X – S<sub>T</sub>)
+                        </div>
+                    </li>
+                    <li><strong>Before expiration (t < T)</strong>, the value is the present value of the exercise price minus the underlying price, or zero.
+                        <div class="formula">
+                            p<sub>t</sub> = max
+                            <span class="fraction">
+                                <span class="fraction-num">X</span>
+                                <span class="fraction-line"></span>
+                                <span class="fraction-den">(1 + r)^(T–t)</span>
+                            </span>
+                            – S<sub>t</sub>
+                        </div>
+                    </li>
+                </ul>
+                <p><strong>Where:</strong> S is the spot price of the underlying, X is the exercise price, r is the risk-free rate, and (T–t) is the time remaining to expiration.</p>
+
+                <h3><i class="fas fa-coins"></i> Moneyness</h3>
+                <p>Moneyness describes the relationship between the underlying asset's price and the option's exercise price.</p>
+                <ul>
+                    <li><strong>In-the-Money (ITM)</strong>: The option has a positive exercise value. For a call, S > X; for a put, X > S</li>
+                    <li><strong>Out-of-the-Money (OTM)</strong>: The option has zero exercise value. For a call, S < X; for a put, X < S</li>
+                    <li><strong>At-the-Money (ATM)</strong>: The underlying price is equal to the exercise price (S = X)</li>
+                </ul>
+
+                <h3><i class="fas fa-clock"></i> Time Value (Extrinsic Value)</h3>
+                <p>Time value is the portion of an option's price that is above its exercise value. It represents the potential for the option to become more profitable before expiration.</p>
+                <div class="formula">
+                    Option Price = Exercise Value + Time Value
+                </div>
+                <p>Key characteristics of time value:</p>
+                <ul>
+                    <li>It decreases as the time to expiration approaches, a phenomenon known as time decay</li>
+                    <li>It is zero at the moment of expiration</li>
+                    <li>Higher volatility in the underlying asset's price leads to a higher time value for the option, and lower volatility leads to a lower time value</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">8.3</div>
+                <h2 class="section-title">Factors Affecting Option Value</h2>
+            </div>
+            <div class="section-content">
+                <p>Several key factors influence the price of call and put options. The table below summarizes the effect of an increase in each factor.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th>Effect on Call Value</th>
+                            <th>Effect on Put Value</th>
+                            <th>Reasoning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Value of the Underlying (S)</strong></td>
+                            <td>Increase</td>
+                            <td>Decrease</td>
+                            <td>A higher spot price is favorable for the right to buy (call) and unfavorable for the right to sell (put).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exercise Price (X)</strong></td>
+                            <td>Decrease</td>
+                            <td>Increase</td>
+                            <td>A lower exercise price makes a call more valuable, while a higher exercise price makes a put more valuable.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Time to Expiration (T)</strong></td>
+                            <td>Increase</td>
+                            <td>Increase</td>
+                            <td>More time provides more opportunity for favorable price movements for both option types.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Risk-Free Interest Rate (r)</strong></td>
+                            <td>Increase</td>
+                            <td>Decrease</td>
+                            <td>A higher rate lowers the present value of the exercise price, which benefits calls (pay less in today's dollars) and hurts puts (receive less in today's dollars).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Volatility of the Underlying</strong></td>
+                            <td>Increase</td>
+                            <td>Increase</td>
+                            <td>Higher volatility increases the chance of a large price swing, which increases the time value for both calls and puts. The effect is the same for both option types.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Income/Benefits on Underlying</strong></td>
+                            <td>Decrease</td>
+                            <td>Increase</td>
+                            <td>Income (like dividends) lowers the underlying's price, which hurts calls and helps puts.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Costs on Underlying</strong></td>
+                            <td>Increase</td>
+                            <td>Decrease</td>
+                            <td>Costs of carry (like storage) increase the underlying's forward price, which helps calls and hurts puts.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter7.html" class="nav-button prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Swap Pricing</span>
+            </a>
+            <a href="chapter9.html" class="nav-button next">
+                <span>Next: Put-Call Parity</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <style>
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <script src="js/chapter-template.js"></script>
+    <script>new ChapterManager(8);</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Pricing and Valuation of Swaps | Study Session 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="readingProgress"></div></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-number">Chapter 7</div>
+            <h1 class="chapter-title">Pricing and Valuation of Interest Rates and Other Swaps</h1>
+            <p class="chapter-subtitle">Understanding swaps as portfolios of forwards and bond replication strategies</p>
+        </div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="index.html" class="nav-home"><i class="fas fa-home"></i> Home</a>
+            <div class="nav-chapters">
+                <a href="chapter1.html" class="nav-chapter">1</a>
+                <a href="chapter2.html" class="nav-chapter">2</a>
+                <a href="chapter3.html" class="nav-chapter">3</a>
+                <a href="chapter4.html" class="nav-chapter">4</a>
+                <a href="chapter5.html" class="nav-chapter">5</a>
+                <a href="chapter6.html" class="nav-chapter">6</a>
+                <a href="chapter7.html" class="nav-chapter active">7</a>
+                <a href="chapter8.html" class="nav-chapter">8</a>
+                <a href="chapter9.html" class="nav-chapter">9</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="container">
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">7.1</div>
+                <h2 class="section-title">Understanding Swaps and Their Relation to Forwards</h2>
+            </div>
+            <div class="section-content">
+                <p>A swap is a derivative contract where two parties agree to exchange a series of future cash flows at specified times according to predetermined terms. Interest rate swaps, a common type, involve the exchange of interest rate payments.</p>
+                <p>A swap can be thought of as a portfolio of forward contracts. For example, a three-year swap with semi-annual payments is conceptually equivalent to a series of six forward contracts, each with a different maturity but all using the same fixed price (the swap rate).</p>
+                
+                <h3><i class="fas fa-list-check"></i> Key Characteristics of Swaps</h3>
+                <ul>
+                    <li>They are typically customized, over-the-counter (OTC) agreements</li>
+                    <li>By design, swaps have a value of zero at initiation</li>
+                    <li>The fixed rate, known as the swap rate, remains constant throughout the life of the swap</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">7.2</div>
+                <h2 class="section-title">Swap Values and Prices</h2>
+            </div>
+            <div class="section-content">
+                <h3><i class="fas fa-balance-scale"></i> Pricing and Valuation Principles</h3>
+                <p><strong>Pricing a swap</strong> involves determining the fixed rate of the swap at the contract's initiation date. This swap rate is set at a level that makes the present value (PV) of the expected fixed-rate payments equal to the present value (PV) of the expected floating-rate payments. This equalization ensures the swap's initial value is zero.</p>
+                <p><strong>Valuing a swap</strong> is the process of determining its market value at any point after initiation. As interest rates fluctuate, the PVs of the fixed and floating legs will diverge, giving the swap a positive or negative value.</p>
+                <p>An important operational aspect is that the floating rate is reset at the beginning of each settlement period based on the current market reference rate (MRR).</p>
+
+                <h3><i class="fas fa-calculator"></i> Periodic Settlement Calculation</h3>
+                <p>At the end of each period, a net cash flow is exchanged. The settlement amount from the perspective of the fixed-rate payer is calculated as follows:</p>
+                <div class="formula">
+                    Periodic Settlement = (MRR – Swap Rate) × Notional Amount × Period
+                </div>
+                <p><strong>Where:</strong></p>
+                <ul>
+                    <li><strong>MRR</strong>: The Market Reference Rate (the floating rate) for that period</li>
+                    <li><strong>Swap Rate (s<sub>N</sub>)</strong>: The fixed rate agreed upon in the contract</li>
+                    <li><strong>Notional Amount</strong>: The principal amount upon which interest is calculated</li>
+                    <li><strong>Period</strong>: The fraction of a year corresponding to the settlement period (e.g., 0.5 for semi-annual, 0.25 for quarterly)</li>
+                </ul>
+
+                <div class="example">
+                    <h4><i class="fas fa-chart-bar"></i> Numerical Example</h4>
+                    <p><strong>Scenario:</strong> Consider an interest rate swap with a notional amount of $20 million and quarterly payments (Period = 0.25). The fixed-rate payer agrees to a swap rate of 4%. At the beginning of a new quarter, the 3-month MRR is reset to 5%.</p>
+                    
+                    <div class="formula">
+                        (0.05 – 0.04) × $20,000,000 × 0.25 = 0.01 × $20,000,000 × 0.25 = $50,000
+                    </div>
+                    
+                    <p><strong>Result:</strong> Since the floating rate (5%) is higher than the fixed rate (4%), the fixed-rate payer will <em>receive</em> a net payment of $50,000 for this period.</p>
+                </div>
+
+                <h3><i class="fas fa-coins"></i> Replicating a Swap with Bonds</h3>
+                <p>A powerful way to understand and value a swap is to view it as a combination of a fixed-rate bond and a floating-rate note (FRN). The position of a <strong>fixed-rate payer</strong> (who is also a floating-rate receiver) is economically equivalent to holding the following two positions:</p>
+                <ol>
+                    <li><strong>A long position in a floating-rate note (FRN)</strong>: This provides the cash inflows from the floating rate (MRR)</li>
+                    <li><strong>A short position in a fixed-rate bond</strong>: This creates the cash outflows of the fixed coupon, which is set equal to the swap rate</li>
+                </ol>
+                <p>Therefore, the value of the swap to the fixed-rate payer at any point in time is simply the value of the FRN minus the value of the fixed-rate bond.</p>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter6.html" class="nav-button prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Futures Pricing</span>
+            </a>
+            <a href="chapter8.html" class="nav-button next">
+                <span>Next: Option Pricing</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <style>
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <script src="js/chapter-template.js"></script>
+    <script>new ChapterManager(7);</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Option Replication Using Put-Call Parity | Study Session 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="readingProgress"></div></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-number">Chapter 9</div>
+            <h1 class="chapter-title">Option Replication Using Put-Call Parity</h1>
+            <p class="chapter-subtitle">Learn put-call parity relationships, synthetic positions, and firm valuation applications</p>
+        </div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="index.html" class="nav-home"><i class="fas fa-home"></i> Home</a>
+            <div class="nav-chapters">
+                <a href="chapter1.html" class="nav-chapter">1</a>
+                <a href="chapter2.html" class="nav-chapter">2</a>
+                <a href="chapter3.html" class="nav-chapter">3</a>
+                <a href="chapter4.html" class="nav-chapter">4</a>
+                <a href="chapter5.html" class="nav-chapter">5</a>
+                <a href="chapter6.html" class="nav-chapter">6</a>
+                <a href="chapter7.html" class="nav-chapter">7</a>
+                <a href="chapter8.html" class="nav-chapter">8</a>
+                <a href="chapter9.html" class="nav-chapter active">9</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="container">
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">9.1</div>
+                <h2 class="section-title">Put-Call Parity</h2>
+            </div>
+            <div class="section-content">
+                <p>Put-call parity is a fundamental no-arbitrage relationship that links the prices of European call and put options that have the same underlying asset, strike price (X), and expiration date (T). It is built on the principle that two different portfolios with identical payoff profiles must have the same initial cost.</p>
+
+                <h3><i class="fas fa-equals"></i> The Core Equation: Protective Put = Fiduciary Call</h3>
+                <p>The relationship is derived from the fact that a "protective put" portfolio has the exact same payoff as a "fiduciary call" portfolio. To avoid arbitrage, their values at inception must be equal. This leads to the put-call parity equation:</p>
+                <div class="formula">
+                    p₀ + S₀ = c₀ + 
+                    <span class="fraction">
+                        <span class="fraction-num">X</span>
+                        <span class="fraction-line"></span>
+                        <span class="fraction-den">(1 + r)ᵀ</span>
+                    </span>
+                </div>
+                <p><strong>Where:</strong></p>
+                <ul>
+                    <li>p₀: The price (premium) of the put option at time 0</li>
+                    <li>S₀: The price of the underlying asset at time 0</li>
+                    <li>c₀: The price (premium) of the call option at time 0</li>
+                    <li>X: The strike price of the options</li>
+                    <li>r: The risk-free interest rate</li>
+                    <li>T: The time to expiration</li>
+                </ul>
+
+                <h3><i class="fas fa-shield-alt"></i> Portfolio 1: The Protective Put</h3>
+                <p>A protective put is a strategy that combines a long position in an underlying asset with a long put option on that asset.</p>
+                <ul>
+                    <li><strong>Initial Value</strong>: p₀ + S₀</li>
+                    <li><strong>Payoff at Expiration</strong>:
+                        <ul>
+                            <li>If S<sub>T</sub> ≥ X, the put expires worthless (out-of-the-money), and the payoff is simply the value of the asset, S<sub>T</sub></li>
+                            <li>If S<sub>T</sub> < X, the put is exercised (in-the-money), and its payoff is X – S<sub>T</sub>. The total payoff is (X – S<sub>T</sub>) + S<sub>T</sub> = X</li>
+                        </ul>
+                    </li>
+                    <li><strong>Summary</strong>: The payoff of the protective put is max(X, S<sub>T</sub>). It provides downside protection at the strike price X while retaining upside potential.</li>
+                </ul>
+
+                <h3><i class="fas fa-university"></i> Portfolio 2: The Fiduciary Call</h3>
+                <p>A fiduciary call is a strategy that combines a long call option with a long position in a risk-free, pure-discount bond that pays the strike price X at maturity.</p>
+                <ul>
+                    <li><strong>Initial Value</strong>: c₀ + 
+                        <span class="fraction">
+                            <span class="fraction-num">X</span>
+                            <span class="fraction-line"></span>
+                            <span class="fraction-den">(1 + r)ᵀ</span>
+                        </span>
+                    </li>
+                    <li><strong>Payoff at Expiration</strong>:
+                        <ul>
+                            <li>If S<sub>T</sub> ≤ X, the call expires worthless (out-of-the-money), and the payoff is the bond maturing at a value of X</li>
+                            <li>If S<sub>T</sub> > X, the call is exercised (in-the-money), and its payoff is S<sub>T</sub> – X. The total payoff is (S<sub>T</sub> – X) + X = S<sub>T</sub></li>
+                        </ul>
+                    </li>
+                    <li><strong>Summary</strong>: The payoff of the fiduciary call is also max(X, S<sub>T</sub>). It provides a minimum payoff of X while also providing exposure to the asset's upside.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">9.2</div>
+                <h2 class="section-title">Option Strategies Based on Put-Call Parity (Synthetics)</h2>
+            </div>
+            <div class="section-content">
+                <p>By rearranging the put-call parity equation, we can create a "synthetic" position for any of the four components (call, put, underlying asset, or bond) using the other three. This is useful for arbitrage and for creating custom risk exposures.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Synthetic Position</th>
+                            <th>Replicating Portfolio</th>
+                            <th>Formula</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Synthetic Call</strong></td>
+                            <td>Long Put + Long Underlying + Short Bond</td>
+                            <td>
+                                c₀ = p₀ + S₀ – 
+                                <span class="fraction">
+                                    <span class="fraction-num">X</span>
+                                    <span class="fraction-line"></span>
+                                    <span class="fraction-den">(1 + r)ᵀ</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Synthetic Put</strong></td>
+                            <td>Long Call + Short Underlying + Long Bond</td>
+                            <td>
+                                p₀ = c₀ – S₀ + 
+                                <span class="fraction">
+                                    <span class="fraction-num">X</span>
+                                    <span class="fraction-line"></span>
+                                    <span class="fraction-den">(1 + r)ᵀ</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Synthetic Underlying</strong></td>
+                            <td>Long Call + Short Put + Long Bond</td>
+                            <td>
+                                S₀ = c₀ – p₀ + 
+                                <span class="fraction">
+                                    <span class="fraction-num">X</span>
+                                    <span class="fraction-line"></span>
+                                    <span class="fraction-den">(1 + r)ᵀ</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Synthetic Bond</strong></td>
+                            <td>Long Put + Long Underlying + Short Call</td>
+                            <td>
+                                <span class="fraction">
+                                    <span class="fraction-num">X</span>
+                                    <span class="fraction-line"></span>
+                                    <span class="fraction-den">(1 + r)ᵀ</span>
+                                </span>
+                                = p₀ + S₀ – c₀
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">9.3</div>
+                <h2 class="section-title">Put-Call-Forward Parity</h2>
+            </div>
+            <div class="section-content">
+                <p>A variation of the parity relationship exists for options priced using a forward contract instead of the spot asset. This is derived by replacing the spot price S₀ in the standard parity equation with the present value of the forward price, 
+                    <span class="fraction">
+                        <span class="fraction-num">F₀(T)</span>
+                        <span class="fraction-line"></span>
+                        <span class="fraction-den">(1 + r)ᵀ</span>
+                    </span>.
+                </p>
+                <p>The put-call-forward parity equation is:</p>
+                <div class="formula">
+                    <span class="fraction">
+                        <span class="fraction-num">F₀(T)</span>
+                        <span class="fraction-line"></span>
+                        <span class="fraction-den">(1 + r)ᵀ</span>
+                    </span>
+                    + p₀ = c₀ + 
+                    <span class="fraction">
+                        <span class="fraction-num">X</span>
+                        <span class="fraction-line"></span>
+                        <span class="fraction-den">(1 + r)ᵀ</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-number">9.4</div>
+                <h2 class="section-title">Put-Call Parity Applications: Firm Value</h2>
+            </div>
+            <div class="section-content">
+                <p>Option theory can be used to model the claims of a firm's shareholders and debtholders on its total assets.</p>
+
+                <h3><i class="fas fa-users"></i> For Shareholders</h3>
+                <p>Shareholders have a claim on the firm's assets after all debts are paid. Their upside potential is unlimited, while their downside potential is limited to their investment (the stock price can't go below zero). This payoff profile is identical to a long call option on the firm's assets (V<sub>T</sub>) with a strike price equal to the face value of the firm's debt (D).</p>
+                <div class="formula">
+                    Shareholder Payoff = max(0, V<sub>T</sub> – D)
+                </div>
+                
+                <h3><i class="fas fa-building"></i> For Debtholders</h3>
+                <p>Debtholders have a senior claim on the firm's assets. Their upward potential is restricted to receiving their principal and interest (D), while their downside includes receiving less than face value or nothing in the case of insolvency.</p>
+                <div class="formula">
+                    Debtholder Payoff = min(V<sub>T</sub>, D)
+                </div>
+            </div>
+        </section>
+
+        <div class="chapter-nav">
+            <a href="chapter8.html" class="nav-button prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>Previous: Option Pricing</span>
+            </a>
+            <a href="index.html" class="nav-button next">
+                <span>Back to Home</span>
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+    </main>
+
+    <style>
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        @media (max-width: 768px) {
+            .chapter-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <script src="js/chapter-template.js"></script>
+    <script>new ChapterManager(9);</script>
+</body>
+</html>
