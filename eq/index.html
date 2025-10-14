@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CFA Equity Investments: Complete Study Guide</title>
+    <title>CFA Equity Investments: Study Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
@@ -12,11 +12,12 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
         }
-        
+        html {
+            scroll-behavior: smooth;
+        }
         .hero-gradient {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        
         .chapter-card {
             background-color: #ffffff;
             border-radius: 1rem;
@@ -27,23 +28,18 @@
             position: relative;
             overflow: hidden;
         }
-        
         .chapter-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 4px;
             background: linear-gradient(90deg, #4299e1, #48bb78, #ed8936);
         }
-        
         .chapter-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
             border-color: #4299e1;
         }
-        
         .chapter-number {
             display: inline-flex;
             align-items: center;
@@ -57,121 +53,15 @@
             font-size: 1.25rem;
             margin-bottom: 1rem;
         }
-        
-        .progress-bar {
-            background: linear-gradient(90deg, #e2e8f0, #cbd5e0);
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-        
-        .progress-fill {
-            background: linear-gradient(90deg, #4299e1, #48bb78);
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.8s ease;
-        }
-        
-        .feature-icon {
-            width: 3rem;
-            height: 3rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-        }
-        
-        .stats-card {
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .floating-nav {
-            position: fixed;
-            top: 50%;
-            right: 2rem;
-            transform: translateY(-50%);
-            background: white;
-            border-radius: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-            z-index: 1000;
-        }
-        
-        .floating-nav-item {
-            display: block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #cbd5e0;
-            margin: 0.5rem 0;
-            transition: all 0.3s ease;
-        }
-        
-        .floating-nav-item:hover,
-        .floating-nav-item.active {
-            background: #4299e1;
-            transform: scale(1.2);
-        }
-        
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, #cbd5e0, transparent);
-            margin: 4rem 0;
-        }
-        
         @media (max-width: 768px) {
-            .floating-nav {
-                display: none;
-            }
             .chapter-card {
                 padding: 1.5rem;
             }
-        }
-        
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #4299e1, #48bb78);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #3182ce, #38a169);
         }
     </style>
 </head>
 <body class="bg-gray-50">
     
-    <!-- Floating Navigation -->
-    <div class="floating-nav hidden lg:block">
-        <a href="#hero" class="floating-nav-item active" title="Home"></a>
-        <a href="#overview" class="floating-nav-item" title="Overview"></a>
-        <a href="#chapters" class="floating-nav-item" title="Chapters"></a>
-        <a href="#features" class="floating-nav-item" title="Features"></a>
-    </div>
-
-    <!-- Hero Section -->
     <section id="hero" class="hero-gradient text-white py-20">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <div class="mb-8">
@@ -181,206 +71,108 @@
                 CFA Equity Investments
             </h1>
             <p class="text-xl md:text-2xl mb-12 opacity-90 max-w-4xl mx-auto">
-                Master the fundamentals of equity analysis with this comprehensive 8-chapter study guide covering market organization, indices, efficiency, valuation, and competitive analysis.
+                A guide to market organization, indices, efficiency, valuation, and competitive analysis.
             </p>
-            
-            <!-- Progress Overview -->
-            <div class="max-w-2xl mx-auto mb-12">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-lg font-medium">Study Progress</span>
-                    <span class="text-lg font-medium">0% Complete</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 0%"></div>
-                </div>
-            </div>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#chapters" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
-                    <i class="fas fa-play mr-2"></i>Start Learning
-                </a>
-                <a href="#overview" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors">
-                    <i class="fas fa-info-circle mr-2"></i>Learn More
-                </a>
-            </div>
+            <a href="#chapters" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
+                <i class="fas fa-play mr-2"></i>Start Learning
+            </a>
         </div>
     </section>
 
-    <!-- Overview Section -->
-    <section id="overview" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Complete Equity Analysis Mastery</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    From fundamental market concepts to advanced valuation techniques, this comprehensive guide covers everything you need to excel in equity investments.
-                </p>
-            </div>
-            
-            <!-- Statistics -->
-            <div class="grid md:grid-cols-4 gap-6 mb-16">
-                <div class="stats-card">
-                    <div class="text-3xl font-bold text-blue-600 mb-2">8</div>
-                    <div class="text-gray-600 font-medium">Comprehensive Chapters</div>
-                </div>
-                <div class="stats-card">
-                    <div class="text-3xl font-bold text-green-600 mb-2">50+</div>
-                    <div class="text-gray-600 font-medium">Key Concepts</div>
-                </div>
-                <div class="stats-card">
-                    <div class="text-3xl font-bold text-purple-600 mb-2">25+</div>
-                    <div class="text-gray-600 font-medium">Practical Examples</div>
-                </div>
-                <div class="stats-card">
-                    <div class="text-3xl font-bold text-orange-600 mb-2">100%</div>
-                    <div class="text-gray-600 font-medium">CFA Aligned</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Chapters Section -->
     <section id="chapters" class="py-20 bg-gray-50">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-900 mb-6">Study Chapters</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Navigate through each chapter at your own pace. Each section builds upon the previous to create a comprehensive understanding of equity investments.
+                    Select a chapter to begin your study of equity investments.
                 </p>
             </div>
             
             <div class="grid md:grid-cols-2 gap-8">
                 
-                <!-- Chapter 1 -->
                 <div class="chapter-card">
                     <div class="chapter-number">1</div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Market Organization and Structure</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Market Organization & Structure</h3>
                     <p class="text-gray-600 mb-6">
-                        Understand the foundation of financial systems, market functions, asset types, and the critical role of market organization in efficient capital allocation.
+                        Understand financial systems, market functions, and asset types.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Financial System Functions</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Market Structures</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Order Types</span>
-                    </div>
                     <a href="chapter1.html" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         Start Chapter <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
-                <!-- Chapter 2 -->
                 <div class="chapter-card">
                     <div class="chapter-number">2</div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-3">Security Market Indices</h3>
                     <p class="text-gray-600 mb-6">
-                        Learn how indices measure market performance, understand different weighting methodologies, and discover their applications in investment management.
+                        Learn how indices measure market performance and different weighting methods.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Index Construction</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Weighting Methods</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Return Calculations</span>
-                    </div>
                     <a href="chapter2.html" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         Start Chapter <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
-                <!-- Chapter 3 -->
                 <div class="chapter-card">
                     <div class="chapter-number">3</div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-3">Market Efficiency</h3>
                     <p class="text-gray-600 mb-6">
-                        Explore the Efficient Market Hypothesis, understand market anomalies, and examine behavioral finance factors that influence market pricing.
+                        Explore the Efficient Market Hypothesis and market anomalies.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">EMH Forms</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Market Anomalies</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Behavioral Finance</span>
-                    </div>
                     <a href="chapter3.html" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         Start Chapter <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
-                <!-- Chapter 4 -->
                 <div class="chapter-card">
                     <div class="chapter-number">4</div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-3">Overview of Equity Securities</h3>
                     <p class="text-gray-600 mb-6">
-                        Master equity fundamentals including common vs. preferred shares, public vs. private equity, and understand risk-return characteristics.
+                        Master equity fundamentals like common vs. preferred shares.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Equity Types</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Risk & Return</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Foreign Investing</span>
-                    </div>
                     <a href="chapter4.html" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         Start Chapter <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
-                <!-- Chapter 5 -->
                 <div class="chapter-card">
                     <div class="chapter-number">5</div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-3">Company Analysis</h3>
                     <p class="text-gray-600 mb-6">
-                        Learn the three-tiered analytical framework for comprehensive company research, from revenue analysis to ROE decomposition.
+                        Learn analytical frameworks for comprehensive company research.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Research Framework</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Financial Analysis</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">DuPont Analysis</span>
-                    </div>
                     <a href="chapter5.html" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         Start Chapter <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
-                <!-- Chapter 6 -->
                 <div class="chapter-card">
                     <div class="chapter-number">6</div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Industry and Competitive Analysis</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Industry & Competitive Analysis</h3>
                     <p class="text-gray-600 mb-6">
-                        Apply Porter's Five Forces, conduct industry surveys, and understand PESTLE analysis for comprehensive industry evaluation.
+                        Apply Porter's Five Forces and conduct industry surveys.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Porter's Five Forces</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Industry Classification</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">PESTLE Analysis</span>
-                    </div>
                     <a href="chapter6.html" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         Start Chapter <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
-                <!-- Chapter 7 -->
                 <div class="chapter-card">
                     <div class="chapter-number">7</div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-3">Competitive Strategy Analysis</h3>
                     <p class="text-gray-600 mb-6">
-                        Dive deeper into competitive positioning, strategic frameworks, and understand how companies create sustainable competitive advantages.
+                        Dive into competitive positioning and strategic frameworks.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Competitive Strategy</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Market Position</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Strategic Analysis</span>
-                    </div>
                     <a href="chapter7.html" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         Start Chapter <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
                 
-                <!-- Chapter 8 -->
                 <div class="chapter-card">
                     <div class="chapter-number">8</div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-3">Equity Valuation</h3>
                     <p class="text-gray-600 mb-6">
-                        Master valuation techniques including DCF models, multiplier approaches, and asset-based valuation methods for comprehensive equity analysis.
+                        Master valuation techniques like DCF and multiplier models.
                     </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">DCF Models</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Multiplier Methods</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Asset Valuation</span>
-                    </div>
                     <a href="chapter8.html" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         Start Chapter <i class="fas fa-arrow-right ml-2"></i>
                     </a>
@@ -390,194 +182,11 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Learning Features</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Designed for comprehensive understanding with practical applications and real-world examples.
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="feature-icon mx-auto">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Practical Examples</h3>
-                    <p class="text-gray-600">
-                        Each chapter includes detailed examples with step-by-step calculations to reinforce key concepts.
-                    </p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="feature-icon mx-auto">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Visual Learning</h3>
-                    <p class="text-gray-600">
-                        Interactive charts, diagrams, and visual frameworks help you understand complex concepts intuitively.
-                    </p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="feature-icon mx-auto">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Mobile Optimized</h3>
-                    <p class="text-gray-600">
-                        Study anywhere with fully responsive design that works perfectly on all devices.
-                    </p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="feature-icon mx-auto">
-                        <i class="fas fa-bookmark"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Key Takeaways</h3>
-                    <p class="text-gray-600">
-                        Important concepts are highlighted and summarized for quick review and retention.
-                    </p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="feature-icon mx-auto">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">CFA Aligned</h3>
-                    <p class="text-gray-600">
-                        Content is specifically structured to align with CFA Institute curriculum requirements.
-                    </p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="feature-icon mx-auto">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Easy Navigation</h3>
-                    <p class="text-gray-600">
-                        Intuitive chapter organization and cross-references make finding information effortless.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-20 hero-gradient text-white">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to Master Equity Investments?</h2>
-            <p class="text-xl mb-8 opacity-90">
-                Start your journey through comprehensive equity analysis and valuation techniques.
-            </p>
-            <a href="chapter1.html" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors inline-flex items-center">
-                <i class="fas fa-play mr-2"></i>Begin Chapter 1
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">CFA Equity Investments</h3>
-                    <p class="text-gray-400">
-                        Comprehensive study guide for mastering equity analysis and valuation techniques.
-                    </p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#chapters" class="hover:text-white transition-colors">All Chapters</a></li>
-                        <li><a href="chapter1.html" class="hover:text-white transition-colors">Start Learning</a></li>
-                        <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Study Progress</h3>
-                    <p class="text-gray-400 mb-4">Track your learning across all 8 chapters</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 CFA Equity Investments Study Guide. Educational content aligned with CFA Institute curriculum.</p>
-            </div>
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2025 CFA Equity Study Guide. For educational purposes.</p>
         </div>
     </footer>
 
-    <script>
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Update floating navigation active state
-        window.addEventListener('scroll', () => {
-            const sections = ['hero', 'overview', 'chapters', 'features'];
-            const navItems = document.querySelectorAll('.floating-nav-item');
-            
-            let current = 0;
-            sections.forEach((section, index) => {
-                const element = document.getElementById(section);
-                if (element && window.scrollY >= element.offsetTop - 200) {
-                    current = index;
-                }
-            });
-            
-            navItems.forEach((item, index) => {
-                item.classList.toggle('active', index === current);
-            });
-        });
-
-        // Progress tracking (basic implementation)
-        function updateProgress() {
-            const visited = JSON.parse(localStorage.getItem('visitedChapters') || '[]');
-            const progress = (visited.length / 8) * 100;
-            
-            document.querySelectorAll('.progress-fill').forEach(fill => {
-                fill.style.width = progress + '%';
-            });
-            
-            document.querySelectorAll('[data-progress-text]').forEach(text => {
-                text.textContent = Math.round(progress) + '% Complete';
-            });
-        }
-
-        // Initialize progress
-        updateProgress();
-
-        // Add intersection observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe chapter cards for animation
-        document.querySelectorAll('.chapter-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-    </script>
 </body>
 </html>
