@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Statistical Measures - CFA Level 1 Quantitative Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #006699;
+            --accent: #008080;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .chapter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Table of Contents Sidebar */
+        .layout-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--light);
+            color: var(--primary);
+            border-left-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: var(--primary);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .content-section {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h3 {
+            color: var(--accent);
+            font-size: 1.4em;
+            margin: 2rem 0 1rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        h4 {
+            color: var(--secondary);
+            font-size: 1.2em;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        .key-term {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .highlight {
+            background-color: #ffffcc;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        /* Formula styling */
+        .formula {
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Example styling */
+        .example {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #b0e7ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(176, 231, 255, 0.3);
+            position: relative;
+        }
+
+        .example::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .example h4 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example h4::before {
+            content: '\f550';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        /* Navigation buttons */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button.prev {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .nav-button.next {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 27.27%; /* 3/11 chapters */
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Quantitative Analysis</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="chapter2.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous
+                </a>
+                <a href="chapter3.html" class="nav-link active">
+                    <i class="fas fa-chart-bar"></i>
+                    Chapter 3
+                </a>
+                <a href="chapter4.html" class="nav-link">
+                    <i class="fas fa-arrow-right"></i>
+                    Next
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+        <div class="chapter-content">
+            <div class="chapter-badge">Chapter 3 of 11</div>
+            <h1 class="chapter-title">Statistical Measures of Asset Returns</h1>
+            <p class="chapter-description">
+                Learn descriptive statistics including measures of central tendency, dispersion, skewness, kurtosis, and correlation analysis
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout-container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <div class="toc-title">
+                <i class="fas fa-list"></i>
+                Contents
+            </div>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#central-tendency" class="toc-link">Central Tendency</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#quantiles" class="toc-link">Quantiles</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#dispersion" class="toc-link">Dispersion Measures</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#shape" class="toc-link">Distribution Shape</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#correlation" class="toc-link">Correlation Analysis</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="content-section" id="central-tendency">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Measures of Central Tendency: Finding the Center</h2>
+                </div>
+                <p>Measures of central tendency give us a single value that describes the center or typical value of a dataset. In finance, this helps us understand the average or expected return of an asset.</p>
+
+                <h3>The Arithmetic Mean</h3>
+                <p>This is the most common measure of the center, calculated by summing all values and dividing by the count of values.</p>
+                <ul>
+                    <li>A key property is that the sum of the deviations of each observation from the mean is always zero.</li>
+                    <li><strong>Advantages:</strong> It uses all the data and is easy to compute.</li>
+                    <li><strong>Limitations:</strong> It is highly sensitive to extreme values, known as outliers.</li>
+                </ul>
+                <div class="formula">
+                    Arithmetic Mean = (Sum of all values) / (Number of values)
+                </div>
+
+                <h3>The Median</h3>
+                <p>The median is the middle value in a sorted dataset. For an even number of observations, it's the average of the two middle values.</p>
+                <ul>
+                    <li>Its main advantage is that it is <strong>not affected by extreme values</strong>.</li>
+                    <li>Limitations include being more time-consuming to calculate for large datasets and not considering the magnitude of all observations.</li>
+                </ul>
+
+                <h3>The Mode</h3>
+                <p>The mode is the value that appears most frequently in a dataset.</p>
+                <ul>
+                    <li>A dataset can have one mode (unimodal), two modes (bimodal), or three modes (trimodal).</li>
+                    <li>It is particularly useful for nominal data (data that is categorical).</li>
+                </ul>
+
+                <h3>Other Concepts of Mean</h3>
+                <p>Depending on the situation, different types of means are more appropriate.</p>
+                <ul>
+                    <li><strong>Weighted Mean:</strong> Assigns different weights (importance) to each observation. This is used extensively in portfolio returns, where each asset has a different weight.
+                        <div class="formula">
+                            Weighted Mean = Sum of (weight × value) for all observations
+                        </div>
+                    </li>
+                    <li><strong>Geometric Mean:</strong> Used to compute the average compound return over multiple periods.
+                        <div class="formula">
+                            Geometric Mean = [(1+R₁)(1+R₂)...(1+Rₙ)]^(1/ₙ) - 1
+                        </div>
+                    </li>
+                    <li><strong>Harmonic Mean:</strong> Used in strategies like cost averaging, where an equal dollar amount is invested at different times.
+                        <div class="formula">
+                            Harmonic Mean = n / (Sum of 1/value for all values)
+                        </div>
+                    </li>
+                    <li><strong>Trimmed Mean:</strong> To handle outliers, this mean is calculated after excluding a small percentage of the highest and lowest values.</li>
+                    <li><strong>Winsorized Mean:</strong> This method adjusts extreme values by replacing them with a certain percentile value, rather than deleting them.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="quantiles">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Measures of Location: Quantiles</h2>
+                </div>
+                <p>Quantiles divide a dataset into equal-sized parts, helping us understand the location of a specific data point within the distribution.</p>
+                <ul>
+                    <li>The location of any quantile can be found with the formula: Position = (n+1) × (percentile/100), where 'n' is the number of observations.</li>
+                    <li><strong>Quartiles:</strong> Divide the data into 4 equal parts. The <strong>Interquartile Range (IQR)</strong> is the difference between the third and first quartiles, representing the middle 50% of the data and serving as a measure of dispersion.</li>
+                    <li><strong>Quintiles and Deciles:</strong> Divide data into 5 and 10 equal parts, respectively.</li>
+                    <li><strong>Percentiles:</strong> Divide data into 100 equal parts for very detailed analysis.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="dispersion">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Measures of Dispersion: Gauging Risk</h2>
+                </div>
+                <p>Dispersion measures the variability of data around the central tendency. In finance, dispersion is a primary indicator of <strong>risk</strong>.</p>
+
+                <ul>
+                    <li><strong>Range:</strong> The simplest measure, calculated as Maximum Value - Minimum Value. It's easy to compute but ignores the shape of the distribution.</li>
+                    <li><strong>Mean Absolute Deviation (MAD):</strong> The average of the absolute deviations from the mean.
+                        <div class="formula">
+                            MAD = (Sum of absolute deviations from mean) / n
+                        </div>
+                    </li>
+                    <li><strong>Sample Variance and Standard Deviation:</strong> These are the most common measures of risk. Variance is the average of the squared deviations from the mean. Standard deviation is the square root of the variance.
+                        <div class="formula">
+                            Sample Variance = Sum of squared deviations from mean / (n-1)<br>
+                            Sample Standard Deviation = Square root of variance
+                        </div>
+                    </li>
+                    <li><strong>Downside Deviation (Target Semi-deviation):</strong> A risk measure that focuses only on returns that fall below a minimum acceptable threshold or target. This is often more relevant to investors who are primarily concerned with losses.
+                        <div class="formula">
+                            Downside Deviation = Square root of [Sum of squared deviations below target / (n-1)]
+                        </div>
+                    </li>
+                    <li><strong>Coefficient of Variation (CV):</strong> Measures the amount of risk (standard deviation) per unit of mean return. It is a relative measure, useful for comparing the risk of assets with different expected returns. A higher CV indicates higher risk per unit of return.
+                        <div class="formula">
+                            Coefficient of Variation = Standard Deviation / Mean
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="shape">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Measures of Shape: Skewness and Kurtosis</h2>
+                </div>
+                <p>These measures describe the shape of a data distribution compared to a perfect "bell curve" (normal distribution).</p>
+
+                <h3>Skewness: Is the Distribution Symmetrical?</h3>
+                <p>Skewness describes the degree of asymmetry in a distribution.</p>
+                <ul>
+                    <li><strong>Symmetrical (Normal) Distribution:</strong> Identical on both sides of the mean. For this distribution, <span class="key-term">Mean = Median = Mode</span>.</li>
+                    <li><strong>Positively Skewed (Skewed Right):</strong> Has a long tail on the right side, with more outliers in the upper region. In this case, <span class="key-term">Mean > Median > Mode</span>. The mean is pulled in the direction of the long tail.</li>
+                    <li><strong>Negatively Skewed (Skewed Left):</strong> Has a long tail on the left side, with more outliers in the lower region. In this case, <span class="key-term">Mean < Median < Mode</span>.</li>
+                </ul>
+
+                <h3>Kurtosis: Are the Tails Fat or Thin?</h3>
+                <p>Kurtosis measures how peaked a distribution is and the thickness of its tails compared to a normal distribution.</p>
+                <ul>
+                    <li>A normal distribution has a kurtosis of <strong>3</strong>.</li>
+                    <li><strong>Excess Kurtosis</strong> = Sample Kurtosis - 3. This is typically what analysts refer to.</li>
+                    <li><strong>Leptokurtic (Positive Excess Kurtosis > 0):</strong> More peaked with "fatter tails" than a normal distribution. This means there is a <strong>higher frequency of extremely large deviations</strong> from the mean, indicating higher risk.</li>
+                    <li><strong>Mesokurtic (Excess Kurtosis = 0):</strong> Has the same kurtosis as a normal distribution.</li>
+                    <li><strong>Platykurtic (Negative Excess Kurtosis < 0):</strong> Less peaked with "thinner tails" than a normal distribution.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="correlation">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Correlation Between Two Variables</h2>
+                </div>
+                <p>Correlation measures the <strong>linear relationship</strong> between two variables, indicating both the direction and strength of their association.</p>
+                
+                <ul>
+                    <li><strong>Covariance:</strong> Measures how two variables move together. Its calculation is the first step towards finding correlation.</li>
+                    <li><strong>Correlation Coefficient (r):</strong> A standardized measure of the linear association between two variables.
+                        <div class="formula">
+                            Correlation Coefficient = Covariance(X,Y) / (Standard Deviation(X) × Standard Deviation(Y))
+                        </div>
+                    </li>
+                </ul>
+
+                <h3>Properties of Correlation</h3>
+                <ul>
+                    <li>The correlation coefficient ranges from <strong>-1 to +1</strong>.</li>
+                    <li>A coefficient of <strong>+1</strong> indicates a perfect positive linear relationship.</li>
+                    <li>A coefficient of <strong>-1</strong> indicates a perfect negative linear relationship.</li>
+                    <li>A coefficient of <strong>0</strong> means there is no linear relationship.</li>
+                    <li>The closer the coefficient is to +1 or -1, the stronger the linear relationship.</li>
+                </ul>
+
+                <h3>Limitations of Correlation Analysis</h3>
+                <ul>
+                    <li>It only measures <strong>linear</strong> relationships. Two variables could have a strong non-linear relationship and still have a correlation of zero.</li>
+                    <li>It can be heavily influenced by <strong>outliers</strong>.</li>
+                    <li><strong>Correlation does not imply causation</strong>. Just because two variables move together does not mean one causes the other.</li>
+                    <li>It can lead to <strong>spurious correlations</strong>, where two variables appear related by chance but have no logical connection.</li>
+                </ul>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav">
+                <a href="chapter2.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Chapter 2
+                </a>
+                
+                <div class="progress-indicator">
+                    <span>Progress:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span>Chapter 3 of 11</span>
+                </div>
+                
+                <a href="chapter4.html" class="nav-button next">
+                    Chapter 4
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Table of Contents active link tracking
+        function updateTOC() {
+            const sections = document.querySelectorAll('.content-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        window.addEventListener('load', updateTOC);
+        
+        // Mark chapter as completed
+        localStorage.setItem('chapter_3_completed', 'true');
+    </script>
+</body>
+</html>

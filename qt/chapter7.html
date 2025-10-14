@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Estimation and Inference - CFA Level 1 Quantitative Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #006699;
+            --accent: #008080;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --table-header: #003366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .chapter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Table of Contents Sidebar */
+        .layout-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--light);
+            color: var(--primary);
+            border-left-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: var(--primary);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .content-section {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h3 {
+            color: var(--accent);
+            font-size: 1.4em;
+            margin: 2rem 0 1rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        h4 {
+            color: var(--secondary);
+            font-size: 1.2em;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        .term {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Formula styling */
+        .formula {
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Example styling */
+        .calculation-example {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #b0e7ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(176, 231, 255, 0.3);
+            position: relative;
+        }
+
+        .calculation-example::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .calculation-example h4 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .calculation-example h4::before {
+            content: '\f550';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--table-header);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        /* Navigation buttons */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button.prev {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .nav-button.next {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 63.63%; /* 7/11 chapters */
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Quantitative Analysis</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="chapter6.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous
+                </a>
+                <a href="chapter7.html" class="nav-link active">
+                    <i class="fas fa-search"></i>
+                    Chapter 7
+                </a>
+                <a href="chapter8.html" class="nav-link">
+                    <i class="fas fa-arrow-right"></i>
+                    Next
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+        <div class="chapter-content">
+            <div class="chapter-badge">Chapter 7 of 11</div>
+            <h1 class="chapter-title">Estimation and Inference</h1>
+            <p class="chapter-description">
+                Learn sampling methods, the Central Limit Theorem, standard errors, and resampling techniques for statistical inference
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout-container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <div class="toc-title">
+                <i class="fas fa-list"></i>
+                Contents
+            </div>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#sampling-fundamentals" class="toc-link">Sampling Fundamentals</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#sampling-methods" class="toc-link">Sampling Methods</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#clt" class="toc-link">Central Limit Theorem</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#resampling" class="toc-link">Resampling Techniques</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="content-section" id="sampling-fundamentals">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">The Fundamentals of Sampling</h2>
+                </div>
+                <p>
+                    In statistics and finance, we often want to learn about a large group — for example, all stocks in an index, all bond yields in a market, or all investor returns over a decade. This large group is called the <span class="term">population</span>.
+                </p>
+                <p>
+                    Studying every single member of the population (a <strong>census</strong>) is usually impractical due to time, cost, or logistical constraints. Instead, we select a smaller, manageable subset called a <span class="term">sample</span>. The process of selecting this subset is called <span class="term">sampling</span>.
+                </p>
+
+                <h3>Key Definitions</h3>
+                <ul>
+                    <li><strong>Population:</strong> The complete set of items or individuals we're interested in.</li>
+                    <li><strong>Sample:</strong> A subset of the population that we actually observe and analyze.</li>
+                    <li><strong>Parameter:</strong> A fixed, unknown numerical measure that describes a characteristic of the population.
+                        <ul>
+                            <li>Example: The true mean return of all S&P 500 stocks.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Sample Statistic:</strong> A value calculated from the sample data, used to estimate the population parameter.
+                        <ul>
+                            <li>Example: The average return of 50 randomly selected S&P 500 stocks.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="calculation-example">
+                    <h4>Example: Estimating Average Dividend Yield</h4>
+                    <p>Suppose you want to know the average dividend yield of all 2,000 stocks in the Russell 2000 index.</p>
+                    <p>You select a sample of 100 stocks and find their average dividend yield is 2.3%.</p>
+                    <p><strong>Interpretation:</strong> You don't know the true population mean, but you use 2.3% as your <strong>best estimate</strong> of it.</p>
+                </div>
+
+                <h3>Why Sampling Is Essential</h3>
+                <p>Sampling is far more efficient than a full census. Benefits include:</p>
+                <ul>
+                    <li>Cost-effective — saves money and resources</li>
+                    <li>Time-efficient — results are available faster</li>
+                    <li>Reduces data collection errors — easier to manage quality control</li>
+                    <li>Often just as accurate — if the sample is well-chosen</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="sampling-methods">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Sampling Methods: How to Choose a Sample</h2>
+                </div>
+                <p>
+                    The quality of your statistical conclusions depends heavily on <strong>how</strong> you select your sample. There are two broad categories: <span class="term">probability sampling</span> and <span class="term">non-probability sampling</span>.
+                </p>
+
+                <h3>Probability vs. Non-Probability Sampling</h3>
+                <ul>
+                    <li><strong>Probability Sampling:</strong> Every member of the population has a <strong>known, non-zero chance</strong> of being selected. These methods allow for valid statistical inference because they minimize selection bias.</li>
+                    <li><strong>Non-Probability Sampling:</strong> Selection is based on convenience, judgment, or other non-random criteria. These methods are quick and easy but <strong>cannot support reliable inference</strong> about the population.</li>
+                </ul>
+
+                <h3>Types of Probability Sampling</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                            <th>Pros & Cons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Simple Random Sampling</strong></td>
+                            <td>Every possible sample of size <em>n</em> has an equal chance of being selected. Can be done using random number generators.</td>
+                            <td><strong>✔️ Pro:</strong> Truly random and unbiased.<br><strong>❌ Con:</strong> May, by chance, produce a non-representative sample (e.g., all tech stocks).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stratified Random Sampling</strong></td>
+                            <td>The population is divided into homogeneous subgroups (<em>strata</em>) based on a key variable (e.g., sector, risk level). A random sample is then drawn from each stratum, proportional to its size.</td>
+                            <td><strong>✔️ Pro:</strong> More precise and representative than simple random sampling.<br><strong>❌ Con:</strong> Requires prior knowledge of population structure.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cluster Sampling</strong></td>
+                            <td>The population is divided into clusters (e.g., geographic regions). A random set of clusters is selected, and individuals are sampled from within them.
+                                <ul>
+                                    <li><strong>One-stage:</strong> All members of selected clusters are included.</li>
+                                    <li><strong>Two-stage:</strong> A random subsample is drawn from each selected cluster.</li>
+                                </ul>
+                            </td>
+                            <td><strong>✔️ Pro:</strong> Cost-effective for large, dispersed populations.<br><strong>❌ Con:</strong> Less accurate than stratified sampling due to potential cluster heterogeneity.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Types of Non-Probability Sampling</h3>
+                <ul>
+                    <li><strong>Convenience Sampling:</strong> Individuals are selected based on ease of access (e.g., surveying people at a coffee shop).
+                        <ul>
+                            <li><strong>✔️ Pro:</strong> Fast and inexpensive.</li>
+                            <li><strong>❌ Con:</strong> High risk of bias; not representative.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Judgmental (Purposive) Sampling:</strong> The researcher uses their expertise to select a sample they believe is representative.
+                        <ul>
+                            <li><strong>✔️ Pro:</strong> Can be useful in exploratory research.</li>
+                            <li><strong>❌ Con:</strong> Subject to researcher bias; not random.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="clt">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">The Central Limit Theorem (CLT) and Inference</h2>
+                </div>
+                <p>
+                    The <span class="term">Central Limit Theorem (CLT)</span> is one of the most powerful and foundational concepts in statistics. It allows us to make reliable inferences about population parameters even when we don't know the shape of the population distribution.
+                </p>
+
+                <h3>What Is the Central Limit Theorem?</h3>
+                <p>
+                    The CLT states that:
+                </p>
+                <div class="formula">
+                    For any population with mean \(\mu\) and finite variance \(\sigma^2\),<br>
+                    the sampling distribution of the sample mean \(\bar{X}\)<br>
+                    will be approximately <strong>normally distributed</strong> as the sample size \(n\) increases,<br>
+                    regardless of the shape of the population distribution.
+                </div>
+                <p><strong>Rule of Thumb:</strong> A sample size of \(n \geq 30\) is generally sufficient for the approximation to be good.</p>
+
+                <h3>Properties of the Sampling Distribution of the Sample Mean</h3>
+                <p>Let's define the <span class="term">sampling distribution of the sample mean</span> — that is, the distribution of all possible sample means of size \(n\).</p>
+                <ul>
+                    <li><strong>Mean:</strong> The mean of the sample means equals the population mean.
+                        <div class="formula">
+                            \( \mu_{\bar{X}} = \mu \)
+                        </div>
+                    </li>
+                    <li><strong>Variance:</strong> The variance of the sample means is the population variance divided by the sample size.
+                        <div class="formula">
+                            \( \sigma_{\bar{X}}^2 = \frac{\sigma^2}{n} \)
+                        </div>
+                    </li>
+                    <li><strong>Standard Deviation (Standard Error):</strong> This is the most important practical measure.</li>
+                </ul>
+
+                <h3>Standard Error of the Sample Mean</h3>
+                <p>
+                    The <span class="term">standard error (SE)</span> is the standard deviation of the sampling distribution of the sample mean. It tells us how much the sample mean is likely to vary from the true population mean due to random sampling.
+                </p>
+                <div class="formula">
+                    If population standard deviation \(\sigma\) is known: \( SE = \frac{\sigma}{\sqrt{n}} \)<br>
+                    If \(\sigma\) is unknown (most real-world cases): \( SE = \frac{s}{\sqrt{n}} \)
+                </div>
+                <p>Where:</p>
+                <ul>
+                    <li>\(s\) = sample standard deviation</li>
+                    <li>\(n\) = sample size</li>
+                </ul>
+
+                <div class="calculation-example">
+                    <h4>Example: Calculating Standard Error</h4>
+                    <p>You sample 49 stocks and find:</p>
+                    <ul>
+                        <li>Sample mean return = 8%</li>
+                        <li>Sample standard deviation = 14%</li>
+                    </ul>
+                    <p>Since the population standard deviation is unknown, use the sample SD:</p>
+                    <div class="formula">
+                        \( SE = \frac{14\%}{\sqrt{49}} = \frac{14}{7} = 2\% \)
+                    </div>
+                    <p><strong>Interpretation:</strong> On average, the sample mean will differ from the true population mean by about 2 percentage points.</p>
+                </div>
+
+                <h4>Standard Deviation vs. Standard Error</h4>
+                <p>Don't confuse these two:</p>
+                <ul>
+                    <li><strong>Standard Deviation (SD):</strong> Measures how spread out the <strong>individual data points</strong> are in a single sample.</li>
+                    <li><strong>Standard Error (SE):</strong> Measures how spread out the <strong>sample means</strong> are across many samples — it's about the precision of the mean estimate.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="resampling">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Resampling Techniques</h2>
+                </div>
+                <p>
+                    <span class="term">Resampling</span> involves repeatedly drawing samples from the observed data to estimate the variability of a statistic (like the mean or standard error) without relying on strict assumptions about the population distribution.
+                </p>
+
+                <h3>Bootstrapping</h3>
+                <p>
+                    <span class="term">Bootstrapping</span> is a powerful resampling method that uses <strong>sampling with replacement</strong> from the original dataset.
+                </p>
+                <ul>
+                    <li>You take many random samples (e.g., 10,000) of the same size as the original, drawing with replacement.</li>
+                    <li>For each bootstrap sample, you calculate the statistic of interest (e.g., mean, median).</li>
+                    <li>The distribution of these bootstrap statistics estimates the sampling distribution.</li>
+                </ul>
+                <p><strong>Uses:</strong> Estimating standard errors, confidence intervals, and bias — especially when parametric assumptions (like normality) are questionable.</p>
+
+                <div class="calculation-example">
+                    <h4>Example: Bootstrapping the Mean</h4>
+                    <p>You have 30 daily returns. To estimate the 95% confidence interval for the mean:</p>
+                    <ol>
+                        <li>Draw 1,000 bootstrap samples (each with 30 returns, with replacement).</li>
+                        <li>Calculate the mean of each sample.</li>
+                        <li>Take the 2.5th and 97.5th percentiles of the 1,000 means.</li>
+                    </ol>
+                    <p>This gives you a robust confidence interval without assuming normality.</p>
+                </div>
+
+                <h3>Jackknife</h3>
+                <p>
+                    The <span class="term">Jackknife</span> is another resampling technique that works by <strong>leaving out one observation at a time</strong>.
+                </p>
+                <ul>
+                    <li>For a sample of size \(n\), you create \(n\) subsamples, each missing one different observation.</li>
+                    <li>You calculate the statistic (e.g., mean) for each subsample.</li>
+                    <li>These values are used to estimate bias and standard error.</li>
+                </ul>
+
+                <h4>Bootstrapping vs. Jackknife: Key Difference</h4>
+                <ul>
+                    <li><strong>Jackknife:</strong> Always produces exactly \(n\) samples for a sample of size \(n\). Deterministic.</li>
+                    <li><strong>Bootstrapping:</strong> You choose how many samples to draw (e.g., 1,000 or 10,000). Stochastic (random).</li>
+                </ul>
+                <p>Bootstrapping is more flexible and widely used; Jackknife is simpler but less powerful for complex statistics.</p>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav">
+                <a href="chapter6.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Chapter 6
+                </a>
+                
+                <div class="progress-indicator">
+                    <span>Progress:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span>Chapter 7 of 11</span>
+                </div>
+                
+                <a href="chapter8.html" class="nav-button next">
+                    Chapter 8
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Table of Contents active link tracking
+        function updateTOC() {
+            const sections = document.querySelectorAll('.content-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        window.addEventListener('load', updateTOC);
+        
+        // Mark chapter as completed
+        localStorage.setItem('chapter_7_completed', 'true');
+    </script>
+</body>
+</html>

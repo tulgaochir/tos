@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Common Probability Distributions - CFA Level 1 Quantitative Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #006699;
+            --accent: #008080;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --table-header: #003366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .chapter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Table of Contents Sidebar */
+        .layout-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--light);
+            color: var(--primary);
+            border-left-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: var(--primary);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .content-section {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h3 {
+            color: var(--accent);
+            font-size: 1.4em;
+            margin: 2rem 0 1rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        h4 {
+            color: var(--secondary);
+            font-size: 1.2em;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        .term {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Formula styling */
+        .formula {
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Example styling */
+        .calculation-example {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #b0e7ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(176, 231, 255, 0.3);
+            position: relative;
+        }
+
+        .calculation-example::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .calculation-example h4 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .calculation-example h4::before {
+            content: '\f550';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--table-header);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        /* Navigation buttons */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button.prev {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .nav-button.next {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 54.54%; /* 6/11 chapters */
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Quantitative Analysis</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="chapter5.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous
+                </a>
+                <a href="chapter6.html" class="nav-link active">
+                    <i class="fas fa-wave-square"></i>
+                    Chapter 6
+                </a>
+                <a href="chapter7.html" class="nav-link">
+                    <i class="fas fa-arrow-right"></i>
+                    Next
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+        <div class="chapter-content">
+            <div class="chapter-badge">Chapter 6 of 11</div>
+            <h1 class="chapter-title">Common Probability Distributions</h1>
+            <p class="chapter-description">
+                Explore lognormal distributions, Monte Carlo simulation, and bootstrapping techniques for financial modeling
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout-container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <div class="toc-title">
+                <i class="fas fa-list"></i>
+                Contents
+            </div>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#lognormal" class="toc-link">Lognormal Distribution</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#monte-carlo" class="toc-link">Monte Carlo Simulation</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#bootstrapping" class="toc-link">Bootstrapping</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#comparison" class="toc-link">Monte Carlo vs Bootstrapping</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="content-section" id="lognormal">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">The Lognormal Distribution & Continuous Compounding</h2>
+                </div>
+                <p>
+                    The normal distribution is widely used, but it allows for negative values—problematic when modeling asset prices, which cannot fall below zero. The <span class="term">lognormal distribution</span> resolves this by ensuring all values are positive.
+                </p>
+
+                <h3>Lognormal Distributions</h3>
+                <ul>
+                    <li><strong>Definition:</strong> A random variable \( X \) is lognormally distributed if \( \ln(X) \) is normally distributed.</li>
+                    <li><strong>Key Properties:</strong>
+                        <ul>
+                            <li>Cannot take negative values—ideal for modeling stock prices.</li>
+                            <li>Positively skewed (right-tailed).</li>
+                            <li>Determined by the mean \( \mu \) and variance \( \sigma^2 \) of \( \ln(X) \).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Mean and Variance:</strong> The mean and variance of the lognormal variable \( X \) are:
+                        <div class="formula">
+                            \( \text{Mean} = \exp(\mu + 0.5\sigma^2) \)<br>
+                            \( \text{Variance} = \exp(2\mu + \sigma^2) \times \left[\exp(\sigma^2) - 1\right] \)
+                        </div>
+                    </li>
+                </ul>
+
+                <h3>Continuous Compounding and Volatility</h3>
+                <p>
+                    If continuously compounded returns are normally distributed, then future asset prices are <span class="term">lognormally distributed</span>.
+                </p>
+                <ul>
+                    <li>The future price \( S_T \) relates to the current price \( S_0 \) via:
+                        <div class="formula">
+                            \( S_T = S_0 \cdot \exp(r_{0,T}) \)
+                        </div>
+                        where \( r_{0,T} \) is the continuously compounded return over time \( T \).
+                    </li>
+                    <li>Continuously compounded returns are always less than or equal to holding period returns.</li>
+                    <li><span class="term">Volatility</span> is the standard deviation of returns. It is typically estimated from historical daily returns.</li>
+                    <li><strong>Annualized Volatility:</strong> Scales volatility to a yearly basis:
+                        <div class="formula">
+                            \( \text{Annualized Volatility} = \sigma_{\text{period}} \times \sqrt{T} \)
+                        </div>
+                        where \( T \) is the number of periods per year (e.g., 252 for daily, 12 for monthly).
+                    </li>
+                </ul>
+
+                <h4>Independently and Identically Distributed (IID) Returns</h4>
+                <p>
+                    If single-period returns are <span class="term">IID</span> (independent and drawn from the same distribution) with mean \( \mu \) and variance \( \sigma^2 \), then the \( T \)-period continuously compounded return has:
+                </p>
+                <ul>
+                    <li>Mean: \( \mu T \)</li>
+                    <li>Variance: \( \sigma^2 T \)</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="monte-carlo">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Monte Carlo Simulation</h2>
+                </div>
+                <p>
+                    <span class="term">Monte Carlo simulation</span> is a computational technique used to model uncertainty and estimate the probability of various outcomes by simulating thousands of random scenarios.
+                </p>
+
+                <h3>Steps in a Monte Carlo Simulation</h3>
+                <ol>
+                    <li>Define the underlying variables (e.g., stock price, interest rate) and their initial values.</li>
+                    <li>Specify the time horizon and the assumed probability distribution (e.g., normal, lognormal).</li>
+                    <li>Model the evolution of these variables using random draws from the chosen distribution.</li>
+                    <li>Calculate the outcome (e.g., option payoff) at the end of each simulated path.</li>
+                    <li>Discount the final value back to present value.</li>
+                    <li>Repeat the process for thousands of trials to build a distribution of possible outcomes.</li>
+                </ol>
+
+                <div class="calculation-example">
+                    <h4>Example: Simulating Stock Prices</h4>
+                    <p>Assume a stock has:
+                        <ul>
+                            <li>Current price: $100</li>
+                            <li>Expected annual return: 8%</li>
+                            <li>Annual volatility: 20%</li>
+                        </ul>
+                    </p>
+                    <p>Using geometric Brownian motion, simulate daily price changes over one year using:
+                        <div class="formula">
+                            \( S_{t+1} = S_t \cdot \exp\left( (\mu - 0.5\sigma^2)\Delta t + \sigma \sqrt{\Delta t} \cdot Z \right) \)
+                        </div>
+                        where \( Z \) is a standard normal random variable.
+                    </p>
+                    <p>After 10,000 simulations, analyze the distribution of final prices to estimate risk and return.</p>
+                </div>
+
+                <p>
+                    The accuracy improves with more trials. Monte Carlo provides a <strong>statistical estimate</strong>, not an exact answer, and is especially useful for complex instruments where analytical solutions are unavailable.
+                </p>
+            </section>
+
+            <section class="content-section" id="bootstrapping">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Bootstrapping</h2>
+                </div>
+                <p>
+                    <span class="term">Bootstrapping</span> is a resampling technique used to estimate the sampling distribution of a statistic by repeatedly drawing samples from observed data.
+                </p>
+
+                <h3>Core Concepts</h3>
+                <ul>
+                    <li>Samples are drawn <strong>with replacement</strong> from the original dataset.</li>
+                    <li>Used when traditional parametric assumptions (e.g., normality) are questionable or inapplicable.</li>
+                    <li>Enables inference (e.g., confidence intervals for mean, median, or VaR) without assuming a specific distribution.</li>
+                    <li>Treats the observed sample as a proxy for the true population, allowing simulation of new samples.</li>
+                </ul>
+
+                <div class="calculation-example">
+                    <h4>Example: Estimating 95% Confidence Interval for Mean Return</h4>
+                    <p>You have 250 daily stock returns. To estimate the confidence interval for the mean:</p>
+                    <ol>
+                        <li>Randomly select 250 returns with replacement (one bootstrap sample).</li>
+                        <li>Calculate the mean of this sample.</li>
+                        <li>Repeat 10,000 times.</li>
+                        <li>Use the 2.5th and 97.5th percentiles of the bootstrapped means as the 95% confidence interval.</li>
+                    </ol>
+                    <p>This method avoids assuming normality and works well with skewed or heavy-tailed data.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="comparison">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Key Differences: Monte Carlo vs. Bootstrapping</h2>
+                </div>
+                <p>
+                    Both are simulation-based, but they differ in data source and purpose.
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Bootstrapping</th>
+                            <th>Monte Carlo Simulation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Source of Randomness</strong></td>
+                            <td>Drawn directly from observed historical data (resampling).</td>
+                            <td>Generated from a theoretical probability distribution (e.g., normal, lognormal).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Assumptions</strong></td>
+                            <td>Few assumptions about underlying distribution; non-parametric.</td>
+                            <td>Requires specifying a distribution and its parameters (parametric).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Purpose</strong></td>
+                            <td>Estimate uncertainty of a statistic (e.g., mean, VaR) from real data.</td>
+                            <td>Explore possible outcomes under a model (e.g., option pricing, risk scenarios).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Dependency</strong></td>
+                            <td>Relies entirely on historical data.</td>
+                            <td>Can simulate data beyond observed history.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav">
+                <a href="chapter5.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Chapter 5
+                </a>
+                
+                <div class="progress-indicator">
+                    <span>Progress:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span>Chapter 6 of 11</span>
+                </div>
+                
+                <a href="chapter7.html" class="nav-button next">
+                    Chapter 7
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Table of Contents active link tracking
+        function updateTOC() {
+            const sections = document.querySelectorAll('.content-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        window.addEventListener('load', updateTOC);
+        
+        // Mark chapter as completed
+        localStorage.setItem('chapter_6_completed', 'true');
+    </script>
+</body>
+</html>

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Rates and Returns - CFA Level 1 Quantitative Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <!-- Optional: Load MathJax for LaTeX rendering (uncomment if desired) -->
+    <!--
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    -->
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #006699;
+            --accent: #008080;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .chapter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Table of Contents Sidebar */
+        .layout-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--light);
+            color: var(--primary);
+            border-left-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: var(--primary);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .content-section {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h3 {
+            color: var(--accent);
+            font-size: 1.4em;
+            margin: 2rem 0 1rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        h4 {
+            color: var(--secondary);
+            font-size: 1.2em;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        .key-term {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Formula styling */
+        .formula {
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Example styling */
+        .example {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #b0e7ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(176, 231, 255, 0.3);
+            position: relative;
+        }
+
+        .example::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .example h4 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example h4::before {
+            content: '\f550';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        /* Navigation buttons */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button.prev {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .nav-button.next {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 9.09%; /* 1/11 chapters */
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Quantitative Analysis</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="chapter1.html" class="nav-link active">
+                    <i class="fas fa-percentage"></i>
+                    Chapter 1
+                </a>
+                <a href="chapter2.html" class="nav-link">
+                    <i class="fas fa-arrow-right"></i>
+                    Next
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+        <div class="chapter-content">
+            <div class="chapter-badge">Chapter 1 of 11</div>
+            <h1 class="chapter-title">Rates and Returns</h1>
+            <p class="chapter-description">
+                Master the fundamentals of interest rates, return calculations, and the time value of money
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout-container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <div class="toc-title">
+                <i class="fas fa-list"></i>
+                Contents
+            </div>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#tvm" class="toc-link">Time Value of Money</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#rate-components" class="toc-link">Interest Rate Components</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#return-measures" class="toc-link">Measuring Returns</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#mwr-twr" class="toc-link">Money vs Time-Weighted Returns</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#annualized-returns" class="toc-link">Annualized Returns</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#adjusted-returns" class="toc-link">Adjusted Returns</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="content-section" id="tvm">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">The Time Value of Money and Interest Rates</h2>
+                </div>
+                <p>
+                    At the heart of finance lies the <span class="key-term">Time Value of Money (TVM)</span>: a dollar today is worth more than a dollar tomorrow. Why? Because money can be invested to earn a return. This principle allows us to compare cash flows that occur at different times.
+                </p>
+                <p>
+                    The tool that makes this comparison possible is the <span class="key-term">interest rate</span>. But what exactly <em>is</em> an interest rate? It can be interpreted in three powerful ways:
+                </p>
+
+                <h3>Three Interpretations of an Interest Rate</h3>
+                <ul>
+                    <li><strong>Required Return:</strong> The minimum return an investor demands to take on the risk of an investment. If an asset doesn't meet this threshold, it's not worth investing in.</li>
+                    <li><strong>Discount Rate:</strong> The rate used to calculate the <em>present value</em> of future cash flows. It "discounts" future money back to today's terms.</li>
+                    <li><strong>Opportunity Cost:</strong> The return you give up by choosing one investment over another. For example, if you spend $1,000 on a vacation instead of investing it at 6%, your opportunity cost is $60 per year.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="rate-components">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">What Makes Up an Interest Rate?</h2>
+                </div>
+                <p>
+                    A quoted interest rate isn't just one number — it's a sum of several risk premiums. Think of it as a "risk buffet" that investors are compensated for bearing.
+                </p>
+                <div class="formula">
+                    Nominal Interest Rate =<br>
+                    Real Risk-Free Rate + Inflation Premium +<br>
+                    Default Risk Premium + Liquidity Premium + Maturity Premium
+                </div>
+
+                <h3>Breaking Down the Components</h3>
+                <ul>
+                    <li><strong>Real Risk-Free Rate:</strong> The theoretical return on a zero-risk, zero-inflation investment. It reflects the pure time value of money.</li>
+                    <li><strong>Inflation Premium:</strong> Compensation for the expected erosion of purchasing power over time. If inflation is expected to be 3%, investors demand at least 3% extra.</li>
+                    <li><strong>Default Risk Premium:</strong> Extra return demanded for the risk that a borrower might fail to repay (e.g., corporate bonds vs. government bonds).</li>
+                    <li><strong>Liquidity Premium:</strong> Compensation for difficulty in selling an asset quickly at fair value. Illiquid assets (e.g., private equity) carry higher premiums.</li>
+                    <li><strong>Maturity Premium:</strong> Extra return for holding longer-term bonds, which are more sensitive to interest rate changes and economic uncertainty.</li>
+                </ul>
+
+                <div class="example">
+                    <h4>Example: Yield on a 10-Year Corporate Bond</h4>
+                    <p>Suppose the real risk-free rate is 1%, expected inflation is 2.5%, default risk is 1.2%, liquidity premium is 0.3%, and maturity premium is 1.0%.</p>
+                    <p>Total Yield = 1% + 2.5% + 1.2% + 0.3% + 1.0% = <strong>6.0%</strong></p>
+                </div>
+            </section>
+
+            <section class="content-section" id="return-measures">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Measuring Investment Returns</h2>
+                </div>
+                <p>
+                    An investment's return comes from two sources:
+                </p>
+                <ul>
+                    <li><strong>Income:</strong> Dividends, interest, or coupons.</li>
+                    <li><strong>Capital Gain/Loss:</strong> Change in the asset's price.</li>
+                </ul>
+
+                <h3>Holding Period Return (HPR)</h3>
+                <p>
+                    The <span class="key-term">Holding Period Return (HPR)</span> is the total return earned over a specific investment period.
+                </p>
+                <div class="formula">
+                    HPR = (P₁ - P₀ + I₁) / P₀
+                </div>
+                <p>Where:</p>
+                <ul>
+                    <li><strong>P₀:</strong> Beginning price</li>
+                    <li><strong>P₁:</strong> Ending price</li>
+                    <li><strong>I₁:</strong> Income received (dividend or interest)</li>
+                </ul>
+
+                <div class="example">
+                    <h4>Example: HPR Calculation</h4>
+                    <p>You buy a stock for $50. It pays a $2 dividend and you sell it for $55.</p>
+                    <p>HPR = (55 - 50 + 2) / 50 = 7 / 50 = <strong>14%</strong></p>
+                </div>
+
+                <h3>Averaging Returns Over Time</h3>
+                <p>When returns vary across periods, we use different averages to summarize performance.</p>
+
+                <h4>Arithmetic Mean Return</h4>
+                <p>The simple average of periodic returns. Best for forecasting next period's expected return.</p>
+                <div class="formula">
+                    Arithmetic Mean = (R₁ + R₂ + ... + Rₙ) / n
+                </div>
+
+                <div class="example">
+                    <h4>Example: Arithmetic Mean</h4>
+                    <p>Returns: Year 1: 10%, Year 2: -5%, Year 3: 15%</p>
+                    <p>Arithmetic Mean = (10% - 5% + 15%) / 3 = 20% / 3 = <strong>6.67%</strong></p>
+                </div>
+
+                <h4>Geometric Mean Return</h4>
+                <p>The compound growth rate over multiple periods. Most accurate for measuring long-term "buy-and-hold" performance.</p>
+                <div class="formula">
+                    Geometric Mean = [(1 + R₁) × (1 + R₂) × ... × (1 + Rₙ)]^(1/n) - 1
+                </div>
+
+                <div class="example">
+                    <h4>Example: Geometric Mean</h4>
+                    <p>Same returns: 10%, -5%, 15%</p>
+                    <p>(1.10) × (0.95) × (1.15) = 1.20175</p>
+                    <p>(1.20175)^(1/3) ≈ 1.063</p>
+                    <p>1.063 - 1 = <strong>6.3%</strong></p>
+                    <p>✅ Note: Geometric mean < Arithmetic mean when returns vary.</p>
+                </div>
+
+                <h4>Harmonic Mean Return</h4>
+                <p>Used when averaging rates (e.g., cost-averaging $100/month into a stock).</p>
+                <div class="formula">
+                    Harmonic Mean = n / [1/R₁ + 1/R₂ + ... + 1/Rₙ]
+                </div>
+                <p>Always ≤ Geometric Mean ≤ Arithmetic Mean when returns vary.</p>
+
+                <h3>Robust Averaging: Dealing with Outliers</h3>
+                <ul>
+                    <li><strong>Trimmed Mean:</strong> Remove top and bottom 5% of returns, then compute the average.</li>
+                    <li><strong>Winsorized Mean:</strong> Replace extreme values with nearest non-extreme values, then average.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="mwr-twr">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Money-Weighted vs. Time-Weighted Return</h2>
+                </div>
+                <p>
+                    When an investor makes deposits or withdrawals, performance measurement gets tricky. Two methods solve this:
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Money-Weighted Return (MWR)</th>
+                            <th>Time-Weighted Return (TWR)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Definition</strong></td>
+                            <td>Compound growth rate of all funds in the portfolio (like IRR).</td>
+                            <td>Compound growth rate of $1 invested at the start.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cash Flows</strong></td>
+                            <td><strong>Considers timing and size</strong> of contributions/withdrawals.</td>
+                            <td><strong>Ignores cash flows</strong> — focuses on portfolio manager's performance.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Use Case</strong></td>
+                            <td>Evaluates investor's overall experience (personal performance).</td>
+                            <td>Evaluates portfolio manager's skill (industry standard).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sensitivity</strong></td>
+                            <td>High: Large inflows before gains inflate MWR.</td>
+                            <td>Low: Removes investor behavior from the equation.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Limitations</strong></td>
+                            <td>Not comparable across investors due to different cash flows.</td>
+                            <td>Requires valuing portfolio at every cash flow (costly).</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example">
+                    <h4>Example: Why TWR is Preferred for Managers</h4>
+                    <p>Two clients have the same fund. One adds money just before a big market rise; the other withdraws. Their MWRs will differ wildly — but the manager's performance (TWR) is the same.</p>
+                    <p>✅ So TWR isolates the manager's skill from investor timing.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="annualized-returns">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Annualized and Continuously Compounded Returns</h2>
+                </div>
+                <p>To compare investments fairly, we annualize returns — converting them to an equivalent one-year basis.</p>
+
+                <h3>Annualized Return (Periodic Compounding)</h3>
+                <p>Converts periodic returns (monthly, quarterly) to an annual rate assuming reinvestment.</p>
+                <div class="formula">
+                    Annualized Return = (1 + Periodic Return)^c - 1<br>
+                    Where c = number of periods per year
+                </div>
+
+                <div class="example">
+                    <h4>Example: Annualizing a Quarterly Return</h4>
+                    <p>Quarterly return = 3% → Annualized Return = (1.03)⁴ - 1 = 1.1255 - 1 = <strong>12.55%</strong></p>
+                    <p>⚠️ Assumption: You can reinvest at 3% each quarter — may not be realistic.</p>
+                </div>
+
+                <h3>Continuously Compounded Return</h3>
+                <p>Assumes compounding happens infinitely often — a powerful tool in finance and derivatives pricing.</p>
+                <div class="formula">
+                    Continuous Return = ln(Ending Price / Beginning Price)<br>
+                    For multiple periods: Total Return = ln(Pₜ / P₀)
+                </div>
+                <p>Where ln = natural logarithm</p>
+                <p>✅ Key fact: Continuously compounded return is always < HPR for the same period.</p>
+
+                <div class="example">
+                    <h4>Example: Continuous Compounding</h4>
+                    <p>Stock rises from $100 to $110 → HPR = 10%</p>
+                    <p>Continuous Return = ln(110 / 100) = ln(1.10) ≈ 0.0953 = <strong>9.53%</strong></p>
+                </div>
+            </section>
+
+            <section class="content-section" id="adjusted-returns">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">Adjusted Return Measures</h2>
+                </div>
+                <p>To get a true picture of investment performance, we adjust returns for fees, taxes, and inflation.</p>
+
+                <h3>Gross vs. Net Return</h3>
+                <ul>
+                    <li><strong>Gross Return:</strong> Return before fees and expenses. Measures pure investment performance.</li>
+                    <li><strong>Net Return:</strong> Return after all fees. What the investor actually keeps.</li>
+                </ul>
+
+                <h3>Pre-Tax vs. After-Tax Return</h3>
+                <ul>
+                    <li>Different returns (dividends, interest, capital gains) are taxed at different rates.</li>
+                    <li><strong>After-Tax Return:</strong> Net return after all taxes are paid.</li>
+                    <li>Tax-efficient strategies (e.g., tax-loss harvesting, holding tax-advantaged accounts) improve after-tax returns.</li>
+                </ul>
+
+                <h3>Nominal vs. Real Return</h3>
+                <p>Adjusts for inflation — shows changes in purchasing power.</p>
+                <div class="formula">
+                    1 + Real Return = (1 + Nominal Return) / (1 + Inflation Rate)
+                </div>
+                <p>Approximation: Real Return ≈ Nominal Return - Inflation</p>
+
+                <div class="example">
+                    <h4>Example: Real Return</h4>
+                    <p>Nominal return = 8%, Inflation = 3%</p>
+                    <p>1 + Real Return = 1.08 / 1.03 ≈ 1.0485 → Real Return ≈ <strong>4.85%</strong></p>
+                </div>
+
+                <h3>Leveraged Return</h3>
+                <p>Using borrowed money or derivatives to amplify exposure.</p>
+                <ul>
+                    <li>Increases both potential gains and losses.</li>
+                    <li>Common in hedge funds, futures trading, and margin investing.</li>
+                    <li>High risk: Can lead to large losses or margin calls.</li>
+                </ul>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav">
+                <a href="index.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Index
+                </a>
+                
+                <div class="progress-indicator">
+                    <span>Progress:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span>Chapter 1 of 11</span>
+                </div>
+                
+                <a href="chapter2.html" class="nav-button next">
+                    Next Chapter
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Table of Contents active link tracking
+        function updateTOC() {
+            const sections = document.querySelectorAll('.content-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        window.addEventListener('load', updateTOC);
+        
+        // Mark chapter as completed
+        localStorage.setItem('chapter_1_completed', 'true');
+    </script>
+</body>
+</html>

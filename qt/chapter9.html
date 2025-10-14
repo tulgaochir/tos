@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Tests of Independence | CFA Level 1 - Quantitative Analysis</title>
+    
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #006699;
+            --accent: #008080;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background-color: var(--light);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 100vh;
+            gap: 0;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            grid-column: 1 / -1;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            grid-column: 1 / -1;
+            background: var(--white);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .breadcrumb-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray-700);
+        }
+
+        .breadcrumb a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--white);
+            border-right: 1px solid var(--gray-200);
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 120px;
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .toc {
+            position: sticky;
+            top: 0;
+        }
+
+        .toc h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: var(--gray-700);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-list a:hover {
+            background-color: var(--gray-100);
+            color: var(--primary);
+        }
+
+        .toc-list a.active {
+            background-color: var(--primary);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            max-width: none;
+            margin: 0;
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .chapter-number {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--white);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .section-content h3 {
+            color: var(--secondary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .section-content h4 {
+            color: var(--gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .section-content ul, .section-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* Formula Display */
+        .formula {
+            background: var(--gray-100);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--gray-100);
+        }
+
+        /* Example Boxes */
+        .example {
+            background: linear-gradient(135deg, #fff7ed, #fef3c7);
+            border: 1px solid #fbbf24;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Important Notes */
+        .note {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: #1d4ed8;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Navigation Buttons */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .nav-button.disabled {
+            background: var(--gray-300);
+            color: var(--gray-700);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 250px 1fr;
+            }
+            
+            .sidebar {
+                padding: 1rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .chapter-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+        <div class="nav-content">
+            <div class="nav-title">CFA Level 1 - Quantitative Analysis</div>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="chapter8.html"><i class="fas fa-arrow-left"></i> Previous</a>
+                <a href="chapter10.html"><i class="fas fa-arrow-right"></i> Next</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="index.html">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Chapter 9: Tests of Independence</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="toc">
+                <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                <ul class="toc-list">
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#chi-square-test">Chi-Square Test</a></li>
+                    <li><a href="#contingency-tables">Contingency Tables</a></li>
+                    <li><a href="#test-statistic">Test Statistic</a></li>
+                    <li><a href="#degrees-freedom">Degrees of Freedom</a></li>
+                    <li><a href="#critical-values">Critical Values</a></li>
+                    <li><a href="#examples">Practical Examples</a></li>
+                    <li><a href="#interpretation">Interpretation of Results</a></li>
+                    <li><a href="#assumptions">Assumptions and Limitations</a></li>
+                    <li><a href="#summary">Chapter Summary</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <div class="chapter-number">Chapter 9</div>
+                <h1 class="chapter-title">Tests of Independence</h1>
+                <p class="chapter-description">
+                    Learn how to test whether two categorical variables are independent using chi-square tests, 
+                    understand contingency tables, and interpret results for investment decision-making.
+                </p>
+            </div>
+
+            <!-- Introduction -->
+            <section id="introduction" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Introduction to Tests of Independence</h2>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Tests of independence are statistical methods used to determine whether two categorical variables 
+                        are related to each other. In finance and investment analysis, these tests help us understand 
+                        relationships between different qualitative factors that might affect investment decisions.
+                    </p>
+                    
+                    <h3>Key Concepts</h3>
+                    <ul>
+                        <li><strong>Independence:</strong> Two variables are independent if the occurrence of one does not affect the probability of the other</li>
+                        <li><strong>Categorical Variables:</strong> Variables that can be divided into distinct categories or groups</li>
+                        <li><strong>Association:</strong> A relationship between two variables where they tend to occur together in predictable patterns</li>
+                    </ul>
+                    
+                    <div class="note">
+                        <div class="note-title">
+                            <i class="fas fa-info-circle"></i>
+                            Important Note
+                        </div>
+                        <p>
+                            Tests of independence help investors understand whether factors like company size, 
+                            sector, or credit rating are related to investment outcomes such as default rates 
+                            or performance categories.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chi-Square Test -->
+            <section id="chi-square-test" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Chi-Square Test of Independence</h2>
+                </div>
+                <div class="section-content">
+                    <p>
+                        The chi-square test of independence is the most commonly used test for determining 
+                        whether two categorical variables are independent. It compares observed frequencies 
+                        with expected frequencies under the assumption of independence.
+                    </p>
+                    
+                    <h3>Hypotheses</h3>
+                    <ul>
+                        <li><strong>Null Hypothesis (H₀):</strong> The two variables are independent</li>
+                        <li><strong>Alternative Hypothesis (H₁):</strong> The two variables are not independent (they are associated)</li>
+                    </ul>
+                    
+                    <h3>When to Use Chi-Square Test</h3>
+                    <ul>
+                        <li>Both variables are categorical</li>
+                        <li>Data consists of frequencies or counts</li>
+                        <li>Sample size is sufficiently large</li>
+                        <li>Expected frequencies in each cell are at least 5</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Contingency Tables -->
+            <section id="contingency-tables" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Contingency Tables</h2>
+                </div>
+                <div class="section-content">
+                    <p>
+                        A contingency table (or cross-tabulation) displays the frequency distribution of 
+                        observations for two categorical variables. It forms the basis for chi-square tests.
+                    </p>
+                    
+                    <h3>Structure of a Contingency Table</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Variable A \ Variable B</th>
+                                    <th>Category B₁</th>
+                                    <th>Category B₂</th>
+                                    <th>Category B₃</th>
+                                    <th>Row Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Category A₁</strong></td>
+                                    <td>O₁₁</td>
+                                    <td>O₁₂</td>
+                                    <td>O₁₃</td>
+                                    <td>R₁</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Category A₂</strong></td>
+                                    <td>O₂₁</td>
+                                    <td>O₂₂</td>
+                                    <td>O₂₃</td>
+                                    <td>R₂</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Column Total</strong></td>
+                                    <td>C₁</td>
+                                    <td>C₂</td>
+                                    <td>C₃</td>
+                                    <td>N</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <p>Where:</p>
+                    <ul>
+                        <li>Oᵢⱼ = Observed frequency in cell (i,j)</li>
+                        <li>Rᵢ = Row total for row i</li>
+                        <li>Cⱼ = Column total for column j</li>
+                        <li>N = Grand total (total sample size)</li>
+                    </ul>
+                    
+                    <h3>Expected Frequencies</h3>
+                    <p>Under the assumption of independence, the expected frequency for each cell is calculated as:</p>
+                    
+                    <div class="formula">
+                        $$E_{ij} = \frac{R_i \times C_j}{N}$$
+                    </div>
+                    
+                    <div class="example">
+                        <div class="example-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Investment Example
+                        </div>
+                        <p>
+                            Suppose we want to test whether company size (Small, Medium, Large) is independent 
+                            of investment performance (Poor, Average, Good). We collect data from 300 companies:
+                        </p>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Company Size</th>
+                                        <th>Poor Performance</th>
+                                        <th>Average Performance</th>
+                                        <th>Good Performance</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Small</td>
+                                        <td>45</td>
+                                        <td>55</td>
+                                        <td>50</td>
+                                        <td>150</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Medium</td>
+                                        <td>25</td>
+                                        <td>35</td>
+                                        <td>40</td>
+                                        <td>100</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Large</td>
+                                        <td>10</td>
+                                        <td>20</td>
+                                        <td>20</td>
+                                        <td>50</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total</strong></td>
+                                        <td><strong>80</strong></td>
+                                        <td><strong>110</strong></td>
+                                        <td><strong>110</strong></td>
+                                        <td><strong>300</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Test Statistic -->
+            <section id="test-statistic" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Chi-Square Test Statistic</h2>
+                </div>
+                <div class="section-content">
+                    <p>
+                        The chi-square test statistic measures the difference between observed and expected frequencies. 
+                        It follows a chi-square distribution under the null hypothesis of independence.
+                    </p>
+                    
+                    <h3>Formula for Chi-Square Statistic</h3>
+                    <div class="formula">
+                        $$\chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$
+                    </div>
+                    
+                    <p>Where:</p>
+                    <ul>
+                        <li>χ² = Chi-square test statistic</li>
+                        <li>Oᵢⱼ = Observed frequency in cell (i,j)</li>
+                        <li>Eᵢⱼ = Expected frequency in cell (i,j)</li>
+                        <li>r = Number of rows</li>
+                        <li>c = Number of columns</li>
+                    </ul>
+                    
+                    <h3>Properties of Chi-Square Statistic</h3>
+                    <ul>
+                        <li>Always non-negative (χ² ≥ 0)</li>
+                        <li>Large values indicate greater deviation from independence</li>
+                        <li>Small values suggest the variables might be independent</li>
+                        <li>Follows chi-square distribution with appropriate degrees of freedom</li>
+                    </ul>
+                    
+                    <div class="example">
+                        <div class="example-title">
+                            <i class="fas fa-calculator"></i>
+                            Calculating Expected Frequencies
+                        </div>
+                        <p>Using our investment example, let's calculate expected frequencies:</p>
+                        
+                        <p>For Small companies with Poor performance:</p>
+                        <div class="formula">
+                            $$E_{11} = \frac{150 \times 80}{300} = 40$$
+                        </div>
+                        
+                        <p>For Medium companies with Average performance:</p>
+                        <div class="formula">
+                            $$E_{22} = \frac{100 \times 110}{300} = 36.67$$
+                        </div>
+                        
+                        <p>Complete expected frequencies table:</p>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Company Size</th>
+                                        <th>Poor</th>
+                                        <th>Average</th>
+                                        <th>Good</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Small</td>
+                                        <td>40.00</td>
+                                        <td>55.00</td>
+                                        <td>55.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Medium</td>
+                                        <td>26.67</td>
+                                        <td>36.67</td>
+                                        <td>36.67</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Large</td>
+                                        <td>13.33</td>
+                                        <td>18.33</td>
+                                        <td>18.33</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Degrees of Freedom -->
+            <section id="degrees-freedom" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Degrees of Freedom</h2>
+                </div>
+                <div class="section-content">
+                    <p>
+                        The degrees of freedom for a chi-square test of independence depend on the size of the contingency table. 
+                        This determines which chi-square distribution to use for finding critical values and p-values.
+                    </p>
+                    
+                    <h3>Formula for Degrees of Freedom</h3>
+                    <div class="formula">
+                        $$df = (r - 1) \times (c - 1)$$
+                    </div>
+                    
+                    <p>Where:</p>
+                    <ul>
+                        <li>df = degrees of freedom</li>
+                        <li>r = number of rows in the contingency table</li>
+                        <li>c = number of columns in the contingency table</li>
+                    </ul>
+                    
+                    <h3>Understanding Degrees of Freedom</h3>
+                    <p>
+                        Degrees of freedom represent the number of values that can vary freely when calculating 
+                        the test statistic, given the constraint that row and column totals are fixed.
+                    </p>
+                    
+                    <div class="example">
+                        <div class="example-title">
+                            <i class="fas fa-chart-bar"></i>
+                            Degrees of Freedom Examples
+                        </div>
+                        <ul>
+                            <li><strong>2×2 table:</strong> df = (2-1) × (2-1) = 1</li>
+                            <li><strong>3×3 table:</strong> df = (3-1) × (3-1) = 4</li>
+                            <li><strong>3×4 table:</strong> df = (3-1) × (4-1) = 6</li>
+                            <li><strong>Our investment example (3×3):</strong> df = (3-1) × (3-1) = 4</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="note">
+                        <div class="note-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Important Consideration
+                        </div>
+                        <p>
+                            As the degrees of freedom increase, the chi-square distribution becomes more 
+                            symmetric and approaches a normal distribution. This affects the critical 
+                            values and the shape of the rejection region.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Critical Values -->
+            <section id="critical-values" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">Critical Values and Decision Rule</h2>
+                </div>
+                <div class="section-content">
+                    <p>
+                        The decision to reject or fail to reject the null hypothesis is based on comparing 
+                        the calculated chi-square statistic with the critical value from the chi-square distribution.
+                    </p>
+                    
+                    <h3>Decision Rule</h3>
+                    <ul>
+                        <li><strong>If χ² > χ²critical:</strong> Reject H₀ (variables are not independent)</li>
+                        <li><strong>If χ² ≤ χ²critical:</strong> Fail to reject H₀ (variables may be independent)</li>
+                    </ul>
+                    
+                    <h3>Common Critical Values</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Degrees of Freedom</th>
+                                    <th>α = 0.10</th>
+                                    <th>α = 0.05</th>
+                                    <th>α = 0.01</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>2.706</td>
+                                    <td>3.841</td>
+                                    <td>6.635</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>4.605</td>
+                                    <td>5.991</td>
+                                    <td>9.210</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>6.251</td>
+                                    <td>7.815</td>
+                                    <td>11.345</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>7.779</td>
+                                    <td>9.488</td>
+                                    <td>13.277</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>9.236</td>
+                                    <td>11.071</td>
+                                    <td>15.086</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>P-value Approach</h3>
+                    <p>
+                        Alternatively, you can calculate the p-value and compare it with the significance level:
+                    </p>
+                    <ul>
+                        <li><strong>If p-value < α:</strong> Reject H₀</li>
+                        <li><strong>If p-value ≥ α:</strong> Fail to reject H₀</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Examples -->
+            <section id="examples" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <h2 class="section-title">Practical Examples</h2>
+                </div>
+                <div class="section-content">
+                    <div class="example">
+                        <div class="example-title">
+                            <i class="fas fa-building"></i>
+                            Example 1: Company Size and Performance
+                        </div>
+                        <p>
+                            Let's complete our investment example by calculating the chi-square statistic:
+                        </p>
+                        
+                        <p><strong>Step 1:</strong> Calculate chi-square statistic</p>
+                        <div class="formula">
+                            $$\chi^2 = \frac{(45-40)^2}{40} + \frac{(55-55)^2}{55} + \frac{(50-55)^2}{55} + \frac{(25-26.67)^2}{26.67} + \frac{(35-36.67)^2}{36.67} + \frac{(40-36.67)^2}{36.67} + \frac{(10-13.33)^2}{13.33} + \frac{(20-18.33)^2}{18.33} + \frac{(20-18.33)^2}{18.33}$$
+                        </div>
+                        
+                        <div class="formula">
+                            $$\chi^2 = 0.625 + 0 + 0.455 + 0.104 + 0.076 + 0.303 + 0.833 + 0.152 + 0.152 = 2.70$$
+                        </div>
+                        
+                        <p><strong>Step 2:</strong> Compare with critical value</p>
+                        <p>With df = 4 and α = 0.05, χ²critical = 9.488</p>
+                        <p>Since 2.70 < 9.488, we fail to reject H₀</p>
+                        
+                        <p><strong>Conclusion:</strong> There is insufficient evidence to conclude that company size and performance are associated.</p>
+                    </div>
+                    
+                    <div class="example">
+                        <div class="example-title">
+                            <i class="fas fa-chart-line"></i>
+                            Example 2: Investment Sector and Risk Rating
+                        </div>
+                        <p>
+                            An investment firm wants to test whether investment sector is independent of risk rating. 
+                            Data from 200 investments:
+                        </p>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Sector</th>
+                                        <th>Low Risk</th>
+                                        <th>Medium Risk</th>
+                                        <th>High Risk</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Technology</td>
+                                        <td>15</td>
+                                        <td>25</td>
+                                        <td>35</td>
+                                        <td>75</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Healthcare</td>
+                                        <td>20</td>
+                                        <td>30</td>
+                                        <td>25</td>
+                                        <td>75</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Financial</td>
+                                        <td>25</td>
+                                        <td>15</td>
+                                        <td>10</td>
+                                        <td>50</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total</strong></td>
+                                        <td><strong>60</strong></td>
+                                        <td><strong>70</strong></td>
+                                        <td><strong>70</strong></td>
+                                        <td><strong>200</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p><strong>Solution:</strong></p>
+                        <p>1. Calculate expected frequencies for each cell</p>
+                        <p>2. Compute χ² = 16.67 (detailed calculation omitted for brevity)</p>
+                        <p>3. df = (3-1) × (3-1) = 4</p>
+                        <p>4. At α = 0.05, χ²critical = 9.488</p>
+                        <p>5. Since 16.67 > 9.488, reject H₀</p>
+                        
+                        <p><strong>Conclusion:</strong> Investment sector and risk rating are not independent.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interpretation -->
+            <section id="interpretation" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">8</div>
+                    <h2 class="section-title">Interpretation of Results</h2>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Proper interpretation of chi-square test results is crucial for making informed 
+                        investment decisions and understanding relationships between categorical variables.
+                    </p>
+                    
+                    <h3>When Variables are Independent</h3>
+                    <ul>
+                        <li>The occurrence of one category does not affect the probability of another</li>
+                        <li>Observed frequencies are close to expected frequencies</li>
+                        <li>Chi-square statistic is small</li>
+                        <li>Investment implications: Factors can be considered separately in analysis</li>
+                    </ul>
+                    
+                    <h3>When Variables are Associated</h3>
+                    <ul>
+                        <li>Certain combinations occur more or less frequently than expected</li>
+                        <li>Patterns in the data suggest relationships</li>
+                        <li>Chi-square statistic is large</li>
+                        <li>Investment implications: Factors should be considered together</li>
+                    </ul>
+                    
+                    <h3>Practical Implications for Investors</h3>
+                    <div class="note">
+                        <div class="note-title">
+                            <i class="fas fa-chart-area"></i>
+                            Investment Applications
+                        </div>
+                        <ul>
+                            <li><strong>Portfolio Construction:</strong> Understanding which factors are independent helps in diversification</li>
+                            <li><strong>Risk Assessment:</strong> Associated variables may indicate correlated risks</li>
+                            <li><strong>Performance Analysis:</strong> Identifying factors that influence returns</li>
+                            <li><strong>Due Diligence:</strong> Testing relationships between company characteristics and outcomes</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Effect Size and Practical Significance</h3>
+                    <p>
+                        Statistical significance doesn't always imply practical importance. Consider:
+                    </p>
+                    <ul>
+                        <li>Cramér's V for measuring association strength</li>
+                        <li>Residual analysis to identify which cells contribute most to the chi-square statistic</li>
+                        <li>Business context and economic significance</li>
+                    </ul>
+                    
+                    <div class="formula">
+                        $$\text{Cramér's V} = \sqrt{\frac{\chi^2}{N \times \min(r-1, c-1)}}$$
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assumptions -->
+            <section id="assumptions" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">9</div>
+                    <h2 class="section-title">Assumptions and Limitations</h2>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Chi-square tests have several important assumptions that must be met for valid results. 
+                        Understanding these limitations is crucial for proper application in financial analysis.
+                    </p>
+                    
+                    <h3>Key Assumptions</h3>
+                    <ul>
+                        <li><strong>Independence of Observations:</strong> Each observation must be independent of others</li>
+                        <li><strong>Expected Frequency Requirement:</strong> Expected frequency in each cell should be at least 5</li>
+                        <li><strong>Mutually Exclusive Categories:</strong> Each observation belongs to exactly one category for each variable</li>
+                        <li><strong>Random Sampling:</strong> Data should be collected through random sampling</li>
+                    </ul>
+                    
+                    <h3>When Assumptions are Violated</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Violation</th>
+                                    <th>Consequence</th>
+                                    <th>Solution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Small expected frequencies</td>
+                                    <td>Test statistic distribution is inaccurate</td>
+                                    <td>Fisher's exact test or combine categories</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-independent observations</td>
+                                    <td>Inflated Type I error rate</td>
+                                    <td>Use appropriate clustering methods</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-random sampling</td>
+                                    <td>Results may not be generalizable</td>
+                                    <td>Acknowledge limitations in interpretation</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Limitations in Financial Applications</h3>
+                    <ul>
+                        <li><strong>Market Dependencies:</strong> Financial data often exhibits temporal dependencies</li>
+                        <li><strong>Sample Size Issues:</strong> Small samples in specialized investment categories</li>
+                        <li><strong>Category Definition:</strong> Subjective categorization of continuous variables</li>
+                        <li><strong>Time-Varying Relationships:</strong> Relationships may change over different market conditions</li>
+                    </ul>
+                    
+                    <div class="note">
+                        <div class="note-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Best Practices
+                        </div>
+                        <ul>
+                            <li>Always check expected frequencies before conducting the test</li>
+                            <li>Consider the business context when interpreting results</li>
+                            <li>Use complementary analysis methods when possible</li>
+                            <li>Be cautious about causal interpretations</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section id="summary" class="content-section">
+                <div class="section-header">
+                    <div class="section-number">10</div>
+                    <h2 class="section-title">Chapter Summary</h2>
+                </div>
+                <div class="section-content">
+                    <h3>Key Learning Points</h3>
+                    <ul>
+                        <li><strong>Tests of Independence:</strong> Statistical methods to determine if categorical variables are related</li>
+                        <li><strong>Chi-Square Test:</strong> Most common test using observed vs. expected frequencies</li>
+                        <li><strong>Contingency Tables:</strong> Cross-tabulations that organize categorical data</li>
+                        <li><strong>Test Statistic:</strong> χ² = Σ[(O-E)²/E] follows chi-square distribution</li>
+                        <li><strong>Degrees of Freedom:</strong> df = (r-1) × (c-1) determines critical values</li>
+                    </ul>
+                    
+                    <h3>Investment Applications</h3>
+                    <ul>
+                        <li>Testing relationships between company characteristics and performance</li>
+                        <li>Analyzing associations between market sectors and risk levels</li>
+                        <li>Understanding dependencies in portfolio construction</li>
+                        <li>Validating assumptions about factor independence</li>
+                    </ul>
+                    
+                    <h3>Critical Formulas</h3>
+                    <div class="formula">
+                        $$E_{ij} = \frac{R_i \times C_j}{N}$$
+                        <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem;">Expected Frequency</p>
+                    </div>
+                    
+                    <div class="formula">
+                        $$\chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$
+                        <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem;">Chi-Square Test Statistic</p>
+                    </div>
+                    
+                    <div class="formula">
+                        $$df = (r - 1) \times (c - 1)$$
+                        <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem;">Degrees of Freedom</p>
+                    </div>
+                    
+                    <h3>Next Steps</h3>
+                    <p>
+                        In the next chapter, we'll explore Simple Linear Regression, which allows us to model 
+                        relationships between continuous variables and make predictions based on linear associations.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav">
+                <a href="chapter8.html" class="nav-button">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous: Hypothesis Testing
+                </a>
+                <a href="index.html" class="nav-button">
+                    <i class="fas fa-home"></i>
+                    Back to Index
+                </a>
+                <a href="chapter10.html" class="nav-button">
+                    Next: Simple Linear Regression
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Table of Contents functionality
+        function updateTOC() {
+            const sections = document.querySelectorAll('.content-section');
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    currentSection = section.id;
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-list a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        
+        // Initialize TOC
+        updateTOC();
+        
+        // Progress tracking
+        function markChapterAsRead() {
+            const readChapters = JSON.parse(localStorage.getItem('readChapters') || '[]');
+            if (!readChapters.includes(9)) {
+                readChapters.push(9);
+                localStorage.setItem('readChapters', JSON.stringify(readChapters));
+            }
+        }
+        
+        // Mark as read when user scrolls to bottom
+        let hasMarkedAsRead = false;
+        window.addEventListener('scroll', function() {
+            if (!hasMarkedAsRead && (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+                markChapterAsRead();
+                hasMarkedAsRead = true;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Portfolio Mathematics - CFA Level 1 Quantitative Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #006699;
+            --accent: #008080;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .chapter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Table of Contents Sidebar */
+        .layout-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--light);
+            color: var(--primary);
+            border-left-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: var(--primary);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .content-section {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h3 {
+            color: var(--accent);
+            font-size: 1.4em;
+            margin: 2rem 0 1rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        h4 {
+            color: var(--secondary);
+            font-size: 1.2em;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        .term {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Formula styling */
+        .formula {
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Example styling */
+        .calculation-example {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #b0e7ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(176, 231, 255, 0.3);
+            position: relative;
+        }
+
+        .calculation-example::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .calculation-example h4 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .calculation-example h4::before {
+            content: '\f550';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        /* Navigation buttons */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button.prev {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .nav-button.next {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 45.45%; /* 5/11 chapters */
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Quantitative Analysis</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="chapter4.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous
+                </a>
+                <a href="chapter5.html" class="nav-link active">
+                    <i class="fas fa-briefcase"></i>
+                    Chapter 5
+                </a>
+                <a href="chapter6.html" class="nav-link">
+                    <i class="fas fa-arrow-right"></i>
+                    Next
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+        <div class="chapter-content">
+            <div class="chapter-badge">Chapter 5 of 11</div>
+            <h1 class="chapter-title">Portfolio Mathematics</h1>
+            <p class="chapter-description">
+                Understand portfolio return and risk calculations, diversification benefits, and risk-adjusted performance measures
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout-container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <div class="toc-title">
+                <i class="fas fa-list"></i>
+                Contents
+            </div>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#expected-return" class="toc-link">Portfolio Expected Return</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#covariance-correlation" class="toc-link">Covariance & Correlation</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#portfolio-variance" class="toc-link">Portfolio Variance</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#forecasting" class="toc-link">Forecasting Correlation</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#applications" class="toc-link">Portfolio Applications</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="content-section" id="expected-return">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Portfolio Expected Return</h2>
+                </div>
+                <p>
+                    The <span class="term">expected return</span> of a portfolio is the weighted average of the expected returns of the individual assets. Each asset's weight is determined by its market value relative to the total portfolio value.
+                </p>
+                <div class="formula">
+                    \( E(R_p) = w_1 E(R_1) + w_2 E(R_2) + \cdots + w_n E(R_n) \)
+                </div>
+                <p><strong>Where:</strong></p>
+                <ul>
+                    <li><span class="term">\( E(R_p) \)</span> is the expected return of the portfolio.</li>
+                    <li><span class="term">\( w_i \)</span> is the weight (proportion) of asset \( i \) in the portfolio.</li>
+                    <li><span class="term">\( E(R_i) \)</span> is the expected return of asset \( i \).</li>
+                </ul>
+
+                <div class="calculation-example">
+                    <h4>2-Asset Portfolio Return Example</h4>
+                    <p>You invest 60% in Stock A (expected return: 10%) and 40% in Bond B (expected return: 5%).</p>
+                    <p><strong>Calculation:</strong><br>
+                    \( E(R_p) = (0.60 \times 10\%) + (0.40 \times 5\%) \)<br>
+                    \( = 6\% + 2\% = \textbf{8\%} \)</p>
+                    <p>The portfolio's expected return is <strong>8%</strong>.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="covariance-correlation">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Covariance and Correlation: How Assets Move Together</h2>
+                </div>
+                <p>
+                    Understanding how asset returns relate to one another is essential for managing risk. <span class="term">Covariance</span> and <span class="term">correlation</span> quantify the degree to which two assets move in tandem.
+                </p>
+
+                <h3>Covariance</h3>
+                <p>
+                    <span class="term">Covariance</span> measures the directional relationship between the returns of two assets:
+                </p>
+                <ul>
+                    <li><strong>Positive:</strong> Returns tend to move together.</li>
+                    <li><strong>Negative:</strong> Returns tend to move in opposite directions.</li>
+                    <li><strong>Zero:</strong> No consistent directional relationship.</li>
+                </ul>
+                <p><strong>Key Properties:</strong></p>
+                <ul>
+                    <li>The covariance of a return with itself equals its <span class="term">variance</span>: \( \mathrm{Cov}(R_i, R_i) = \sigma^2(R_i) \).</li>
+                    <li>Symmetry: \( \mathrm{Cov}(R_i, R_j) = \mathrm{Cov}(R_j, R_i) \).</li>
+                    <li>Covariance with a constant is zero.</li>
+                </ul>
+
+                <h3>Correlation</h3>
+                <p>
+                    <span class="term">Correlation</span> standardizes covariance to a range between \(-1\) and \(+1\), making it easier to interpret.
+                </p>
+                <div class="formula">
+                    \( \rho(R_i, R_j) = \frac{\mathrm{Cov}(R_i, R_j)}{\sigma(R_i) \sigma(R_j)} \)
+                </div>
+                <ul>
+                    <li><strong>+1:</strong> Perfect positive linear relationship.</li>
+                    <li><strong>-1:</strong> Perfect negative linear relationship.</li>
+                    <li><strong>0:</strong> No linear relationship.</li>
+                    <li><strong>Note:</strong> Only captures linear dependence; nonlinear patterns may exist.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="portfolio-variance">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Portfolio Variance and Diversification</h2>
+                </div>
+                <p>
+                    <span class="term">Portfolio variance</span> measures total risk and depends not only on individual asset risks but also on how they co-move.
+                </p>
+                <div class="formula">
+                    \( \sigma^2(R_p) = \sum_{i=1}^{n} \sum_{j=1}^{n} w_i w_j \mathrm{Cov}(R_i, R_j) \)
+                </div>
+                <p>For a two-asset portfolio:</p>
+                <div class="formula">
+                    \( \sigma^2(R_p) = w_1^2 \sigma_1^2 + w_2^2 \sigma_2^2 + 2 w_1 w_2 \mathrm{Cov}(R_1, R_2) \)
+                </div>
+
+                <h3>Diversification Benefits</h3>
+                <p>
+                    When assets are <strong>not perfectly correlated</strong>, combining them reduces overall portfolio risk. This is the power of <span class="term">diversification</span>.
+                </p>
+                <ul>
+                    <li>If returns are independent, covariance is zero — reducing portfolio variance.</li>
+                    <li>For \( n \) assets, you need \( n \) variances and \( \frac{n(n-1)}{2} \) unique covariances.</li>
+                </ul>
+
+                <h3>Properties of Variance</h3>
+                <ul>
+                    <li>Variance of a constant is zero.</li>
+                    <li>Adding a constant to a return does not change its variance.</li>
+                    <li>Scaling a return by weight \( w \): \( \sigma^2(wR) = w^2 \sigma^2(R) \).</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="forecasting">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Forecasting Correlation and Key Rules</h2>
+                </div>
+                <p>
+                    Accurate forecasts of asset relationships are critical for effective portfolio construction.
+                </p>
+                <ul>
+                    <li><span class="term">Covariance from Joint Probabilities:</span> Compute as the weighted average of cross-products of deviations from expected returns.</li>
+                    <li><span class="term">Independent Variables:</span> Two returns are independent if \( P(R_i, R_j) = P(R_i) P(R_j) \).</li>
+                    <li><span class="term">Multiplication Rule:</span> If uncorrelated, \( E(R_i R_j) = E(R_i) E(R_j) \).</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="applications">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Applications in Portfolio Management</h2>
+                </div>
+                <p>
+                    Portfolio mathematics underpins modern investment decision-making, often assuming normally distributed returns.
+                </p>
+
+                <h3>Optimal Portfolio Selection</h3>
+                <ul>
+                    <li><span class="term">Mean-Variance Analysis:</span> Constructs portfolios that maximize return for a given level of risk.</li>
+                    <li><span class="term">Roy's Safety-First Rule:</span> Minimizes the chance of falling below a minimum acceptable return \( R_L \). The best portfolio maximizes the <span class="term">Safety-First Ratio</span>:
+                        <div class="formula">
+                            \( \text{SFRatio} = \frac{E(R_P) - R_L}{\sigma_P} \)
+                        </div>
+                    </li>
+                    <li><span class="term">Sharpe Ratio:</span> Measures excess return per unit of total risk (standard deviation). Higher values indicate better risk-adjusted performance:
+                        <div class="formula">
+                            \( \text{Sharpe Ratio} = \frac{E(R_P) - R_f}{\sigma_P} \)
+                        </div>
+                    </li>
+                </ul>
+
+                <h3>Managing Financial Risk</h3>
+                <ul>
+                    <li><span class="term">Value at Risk (VaR):</span> Estimates the worst expected loss over a time horizon at a given confidence level (e.g., "5% chance of losing $1M or more tomorrow").</li>
+                    <li><span class="term">Stress Testing & Scenario Analysis:</span> Evaluates portfolio resilience under extreme but plausible market conditions, complementing VaR.</li>
+                </ul>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav">
+                <a href="chapter4.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Chapter 4
+                </a>
+                
+                <div class="progress-indicator">
+                    <span>Progress:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span>Chapter 5 of 11</span>
+                </div>
+                
+                <a href="chapter6.html" class="nav-button next">
+                    Chapter 6
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Table of Contents active link tracking
+        function updateTOC() {
+            const sections = document.querySelectorAll('.content-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        window.addEventListener('load', updateTOC);
+        
+        // Mark chapter as completed
+        localStorage.setItem('chapter_5_completed', 'true');
+    </script>
+</body>
+</html>

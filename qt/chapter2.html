@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: The Time Value of Money - CFA Level 1 Quantitative Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #006699;
+            --accent: #008080;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .chapter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Table of Contents Sidebar */
+        .layout-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--light);
+            color: var(--primary);
+            border-left-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: var(--primary);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .content-section {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h3 {
+            color: var(--accent);
+            font-size: 1.4em;
+            margin: 2rem 0 1rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        h4 {
+            color: var(--secondary);
+            font-size: 1.2em;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        .key-term {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Formula styling */
+        .formula {
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Example styling */
+        .example {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #b0e7ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(176, 231, 255, 0.3);
+            position: relative;
+        }
+
+        .example::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .example h4 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example h4::before {
+            content: '\f550';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        /* Navigation buttons */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button.prev {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .nav-button.next {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 18.18%; /* 2/11 chapters */
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Quantitative Analysis</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="chapter1.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous
+                </a>
+                <a href="chapter2.html" class="nav-link active">
+                    <i class="fas fa-clock"></i>
+                    Chapter 2
+                </a>
+                <a href="chapter3.html" class="nav-link">
+                    <i class="fas fa-arrow-right"></i>
+                    Next
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+        <div class="chapter-content">
+            <div class="chapter-badge">Chapter 2 of 11</div>
+            <h1 class="chapter-title">The Time Value of Money</h1>
+            <p class="chapter-description">
+                Explore present and future value calculations, annuities, perpetuities, and their applications in valuation
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout-container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <div class="toc-title">
+                <i class="fas fa-list"></i>
+                Contents
+            </div>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#tvm-core" class="toc-link">Core Concepts</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#fixed-income" class="toc-link">Fixed-Income & Equity</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#equity-valuation" class="toc-link">Stock Valuation</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#implied-returns" class="toc-link">Implied Returns</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#no-arbitrage" class="toc-link">No-Arbitrage Principle</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="content-section" id="tvm-core">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">The Core Concept of Time Value of Money (TVM)</h2>
+                </div>
+                <p>
+                    The <span class="key-term">Time Value of Money (TVM)</span> is the foundational principle of finance: <strong>a dollar today is worth more than a dollar tomorrow</strong>. Why? Because money you have now can be invested to earn interest, dividends, or capital gains.
+                </p>
+                <p>
+                    This principle underpins nearly every financial decision — from saving and borrowing to valuing stocks and bonds.
+                </p>
+
+                <h3>Present Value (PV) vs. Future Value (FV)</h3>
+                <ul>
+                    <li><strong>Future Value (FV):</strong> What a sum of money today will grow to in the future, given a rate of return. This process is called <strong>compounding</strong>.</li>
+                    <li><strong>Present Value (PV):</strong> What a future sum of money is worth today. This is called <strong>discounting</strong>, and the rate used is the <strong>discount rate</strong>.</li>
+                </ul>
+
+                <h3>Basic TVM Formula (Single Cash Flow)</h3>
+                <div class="formula">
+                    FVₜ = PV × (1 + r)ᵗ<br>
+                    PV = FVₜ / (1 + r)ᵗ
+                </div>
+                <p>Where:</p>
+                <ul>
+                    <li>r = interest rate per period</li>
+                    <li>t = number of periods</li>
+                </ul>
+
+                <div class="example">
+                    <h4>Example: Future Value</h4>
+                    <p>You invest $1,000 at 6% annual interest for 3 years.</p>
+                    <p>FV = 1000 × (1.06)³ = 1000 × 1.191 = <strong>$1,191</strong></p>
+                </div>
+
+                <div class="example">
+                    <h4>Example: Present Value</h4>
+                    <p>You need $5,000 in 5 years. Discount rate = 4%.</p>
+                    <p>PV = 5000 / (1.04)⁵ = 5000 / 1.2167 ≈ <strong>$4,109</strong></p>
+                </div>
+
+                <h3>Continuous Compounding</h3>
+                <p>Used in advanced finance (e.g., derivatives), this assumes interest is compounded continuously.</p>
+                <div class="formula">
+                    FVₜ = PV × e^(r×t)<br>
+                    PV = FVₜ × e^(-r×t)
+                </div>
+                <p>Where e ≈ 2.71828 (Euler's number)</p>
+
+                <div class="example">
+                    <h4>Example: Continuous Compounding</h4>
+                    <p>$1,000 invested at 5% continuously compounded for 2 years:</p>
+                    <p>FV = 1000 × e^(0.05×2) = 1000 × e^0.10 ≈ 1000 × 1.1052 = <strong>$1,105.20</strong></p>
+                </div>
+            </section>
+
+            <section class="content-section" id="fixed-income">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">TVM in Fixed-Income and Equity Valuation</h2>
+                </div>
+                <p>
+                    The value of any financial asset is the <strong>present value of its expected future cash flows</strong>. Let's see how this applies to bonds and stocks.
+                </p>
+
+                <h3>Valuing Bonds</h3>
+                <p>A bond's value is the sum of the present values of all its future cash flows: coupon payments and principal repayment.</p>
+
+                <ul>
+                    <li><strong>Zero-Coupon Bond (Discount Instrument):</strong> Pays no coupons. Bought at a discount, redeemed at face value.</li>
+                    <div class="formula">
+                        PV = FV / (1 + r)ᵗ
+                    </div>
+
+                    <li><strong>Coupon Bond:</strong> Pays periodic interest (PMT) and returns face value (FV) at maturity.</li>
+                    <div class="formula">
+                        PV = Σ [PMT / (1 + r)ⁱ] + FV / (1 + r)ⁿ<br>
+                        (Sum from i=1 to n)
+                    </div>
+                </ul>
+
+                <h3>Annuities: Regular Payments Over Time</h3>
+                <p>An <strong>annuity</strong> is a series of equal payments made at regular intervals (e.g., mortgage, lease, retirement payout).</p>
+
+                <ul>
+                    <li><strong>Present Value of Ordinary Annuity</strong> (payments at end of each period):</li>
+                    <div class="formula">
+                        PV = A × [1 - (1 + r)⁻ᵗ] / r
+                    </div>
+
+                    <li><strong>Present Value of Annuity Due</strong> (payments at beginning of each period):</li>
+                    <div class="formula">
+                        PV = A × [1 - (1 + r)⁻ᵗ] / r × (1 + r)
+                    </div>
+
+                    <li><strong>Future Value of Ordinary Annuity</strong> (payments at end of each period):</li>
+                    <div class="formula">
+                        FV = A × [(1 + r)ᵗ - 1] / r
+                    </div>
+
+                    <li><strong>Future Value of Annuity Due</strong> (payments at beginning of each period):</li>
+                    <div class="formula">
+                        FV = A × [(1 + r)ᵗ - 1] / r × (1 + r)
+                    </div>
+
+                    <li><strong>Solve for Payment (A):</strong> Use when calculating loan payments or savings goals.</li>
+                    <div class="formula">
+                        A = (r × PV) / [1 - (1 + r)⁻ᵗ]
+                    </div>
+                </ul>
+
+                <div class="example">
+                    <h4>Example: Car Loan Payment (Ordinary Annuity)</h4>
+                    <p>You take a $20,000 car loan at 6% annual interest (0.5% monthly) for 5 years (60 months).</p>
+                    <p>A = (0.005 × 20000) / [1 - (1.005)⁻⁶⁰] ≈ 100 / 0.2586 ≈ <strong>$386.66 per month</strong></p>
+                </div>
+
+                <h3>Perpetuity: Infinite Payments</h3>
+                <p>A stream of equal payments that never ends (e.g., perpetual bond).</p>
+                <div class="formula">
+                    PV = PMT / r
+                </div>
+
+                <div class="example">
+                    <h4>Example: Valuing a Perpetual Bond</h4>
+                    <p>A bond pays $50 annually forever. Required return = 8%.</p>
+                    <p>PV = 50 / 0.08 = <strong>$625</strong></p>
+                </div>
+            </section>
+
+            <section class="content-section" id="equity-valuation">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Valuing Stocks Using TVM</h2>
+                </div>
+                <p>
+                    A stock's value is the present value of all expected future dividends. Since stocks have no maturity, we use models that project dividends into the future.
+                </p>
+
+                <h3>Dividend Discount Models (DDM)</h3>
+                <ul>
+                    <li><strong>Zero Growth Model:</strong> Dividends are constant forever → perpetuity.</li>
+                    <div class="formula">
+                        P₀ = D / r
+                    </div>
+
+                    <li><strong>Constant Growth Model (Gordon Growth Model):</strong> Dividends grow at a constant rate g forever.</li>
+                    <div class="formula">
+                        P₀ = D₁ / (r − g)
+                    </div>
+                    <p>Where D₁ = D₀ × (1 + g)</p>
+                    <p>⚠️ Must have r > g, or the model breaks down.</p>
+
+                    <li><strong>Two-Stage Growth Model:</strong> Realistic for companies with high initial growth that later stabilizes.</li>
+                    <ol>
+                        <li><strong>Stage 1 (High Growth):</strong> Calculate PV of dividends during high-growth phase (growth rate gₛ).</li>
+                        <li><strong>Stage 2 (Stable Growth):</strong> Use Gordon model to find terminal value at end of Stage 1, then discount it back to today.</li>
+                    </ol>
+                    <p>Total value = Sum of Stage 1 PVs + PV of terminal value.</p>
+                </ul>
+
+                <div class="example">
+                    <h4>Example: Gordon Growth Model</h4>
+                    <p>Next year's dividend D₁ = $2, required return r = 10%, growth rate g = 5%.</p>
+                    <p>P₀ = 2 / (0.10 − 0.05) = 2 / 0.05 = <strong>$40</strong></p>
+                </div>
+            </section>
+
+            <section class="content-section" id="implied-returns">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Implied Return and Growth</h2>
+                </div>
+                <p>
+                    We can rearrange TVM formulas to find the <strong>implied return</strong> or <strong>implied growth rate</strong> based on current market prices.
+                </p>
+
+                <h3>For Bonds: Yield-to-Maturity (YTM)</h3>
+                <p>
+                    <span class="key-term">Yield-to-Maturity (YTM)</span> is the internal rate of return (IRR) on a bond — the discount rate that makes the PV of all future cash flows equal to the bond's current price.
+                </p>
+                <ul>
+                    <li><strong>For Zero-Coupon Bond:</strong>
+                        <div class="formula">
+                            r = (FV / PV)^(1/t) − 1
+                        </div>
+                    </li>
+                    <li><strong>For Coupon Bonds:</strong> No closed-form solution. Use financial calculator or iterative method.</li>
+                </ul>
+
+                <div class="example">
+                    <h4>Example: YTM of a Zero-Coupon Bond</h4>
+                    <p>Face value = $1,000, price = $800, maturity = 5 years.</p>
+                    <p>r = (1000 / 800)^(1/5) − 1 = (1.25)^0.2 − 1 ≈ 1.0456 − 1 = <strong>4.56%</strong></p>
+                </div>
+
+                <h3>For Stocks: Implied Return and Growth</h3>
+                <ul>
+                    <li><strong>Implied Required Return (r):</strong>
+                        <div class="formula">
+                            r = (D₁ / P₀) + g
+                        </div>
+                    </li>
+                    <li><strong>Implied Growth Rate (g):</strong>
+                        <div class="formula">
+                            g = r − (D₁ / P₀)
+                        </div>
+                    </li>
+                </ul>
+
+                <h3>Link to Price-to-Earnings (P/E) Ratio</h3>
+                <p>The P/E ratio reflects investor expectations about growth, payout, and risk.</p>
+                <div class="formula">
+                    P₀/E₀ = [(D₀/E₀) × (1 + g)] / (r − g)
+                </div>
+                <p>Where D₀/E₀ = dividend payout ratio.</p>
+
+                <p><strong>Forward P/E Ratio:</strong> Uses next year's earnings E₁</p>
+                <div class="formula">
+                    Forward P/E = P₀ / E₁ = (D₁/E₁) / (r − g)
+                </div>
+                <p>✅ <strong>Higher P/E if:</strong> High payout, high growth, low required return</p>
+                <p>❌ <strong>Lower P/E if:</strong> High risk (high r)</p>
+            </section>
+
+            <section class="content-section" id="no-arbitrage">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">The No-Arbitrage Principle and Cash Flow Additivity</h2>
+                </div>
+                <p>
+                    The <span class="key-term">No-Arbitrage Principle</span> states that two assets with identical cash flows must have the same price — otherwise, investors could make a riskless profit (arbitrage).
+                </p>
+                <p>
+                    This leads to the <strong>Cash Flow Additivity Principle</strong>: The PV of a series of cash flows is the sum of the PVs of each individual flow.
+                </p>
+
+                <h3>Applications of No-Arbitrage</h3>
+                <ul>
+                    <li><strong>Implied Forward Rates:</strong> The rate that must prevail in the future to prevent arbitrage between bonds of different maturities.</li>
+                    <div class="formula">
+                        (1 + r₂)² = (1 + r₁) × (1 + f₁,₁)
+                    </div>
+                    <p>Where f₁,₁ = one-year forward rate one year from now.</p>
+
+                    <div class="example">
+                        <h4>Example: Calculating Forward Rate</h4>
+                        <p>1-year spot rate = 3%, 2-year spot rate = 4%.</p>
+                        <p>(1.04)² = (1.03) × (1 + f)</p>
+                        <p>1.0816 = 1.03 × (1 + f)</p>
+                        <p>1 + f = 1.0816 / 1.03 ≈ 1.0501</p>
+                        <p>f ≈ <strong>5.01%</strong></p>
+                    </div>
+
+                    <li><strong>Interest Rate Parity (IRP):</strong> Links interest rates and exchange rates to prevent arbitrage in currency markets.</li>
+                    <div class="formula">
+                        F = S₀ × (1 + r_d) / (1 + r_f)
+                    </div>
+                    <p>Where F = forward exchange rate, S₀ = spot rate, r_d = domestic rate, r_f = foreign rate.</p>
+
+                    <li><strong>Option Pricing:</strong> An option's price must equal the cost of a <strong>replicating portfolio</strong> (a combination of the underlying asset and risk-free borrowing/lending) that produces the same payoffs.</li>
+                    <p>The <strong>hedge ratio</strong> (number of shares to buy per option sold) ensures the portfolio is riskless.</p>
+                </ul>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav">
+                <a href="chapter1.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Chapter 1
+                </a>
+                
+                <div class="progress-indicator">
+                    <span>Progress:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span>Chapter 2 of 11</span>
+                </div>
+                
+                <a href="chapter3.html" class="nav-button next">
+                    Chapter 3
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Table of Contents active link tracking
+        function updateTOC() {
+            const sections = document.querySelectorAll('.content-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        window.addEventListener('load', updateTOC);
+        
+        // Mark chapter as completed
+        localStorage.setItem('chapter_2_completed', 'true');
+    </script>
+</body>
+</html>

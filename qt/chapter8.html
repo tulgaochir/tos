@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Hypothesis Testing - CFA Level 1 Quantitative Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #006699;
+            --accent: #008080;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --table-header: #003366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .chapter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Table of Contents Sidebar */
+        .layout-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--light);
+            color: var(--primary);
+            border-left-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: var(--primary);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .content-section {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h3 {
+            color: var(--accent);
+            font-size: 1.4em;
+            margin: 2rem 0 1rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        h4 {
+            color: var(--secondary);
+            font-size: 1.2em;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        .term {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Formula styling */
+        .formula {
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Example styling */
+        .calculation-example {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #b0e7ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(176, 231, 255, 0.3);
+            position: relative;
+        }
+
+        .calculation-example::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .calculation-example h4 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .calculation-example h4::before {
+            content: '\f550';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--table-header);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        /* Navigation buttons */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button.prev {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .nav-button.next {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 72.72%; /* 8/11 chapters */
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Quantitative Analysis</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="chapter7.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous
+                </a>
+                <a href="chapter8.html" class="nav-link active">
+                    <i class="fas fa-vial"></i>
+                    Chapter 8
+                </a>
+                <a href="chapter9.html" class="nav-link">
+                    <i class="fas fa-arrow-right"></i>
+                    Next
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+        <div class="chapter-content">
+            <div class="chapter-badge">Chapter 8 of 11</div>
+            <h1 class="chapter-title">Hypothesis Testing</h1>
+            <p class="chapter-description">
+                Master hypothesis testing framework, t-tests, chi-square tests, and both parametric and nonparametric methods
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout-container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <div class="toc-title">
+                <i class="fas fa-list"></i>
+                Contents
+            </div>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#framework" class="toc-link">Testing Framework</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#decision-making" class="toc-link">Statistical Decision Making</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#parametric-tests" class="toc-link">Parametric Tests</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#nonparametric" class="toc-link">Nonparametric Tests</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="content-section" id="framework">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">The Framework of Hypothesis Testing</h2>
+                </div>
+                <p>
+                    <span class="term">Hypothesis testing</span> is a formal statistical method used to make decisions about a population based on sample data. It's one of the two main branches of <span class="term">statistical inference</span> (the other being estimation).
+                </p>
+                <p>
+                    Think of it like a court trial: the null hypothesis is "innocent until proven guilty." We assume it's true — and only reject it if the evidence (data) is strong enough.
+                </p>
+
+                <h3>The 7-Step Process of Hypothesis Testing</h3>
+                <p>
+                    This structured approach ensures consistency and rigor:
+                </p>
+                <ol>
+                    <li><strong>State the hypotheses</strong> — Define \( H_0 \) and \( H_a \).</li>
+                    <li><strong>Choose the appropriate test statistic</strong> — e.g., z, t, chi-square, F.</li>
+                    <li><strong>Specify the significance level (\( \alpha \))</strong> — Common choices: 0.05 (5%), 0.01 (1%).</li>
+                    <li><strong>State the decision rule</strong> — When will you reject \( H_0 \)?</li>
+                    <li><strong>Collect data and calculate the test statistic</strong> — Use sample data.</li>
+                    <li><strong>Make the statistical decision</strong> — Reject or fail to reject \( H_0 \).</li>
+                    <li><strong>Make the economic or investment decision</strong> — What does this mean for portfolio strategy, risk, etc.?</li>
+                </ol>
+
+                <h3>Null vs. Alternative Hypotheses</h3>
+                <ul>
+                    <li><strong>Null Hypothesis (\( H_0 \)):</strong> The default assumption. It always contains an <strong>equality</strong> (=, ≤, or ≥). This is what we test and potentially reject.</li>
+                    <li><strong>Alternative Hypothesis (\( H_a \)):</strong> What we conclude if we reject \( H_0 \). It represents the researcher's belief or claim.</li>
+                </ul>
+
+                <div class="calculation-example">
+                    <h4>Example: Testing a Fund Manager's Claim</h4>
+                    <p>A fund manager claims their average return is at least 8% per year.</p>
+                    <p>We want to test this claim.</p>
+                    <ul>
+                        <li>\( H_0: \mu \geq 8\% \) (They're right)</li>
+                        <li>\( H_a: \mu < 8\% \) (They're overstating)</li>
+                    </ul>
+                    <p>This is a <strong>lower-tail test</strong> — we're checking if returns are significantly <em>less than</em> 8%.</p>
+                </div>
+
+                <h3>Type I and Type II Errors</h3>
+                <p>
+                    Because we use a sample, our decision might be wrong. There are two types of errors:
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Decision</th>
+                            <th>If \( H_0 \) is True</th>
+                            <th>If \( H_0 \) is False</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Do Not Reject \( H_0 \)</strong></td>
+                            <td>✅ Correct Decision</td>
+                            <td>❌ <strong>Type II Error</strong><br>(Fail to reject a false null)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reject \( H_0 \)</strong></td>
+                            <td>❌ <strong>Type I Error</strong><br>(Reject a true null)</td>
+                            <td>✅ Correct Decision</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul>
+                    <li><strong>Significance level (\( \alpha \))</strong> = Probability of Type I error.</li>
+                    <li><strong>Power of the test</strong> = 1 – P(Type II error) = Probability of correctly rejecting a false null.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="decision-making">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Making a Statistical Decision</h2>
+                </div>
+                <p>
+                    Once hypotheses are set, we use sample data to decide whether to reject \( H_0 \). There are three main approaches — all lead to the same conclusion.
+                </p>
+
+                <h3>Test Statistic: The Core Formula</h3>
+                <p>
+                    The <span class="term">test statistic</span> measures how far the sample result is from the hypothesized value, in units of standard error.
+                </p>
+                <div class="formula">
+                    \( \text{Test Statistic} = \frac{\text{Sample Statistic} - \text{Hypothesized Value}}{\text{Standard Error of the Statistic}} \)
+                </div>
+                <p>This formula is used in z-tests, t-tests, and others.</p>
+
+                <h3>Three Approaches to Decision Making</h3>
+                <ul>
+                    <li><strong>1. Critical Value Approach:</strong>
+                        <ul>
+                            <li>Compare the test statistic to a critical value from a statistical table (z, t, etc.).</li>
+                            <li>Reject \( H_0 \) if the test statistic falls in the <strong>rejection region</strong>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>2. p-Value Approach:</strong>
+                        <ul>
+                            <li>The <span class="term">p-value</span> is the <strong>smallest significance level</strong> at which you can reject \( H_0 \).</li>
+                            <li><strong>Decision Rule:</strong> If p-value < \( \alpha \), reject \( H_0 \).</li>
+                            <li><strong>Interpretation:</strong> A p-value of 0.03 means there's only a 3% chance of seeing this result if \( H_0 \) were true.</li>
+                        </ul>
+                    </li>
+                    <li><strong>3. Confidence Interval Approach:</strong>
+                        <ul>
+                            <li>A \( (1 - \alpha) \times 100\% \) confidence interval gives a range of plausible values for the population parameter.</li>
+                            <li>If the hypothesized value under \( H_0 \) is <strong>outside</strong> this interval, reject \( H_0 \).</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>One-Tailed vs. Two-Tailed Tests</h3>
+                <p>The form of \( H_a \) determines the type of test.</p>
+
+                <h4>Two-Tailed Test</h4>
+                <ul>
+                    <li>Used when we care about <strong>any difference</strong> from the hypothesized value.</li>
+                    <li>Example: \( H_0: \mu = 8\% \), \( H_a: \mu \neq 8\% \)</li>
+                    <li><strong>Rejection Region:</strong> Split between both tails (e.g., ±1.96 for \( \alpha = 0.05 \)).</li>
+                </ul>
+
+                <h4>One-Tailed Test</h4>
+                <ul>
+                    <li>Used when direction matters.</li>
+                    <li><strong>Upper Tail:</strong> \( H_0: \mu \leq \mu_0 \), \( H_a: \mu > \mu_0 \)<br>
+                        Reject if test statistic > positive critical value.</li>
+                    <li><strong>Lower Tail:</strong> \( H_0: \mu \geq \mu_0 \), \( H_a: \mu < \mu_0 \)<br>
+                        Reject if test statistic < negative critical value.</li>
+                </ul>
+
+                <div class="calculation-example">
+                    <h4>Example: One-Tailed z-Test</h4>
+                    <p>Test if average return > 6%. Sample: n = 50, \( \bar{x} = 7\% \), \( \sigma = 4\% \), \( \alpha = 0.05 \).</p>
+                    <p>Step 1: \( H_0: \mu \leq 6\% \), \( H_a: \mu > 6\% \)</p>
+                    <p>Step 2: Use z-test (large sample, known σ)</p>
+                    <p>Step 3: Critical value = 1.645 (upper 5%)</p>
+                    <p>Step 4: Calculate test statistic:</p>
+                    <div class="formula">
+                        \( z = \frac{7 - 6}{4 / \sqrt{50}} = \frac{1}{0.566} \approx 1.77 \)
+                    </div>
+                    <p>Step 5: 1.77 > 1.645 → <strong>Reject \( H_0 \)</strong></p>
+                    <p>Conclusion: Evidence suggests average return is greater than 6%.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="parametric-tests">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Common Parametric Hypothesis Tests</h2>
+                </div>
+                <p>
+                    <span class="term">Parametric tests</span> make assumptions about the population distribution (usually normality) and test specific parameters like mean or variance.
+                </p>
+
+                <h3>Tests Concerning the Mean</h3>
+                <ul>
+                    <li><strong>Single Mean:</strong>
+                        <ul>
+                            <li><strong>z-test:</strong> Use if population variance is known OR sample size ≥ 30 (CLT applies).</li>
+                            <li><strong>t-test:</strong> Use if population variance is unknown and n < 30. Degrees of freedom = \( n - 1 \).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Difference Between Two Means (Independent Samples):</strong>
+                        <ul>
+                            <li><strong>Pooled t-test:</strong> When variances are unknown but assumed <strong>equal</strong>.</li>
+                            <li><strong>Approximate t-test (Welch's t):</strong> When variances are unknown and assumed <strong>unequal</strong>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Mean of Differences (Paired Comparisons):</strong>
+                        <ul>
+                            <li>Used for "before vs. after" or matched pairs (e.g., same stock under two strategies).</li>
+                            <li>Apply a <strong>t-test to the differences</strong> \( d_i = x_i - y_i \).</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Tests Concerning Variance (Measuring Risk)</h3>
+                <ul>
+                    <li><strong>Single Variance:</strong> Use the <strong>chi-square (\( \chi^2 \)) test</strong> for a normal population.
+                        <div class="formula">
+                            \( \chi^2 = \frac{(n - 1)s^2}{\sigma_0^2} \)
+                        </div>
+                        <p>Where:</p>
+                        <ul>
+                            <li>\( s^2 \) = sample variance</li>
+                            <li>\( \sigma_0^2 \) = hypothesized population variance</li>
+                            <li>df = \( n - 1 \)</li>
+                        </ul>
+                        <p>The \( \chi^2 \) distribution is <strong>right-skewed</strong> and only takes positive values.</p>
+                    </li>
+                    <li><strong>Equality of Two Variances:</strong> Use the <strong>F-test</strong>.
+                        <div class="formula">
+                            \( F = \frac{s_1^2}{s_2^2} \)
+                        </div>
+                        <p>Where \( s_1^2 \geq s_2^2 \) (larger variance on top).</p>
+                        <ul>
+                            <li>df<sub>1</sub> = \( n_1 - 1 \), df<sub>2</sub> = \( n_2 - 1 \)</li>
+                            <li>F-distribution is <strong>right-skewed</strong>.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Test for Correlation</h3>
+                <p>
+                    To test if the correlation \( \rho \) between two variables is significantly different from zero:
+                </p>
+                <ul>
+                    <li>\( H_0: \rho = 0 \), \( H_a: \rho \neq 0 \)</li>
+                    <li>Use a <strong>t-test</strong> with:
+                        <div class="formula">
+                            \( t = \frac{r \sqrt{n - 2}}{\sqrt{1 - r^2}} \)
+                        </div>
+                        <p>Where \( r \) = sample correlation, df = \( n - 2 \)</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="nonparametric">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Nonparametric Tests: When Assumptions Fail</h2>
+                </div>
+                <p>
+                    <span class="term">Nonparametric tests</span> make fewer assumptions about the population. They are used when:
+                </p>
+                <ul>
+                    <li>Data is not normally distributed</li>
+                    <li>Sample size is small</li>
+                    <li>Data is ordinal or ranked</li>
+                </ul>
+                <p>They are less powerful than parametric tests but more robust.</p>
+
+                <h3>Common Nonparametric Tests</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Parametric Test</th>
+                            <th>Nonparametric Alternative</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Is a single mean significantly different from a value?</td>
+                            <td>t-test / z-test</td>
+                            <td>Wilcoxon signed-rank test</td>
+                        </tr>
+                        <tr>
+                            <td>Are means of two independent groups different?</td>
+                            <td>t-test / approx. t-test</td>
+                            <td>Mann-Whitney U test</td>
+                        </tr>
+                        <tr>
+                            <td>Are paired observations different?</td>
+                            <td>Paired t-test</td>
+                            <td>Wilcoxon signed-rank test, Sign test</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Spearman Rank Correlation Coefficient</h3>
+                <p>
+                    When the assumptions for Pearson correlation (normality, linearity) aren't met, use the <span class="term">Spearman rank correlation</span>. It measures monotonic (not necessarily linear) relationships.
+                </p>
+                <p><strong>Steps:</strong></p>
+                <ol>
+                    <li>Rank the values of each variable separately.</li>
+                    <li>Calculate the difference \( d_i \) between ranks for each pair.</li>
+                    <li>Apply the formula:</li>
+                </ol>
+                <div class="formula">
+                    \( r_S = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)} \)
+                </div>
+                <p><strong>Interpretation:</strong> Same as Pearson — ranges from -1 to +1.</p>
+
+                <div class="calculation-example">
+                    <h4>Example: Spearman Correlation</h4>
+                    <p>Two analysts rank 5 stocks by attractiveness:</p>
+                    <ul>
+                        <li>Analyst A: 1, 2, 3, 4, 5</li>
+                        <li>Analyst B: 2, 1, 4, 3, 5</li>
+                    </ul>
+                    <p>Differences in ranks: \( d_i = [-1, 1, -1, 1, 0] \)</p>
+                    <p>\( \sum d_i^2 = 1 + 1 + 1 + 1 + 0 = 4 \)</p>
+                    <div class="formula">
+                        \( r_S = 1 - \frac{6 \times 4}{5(25 - 1)} = 1 - \frac{24}{120} = 1 - 0.2 = 0.8 \)
+                    </div>
+                    <p>Strong positive rank correlation — analysts agree on general order.</p>
+                </div>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav">
+                <a href="chapter7.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Chapter 7
+                </a>
+                
+                <div class="progress-indicator">
+                    <span>Progress:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span>Chapter 8 of 11</span>
+                </div>
+                
+                <a href="chapter9.html" class="nav-button next">
+                    Chapter 9
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Table of Contents active link tracking
+        function updateTOC() {
+            const sections = document.querySelectorAll('.content-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        window.addEventListener('load', updateTOC);
+        
+        // Mark chapter as completed
+        localStorage.setItem('chapter_8_completed', 'true');
+    </script>
+</body>
+</html>

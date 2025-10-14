@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Probability Trees and Conditional Expectations - CFA Level 1 Quantitative Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #006699;
+            --accent: #008080;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .chapter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Table of Contents Sidebar */
+        .layout-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 90px;
+            height: fit-content;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: var(--light);
+            color: var(--primary);
+            border-left-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: var(--primary);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .content-section {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h3 {
+            color: var(--accent);
+            font-size: 1.4em;
+            margin: 2rem 0 1rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        h4 {
+            color: var(--secondary);
+            font-size: 1.2em;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        .key-term {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .calculation {
+            font-family: monospace;
+            background-color: #f5f5f5;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        /* Formula styling */
+        .formula {
+            background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Example styling */
+        .example {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #b0e7ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(176, 231, 255, 0.3);
+            position: relative;
+        }
+
+        .example::before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .example h4 {
+            margin-top: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example h4::before {
+            content: '\f550';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        /* Navigation buttons */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button.prev {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .nav-button.next {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 36.36%; /* 4/11 chapters */
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>Quantitative Analysis</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="chapter3.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Previous
+                </a>
+                <a href="chapter4.html" class="nav-link active">
+                    <i class="fas fa-project-diagram"></i>
+                    Chapter 4
+                </a>
+                <a href="chapter5.html" class="nav-link">
+                    <i class="fas fa-arrow-right"></i>
+                    Next
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+        <div class="chapter-content">
+            <div class="chapter-badge">Chapter 4 of 11</div>
+            <h1 class="chapter-title">Probability Trees and Conditional Expectations</h1>
+            <p class="chapter-description">
+                Master probability concepts, conditional expectations, Bayes' theorem, and decision-making under uncertainty
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout-container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <div class="toc-title">
+                <i class="fas fa-list"></i>
+                Contents
+            </div>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#expected-value" class="toc-link">Expected Value & Variance</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#conditional-expectations" class="toc-link">Conditional Expectations</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#bayes-theorem" class="toc-link">Bayes' Formula</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="content-section" id="expected-value">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Foundational Concepts: Expected Value and Variance</h2>
+                </div>
+                <p>These two concepts are the building blocks for understanding the potential returns and risks of an investment.</p>
+
+                <h3>Expected Value</h3>
+                <p>The <span class="key-term">Expected Value</span> is the probability-weighted average of all possible outcomes for a random variable. Think of it as the long-term average outcome you would expect if you repeated an experiment many times.</p>
+                
+                <div class="example">
+                    <h4>Expected Value Example</h4>
+                    <p>Suppose a stock has a 30% chance of returning 15%, a 50% chance of returning 10%, and a 20% chance of returning -5%.</p>
+                    <p><strong>Calculation:</strong></p>
+                    <div class="calculation">
+                        E(X) = (0.30 × 15%) + (0.50 × 10%) + (0.20 × -5%)<br>
+                        E(X) = 4.5% + 5.0% - 1.0% = <strong>8.5%</strong>
+                    </div>
+                    <p>The expected return of the stock is 8.5%.</p>
+                </div>
+
+                <h3>Variance and Standard Deviation</h3>
+                <p><span class="key-term">Variance</span> measures the dispersion of outcomes around the expected value. It is the expected value of the squared deviations from the mean. In finance, variance is a key measure of <span class="key-term">risk</span>.</p>
+                <div class="formula">
+                    Variance(X) = E{[X - E(X)]²}
+                </div>
+                
+                <h4>Key Properties of Variance:</h4>
+                <ul>
+                    <li>Variance is always greater than or equal to zero (≥ 0).</li>
+                    <li>A variance of zero means there is no risk or dispersion; the outcome is certain.</li>
+                    <li>A higher variance signifies greater dispersion and, therefore, higher risk.</li>
+                </ul>
+
+                <p>The <span class="key-term">Standard Deviation</span> is the positive square root of the variance. Its main advantage is that it is measured in the same units as the random variable (e.g., percentages for returns), making it much easier to interpret than variance.</p>
+                
+                <div class="example">
+                    <h4>Variance & Standard Deviation Example</h4>
+                    <p>Using the stock from the previous example with an E(X) of 8.5%:</p>
+                    <ol>
+                        <li><strong>Calculate Squared Deviations:</strong>
+                            <ul>
+                                <li>(15% - 8.5%)² = (6.5%)² = 42.25%</li>
+                                <li>(10% - 8.5%)² = (1.5%)² = 2.25%</li>
+                                <li>(-5% - 8.5%)² = (-13.5%)² = 182.25%</li>
+                            </ul>
+                        </li>
+                        <li><strong>Calculate Variance (Probability-Weighted Average of Squared Deviations):</strong>
+                            <ul>
+                                <li>Variance = (0.30 × 42.25) + (0.50 × 2.25) + (0.20 × 182.25)</li>
+                                <li>Variance = 12.675 + 1.125 + 36.45 = <strong>50.25</strong> (Note: units are percent squared)</li>
+                            </ul>
+                        </li>
+                         <li><strong>Calculate Standard Deviation:</strong>
+                            <ul>
+                                <li>Standard Deviation = √50.25 ≈ <strong>7.09%</strong></li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p>The standard deviation of 7.09% gives us a measure of the stock's risk in percentage terms.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="conditional-expectations">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Conditional Expectations and Probability Trees</h2>
+                </div>
+                <p>Often, we need to analyze outcomes based on specific conditions or scenarios. This is where conditional probability comes in.</p>
+
+                <h3>Conditional Expected Value and Variance</h3>
+                <ul>
+                    <li><strong>Conditional Expected Value, E(X|S):</strong> The expected value of a random variable X, <em>given</em> that a specific event or scenario S has occurred. The formula is a probability-weighted average using conditional probabilities.
+                        <div class="formula">
+                            E(X|S) = P(X₁|S)X₁ + P(X₂|S)X₂ + ... + P(Xₙ|S)Xₙ
+                        </div>
+                    </li>
+                    <li><strong>Conditional Variance, σ²(X|S):</strong> The variance of a random variable X, <em>given</em> that a specific event or scenario S has occurred.</li>
+                </ul>
+
+                <h3>The Total Probability Rule for Expected Value</h3>
+                <p>This powerful rule allows us to calculate the overall (unconditional) expected value by taking a weighted average of all the conditional expected values. This is often visualized using a <span class="key-term">probability tree</span>.</p>
+                <div class="formula">
+                    E(X) = E(X|S₁)P(S₁) + E(X|S₂)P(S₂) + ... + E(X|Sₙ)P(Sₙ)<br>
+                    Where S₁, S₂, ..., Sₙ are mutually exclusive and exhaustive scenarios.
+                </div>
+                <p>In simple terms, the overall expected value is the sum of (Expected Value in Scenario 1 × Probability of Scenario 1) + (Expected Value in Scenario 2 × Probability of Scenario 2), and so on.</p>
+            </section>
+
+            <section class="content-section" id="bayes-theorem">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Updating Beliefs with New Information: Bayes' Formula</h2>
+                </div>
+                <p>Bayes' formula (also known as inverse probability) is a formal method for updating the probability of an event based on new information. It allows us to systematically revise our initial beliefs (prior probabilities) to arrive at more informed beliefs (posterior probabilities).</p>
+                
+                <div class="formula">
+                    P(Event|Information) = [P(Information|Event) / P(Information)] × P(Event)
+                </div>
+
+                <h4>Breaking Down the Formula:</h4>
+                <ul>
+                    <li><strong>P(Event):</strong> The <span class="key-term">Prior Probability</span>. This is our initial belief about the probability of an event before we get any new information.</li>
+                    <li><strong>P(Information | Event):</strong> The conditional probability of observing the new information, assuming that our event is true.</li>
+                    <li><strong>P(Information):</strong> The unconditional probability of observing the new information.</li>
+                    <li><strong>P(Event | Information):</strong> The <span class="key-term">Posterior Probability</span>. This is our updated, revised probability of the event after considering the new information.</li>
+                </ul>
+
+                <h4>Key Terminology:</h4>
+                <ul>
+                    <li>The updated probability, P(Event | Information), is formally called the <span class="key-term">posterior probability</span>.</li>
+                    <li>If our initial beliefs (prior probabilities) are all equal, they are referred to as <span class="key-term">diffuse priors</span>.</li>
+                </ul>
+                
+                <div class="example">
+                    <h4>Bayes' Formula Example</h4>
+                    <p>Imagine a disease affects 1% of the population (P(Disease) = 0.01). A test for it is 95% accurate for those who have it (P(Positive Test | Disease) = 0.95) and has a 5% false positive rate for those who don't (P(Positive Test | No Disease) = 0.05).</p>
+                    <p><strong>Question:</strong> If you test positive, what is the probability you actually have the disease? We want to find P(Disease | Positive Test).</p>
+                    <ol>
+                        <li><strong>Identify Priors:</strong> P(Disease) = 0.01. Therefore, P(No Disease) = 0.99.</li>
+                        <li><strong>Calculate P(Positive Test) using the Total Probability Rule:</strong><br>
+                        <div class="calculation">
+                            P(Positive Test) = P(Positive|Disease)P(Disease) + P(Positive|No Disease)P(No Disease)<br>
+                            P(Positive Test) = (0.95 × 0.01) + (0.05 × 0.99) = 0.0095 + 0.0495 = 0.059
+                        </div>
+                        </li>
+                        <li><strong>Apply Bayes' Formula:</strong><br>
+                        <div class="calculation">
+                            P(Disease|Positive Test) = [P(Positive Test|Disease) / P(Positive Test)] × P(Disease)<br>
+                            P(Disease|Positive Test) = [0.95 / 0.059] × 0.01 ≈ 0.161
+                        </div>
+                        </li>
+                    </ol>
+                    <p>Even with a positive test, your updated probability (posterior) of having the disease is only about <strong>16.1%</strong>.</p>
+                </div>
+            </section>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-nav">
+                <a href="chapter3.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Chapter 3
+                </a>
+                
+                <div class="progress-indicator">
+                    <span>Progress:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span>Chapter 4 of 11</span>
+                </div>
+                
+                <a href="chapter5.html" class="nav-button next">
+                    Chapter 5
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Table of Contents active link tracking
+        function updateTOC() {
+            const sections = document.querySelectorAll('.content-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Update TOC on scroll
+        window.addEventListener('scroll', updateTOC);
+        window.addEventListener('load', updateTOC);
+        
+        // Mark chapter as completed
+        localStorage.setItem('chapter_4_completed', 'true');
+    </script>
+</body>
+</html>
