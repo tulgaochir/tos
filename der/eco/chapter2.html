@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CFA Economics: Understanding Business Cycles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        /* Navigation Styles */
+        .chapter-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .floating-toc {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .toc-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .toc-item.active {
+            background: linear-gradient(135deg, #3182ce, #2c5282);
+            color: white;
+            transform: translateX(-5px);
+        }
+        
+        /* Enhanced Content Styles */
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7, #c084fc);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            font-weight: 600;
+            color: #2d3748;
+        }
+        tbody tr:hover {
+            background-color: #f8fafc;
+            transform: translateX(2px);
+            transition: all 0.2s ease;
+        }
+        .callout {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.75rem 0;
+            position: relative;
+        }
+        .callout::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            border-radius: 0 0.75rem 0.75rem 0;
+        }
+        .callout-note {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            color: #6b21a8;
+        }
+        .callout-note::before {
+            background: #8b5cf6;
+        }
+        .callout-warning {
+            background: linear-gradient(135deg, #fffaf0, #fef3c7);
+            color: #92400e;
+        }
+        .callout-warning::before {
+            background: #dd6b20;
+        }
+        .callout-success {
+            background: linear-gradient(135deg, #f0fff4, #dcfce7);
+            color: #166534;
+        }
+        .callout-success::before {
+            background: #38a169;
+        }
+        .header-gradient {
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-gradient::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="0,0 1000,50 1000,100 0,100"></polygon></svg>');
+            background-size: cover;
+        }
+        .header-gradient h1 {
+            color: white;
+            font-weight: 800;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .header-gradient p {
+            color: #e0e7ff;
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+            position: relative;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            color: white;
+            border-radius: 12px;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        .key-point {
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            margin: 1.25rem 0;
+            border-left: 4px solid #8b5cf6;
+            transition: all 0.3s ease;
+        }
+        .key-point:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .key-point-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        .progress-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            position: sticky;
+            top: 100px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .progress-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+        }
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #e2e8f0, #8b5cf6, #e2e8f0);
+            z-index: 1;
+        }
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            min-width: 120px;
+        }
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .step-label {
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        .active-step .step-circle {
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            border-color: #8b5cf6;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        .active-step .step-label {
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: #8b5cf6;
+        }
+        .card:hover::before {
+            transform: translateX(0);
+        }
+        .card-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            color: #2d3748;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7);
+        }
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1a202c;
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+        }
+        .highlight-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .definition {
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #8b5cf6;
+            position: relative;
+        }
+        .definition::before {
+            content: '💡';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+        }
+        .definition-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        .section-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        .section-subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7);
+        }
+        .phase-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        .phase-card:hover::before {
+            transform: scaleX(1);
+        }
+        .phase-title {
+            font-weight: 600;
+            color: #7c3aed;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            .header-gradient h1 {
+                font-size: 2rem;
+            }
+            .header-gradient p {
+                font-size: 1rem;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .section-number {
+                margin-bottom: 1rem;
+            }
+            .floating-toc {
+                display: none;
+            }
+            .progress-container {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+
+    <!-- Navigation Bar -->
+    <nav class="chapter-nav fixed top-0 left-0 right-0 z-50 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="flex items-center space-x-2 text-purple-600 hover:text-purple-700 transition-colors">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="font-semibold">Back to Chapters</span>
+                </a>
+                <div class="h-6 w-px bg-gray-300"></div>
+                <h1 class="text-lg font-semibold text-gray-800">Chapter 2: Business Cycles</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="toggleToc" class="lg:hidden p-2 text-gray-600 hover:text-purple-600 transition-colors">
+                    <i class="fas fa-list"></i>
+                </button>
+                <div class="flex space-x-2">
+                    <a href="chapter1.html" class="px-3 py-2 text-gray-600 hover:text-purple-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-1"></i> Previous
+                    </a>
+                    <a href="chapter3.html" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                        Next Chapter <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Table of Contents -->
+    <div class="floating-toc hidden lg:block">
+        <div class="bg-white rounded-lg shadow-xl p-4 w-64 max-h-96 overflow-y-auto">
+            <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                <i class="fas fa-list mr-2 text-purple-600"></i>
+                Table of Contents
+            </h3>
+            <div class="space-y-2">
+                <div class="toc-item active px-3 py-2 rounded text-sm cursor-pointer transition-all" data-section="section1">
+                    1. Overview
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section2">
+                    2. Credit Cycle
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section3">
+                    3. Firm Behavior
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section4">
+                    4. Indicators
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-8 pt-24">
+        <header class="header-gradient text-center rounded-lg mb-10">
+            <h1 class="text-4xl font-bold">Understanding Business Cycles</h1>
+            <p>A Clear Guide to Economic Fluctuations for CFA Candidates</p>
+        </header>
+
+
+        <!-- 1. Overview of the Business Cycle -->
+        <div class="content-section" id="section1">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Overview of the Business Cycle</h2>
+            </div>
+            
+            <p class="text-lg mb-6">The business cycle describes the natural rise and fall of economic activity over time. Though cycles vary in length and intensity, they follow a predictable pattern that helps investors and policymakers anticipate shifts in the economy.</p>
+
+            <h3 class="section-subtitle">Key Components</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Expansion</h3>
+                    <p>Period of rising GDP, income, and employment.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Contraction</h3>
+                    <p>Period of falling GDP, income, and employment (often called a recession if prolonged).</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Peak</h3>
+                    <p>Highest point of economic activity—end of expansion, start of contraction.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Trough</h3>
+                    <p>Lowest point of economic activity—end of contraction, start of recovery.</p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">The Four Phases</h3>
+            <p>Each phase has distinct economic conditions and investment implications:</p>
+
+            <div class="card-grid">
+                <!-- Phase 1: Recovery -->
+                <div class="phase-card">
+                    <h4 class="phase-title">Phase 1: Recovery (Trough)</h4>
+                    <p><strong>Economic Conditions:</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Economy hits its lowest point.</li>
+                        <li>Activity begins to rebound.</li>
+                        <li>Confidence slowly returns.</li>
+                    </ul>
+                    <div class="callout callout-success mt-4">
+                        <p><strong>Investor Behavior:</strong> Low interest rates and improving outlook make cyclical stocks attractive.</p>
+                    </div>
+                </div>
+
+                <!-- Phase 2: Expansion -->
+                <div class="phase-card">
+                    <h4 class="phase-title">Phase 2: Expansion</h4>
+                    <p><strong>Economic Conditions:</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Strong growth in GDP, jobs, and spending.</li>
+                        <li>Output exceeds long-term potential.</li>
+                        <li>Prices and interest rates rise.</li>
+                        <li>Risk of "overheating" increases.</li>
+                    </ul>
+                    <div class="callout callout-success mt-4">
+                        <p><strong>Investor Behavior:</strong> Equities perform well; business confidence is high.</p>
+                    </div>
+                </div>
+
+                <!-- Phase 3: Slowdown -->
+                <div class="phase-card">
+                    <h4 class="phase-title">Phase 3: Slowdown (Peak)</h4>
+                    <p><strong>Economic Conditions:</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Growth begins to decelerate.</li>
+                        <li>Output is at its highest level.</li>
+                        <li>Inflation may peak or start to ease.</li>
+                        <li>Optimism remains, but caution grows.</li>
+                    </ul>
+                    <div class="callout callout-warning mt-4">
+                        <p><strong>Investor Behavior:</strong> Smart money shifts toward bonds; equity valuations are stretched.</p>
+                    </div>
+                </div>
+
+                <!-- Phase 4: Contraction -->
+                <div class="phase-card">
+                    <h4 class="phase-title">Phase 4: Contraction</h4>
+                    <p><strong>Economic Conditions:</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>GDP, employment, and spending fall.</li>
+                        <li>Output drops below potential.</li>
+                        <li>Business confidence collapses.</li>
+                        <li>Recessionary conditions emerge.</li>
+                    </ul>
+                    <div class="callout callout-warning mt-4">
+                        <p><strong>Investor Behavior:</strong> Flight to safety—investors favor bonds and defensive stocks (e.g., utilities, consumer staples).</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Types of Business Cycles</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Classical Cycle</h3>
+                    <p>Based on absolute GDP levels—contraction = falling GDP.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Growth Cycle</h3>
+                    <p>Measures deviations from long-term trend—downturn = growth below trend (even if positive).</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Growth Rate Cycle</h3>
+                    <p>Focuses on changes in the growth rate—downturn = slowing growth.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. The Credit Cycle -->
+        <div class="content-section" id="section2">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">The Credit Cycle</h2>
+            </div>
+            
+            <p class="text-lg mb-6">The credit cycle reflects how easily businesses and consumers can borrow money—and it closely mirrors the business cycle.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="card-title">During Expansions</h3>
+                    <p>Lenders loosen standards—credit is abundant and cheap.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">During Contractions</h3>
+                    <p>Lenders tighten standards—credit becomes scarce and expensive.</p>
+                </div>
+            </div>
+            
+            <div class="callout callout-note mt-6">
+                <p><strong>Why it matters:</strong> Easy credit can inflate asset bubbles (e.g., housing, stocks). Monitoring the credit cycle helps anticipate turning points in the broader economy.</p>
+            </div>
+        </div>
+
+        <!-- 3. Economic Indicators and Firm Behavior -->
+        <div class="content-section" id="section3">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">How Firms Behave Through the Cycle</h2>
+            </div>
+            
+            <p class="text-lg mb-6">Corporate decisions on investment, hiring, and inventory provide real-time signals about the economy's direction.</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="section-subtitle">Capital Spending</h3>
+                    <div class="card">
+                        <p>Firms invest in new equipment or facilities when:</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>They expect strong future demand.</li>
+                            <li>Current profits and sales are rising.</li>
+                            <li>Existing capacity is near full utilization.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="section-subtitle">Workforce & Cost Management</h3>
+                    <div class="card">
+                        <p>Early in a downturn, firms delay layoffs. As the contraction deepens, they:</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Reduce advertising and discretionary spending.</li>
+                            <li>Liquidate excess inventory (often at discounts).</li>
+                            <li>Eventually cut jobs to preserve cash.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <h3 class="section-subtitle">Inventory-to-Sales Ratio</h3>
+                <div class="card">
+                    <p>This key metric shows how much inventory companies hold relative to sales:</p>
+                    <div class="grid md:grid-cols-2 gap-4 mt-4">
+                        <div class="callout callout-warning">
+                            <p><strong>Rising ratio:</strong> Sales are slowing—potential sign of an approaching contraction.</p>
+                        </div>
+                        <div class="callout callout-success">
+                            <p><strong>Falling ratio:</strong> Sales are outpacing production—may signal future output increases.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Economic Indicators for Forecasting -->
+        <div class="content-section" id="section4">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">Tracking the Cycle with Economic Indicators</h2>
+            </div>
+            
+            <p class="text-lg mb-6">Analysts use three types of indicators to identify where we are in the business cycle.</p>
+
+            <h3 class="section-subtitle">Indicator Types</h3>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Indicator Type</th>
+                            <th>Timing</th>
+                            <th>Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Leading</strong></td>
+                            <td>Change <em>before</em> the economy</td>
+                            <td>Stock prices, building permits, jobless claims, consumer sentiment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Coincident</strong></td>
+                            <td>Change <em>with</em> the economy</td>
+                            <td>Payroll employment, industrial production, personal income</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lagging</strong></td>
+                            <td>Change <em>after</em> the economy</td>
+                            <td>Unemployment rate, CPI inflation, corporate profits</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="section-subtitle">Composite Indicators</h3>
+            <p>Single indicators can be noisy—so analysts combine them into reliable indexes:</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Conference Board LEI</h3>
+                    <p>Leading index for the U.S. economy.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">OECD CLI</h3>
+                    <p>Tracks turning points globally using the growth cycle framework.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Tendency Surveys</h3>
+                    <p>Measure business and consumer sentiment—powerful leading signals.</p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Modern Tools: Big Data & Nowcasting</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Big Data</h3>
+                    <p>Real-time data from e-commerce, shipping, and payments offer faster economic insights.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Nowcasting</h3>
+                    <p>Estimates current-quarter GDP using high-frequency data (e.g., Atlanta Fed's <strong>GDPNow</strong> model).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced navigation and interaction functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            const steps = document.querySelectorAll('.progress-step');
+            const tocItems = document.querySelectorAll('.toc-item');
+            const backToTop = document.getElementById('backToTop');
+            
+            // Function to reset all steps and toc items
+            function resetActiveStates() {
+                steps.forEach(step => step.classList.remove('active-step'));
+                tocItems.forEach(item => item.classList.remove('active'));
+            }
+            
+            // Function to update progress steps and TOC based on scroll position
+            function updateActiveSection() {
+                const scrollPosition = window.scrollY + 200;
+                
+                let currentSectionIndex = 0;
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    if (sections[i].offsetTop <= scrollPosition) {
+                        currentSectionIndex = i;
+                        break;
+                    }
+                }
+                
+                resetActiveStates();
+                
+                // Update progress steps
+                for (let i = 0; i <= currentSectionIndex; i++) {
+                    if (steps[i]) {
+                        steps[i].classList.add('active-step');
+                    }
+                }
+                
+                // Update TOC
+                if (tocItems[currentSectionIndex]) {
+                    tocItems[currentSectionIndex].classList.add('active');
+                }
+            }
+            
+            // Scroll event listener
+            window.addEventListener('scroll', () => {
+                updateActiveSection();
+                
+                // Show/hide back to top button
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // TOC item click handlers
+            tocItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    const targetSection = document.getElementById(`section${index + 1}`);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Progress step click handlers
+            steps.forEach((step, index) => {
+                step.addEventListener('click', () => {
+                    const targetSection = document.getElementById(`section${index + 1}`);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Back to top functionality
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Mobile TOC toggle
+            const toggleToc = document.getElementById('toggleToc');
+            const floatingToc = document.querySelector('.floating-toc');
+            
+            if (toggleToc && floatingToc) {
+                toggleToc.addEventListener('click', () => {
+                    floatingToc.classList.toggle('hidden');
+                    floatingToc.classList.toggle('lg:block');
+                });
+            }
+            
+            // Initial call
+            updateActiveSection();
+        });
+    </script>
+
+</body>
+</html>
