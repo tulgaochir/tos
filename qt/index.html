@@ -16,85 +16,42 @@
             --text: #334155;
             --text-light: #64748b;
             --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text);
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            min-height: 100vh;
         }
-
         .header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 3rem 2rem 4rem;
+            padding: 3rem 2rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
         .header h1 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-
         .header p {
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 600px;
-            margin: 0 auto 2rem;
+            margin: 0 auto;
         }
-
-        .badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 500;
-            display: inline-block;
-            backdrop-filter: blur(10px);
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 3rem 2rem;
         }
-
         .chapters-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            margin: -2rem 2rem 4rem;
-            position: relative;
-            z-index: 2;
         }
-
         .chapter-card {
             background: var(--white);
             border-radius: 16px;
@@ -102,84 +59,42 @@
             box-shadow: var(--shadow-lg);
             transition: all 0.3s ease;
             border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
         }
-
         .chapter-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
-
         .chapter-header {
             background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
             color: white;
             padding: 1.5rem;
-            position: relative;
         }
-
         .chapter-number {
             font-size: 0.875rem;
             font-weight: 600;
-            opacity: 0.9;
             margin-bottom: 0.5rem;
         }
-
         .chapter-title {
             font-size: 1.25rem;
             font-weight: 600;
-            line-height: 1.4;
         }
-
-        .chapter-icon {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            font-size: 1.5rem;
-            opacity: 0.7;
-        }
-
         .chapter-body {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
-
         .chapter-description {
             color: var(--text-light);
             font-size: 0.95rem;
             margin-bottom: 1.5rem;
-            line-height: 1.6;
+            flex-grow: 1;
         }
-
-        .chapter-topics {
-            margin-bottom: 1.5rem;
-        }
-
-        .chapter-topics h4 {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .topics-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .topic-tag {
-            background: var(--light);
-            color: var(--text);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            border: 1px solid var(--border);
-        }
-
         .chapter-link {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             background: var(--primary);
             color: white;
@@ -187,50 +102,12 @@
             border-radius: 8px;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.2s ease;
-            width: 100%;
-            justify-content: center;
+            transition: background 0.2s ease;
+            margin-top: auto;
         }
-
         .chapter-link:hover {
             background: var(--secondary);
-            transform: translateY(-2px);
         }
-
-        .progress-section {
-            background: var(--white);
-            margin: 2rem;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-        }
-
-        .progress-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .progress-header h2 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-bar {
-            background: var(--light);
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, var(--accent), var(--secondary));
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
         .footer {
             background: var(--primary);
             color: white;
@@ -238,72 +115,33 @@
             padding: 2rem;
             margin-top: 4rem;
         }
-
         .footer p {
             opacity: 0.8;
         }
-
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .chapters-grid {
-                grid-template-columns: 1fr;
-                margin: -2rem 1rem 4rem;
-            }
-            
-            .container {
-                padding: 0 1rem;
-            }
+            .header h1 { font-size: 2rem; }
+            .chapters-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
-            <h1><i class="fas fa-chart-line"></i> Quantitative Analysis</h1>
-            <p>Complete Study Guide for CFA Level 1 Quantitative Methods</p>
-            <div class="badge">11 Comprehensive Chapters</div>
+            <h1><i class="fas fa-calculator"></i> Quantitative Analysis</h1>
+            <p>A Complete Study Guide for CFA Level 1 Quantitative Methods</p>
         </div>
     </header>
 
     <main class="container">
-        <section class="progress-section">
-            <div class="progress-header">
-                <h2>Study Progress</h2>
-                <p>Track your progress through the Quantitative Analysis curriculum</p>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <p id="progressText">0 of 11 chapters completed (0%)</p>
-            </div>
-        </section>
-
         <section class="chapters-grid">
             <div class="chapter-card">
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 1</div>
                     <h3 class="chapter-title">Rates and Returns</h3>
-                    <i class="fas fa-percentage chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Master the fundamentals of interest rates, return calculations, and the time value of money. Learn to calculate and interpret different types of returns.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Interest Rates</span>
-                            <span class="topic-tag">HPR</span>
-                            <span class="topic-tag">Geometric Mean</span>
-                            <span class="topic-tag">Real Returns</span>
-                        </div>
-                    </div>
-                    <a href="chapter1.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Master interest rates, return calculations, and the time value of money.</p>
+                    <a href="chapter1.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -311,25 +149,10 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 2</div>
                     <h3 class="chapter-title">The Time Value of Money</h3>
-                    <i class="fas fa-clock chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Explore present and future value calculations, annuities, perpetuities, and their applications in bond and stock valuation.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">PV/FV</span>
-                            <span class="topic-tag">Annuities</span>
-                            <span class="topic-tag">Bond Valuation</span>
-                            <span class="topic-tag">Gordon Model</span>
-                        </div>
-                    </div>
-                    <a href="chapter2.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Explore present/future value, annuities, and perpetuities.</p>
+                    <a href="chapter2.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -337,25 +160,10 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 3</div>
                     <h3 class="chapter-title">Statistical Measures</h3>
-                    <i class="fas fa-chart-bar chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Learn descriptive statistics including measures of central tendency, dispersion, skewness, kurtosis, and correlation analysis.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Mean/Median</span>
-                            <span class="topic-tag">Variance</span>
-                            <span class="topic-tag">Skewness</span>
-                            <span class="topic-tag">Correlation</span>
-                        </div>
-                    </div>
-                    <a href="chapter3.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Learn central tendency, dispersion, skewness, and kurtosis.</p>
+                    <a href="chapter3.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -363,25 +171,10 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 4</div>
                     <h3 class="chapter-title">Probability Trees</h3>
-                    <i class="fas fa-project-diagram chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Master probability concepts, conditional expectations, Bayes' theorem, and decision-making under uncertainty.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Expected Value</span>
-                            <span class="topic-tag">Variance</span>
-                            <span class="topic-tag">Bayes' Theorem</span>
-                            <span class="topic-tag">Decision Trees</span>
-                        </div>
-                    </div>
-                    <a href="chapter4.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Master probability, conditional expectations, and Bayes' theorem.</p>
+                    <a href="chapter4.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -389,25 +182,10 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 5</div>
                     <h3 class="chapter-title">Portfolio Mathematics</h3>
-                    <i class="fas fa-briefcase chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Understand portfolio return and risk calculations, diversification benefits, and risk-adjusted performance measures.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Portfolio Return</span>
-                            <span class="topic-tag">Covariance</span>
-                            <span class="topic-tag">Sharpe Ratio</span>
-                            <span class="topic-tag">VaR</span>
-                        </div>
-                    </div>
-                    <a href="chapter5.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Understand portfolio return, risk, and diversification benefits.</p>
+                    <a href="chapter5.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -415,25 +193,10 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 6</div>
                     <h3 class="chapter-title">Probability Distributions</h3>
-                    <i class="fas fa-wave-square chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Explore lognormal distributions, Monte Carlo simulation, and bootstrapping techniques for financial modeling.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Lognormal</span>
-                            <span class="topic-tag">Monte Carlo</span>
-                            <span class="topic-tag">Bootstrapping</span>
-                            <span class="topic-tag">Volatility</span>
-                        </div>
-                    </div>
-                    <a href="chapter6.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Explore lognormal distributions, Monte Carlo simulation, and bootstrapping.</p>
+                    <a href="chapter6.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -441,25 +204,10 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 7</div>
                     <h3 class="chapter-title">Estimation and Inference</h3>
-                    <i class="fas fa-search chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Learn sampling methods, the Central Limit Theorem, standard errors, and resampling techniques for statistical inference.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Sampling</span>
-                            <span class="topic-tag">CLT</span>
-                            <span class="topic-tag">Standard Error</span>
-                            <span class="topic-tag">Jackknife</span>
-                        </div>
-                    </div>
-                    <a href="chapter7.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Learn sampling, the Central Limit Theorem, and standard errors.</p>
+                    <a href="chapter7.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -467,25 +215,10 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 8</div>
                     <h3 class="chapter-title">Hypothesis Testing</h3>
-                    <i class="fas fa-vial chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Master hypothesis testing framework, t-tests, chi-square tests, and both parametric and nonparametric methods.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">t-tests</span>
-                            <span class="topic-tag">p-values</span>
-                            <span class="topic-tag">Type I/II Errors</span>
-                            <span class="topic-tag">Chi-Square</span>
-                        </div>
-                    </div>
-                    <a href="chapter8.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Master hypothesis testing, t-tests, and chi-square tests.</p>
+                    <a href="chapter8.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -493,25 +226,10 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 9</div>
                     <h3 class="chapter-title">Tests of Independence</h3>
-                    <i class="fas fa-link chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Analyze relationships between variables using correlation tests, Spearman rank correlation, and chi-square independence tests.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Pearson r</span>
-                            <span class="topic-tag">Spearman</span>
-                            <span class="topic-tag">Independence</span>
-                            <span class="topic-tag">Contingency</span>
-                        </div>
-                    </div>
-                    <a href="chapter9.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Analyze relationships with correlation and chi-square tests.</p>
+                    <a href="chapter9.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -519,25 +237,10 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 10</div>
                     <h3 class="chapter-title">Simple Linear Regression</h3>
-                    <i class="fas fa-chart-line chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Learn regression analysis fundamentals, model assumptions, goodness of fit measures, and prediction techniques.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Regression</span>
-                            <span class="topic-tag">R-squared</span>
-                            <span class="topic-tag">ANOVA</span>
-                            <span class="topic-tag">Predictions</span>
-                        </div>
-                    </div>
-                    <a href="chapter10.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Learn regression fundamentals, model assumptions, and R-squared.</p>
+                    <a href="chapter10.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
 
@@ -545,62 +248,17 @@
                 <div class="chapter-header">
                     <div class="chapter-number">Chapter 11</div>
                     <h3 class="chapter-title">Big Data Techniques</h3>
-                    <i class="fas fa-database chapter-icon"></i>
                 </div>
                 <div class="chapter-body">
-                    <p class="chapter-description">
-                        Explore fintech applications, big data analytics, machine learning, and artificial intelligence in quantitative analysis.
-                    </p>
-                    <div class="chapter-topics">
-                        <h4>Key Topics</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Fintech</span>
-                            <span class="topic-tag">Big Data</span>
-                            <span class="topic-tag">Machine Learning</span>
-                            <span class="topic-tag">NLP</span>
-                        </div>
-                    </div>
-                    <a href="chapter11.html" class="chapter-link">
-                        <i class="fas fa-book-open"></i>
-                        Start Chapter
-                    </a>
+                    <p class="chapter-description">Explore fintech, big data analytics, and machine learning in finance.</p>
+                    <a href="chapter11.html" class="chapter-link"><i class="fas fa-book-open"></i> Start Chapter</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2024 CFA Level 1 Quantitative Analysis Study Guide. All content preserved from original materials.</p>
+        <p>&copy; 2025 CFA Quantitative Analysis Study Guide. For Educational Purposes.</p>
     </footer>
-
-    <script>
-        // Simple progress tracking using localStorage
-        function updateProgress() {
-            const chapters = 11;
-            let completed = 0;
-            
-            for (let i = 1; i <= chapters; i++) {
-                if (localStorage.getItem(`chapter_${i}_completed`)) {
-                    completed++;
-                }
-            }
-            
-            const percentage = Math.round((completed / chapters) * 100);
-            document.getElementById('progressFill').style.width = percentage + '%';
-            document.getElementById('progressText').textContent = 
-                `${completed} of ${chapters} chapters completed (${percentage}%)`;
-        }
-        
-        // Mark chapter as completed when link is clicked
-        document.querySelectorAll('.chapter-link').forEach((link, index) => {
-            link.addEventListener('click', function() {
-                localStorage.setItem(`chapter_${index + 1}_completed`, 'true');
-                updateProgress();
-            });
-        });
-        
-        // Update progress on page load
-        updateProgress();
-    </script>
 </body>
 </html>
