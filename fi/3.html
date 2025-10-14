@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed-Income Issuance and Trading</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --dark-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-gold: #f59e0b;
+            --light-gray: #f8fafc;
+            --medium-gray: #e2e8f0;
+            --dark-gray: #475569;
+            --text-dark: #1e293b;
+            --success-green: #10b981;
+            --warning-orange: #f97316;
+            --danger-red: #dc2626;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            counter-reset: section-counter;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-home {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-home:hover {
+            color: var(--dark-blue);
+        }
+
+        .chapter-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chapter-nav a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .chapter-nav a:hover {
+            background: var(--light-gray);
+            color: var(--primary-blue);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border-top: 4px solid var(--primary-blue);
+            position: relative;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        h2 {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2::before {
+            content: counter(section-counter);
+            counter-increment: section-counter;
+            background: var(--primary-blue);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--medium-gray);
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+
+        /* Enhanced Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--medium-gray);
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background: var(--light-gray);
+            transition: background-color 0.3s ease;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Enhanced Callout Boxes */
+        .explanation, .note, .example, .warning {
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            position: relative;
+            border-left: 5px solid;
+        }
+
+        .explanation {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-color: var(--success-green);
+            color: #166534;
+        }
+
+        .note {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-color: var(--light-blue);
+            color: #1e40af;
+        }
+
+        .example {
+            background: linear-gradient(135deg, #fdf4ff, #f3e8ff);
+            border-color: #8b5cf6;
+            color: #6b21a8;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fefce8, #fef3c7);
+            border-color: var(--warning-orange);
+            color: #a16207;
+        }
+
+        .explanation strong, .note strong, .example strong, .warning strong {
+            color: inherit;
+            font-weight: 700;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        li strong {
+            color: var(--primary-blue);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .footer-nav a:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .table-container {
+                font-size: 0.9rem;
+            }
+
+            .chapter-nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <a href="index.html" class="nav-home">
+                <i class="fas fa-home"></i> CFA Fixed Income Study Guide
+            </a>
+            <div class="chapter-nav">
+                <a href="2.html"><i class="fas fa-arrow-left"></i> Previous</a>
+                <a href="index.html"><i class="fas fa-list"></i> All Chapters</a>
+                <a href="4.html">Next Chapter <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-badge">Chapter 3</div>
+            <h1><i class="fas fa-exchange-alt"></i> Fixed-Income Issuance and Trading</h1>
+            <p class="subtitle">Primary and secondary markets, participants, and market structure</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="section-card">
+            <h2><i class="fas fa-info-circle"></i> Introduction to Fixed-Income Markets</h2>
+            <p>Fixed-income markets are where debt securities are created and traded. Unlike equity markets, the fixed-income universe is incredibly diverse, with securities defined by their issuer, credit quality, maturity, and currency. The market is broadly split into two main parts:</p>
+            <ul>
+                <li><strong>Primary Markets:</strong> Where new bonds are issued for the first time to raise capital.</li>
+                <li><strong>Secondary Markets:</strong> Where existing bonds are traded among investors.</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-chart-pie"></i> Fixed-Income Segments, Issuers, and Investors</h2>
+            
+            <h3>Categorizing the Fixed-Income Market</h3>
+            <p>The vast fixed-income market is categorized along several key dimensions:</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-tag"></i> Category</th>
+                            <th><i class="fas fa-info"></i> Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Issuer Type</strong></td>
+                            <td>Governments (sovereign, local), Corporations, and Securitized (e.g., Mortgage-Backed Securities).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Credit Quality</strong></td>
+                            <td>The likelihood of the issuer defaulting on its payments, assessed by credit rating agencies.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Time to Maturity</strong></td>
+                            <td>Short-term (less than 1 year), intermediate-term (1–10 years), and long-term (more than 10 years).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Other Factors</strong></td>
+                            <td>Geography, currency of denomination, and ESG (Environmental, Social, and Governance) characteristics.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="explanation">
+                <strong>Fixed-Income vs. Equities:</strong> A key difference is diversity. A single company typically issues only one or two classes of common stock. However, the same company can issue dozens of different bonds with varying maturities, currencies, and seniority, creating a much larger and more complex universe of securities.
+            </div>
+
+            <h3>Credit Rating Insights</h3>
+            <p>Credit rating agencies like S&P and Moody's play a crucial role by assessing an issuer's default risk. These ratings directly impact a bond's yield and price.</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-star"></i> Rating Category</th>
+                            <th><i class="fas fa-chart-line"></i> S&P Ratings</th>
+                            <th><i class="fas fa-info"></i> Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Investment Grade</strong></td>
+                            <td>AAA down to BBB–</td>
+                            <td>Issuers with a high capacity to meet their financial commitments. Considered lower risk.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>High Yield (Junk)</strong></td>
+                            <td>BB+ down to C</td>
+                            <td>Speculative-grade issuers with a higher risk of default.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Default</strong></td>
+                            <td>D</td>
+                            <td>The issuer has defaulted or is expected to default with little chance of recovery for investors.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>Fallen Angels:</strong> These are issuers that were once rated investment grade but have been downgraded to high yield.</p>
+
+            <h3>Investors in Fixed-Income Markets</h3>
+            <p>Different types of investors participate in different segments of the market based on their risk tolerance, liability-matching needs, and investment horizon.</p>
+            <ul>
+                <li><strong>Default Risk-Free (e.g., U.S. Treasuries):</strong>
+                    <ul>
+                        <li><strong>Short-Term:</strong> Money Market Funds</li>
+                        <li><strong>Intermediate-Term:</strong> Central Banks, Financial Intermediaries</li>
+                        <li><strong>Long-Term:</strong> Pension Funds</li>
+                    </ul>
+                </li>
+                <li><strong>Investment Grade:</strong>
+                    <ul>
+                        <li><strong>Short-Term:</strong> Corporate Treasurers</li>
+                        <li><strong>Intermediate-Term:</strong> Bond Funds, ETFs</li>
+                        <li><strong>Long-Term:</strong> Insurance Companies</li>
+                    </ul>
+                </li>
+                <li><strong>High Yield:</strong>
+                    <ul>
+                        <li><strong>Short-Term:</strong> Asset Managers</li>
+                        <li><strong>Intermediate-Term:</strong> Hedge Funds, Distressed Debt Funds</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-chart-bar"></i> Fixed-Income Indexes</h2>
+            <p>Fixed-income indexes (or bond indexes) serve as benchmarks to measure the performance of the market and of investment managers. They differ from equity indexes in several important ways:</p>
+            <ul>
+                <li><strong>Number of Constituents:</strong> Bond indexes contain far more securities than equity indexes.</li>
+                <li><strong>Frequent Changes:</strong> The constituents of a bond index change constantly as old bonds mature and new bonds are issued.</li>
+                <li><strong>Weighting:</strong> They are usually weighted by the market value of the issuer's outstanding debt.</li>
+            </ul>
+            <p>Investors must choose an index that aligns with their investment strategy. Increasingly, ESG factors are used to screen and exclude certain issuers from indexes.</p>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-handshake"></i> Primary and Secondary Fixed-Income Markets</h2>
+
+            <h3>The Primary Market: New Issuance</h3>
+            <p>The primary market is where issuers sell new bonds to investors to raise capital.</p>
+            <ul>
+                <li><strong>Process:</strong> The process can be a public offering or a private placement. Debut issuers go through a detailed process, while frequent issuers often use a streamlined approach like a <strong>shelf registration</strong>.</li>
+                <li><strong>Underwriting:</strong> Investment banks act as underwriters, managing the sale process. For high-quality bonds, they often buy the entire issue and resell it (firm commitment). For lower-quality bonds, they may agree to sell the bonds on a <strong>best-efforts basis</strong>.</li>
+                <li><strong>Issuance Methods:</strong>
+                    <ul>
+                        <li><strong>Corporate Bonds:</strong> Typically issued via underwriters.</li>
+                        <li><strong>Sovereign Bonds:</strong> Typically issued through public auctions.</li>
+                        <li><strong>Private Placements:</strong> Bonds sold directly to a small group of specialized institutional investors.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>The Secondary Market: Trading of Existing Bonds</h3>
+            <p>The secondary market facilitates the trading of existing bonds, providing liquidity and price discovery.</p>
+            <ul>
+                <li><strong>Structure:</strong> The fixed-income secondary market is predominantly an <strong>over-the-counter (OTC)</strong> or quote-driven market, where dealers post bid (buy) and ask (sell) prices.</li>
+                <li><strong>Participants:</strong> The main players are institutional investors, financial intermediaries, and central banks.</li>
+                <li><strong>Liquidity:</strong> Liquidity can vary dramatically.
+                    <ul>
+                        <li>Newer ("on-the-run") and higher-credit-quality bonds are generally more liquid.</li>
+                        <li>The <strong>bid-offer spread</strong> (the difference between the bid and ask price) is a key measure of liquidity; a narrower spread means higher liquidity.</li>
+                        <li>Pricing for illiquid bonds is often estimated based on the prices of more liquid bonds with similar characteristics.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-nav">
+                <a href="2.html"><i class="fas fa-arrow-left"></i> Previous Chapter</a>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="4.html"><i class="fas fa-arrow-right"></i> Next Chapter</a>
+                <a href="index.html#chapters"><i class="fas fa-list"></i> All Chapters</a>
+            </div>
+            <p>&copy; 2025 CFA Level I Study Guide | Fixed-Income Issuance and Trading</p>
+        </div>
+    </footer>
+
+</body>
+</html>

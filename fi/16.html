@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 16: Credit Analysis for Non-Financial Corporate Issuers - CFA Level I Fixed Income</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #06b6d4;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-secondary);
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid var(--success-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-header {
+            font-weight: 600;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--info-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .note-header {
+            font-weight: 600;
+            color: var(--info-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 4px solid var(--warning-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .warning-header {
+            font-weight: 600;
+            color: var(--warning-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .list-styled {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .fraction {
+            display: inline-block;
+            text-align: center;
+            margin: 0 4px;
+            vertical-align: middle;
+        }
+
+        .fraction-num,
+        .fraction-den {
+            display: block;
+            font-size: 0.9em;
+        }
+
+        .fraction-line {
+            display: block;
+            height: 1px;
+            background-color: var(--primary-color);
+            margin: 2px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .nav-header {
+                padding: 1rem;
+                position: relative;
+                top: 0;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-title {
+                font-size: 1.2rem;
+            }
+            
+            .chapter-header {
+                padding: 2rem 1rem;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .chapter-icon {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-header">
+            <div class="nav-content">
+                <div class="nav-title">
+                    <i class="fas fa-chart-line chapter-icon"></i>
+                    CFA Level I - Fixed Income
+                </div>
+                <div class="nav-links">
+                    <span class="breadcrumb">Chapter 16 of 19</span>
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="15.html" class="nav-link">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                    <a href="17.html" class="nav-link">
+                        <i class="fas fa-chevron-right"></i> Next
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="chapter-header">
+            <div class="chapter-number">Chapter 16</div>
+            <h1 class="chapter-title">Credit Analysis for Non-Financial Corporate Issuers</h1>
+            <p class="chapter-subtitle">Comprehensive framework for evaluating corporate creditworthiness through qualitative and quantitative analysis</p>
+        </header>
+
+        <main>
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Introduction</h2>
+                </div>
+                
+                <div class="content-text">
+                    This module focuses on the credit analysis of non-financial corporations. The core task is to assess a company's ability to generate sufficient cash flow to meet its debt obligations. This involves analyzing both qualitative and quantitative factors to estimate two key metrics of credit risk:
+                </div>
+                
+                <ul class="list-styled">
+                    <li><strong>Probability of Default (POD):</strong> The likelihood that the company will fail to make its payments.</li>
+                    <li><strong>Loss Given Default (LGD):</strong> The expected loss if a default occurs, which is heavily influenced by a bond's seniority and collateral.</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Assessing Corporate Creditworthiness</h2>
+                </div>
+                
+                <div class="content-text">
+                    A thorough credit assessment integrates a qualitative understanding of the business with rigorous quantitative analysis of its financial health.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Qualitative Factors
+                </div>
+                
+                <div class="content-text">
+                    These factors provide context for the numbers and help an analyst understand the sustainability of a company's cash flows.
+                </div>
+                
+                <ul class="list-styled">
+                    <li><strong>Business Model:</strong> How stable and predictable are the company's demand, revenue, and profit margins? Companies with stable, recurring revenues are better suited for debt financing.</li>
+                    <li><strong>Industry and Competition:</strong> What is the structure of the industry (e.g., Porter's Five Forces) and what is its growth potential?</li>
+                    <li><strong>Business Risk:</strong> This includes issuer-specific risks, industry-wide risks, and external risks from macroeconomic, technological, or ESG factors.</li>
+                    <li><strong>Corporate Governance:</strong> Does the company have strong practices related to legal, tax, and accounting compliance? Importantly, what is management's track record in its treatment of bondholders?</li>
+                </ul>
+
+                <div class="subsection-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Quantitative Factors
+                </div>
+                
+                <div class="content-text">
+                    This involves financial statement modeling and forecasting to assess a company's financial strength.
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Key Metric Area</th>
+                                <th>Focus of Analysis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Profitability</strong></td>
+                                <td>Focus on the quality and recurrence of revenues and profits that are available for debt repayment.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Financial Leverage</strong></td>
+                                <td>Measures the company's reliance on debt. Lower leverage is strongly preferred by debt investors as it provides a larger equity cushion to absorb losses.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Debt Service Coverage</strong></td>
+                                <td>Assesses the company's ability to meet its interest and principal payments from its operating cash flows. Higher coverage ratios indicate a lower credit risk.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Short-Term Liquidity</strong></td>
+                                <td>Evaluates the company's near-term resources (like cash and receivables) available to cover upcoming payments.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Financial Ratios in Corporate Credit Analysis</h2>
+                </div>
+                
+                <div class="content-text">
+                    Analysts use several key financial ratios to quantify a company's creditworthiness. It is crucial to compare these ratios against industry peers and the company's own historical trends.
+                </div>
+                
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        A Note on Ratios
+                    </div>
+                    <div class="content-text">
+                        Financial ratios can vary significantly by industry. Non-IFRS/GAAP measures like EBITDA are widely used in credit analysis for their cash flow proxy, but analysts should understand their limitations and adjustments.
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ratio Category</th>
+                                <th>Specific Ratio</th>
+                                <th>What It Measures</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Profitability</strong></td>
+                                <td><strong>EBIT Margin</strong>
+                                    <div class="formula-box">
+                                        <span class="fraction">
+                                            <span class="fraction-num">EBIT</span>
+                                            <span class="fraction-line"></span>
+                                            <span class="fraction-den">Revenue</span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>Measures operating profitability. A higher margin suggests more profit is available to service debt.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coverage</strong></td>
+                                <td><strong>EBIT to Interest Expense</strong>
+                                    <div class="formula-box">
+                                        <span class="fraction">
+                                            <span class="fraction-num">EBIT</span>
+                                            <span class="fraction-line"></span>
+                                            <span class="fraction-den">Interest Expense</span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>The primary interest coverage ratio. A higher ratio indicates that the company can comfortably cover its interest payments from its operating income, reducing credit risk.</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><strong>Leverage</strong></td>
+                                <td><strong>Debt to EBITDA</strong>
+                                    <div class="formula-box">
+                                        <span class="fraction">
+                                            <span class="fraction-num">Total Debt</span>
+                                            <span class="fraction-line"></span>
+                                            <span class="fraction-den">EBITDA</span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>Evaluates debt relative to a proxy for operating cash flow. A higher ratio indicates greater leverage and increased credit risk.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Retained Cash Flow (RCF) to Net Debt</strong>
+                                    <div class="formula-box">
+                                        <span class="fraction">
+                                            <span class="fraction-num">RCF</span>
+                                            <span class="fraction-line"></span>
+                                            <span class="fraction-den">Net Debt</span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>Measures the cash flow available to repay debt after covering operating expenses and dividends. A higher ratio implies lower leverage and credit risk.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Seniority Rankings, Recovery Rates, and Credit Ratings</h2>
+                </div>
+                
+                <div class="content-text">
+                    In the event of a default, not all debt is treated equally. A bond's rank in the capital structure is a primary determinant of the recovery rate for investors.
+                </div>
+                
+                <div class="subsection-title">
+                    <i class="fas fa-layer-group"></i>
+                    Seniority Rankings and Recovery Rates
+                </div>
+                
+                <div class="content-text">
+                    The <strong>seniority ranking</strong> dictates the order of repayment in bankruptcy. This hierarchy directly impacts the <strong>recovery rate</strong>—the percentage of a creditor's claim that is recovered.
+                </div>
+                
+                <ul class="list-styled">
+                    <li><strong>Secured Debt:</strong> Has the highest claim, backed by specific collateral. Tends to have the highest recovery rates.</li>
+                    <li><strong>Senior Unsecured Debt:</strong> Has a general claim on all unpledged assets. This is the most common type of corporate bond.</li>
+                    <li><strong>Subordinated Debt:</strong> Has a lower priority of claim and is only paid after all senior debt has been satisfied. Tends to have the lowest recovery rates.</li>
+                </ul>
+                
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-gavel"></i>
+                        Bankruptcy Proceedings
+                    </div>
+                    <div class="content-text">
+                        While the legal framework provides a clear pecking order, actual bankruptcy negotiations can be complex. To expedite a resolution, senior debtholders may sometimes agree to allow lower-ranking claimants to receive more than they are legally entitled to.
+                    </div>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-star"></i>
+                    Issuer and Issue Credit Ratings
+                </div>
+                
+                <div class="content-text">
+                    Rating agencies provide two main types of ratings for corporate debt:
+                </div>
+                
+                <ul class="list-styled">
+                    <li><strong>Issuer Credit Rating (Corporate Family Rating - CFR):</strong> An assessment of the issuer's overall creditworthiness. It typically applies to the company's senior unsecured debt.</li>
+                    <li><strong>Issue Credit Rating (Corporate Credit Rating - CCR):</strong> A rating assigned to a specific bond issue, which considers its specific ranking in the capital structure.</li>
+                </ul>
+
+                <div class="subsection-title">
+                    <i class="fas fa-adjust"></i>
+                    Notching
+                </div>
+                
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Understanding Notching
+                    </div>
+                    <div class="content-text">
+                        <strong>Notching</strong> is the practice by rating agencies of adjusting a specific issue's rating up or down from the issuer's overall credit rating based on its seniority and other features. For example, a subordinated bond from a company with a 'BBB' issuer rating might be "notched down" to a 'BBB-' issue rating. The higher the issuer's credit rating, the smaller the notching adjustments tend to be, as the perceived difference in loss severity between different debt classes is smaller for very safe companies.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

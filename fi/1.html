@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed-Income Instrument Features</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --dark-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-gold: #f59e0b;
+            --light-gray: #f8fafc;
+            --medium-gray: #e2e8f0;
+            --dark-gray: #475569;
+            --text-dark: #1e293b;
+            --success-green: #10b981;
+            --warning-orange: #f97316;
+            --danger-red: #dc2626;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            counter-reset: section-counter;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-home {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-home:hover {
+            color: var(--dark-blue);
+        }
+
+        .chapter-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chapter-nav a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .chapter-nav a:hover {
+            background: var(--light-gray);
+            color: var(--primary-blue);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border-top: 4px solid var(--primary-blue);
+            position: relative;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        h2 {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2::before {
+            content: counter(section-counter);
+            counter-increment: section-counter;
+            background: var(--primary-blue);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--medium-gray);
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+
+        /* Enhanced Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--medium-gray);
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background: var(--light-gray);
+            transition: background-color 0.3s ease;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Enhanced Formula Boxes */
+        .formula {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 2px solid var(--light-blue);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--primary-blue);
+            position: relative;
+        }
+
+        .formula::before {
+            content: '📊';
+            position: absolute;
+            top: -0.75rem;
+            left: 1rem;
+            background: white;
+            padding: 0 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Enhanced Callout Boxes */
+        .explanation, .note, .example, .warning {
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            position: relative;
+            border-left: 5px solid;
+        }
+
+        .explanation {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-color: var(--success-green);
+            color: #166534;
+        }
+
+        .note {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-color: var(--light-blue);
+            color: #1e40af;
+        }
+
+        .example {
+            background: linear-gradient(135deg, #fdf4ff, #f3e8ff);
+            border-color: #8b5cf6;
+            color: #6b21a8;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fefce8, #fef3c7);
+            border-color: var(--warning-orange);
+            color: #a16207;
+        }
+
+        .explanation strong, .note strong, .example strong, .warning strong {
+            color: inherit;
+            font-weight: 700;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        li strong {
+            color: var(--primary-blue);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .footer-nav a:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .table-container {
+                font-size: 0.9rem;
+            }
+
+            .chapter-nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-bar, .footer {
+                display: none;
+            }
+
+            .section-card {
+                box-shadow: none;
+                border: 1px solid var(--medium-gray);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <a href="index.html" class="nav-home">
+                <i class="fas fa-home"></i> CFA Fixed Income Study Guide
+            </a>
+            <div class="chapter-nav">
+                <a href="index.html"><i class="fas fa-list"></i> All Chapters</a>
+                <a href="2.html">Next Chapter <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-badge">Chapter 1</div>
+            <h1><i class="fas fa-landmark"></i> Fixed-Income Instrument Features</h1>
+            <p class="subtitle">Foundation concepts including bond basics, yield measures, and legal frameworks</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="section-card">
+            <h2><i class="fas fa-info-circle"></i> Introduction to Fixed Income</h2>
+            <p>Fixed-income securities are debt instruments that represent a loan made by an investor to a borrower. They are a fundamental part of global financial markets.</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-tag"></i> Element</th>
+                            <th><i class="fas fa-align-left"></i> Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Main Players</strong></td>
+                            <td>
+                                <ul>
+                                    <li><strong>Borrowers:</strong> Entities that need to raise capital, such as corporations, governments (sovereign and local), and supranational organizations (e.g., the World Bank).</li>
+                                    <li><strong>Investors (Lenders):</strong> Entities that provide the capital, such as central banks, pension funds, and insurance companies.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Types of Instruments</strong></td>
+                            <td>
+                                <ul>
+                                    <li><strong>Loans:</strong> Private agreements negotiated directly between a single borrower and a single lender (or a small group of lenders).</li>
+                                    <li><strong>Bonds:</strong> Standardized debt instruments that are issued to the public and can be traded openly in financial markets.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-cogs"></i> Core Features of Fixed-Income Securities</h2>
+            <p>Understanding the specific features of a bond is essential for analyzing its risk and return profile.</p>
+
+            <h3>Key Bond Features</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-key"></i> Feature</th>
+                            <th><i class="fas fa-info-circle"></i> Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Issuer</strong></td>
+                            <td>The entity borrowing the money (e.g., government, corporation). The issuer type is the primary determinant of a bond's creditworthiness.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maturity</strong></td>
+                            <td>The date when the issuer must repay the principal amount.
+                                <ul>
+                                    <li><strong>Money Market:</strong> Maturity of less than one year.</li>
+                                    <li><strong>Capital Market:</strong> Maturity of more than one year.</li>
+                                    <li><strong>Perpetual Bond:</strong> Has no maturity date.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Principal (Par Value)</strong></td>
+                            <td>The amount the issuer agrees to repay the bondholder at maturity.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Coupon Rate & Frequency</strong></td>
+                            <td>The interest rate the issuer agrees to pay on the principal.
+                                <ul>
+                                    <li><strong>Fixed-Coupon Bonds:</strong> Pay a consistent interest rate.</li>
+                                    <li><strong>Floating-Rate Notes (FRNs):</strong> Pay a variable interest rate that resets periodically.</li>
+                                    <li><strong>Zero-Coupon Bonds:</strong> Pay no periodic interest; they are issued at a discount to their principal value.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Seniority</strong></td>
+                            <td>The ranking of the bond in the issuer's capital structure, which determines the order of repayment in case of bankruptcy.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contingency Provisions</strong></td>
+                            <td>Special terms included in the bond agreement that apply if a specific event occurs, such as call options (issuer can redeem early) or put options (investor can sell back early).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Yield Measures</h3>
+            <p>Yield measures are used to estimate the return an investor can expect from a bond.</p>
+            <ul>
+                <li><strong>Current Yield:</strong> A simple measure of return.
+                    <div class="formula">Current Yield = Annual Coupon Interest / Bond Price</div>
+                    <div class="example"><strong>Example:</strong> A bond with a $1,000 par value and a 5% coupon rate pays $50 in interest annually. If the bond's current market price is $980, its current yield is $50 / $980 = 5.1%.</div>
+                </li>
+                <li><strong>Yield-to-Maturity (YTM):</strong> The most comprehensive measure of return. It is the internal rate of return (IRR) of a bond's expected cash flows (all coupon payments and the final principal repayment) given its current market price.
+                    <div class="note">
+                        <strong>Important Conditions for YTM:</strong> The calculated YTM will only be the actual return an investor earns if three conditions are met:
+                        <ol>
+                            <li>The bond is held until maturity.</li>
+                            <li>The issuer makes all payments as scheduled (no default).</li>
+                            <li>The investor reinvests all periodic cash flows (coupons) at the same YTM rate.</li>
+                        </ol>
+                    </div>
+                </li>
+            </ul>
+
+            <h3>Yield Curves</h3>
+            <p>A yield curve is a graph that plots the YTM of bonds against their respective maturities. </p>
+            <ul>
+                <li><strong>Shape:</strong> Typically, the yield curve is upward sloping, meaning bonds with longer maturities have higher YTMs. This is because investors demand a higher return for the increased risk associated with lending money for a longer period.</li>
+                <li><strong>Credit Risk Analysis:</strong> An issuer's yield curve can be compared to that of a benchmark, like U.S. Treasury bonds (which are considered risk-free). The difference in yield between the issuer's bond and a sovereign bond of the same maturity is called the <strong>credit spread</strong>. A higher spread indicates higher perceived credit risk.</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-gavel"></i> Bond Indentures and Covenants</h2>
+            <p>The legal framework of a bond is critical for understanding the rights and obligations of both the issuer and the bondholders.</p>
+            
+            <h3>The Bond Indenture</h3>
+            <p>The <strong>bond indenture</strong> is the legal contract between the issuer and the bondholders. It outlines all the key features of the bond, the issuer's duties, the sources of repayment, and the bondholders' rights.</p>
+
+            <h3>Sources of Repayment & Security</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-building"></i> Bond Type</th>
+                            <th><i class="fas fa-dollar-sign"></i> Primary Source of Repayment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Sovereign Bonds</strong></td>
+                            <td>Backed by the government's full faith and credit, including its power to tax and issue currency.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Local/Regional Bonds</strong></td>
+                            <td>Backed by taxes or fees from specific projects (e.g., tolls from a bridge).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Corporate Bonds</strong></td>
+                            <td>Backed by the company's ability to generate cash flow from its operations.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secured vs. Unsecured Bonds</strong></td>
+                            <td><strong>Secured bonds</strong> give creditors a legal claim on specific assets (collateral) in case of default, giving them priority in liquidation. <strong>Unsecured bonds</strong> (debentures) are repaid after secured debts.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Bond Covenants</h3>
+            <p><strong>Covenants</strong> are legally enforceable rules within the indenture that the issuer must adhere to. They are designed to protect bondholders.</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-shield-alt"></i> Covenant Type</th>
+                            <th><i class="fas fa-info"></i> Description</th>
+                            <th><i class="fas fa-list-ul"></i> Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Affirmative Covenants</strong></td>
+                            <td>Require the issuer to take specific actions.</td>
+                            <td>
+                                <ul>
+                                    <li>Use bond proceeds for the stated purpose.</li>
+                                    <li>Provide regular financial reports.</li>
+                                    <li><strong>Pari Passu Clause:</strong> Treat all debts with the same seniority equally.</li>
+                                    <li><strong>Cross-Default Clause:</strong> A default on any of the issuer's debts triggers a default on this bond.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Negative Covenants</strong></td>
+                            <td>Prohibit or limit the issuer from taking certain actions that could harm bondholders.</td>
+                            <td>
+                                <ul>
+                                    <li>Restrictions on selling major assets.</li>
+                                    <li>Limitations on issuing additional debt.</li>
+                                    <li>Restrictions on making certain investments.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="note">
+                <strong>Recourse for Covenant Violations:</strong> If an issuer violates a covenant, bondholders have legal recourse and may demand remedies such as a higher interest rate or the immediate repayment of the principal (accelerated repayment).
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-nav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="2.html"><i class="fas fa-arrow-right"></i> Next Chapter</a>
+                <a href="index.html#chapters"><i class="fas fa-list"></i> All Chapters</a>
+            </div>
+            <p>&copy; 2025 CFA Level I Study Guide | Fixed-Income Instrument Features</p>
+        </div>
+    </footer>
+
+</body>
+</html>

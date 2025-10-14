@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFA Level I - Fixed Income Study Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --dark-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-gold: #f59e0b;
+            --light-gray: #f8fafc;
+            --medium-gray: #e2e8f0;
+            --dark-gray: #475569;
+            --text-dark: #1e293b;
+            --success-green: #10b981;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cfa-badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .intro-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .intro-section h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .intro-section p {
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .stat-label {
+            color: var(--dark-gray);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--medium-gray) 100%);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .chapter-number {
+            background: var(--primary-blue);
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-description {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .chapter-content {
+            padding: 1.5rem;
+        }
+
+        .chapter-topics {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .chapter-topics li {
+            padding: 0.5rem 0;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chapter-topics li::before {
+            content: '✓';
+            background: var(--success-green);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .chapter-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .chapter-link:hover {
+            background: var(--dark-blue);
+            transform: translateY(-1px);
+        }
+
+        .chapter-link i {
+            margin-left: 0.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin: 4rem 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .subtitle {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .chapters-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .intro-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .progress-indicator {
+            background: rgba(255, 255, 255, 0.1);
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-gold);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .difficulty-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-gold);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .difficulty-badge.intermediate {
+            background: #f97316;
+        }
+
+        .difficulty-badge.advanced {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1><i class="fas fa-chart-line"></i> Fixed Income</h1>
+            <div class="subtitle">Comprehensive Study Guide for CFA Level I</div>
+            <div class="cfa-badge">
+                <i class="fas fa-graduation-cap"></i>
+                CFA Institute Curriculum
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro-section">
+            <h2>Master Fixed Income Securities</h2>
+            <p>This comprehensive study guide covers all essential topics in Fixed Income for the CFA Level I exam. From basic bond features to complex securitized products, you'll gain the knowledge needed to analyze and value fixed-income instruments professionally.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">19</div>
+                    <div class="stat-label">Comprehensive Chapters</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15-20%</div>
+                    <div class="stat-label">of CFA Level I Exam</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Key Concepts Covered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Practical Examples</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2 class="section-title">Study Guide Chapters</h2>
+            <p class="section-subtitle">Navigate through comprehensive coverage of fixed-income concepts, from fundamental principles to advanced applications</p>
+        </div>
+
+        <div class="chapters-grid">
+            <div class="chapter-card">
+                <div class="difficulty-badge">Fundamental</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 1</div>
+                    <h3 class="chapter-title">Fixed-Income Instrument Features</h3>
+                    <p class="chapter-description">Foundation concepts including bond basics, yield measures, and legal frameworks</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Introduction to Fixed Income</li>
+                        <li>Core Bond Features</li>
+                        <li>Bond Indentures and Covenants</li>
+                        <li>Yield Measures and Curves</li>
+                    </ul>
+                    <a href="1.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Fundamental</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 2</div>
+                    <h3 class="chapter-title">Fixed-Income Cash Flows and Types</h3>
+                    <p class="chapter-description">Cash flow structures, embedded options, and legal considerations</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Cash Flow Structures</li>
+                        <li>Contingency Provisions</li>
+                        <li>Legal & Regulatory Aspects</li>
+                        <li>Tax Considerations</li>
+                    </ul>
+                    <a href="2.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Fundamental</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 3</div>
+                    <h3 class="chapter-title">Fixed-Income Issuance and Trading</h3>
+                    <p class="chapter-description">Primary and secondary markets, participants, and market structure</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Market Segments & Participants</li>
+                        <li>Credit Rating Insights</li>
+                        <li>Fixed-Income Indexes</li>
+                        <li>Primary & Secondary Markets</li>
+                    </ul>
+                    <a href="3.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Fundamental</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 4</div>
+                    <h3 class="chapter-title">Fixed-Income Markets for Corporate Issuers</h3>
+                    <p class="chapter-description">Corporate funding alternatives from short-term to long-term debt</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Short-Term Funding Alternatives</li>
+                        <li>Repurchase Agreements</li>
+                        <li>Long-Term Corporate Debt</li>
+                        <li>Investment Grade vs High Yield</li>
+                    </ul>
+                    <a href="4.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Fundamental</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 5</div>
+                    <h3 class="chapter-title">Fixed-Income Markets for Government Issuers</h3>
+                    <p class="chapter-description">Sovereign debt, auction processes, and non-sovereign entities</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Sovereign Debt Framework</li>
+                        <li>Issuance & Trading Process</li>
+                        <li>Non-Sovereign Debt</li>
+                        <li>Supranational Organizations</li>
+                    </ul>
+                    <a href="5.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Intermediate</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 6</div>
+                    <h3 class="chapter-title">Bond Valuation: Prices and Yields</h3>
+                    <p class="chapter-description">DCF analysis, yield-to-maturity, and matrix pricing techniques</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Bond Pricing with DCF</li>
+                        <li>Yield-to-Maturity Concepts</li>
+                        <li>Price-Feature Relationships</li>
+                        <li>Matrix Pricing Methods</li>
+                    </ul>
+                    <a href="6.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Intermediate</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 7</div>
+                    <h3 class="chapter-title">Yield and Yield Spread Measures for Fixed-Rate Bonds</h3>
+                    <p class="chapter-description">Periodicity, embedded options, and comprehensive spread analysis</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Periodicity & Annualized Yields</li>
+                        <li>Bonds with Embedded Options</li>
+                        <li>Yield Spread Analysis</li>
+                        <li>G-Spread, I-Spread, Z-Spread, OAS</li>
+                    </ul>
+                    <a href="7.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Intermediate</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 8</div>
+                    <h3 class="chapter-title">Yield Measures for Floating-Rate Instruments</h3>
+                    <p class="chapter-description">FRNs, money market instruments, and yield comparisons</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Floating-Rate Notes (FRNs)</li>
+                        <li>Money Market Instruments</li>
+                        <li>Discount vs Add-On Rates</li>
+                        <li>Bond Equivalent Yields</li>
+                    </ul>
+                    <a href="8.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Intermediate</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 9</div>
+                    <h3 class="chapter-title">Term Structure: Spot, Par, and Forward Curves</h3>
+                    <p class="chapter-description">Yield curve construction, bootstrapping, and forward rate calculations</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Spot Rate Curves</li>
+                        <li>No-Arbitrage Pricing</li>
+                        <li>Par & Forward Curves</li>
+                        <li>Curve Relationships</li>
+                    </ul>
+                    <a href="9.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Intermediate</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 10</div>
+                    <h3 class="chapter-title">Interest Rate Risk and Return</h3>
+                    <p class="chapter-description">Sources of return, Macaulay duration, and investment horizon matching</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Sources of Bond Return</li>
+                        <li>Price vs Reinvestment Risk</li>
+                        <li>Macaulay Duration</li>
+                        <li>Investment Horizon Effects</li>
+                    </ul>
+                    <a href="10.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Advanced</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 11</div>
+                    <h3 class="chapter-title">Yield-Based Bond Duration Measures and Properties</h3>
+                    <p class="chapter-description">Macaulay, Modified, and Approximate Duration calculations and applications</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Core Duration Measures</li>
+                        <li>Money Duration & PVBP</li>
+                        <li>Duration Properties</li>
+                        <li>Special Bond Cases</li>
+                    </ul>
+                    <a href="11.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Advanced</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 12</div>
+                    <h3 class="chapter-title">Yield-Based Bond Convexity and Portfolio Properties</h3>
+                    <p class="chapter-description">Convexity calculations, portfolio duration, and risk management applications</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Bond Convexity Concepts</li>
+                        <li>Convexity Adjustments</li>
+                        <li>Money Duration & Convexity</li>
+                        <li>Portfolio Applications</li>
+                    </ul>
+                    <a href="12.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Advanced</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 13</div>
+                    <h3 class="chapter-title">Curve-Based and Empirical Risk Measures</h3>
+                    <p class="chapter-description">Effective duration, key rate duration, and empirical risk measurement</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Curve-Based Measures</li>
+                        <li>Effective Duration & Convexity</li>
+                        <li>Key Rate Duration</li>
+                        <li>Empirical Duration</li>
+                    </ul>
+                    <a href="13.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Intermediate</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 14</div>
+                    <h3 class="chapter-title">Credit Risk</h3>
+                    <p class="chapter-description">Credit analysis framework, rating agencies, and yield spread factors</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Sources of Credit Risk</li>
+                        <li>The "Cs of Credit" Framework</li>
+                        <li>Credit Rating Agencies</li>
+                        <li>Yield Spread Factors</li>
+                    </ul>
+                    <a href="14.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Intermediate</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 15</div>
+                    <h3 class="chapter-title">Credit Analysis for Government Issuers</h3>
+                    <p class="chapter-description">Sovereign credit analysis, non-sovereign entities, and government debt structures</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Sovereign Credit Analysis</li>
+                        <li>Qualitative vs Quantitative Factors</li>
+                        <li>Non-Sovereign Credit Risk</li>
+                        <li>GO vs Revenue Bonds</li>
+                    </ul>
+                    <a href="15.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Intermediate</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 16</div>
+                    <h3 class="chapter-title">Credit Analysis for Corporate Issuers</h3>
+                    <p class="chapter-description">Corporate creditworthiness, financial ratios, and seniority rankings</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Corporate Creditworthiness</li>
+                        <li>Financial Ratio Analysis</li>
+                        <li>Seniority & Recovery Rates</li>
+                        <li>Credit Rating Notching</li>
+                    </ul>
+                    <a href="16.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Advanced</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 17</div>
+                    <h3 class="chapter-title">Fixed-Income Securitization</h3>
+                    <p class="chapter-description">Securitization process, SPEs, benefits, and product structures</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Securitization Process</li>
+                        <li>Special Purpose Entities</li>
+                        <li>Benefits & Risks</li>
+                        <li>Structural Enhancements</li>
+                    </ul>
+                    <a href="17.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Advanced</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 18</div>
+                    <h3 class="chapter-title">Asset-Backed Security (ABS) Features</h3>
+                    <p class="chapter-description">ABS structures, covered bonds, credit tranching, and CDOs</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>ABS Structures</li>
+                        <li>Covered Bonds</li>
+                        <li>Credit Tranching</li>
+                        <li>Collateralized Debt Obligations</li>
+                    </ul>
+                    <a href="18.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="difficulty-badge">Advanced</div>
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 19</div>
+                    <h3 class="chapter-title">Mortgage-Backed Security (MBS) Features</h3>
+                    <p class="chapter-description">Mortgage loans, prepayment risk, RMBS, CMBS, and time tranching</p>
+                </div>
+                <div class="chapter-content">
+                    <ul class="chapter-topics">
+                        <li>Mortgage Loan Basics</li>
+                        <li>Prepayment Risk Management</li>
+                        <li>Residential MBS (RMBS)</li>
+                        <li>Commercial MBS (CMBS)</li>
+                    </ul>
+                    <a href="19.html" class="chapter-link">
+                        Start Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>CFA Level I Fixed Income Study Guide</h3>
+            <p>Comprehensive preparation materials for mastering fixed-income concepts and calculations</p>
+            <div class="footer-links">
+                <a href="#overview">Study Guide Overview</a>
+                <a href="#chapters">All Chapters</a>
+                <a href="#resources">Additional Resources</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div style="margin-top: 2rem; opacity: 0.6; font-size: 0.9rem;">
+                &copy; 2025 CFA Level I Study Materials | For Educational Purposes
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

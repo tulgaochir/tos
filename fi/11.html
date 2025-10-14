@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11: Credit Analysis Models - CFA Level I Fixed Income</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #06b6d4;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-secondary);
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid var(--success-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-header {
+            font-weight: 600;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--info-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .note-header {
+            font-weight: 600;
+            color: var(--info-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 4px solid var(--warning-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .warning-header {
+            font-weight: 600;
+            color: var(--warning-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .list-styled {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .nav-header {
+                padding: 1rem;
+                position: relative;
+                top: 0;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-title {
+                font-size: 1.2rem;
+            }
+            
+            .chapter-header {
+                padding: 2rem 1rem;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .chapter-icon {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-header">
+            <div class="nav-content">
+                <div class="nav-title">
+                    <i class="fas fa-chart-line chapter-icon"></i>
+                    CFA Level I - Fixed Income
+                </div>
+                <div class="nav-links">
+                    <span class="breadcrumb">Chapter 11 of 19</span>
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="10.html" class="nav-link">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                    <a href="12.html" class="nav-link">
+                        <i class="fas fa-chevron-right"></i> Next
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="chapter-header">
+            <div class="chapter-number">Chapter 11</div>
+            <h1 class="chapter-title">Credit Analysis Models</h1>
+            <p class="chapter-subtitle">Understanding frameworks and methodologies for evaluating credit risk in corporate and sovereign debt securities</p>
+        </header>
+
+        <main>
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Introduction to Credit Analysis</h2>
+                </div>
+                
+                <div class="content-text">
+                    Credit analysis is the process of evaluating the ability and willingness of a borrower to meet debt obligations. It involves assessing the probability of default and estimating potential losses in the event of default.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-target"></i>
+                    Objectives of Credit Analysis
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Default Risk Assessment:</strong> Estimate the probability that the borrower will fail to meet obligations</li>
+                    <li><strong>Loss Severity Estimation:</strong> Determine potential losses if default occurs</li>
+                    <li><strong>Relative Value Analysis:</strong> Compare credit spreads across different securities</li>
+                    <li><strong>Portfolio Risk Management:</strong> Assess concentration and correlation risks</li>
+                </ul>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Key Credit Risk Components
+                    </div>
+                    <div class="content-text">
+                        <strong>Expected Loss = Probability of Default × Loss Given Default × Exposure at Default</strong>
+                        <br><br>
+                        Understanding each component is crucial for comprehensive credit risk assessment.
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Traditional Credit Analysis: The Four Cs</h2>
+                </div>
+                
+                <div class="content-text">
+                    The traditional framework for credit analysis focuses on four fundamental factors that determine creditworthiness.
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Description</th>
+                                <th>Key Metrics</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Capacity</strong></td>
+                                <td>Ability to repay debt obligations</td>
+                                <td>Cash flow, earnings, debt ratios</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Collateral</strong></td>
+                                <td>Assets that secure the debt</td>
+                                <td>Asset quality, coverage ratios</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Covenants</strong></td>
+                                <td>Terms and conditions of the debt agreement</td>
+                                <td>Financial maintenance, restrictions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Character</strong></td>
+                                <td>Integrity and commitment to repay</td>
+                                <td>Management quality, track record</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Capacity Analysis
+                </div>
+
+                <div class="content-text">
+                    Capacity analysis focuses on the borrower's financial ability to generate sufficient cash flows to service debt obligations.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Key Capacity Ratios
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>EBITDA Coverage:</strong> EBITDA / Interest Expense</li>
+                        <li><strong>Debt-to-EBITDA:</strong> Total Debt / EBITDA</li>
+                        <li><strong>Free Cash Flow to Debt:</strong> FCF / Total Debt</li>
+                        <li><strong>Debt Service Coverage:</strong> EBITDA / (Interest + Principal Payments)</li>
+                    </ul>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Collateral and Covenants
+                </div>
+
+                <div class="content-text">
+                    Collateral provides security in case of default, while covenants protect lenders by imposing restrictions or requiring certain financial performance levels.
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Covenant Types
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>Affirmative Covenants:</strong> Actions the borrower must take</li>
+                        <li><strong>Negative Covenants:</strong> Actions the borrower cannot take</li>
+                        <li><strong>Financial Covenants:</strong> Specific financial ratios that must be maintained</li>
+                        <li><strong>Incurrence Covenants:</strong> Tests only when taking certain actions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Credit Ratings and Rating Agencies</h2>
+                </div>
+                
+                <div class="content-text">
+                    Credit rating agencies provide independent assessments of credit risk through standardized rating scales that facilitate comparison across issuers and securities.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-building"></i>
+                    Major Rating Agencies
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Agency</th>
+                                <th>Investment Grade</th>
+                                <th>Speculative Grade</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Moody's</strong></td>
+                                <td>Aaa to Baa3</td>
+                                <td>Ba1 to C</td>
+                                <td>Ca, C</td>
+                            </tr>
+                            <tr>
+                                <td><strong>S&P</strong></td>
+                                <td>AAA to BBB-</td>
+                                <td>BB+ to C</td>
+                                <td>D</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fitch</strong></td>
+                                <td>AAA to BBB-</td>
+                                <td>BB+ to C</td>
+                                <td>RD, D</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-chart-line"></i>
+                    Rating Process and Methodology
+                </div>
+
+                <div class="content-text">
+                    Rating agencies follow systematic processes that combine quantitative analysis with qualitative factors:
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Business Risk Assessment:</strong> Industry dynamics, competitive position, management quality</li>
+                    <li><strong>Financial Risk Assessment:</strong> Leverage, coverage ratios, cash flow quality</li>
+                    <li><strong>Comparative Analysis:</strong> Peer comparison and industry benchmarking</li>
+                    <li><strong>Forward-Looking Perspective:</strong> Expected future performance and scenarios</li>
+                </ul>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Rating Outlooks and Watches
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>Positive Outlook:</strong> Rating likely to be upgraded within 1-2 years</li>
+                        <li><strong>Negative Outlook:</strong> Rating likely to be downgraded within 1-2 years</li>
+                        <li><strong>Stable Outlook:</strong> Rating unlikely to change</li>
+                        <li><strong>CreditWatch:</strong> Rating under review for potential change within 90 days</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Structural and Reduced-Form Models</h2>
+                </div>
+                
+                <div class="subsection-title">
+                    <i class="fas fa-cogs"></i>
+                    Structural Models
+                </div>
+
+                <div class="content-text">
+                    Structural models, pioneered by Merton (1974), treat a company's equity as a call option on the firm's assets. Default occurs when asset value falls below debt obligations.
+                </div>
+
+                <div class="formula-box">
+                    Merton Model: Default occurs when V_T < D
+                    <br>
+                    Where: V_T = Asset value at maturity, D = Debt obligation
+                    <br><br>
+                    Distance to Default = (ln(V₀/D) + (μ - σ²/2)T) / (σ√T)
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Structural Model Advantages and Limitations
+                    </div>
+                    <div class="content-text">
+                        <strong>Advantages:</strong>
+                        <ul class="list-styled">
+                            <li>Economic intuition based on firm fundamentals</li>
+                            <li>Links credit risk to asset volatility and leverage</li>
+                            <li>Provides default probabilities and recovery rates</li>
+                        </ul>
+                        
+                        <strong>Limitations:</strong>
+                        <ul class="list-styled">
+                            <li>Assumes asset values are observable</li>
+                            <li>Simplified capital structure assumptions</li>
+                            <li>May not predict short-term defaults well</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-random"></i>
+                    Reduced-Form Models
+                </div>
+
+                <div class="content-text">
+                    Reduced-form models treat default as an unpredictable event governed by a stochastic process. They focus on modeling default intensity or hazard rates directly from market prices.
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model Type</th>
+                                <th>Approach</th>
+                                <th>Key Inputs</th>
+                                <th>Primary Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Structural</strong></td>
+                                <td>Firm value based</td>
+                                <td>Asset volatility, leverage</td>
+                                <td>Fundamental analysis</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reduced-Form</strong></td>
+                                <td>Default intensity based</td>
+                                <td>Credit spreads, recovery rates</td>
+                                <td>Market-based pricing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Credit Scoring and Machine Learning Models</h2>
+                </div>
+                
+                <div class="content-text">
+                    Modern credit analysis increasingly incorporates quantitative models and machine learning techniques to improve prediction accuracy and efficiency.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-calculator"></i>
+                    Traditional Credit Scoring Models
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-chart-bar"></i>
+                        Altman Z-Score Model
+                    </div>
+                    <div class="content-text">
+                        One of the most famous credit scoring models for predicting bankruptcy:
+                        <br><br>
+                        <strong>Z = 1.2A + 1.4B + 3.3C + 0.6D + 1.0E</strong>
+                        <br><br>
+                        Where:
+                        <ul class="list-styled">
+                            <li>A = Working Capital / Total Assets</li>
+                            <li>B = Retained Earnings / Total Assets</li>
+                            <li>C = EBIT / Total Assets</li>
+                            <li>D = Market Value of Equity / Total Liabilities</li>
+                            <li>E = Sales / Total Assets</li>
+                        </ul>
+                        
+                        Z > 2.99: Safe zone<br>
+                        1.81 < Z < 2.99: Grey zone<br>
+                        Z < 1.81: Distress zone
+                    </div>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-robot"></i>
+                    Machine Learning Applications
+                </div>
+
+                <div class="content-text">
+                    Advanced analytics and machine learning are revolutionizing credit analysis by processing vast amounts of data and identifying complex patterns.
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Technique</th>
+                                <th>Application</th>
+                                <th>Advantages</th>
+                                <th>Challenges</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Random Forest</strong></td>
+                                <td>Default prediction</td>
+                                <td>Handles non-linear relationships</td>
+                                <td>Black box nature</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Neural Networks</strong></td>
+                                <td>Complex pattern recognition</td>
+                                <td>High accuracy potential</td>
+                                <td>Requires large datasets</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SVM</strong></td>
+                                <td>Classification problems</td>
+                                <td>Works with high dimensions</td>
+                                <td>Parameter selection complexity</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Model Risk Considerations
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>Overfitting:</strong> Models may perform poorly on new data</li>
+                        <li><strong>Data Quality:</strong> Garbage in, garbage out principle applies</li>
+                        <li><strong>Model Stability:</strong> Performance may degrade over time</li>
+                        <li><strong>Regulatory Acceptance:</strong> Explainability requirements for some applications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">Sovereign Credit Analysis</h2>
+                </div>
+                
+                <div class="content-text">
+                    Sovereign credit analysis evaluates the creditworthiness of national governments, considering both the ability and willingness to repay debt obligations.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-globe"></i>
+                    Sovereign Risk Factors
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Key Factors</th>
+                                <th>Indicators</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Economic</strong></td>
+                                <td>Growth, inflation, competitiveness</td>
+                                <td>GDP per capita, productivity growth</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fiscal</strong></td>
+                                <td>Budget balance, debt levels</td>
+                                <td>Debt-to-GDP, deficit ratios</td>
+                            </tr>
+                            <tr>
+                                <td><strong>External</strong></td>
+                                <td>Current account, reserves</td>
+                                <td>External debt, reserve coverage</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Political</strong></td>
+                                <td>Stability, governance quality</td>
+                                <td>Political risk indices</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-flag"></i>
+                        Currency Considerations
+                    </div>
+                    <div class="content-text">
+                        <strong>Local Currency vs. Foreign Currency Debt:</strong>
+                        <br><br>
+                        Sovereigns generally have lower default risk on local currency debt because they can print money, though this may lead to inflation. Foreign currency debt poses higher risk as countries cannot print foreign currencies.
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Sovereign Rating Methodology
+                    </div>
+                    <div class="content-text">
+                        Rating agencies typically assess sovereigns across multiple dimensions:
+                        <ul class="list-styled">
+                            <li><strong>Economic Assessment:</strong> GDP per capita, growth prospects, economic diversity</li>
+                            <li><strong>Institutional Assessment:</strong> Governance, rule of law, policy credibility</li>
+                            <li><strong>Fiscal Assessment:</strong> Debt burden, fiscal flexibility, contingent liabilities</li>
+                            <li><strong>External Assessment:</strong> Current account dynamics, external liquidity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed-Income Cash Flows and Types</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --dark-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-gold: #f59e0b;
+            --light-gray: #f8fafc;
+            --medium-gray: #e2e8f0;
+            --dark-gray: #475569;
+            --text-dark: #1e293b;
+            --success-green: #10b981;
+            --warning-orange: #f97316;
+            --danger-red: #dc2626;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            counter-reset: section-counter;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-home {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-home:hover {
+            color: var(--dark-blue);
+        }
+
+        .chapter-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chapter-nav a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .chapter-nav a:hover {
+            background: var(--light-gray);
+            color: var(--primary-blue);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border-top: 4px solid var(--primary-blue);
+            position: relative;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        h2 {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2::before {
+            content: counter(section-counter);
+            counter-increment: section-counter;
+            background: var(--primary-blue);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--medium-gray);
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+
+        /* Enhanced Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--medium-gray);
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background: var(--light-gray);
+            transition: background-color 0.3s ease;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Enhanced Callout Boxes */
+        .explanation, .note, .example, .warning {
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            position: relative;
+            border-left: 5px solid;
+        }
+
+        .explanation {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-color: var(--success-green);
+            color: #166534;
+        }
+
+        .note {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-color: var(--light-blue);
+            color: #1e40af;
+        }
+
+        .example {
+            background: linear-gradient(135deg, #fdf4ff, #f3e8ff);
+            border-color: #8b5cf6;
+            color: #6b21a8;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fefce8, #fef3c7);
+            border-color: var(--warning-orange);
+            color: #a16207;
+        }
+
+        .explanation strong, .note strong, .example strong, .warning strong {
+            color: inherit;
+            font-weight: 700;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        li strong {
+            color: var(--primary-blue);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .footer-nav a:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .table-container {
+                font-size: 0.9rem;
+            }
+
+            .chapter-nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <a href="index.html" class="nav-home">
+                <i class="fas fa-home"></i> CFA Fixed Income Study Guide
+            </a>
+            <div class="chapter-nav">
+                <a href="1.html"><i class="fas fa-arrow-left"></i> Previous</a>
+                <a href="index.html"><i class="fas fa-list"></i> All Chapters</a>
+                <a href="3.html">Next Chapter <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-badge">Chapter 2</div>
+            <h1><i class="fas fa-stream"></i> Fixed-Income Cash Flows and Types</h1>
+            <p class="subtitle">Cash flow structures, embedded options, and legal considerations</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="section-card">
+            <h2><i class="fas fa-info-circle"></i> Introduction</h2>
+            <p>This module explores the diverse cash flow structures of fixed-income instruments and the legal, regulatory, and tax considerations that impact them. Understanding these aspects is crucial for properly valuing bonds and assessing their risks.</p>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-chart-line"></i> Fixed-Income Cash Flow Structures</h2>
+            <p>Bonds can be structured to pay back principal and interest in many different ways.</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-layer-group"></i> Structure Type</th>
+                            <th><i class="fas fa-chart-bar"></i> Description & Cash Flow Pattern</th>
+                            <th><i class="fas fa-exclamation-triangle"></i> Key Considerations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bullet Bonds</strong></td>
+                            <td>The issuer pays periodic interest (coupons) throughout the bond's life and repays the entire principal amount in a single "bullet" payment at maturity.</td>
+                            <td>This is the most common and simplest structure, preferred for its predictable and stable cash flows.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Amortizing Debt</strong></td>
+                            <td>The issuer repays parts of the principal outstanding over the life of the bond, along with interest payments.
+                                <ul>
+                                    <li><strong>Fully Amortizing:</strong> Each payment is equal and covers both interest and a portion of the principal (like a mortgage).</li>
+                                    <li><strong>Partially Amortizing:</strong> Involves periodic principal repayments, but a large lump sum (a <strong>balloon payment</strong>) is still due at maturity.</li>
+                                </ul>
+                            </td>
+                            <td><strong>Benefits:</strong> Reduces credit risk for the investor over time as the principal is repaid. <br><strong>Risks:</strong> Exposes investors to <strong>reinvestment risk</strong>, as they receive principal back earlier and must reinvest it, potentially at lower interest rates.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sinking Funds</strong></td>
+                            <td>A provision requiring the issuer to set aside funds to gradually repay a portion of the bond principal before maturity. This is a form of amortization designed to reduce credit risk.</td>
+                            <td>Lowers the credit risk of the bond but, like amortizing debt, introduces reinvestment risk for the bondholder.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Floating-Rate Notes (FRNs)</strong></td>
+                            <td>The coupon payments are not fixed. Instead, they are based on a market reference rate (like LIBOR or SOFR) plus a fixed credit spread. The coupon rate resets periodically.</td>
+                            <td><strong>Benefits:</strong> Reduces interest rate risk for the investor, as coupon payments adjust to market conditions. <br><strong>Risks:</strong> Credit risk remains a key factor.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Special Coupon Structures</strong></td>
+                            <td>
+                                <ul>
+                                    <li><strong>Step-Up Coupon Bonds:</strong> The coupon rate increases at predetermined dates.</li>
+                                    <li><strong>Credit-Linked Coupon Bonds:</strong> The coupon rate adjusts based on changes in the issuer's credit rating.</li>
+                                    <li><strong>Payment-in-Kind (PIK) Bonds:</strong> Allows the issuer to pay interest with additional bonds rather than cash.</li>
+                                    <li><strong>Index-Linked Bonds:</strong> Coupon payments are linked to an inflation index, protecting investors from inflation risk.</li>
+                                </ul>
+                            </td>
+                            <td>These structures are designed to offer specific protections or incentives to investors, often in exchange for a lower initial yield.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zero-Coupon & Deferred Coupon Bonds</strong></td>
+                            <td>
+                                <ul>
+                                    <li><strong>Zero-Coupon Bonds:</strong> Issued at a deep discount to face value, make no periodic interest payments, and pay the full face value at maturity.</li>
+                                    <li><strong>Deferred Coupon Bonds:</strong> Interest payments are delayed for a specified period at the beginning of the bond's life.</li>
+                                </ul>
+                            </td>
+                            <td>Zero-coupon bonds offer complete protection against reinvestment risk since there are no coupons to reinvest. Deferred coupon bonds may indicate higher risk or specific financing needs of the issuer.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-cog"></i> Fixed-Income Contingency Provisions (Embedded Options)</h2>
+            <p>Contingency provisions are options embedded within a bond that can be exercised if certain conditions are met. They fundamentally alter a bond's risk and return profile.</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-wrench"></i> Provision Type</th>
+                            <th><i class="fas fa-user"></i> Who Holds the Option?</th>
+                            <th><i class="fas fa-info"></i> Description</th>
+                            <th><i class="fas fa-chart-line"></i> Impact on Bond Price & Yield</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Callable Bonds</strong></td>
+                            <td><strong>Issuer</strong></td>
+                            <td>Gives the issuer the right to redeem (or "call") the bond before its scheduled maturity date at a predetermined price. Issuers do this when interest rates fall, allowing them to refinance their debt at a lower cost.
+                                <ul>
+                                    <li><strong>Call Protection Period:</strong> A period after issuance when the bond cannot be called.</li>
+                                    <li><strong>Make-Whole Call:</strong> A type of call provision that compensates bondholders based on the present value of future payments, making it less disadvantageous for them.</li>
+                                </ul>
+                            </td>
+                            <td>Because the call option benefits the issuer, callable bonds are issued at a <strong>lower price</strong> and offer a <strong>higher yield</strong> compared to identical non-callable bonds to compensate investors for the call risk.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Putable Bonds</strong></td>
+                            <td><strong>Bondholder</strong></td>
+                            <td>Gives the bondholder the right to sell the bond back to the issuer before maturity at a predetermined price. Bondholders do this when interest rates rise, allowing them to reinvest their capital at higher rates.</td>
+                            <td>Because the put option benefits the bondholder, putable bonds are issued at a <strong>higher price</strong> and offer a <strong>lower yield</strong> compared to identical non-putable bonds.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Convertible Bonds</strong></td>
+                            <td><strong>Bondholder</strong></td>
+                            <td>Gives the bondholder the right to convert the bond into a predetermined number of common shares of the issuer's stock.
+                                <div class="note" style="margin: 1rem 0; font-style: italic; color: var(--primary-blue);">Convertible Bond = Option-Free Bond + Equity Call Option</div>
+                            </td>
+                            <td>Convertible bonds offer a lower yield than non-convertible bonds because the conversion feature provides potential upside from the company's stock performance.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contingent Convertible Bonds (CoCos)</strong></td>
+                            <td><strong>Issuer (Automatic)</strong></td>
+                            <td>These bonds automatically convert into common stock if a specific trigger event occurs, such as the issuer's (typically a bank's) capital ratio falling below a certain level.</td>
+                            <td>CoCos reduce the issuer's default risk during downturns but force losses onto bondholders. They typically offer a <strong>higher yield</strong> to compensate for this forced conversion risk.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-balance-scale"></i> Legal, Regulatory, and Tax Considerations</h2>
+            <p>The environment in which a bond is issued and traded significantly affects its characteristics and the after-tax return for investors.</p>
+            
+            <h3>Legal and Regulatory Considerations</h3>
+            <p>The primary markets for bonds are often categorized by their jurisdiction.</p>
+            <ul>
+                <li><strong>Domestic Bonds:</strong> Issued in a country by an entity incorporated in that country and denominated in the local currency.</li>
+                <li><strong>Foreign Bonds:</strong> Issued in a country by an entity incorporated in another country, but still in the local currency (e.g., a "Yankee bond" is a USD bond issued in the U.S. by a non-U.S. company).</li>
+                <li><strong>Eurobonds:</strong> Issued and traded outside the jurisdiction of any single country and are often less regulated. They can be issued in any currency and are typically unsecured bearer bonds.</li>
+                <li><strong>Global Bonds:</strong> Bonds that are issued simultaneously in the Eurobond market and at least one domestic market, ensuring wide distribution for very large issues.</li>
+            </ul>
+
+            <h3>Tax Considerations</h3>
+            <ul>
+                <li><strong>For Corporate Issuers:</strong> Interest expenses are generally tax-deductible, making debt an attractive source of financing.</li>
+                <li><strong>For Investors:</strong> The tax treatment of bond income varies significantly by jurisdiction and bond type:
+                    <ul>
+                        <li><strong>Interest Income:</strong> Often taxed at the investor's ordinary income tax rate.</li>
+                        <li><strong>Capital Gains/Losses:</strong> The tax treatment of gains or losses from selling a bond can differ, with long-term gains often taxed at a lower rate.</li>
+                        <li><strong>Zero-Coupon Bonds:</strong> The implied interest (original issue discount or OID) may be taxed annually even though no cash is received until maturity.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-nav">
+                <a href="1.html"><i class="fas fa-arrow-left"></i> Previous Chapter</a>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="3.html"><i class="fas fa-arrow-right"></i> Next Chapter</a>
+                <a href="index.html#chapters"><i class="fas fa-list"></i> All Chapters</a>
+            </div>
+            <p>&copy; 2025 CFA Level I Study Guide | Fixed-Income Cash Flows and Types</p>
+        </div>
+    </footer>
+
+</body>
+</html>

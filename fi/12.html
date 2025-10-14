@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12: Credit Default Swaps - CFA Level I Fixed Income</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #06b6d4;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-secondary);
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid var(--success-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-header {
+            font-weight: 600;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--info-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .note-header {
+            font-weight: 600;
+            color: var(--info-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 4px solid var(--warning-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .warning-header {
+            font-weight: 600;
+            color: var(--warning-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .list-styled {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .nav-header {
+                padding: 1rem;
+                position: relative;
+                top: 0;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-title {
+                font-size: 1.2rem;
+            }
+            
+            .chapter-header {
+                padding: 2rem 1rem;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .chapter-icon {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-header">
+            <div class="nav-content">
+                <div class="nav-title">
+                    <i class="fas fa-chart-line chapter-icon"></i>
+                    CFA Level I - Fixed Income
+                </div>
+                <div class="nav-links">
+                    <span class="breadcrumb">Chapter 12 of 19</span>
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="11.html" class="nav-link">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                    <a href="13.html" class="nav-link">
+                        <i class="fas fa-chevron-right"></i> Next
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="chapter-header">
+            <div class="chapter-number">Chapter 12</div>
+            <h1 class="chapter-title">Credit Default Swaps</h1>
+            <p class="chapter-subtitle">Understanding the structure, mechanics, and applications of credit default swaps in credit risk management and trading</p>
+        </header>
+
+        <main>
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Introduction to Credit Default Swaps</h2>
+                </div>
+                
+                <div class="content-text">
+                    A Credit Default Swap (CDS) is a credit derivative that allows investors to transfer credit risk without transferring the underlying asset. It functions as insurance against the default of a specific borrower or reference entity.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-handshake"></i>
+                    Basic CDS Structure
+                </div>
+
+                <div class="content-text">
+                    In a CDS transaction, there are two parties:
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Protection Buyer:</strong> Pays periodic premiums and receives protection against credit events</li>
+                    <li><strong>Protection Seller:</strong> Receives premiums and compensates the buyer if a credit event occurs</li>
+                </ul>
+
+                <div class="formula-box">
+                    CDS Premium = (CDS Spread × Notional Amount × Days in Period) / 360
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Key CDS Terms
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>Reference Entity:</strong> The borrower whose credit risk is being transferred</li>
+                        <li><strong>Reference Obligation:</strong> The specific debt instrument covered by the CDS</li>
+                        <li><strong>Notional Amount:</strong> The face value of protection purchased</li>
+                        <li><strong>Maturity:</strong> The length of protection (commonly 1, 3, 5, or 10 years)</li>
+                        <li><strong>CDS Spread:</strong> The annual premium expressed in basis points</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Credit Events and Settlement</h2>
+                </div>
+                
+                <div class="content-text">
+                    Credit events trigger the protection payment in a CDS. The International Swaps and Derivatives Association (ISDA) standardizes the definition of credit events.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Standard Credit Events
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Credit Event</th>
+                                <th>Description</th>
+                                <th>Threshold</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Failure to Pay</strong></td>
+                                <td>Missed payment after grace period</td>
+                                <td>$1 million (typically)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bankruptcy</strong></td>
+                                <td>Formal insolvency proceedings</td>
+                                <td>No threshold</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Restructuring</strong></td>
+                                <td>Material changes to debt terms</td>
+                                <td>$10 million (typically)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Obligation Acceleration</strong></td>
+                                <td>Debt becomes immediately due</td>
+                                <td>$10 million (typically)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Obligation Default</strong></td>
+                                <td>Cross-default on other obligations</td>
+                                <td>$10 million (typically)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Repudiation/Moratorium</strong></td>
+                                <td>Rejection of debt obligations</td>
+                                <td>$10 million (typically)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-coins"></i>
+                    Settlement Methods
+                </div>
+
+                <div class="content-text">
+                    When a credit event occurs, the CDS can be settled in two ways:
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Physical vs. Cash Settlement
+                    </div>
+                    <div class="content-text">
+                        <strong>Physical Settlement:</strong>
+                        <ul class="list-styled">
+                            <li>Protection buyer delivers reference obligation to protection seller</li>
+                            <li>Protection seller pays full notional amount</li>
+                            <li>More common in early CDS contracts</li>
+                        </ul>
+                        
+                        <strong>Cash Settlement:</strong>
+                        <ul class="list-styled">
+                            <li>Protection seller pays (Notional × (1 - Recovery Rate))</li>
+                            <li>Recovery rate determined through auction process</li>
+                            <li>More efficient and widely used today</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="formula-box">
+                    Cash Settlement Payment = Notional Amount × (100% - Recovery Rate)
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">CDS Pricing and Valuation</h2>
+                </div>
+                
+                <div class="content-text">
+                    CDS pricing involves determining the fair value of the periodic premium payments in exchange for default protection. The CDS spread reflects the market's assessment of credit risk.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-calculator"></i>
+                    Basic Pricing Framework
+                </div>
+
+                <div class="content-text">
+                    The CDS spread should theoretically equal the credit spread of the reference entity's bonds, adjusted for differences in recovery rates and liquidity.
+                </div>
+
+                <div class="formula-box">
+                    CDS Spread ≈ Credit Spread × (1 - Recovery Rate) / (1 - Bond Recovery Rate)
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-chart-line"></i>
+                    Present Value Approach
+                </div>
+
+                <div class="content-text">
+                    The fair CDS spread equates the present value of premium payments to the present value of expected loss payments:
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Formula</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Premium Leg PV</strong></td>
+                                <td>Spread × Σ[Survival Prob × Discount Factor × Time]</td>
+                                <td>Present value of premium payments</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Protection Leg PV</strong></td>
+                                <td>LGD × Σ[Default Prob × Discount Factor]</td>
+                                <td>Present value of protection payments</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fair Spread</strong></td>
+                                <td>Protection Leg PV / Premium Leg PV</td>
+                                <td>CDS spread that makes PV = 0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Example: CDS Valuation
+                    </div>
+                    <div class="content-text">
+                        A 5-year CDS with:
+                        <ul class="list-styled">
+                            <li>Notional: $10 million</li>
+                            <li>Annual default probability: 2%</li>
+                            <li>Recovery rate: 40%</li>
+                            <li>Risk-free rate: 3%</li>
+                        </ul>
+                        
+                        The protection seller expects to pay out approximately:
+                        <br>
+                        Expected Loss = $10M × 2% × (1 - 40%) = $120,000 per year
+                        <br><br>
+                        The CDS spread would be determined to make the present value of premiums equal to the present value of expected losses.
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        CDS-Bond Basis
+                    </div>
+                    <div class="content-text">
+                        The CDS-bond basis is the difference between the CDS spread and the credit spread of the reference entity's bond. A positive basis suggests the CDS is expensive relative to the bond, while a negative basis suggests the opposite.
+                        <br><br>
+                        <strong>Basis = CDS Spread - Bond Credit Spread</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">CDS Applications and Strategies</h2>
+                </div>
+                
+                <div class="content-text">
+                    Credit default swaps serve multiple purposes in financial markets, from risk management to speculation and arbitrage.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Hedging Applications
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Strategy</th>
+                                <th>Objective</th>
+                                <th>Implementation</th>
+                                <th>Risk Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Credit Protection</strong></td>
+                                <td>Hedge bond portfolio</td>
+                                <td>Buy CDS on holdings</td>
+                                <td>Basis risk, counterparty risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Portfolio Hedge</strong></td>
+                                <td>Reduce overall credit exposure</td>
+                                <td>Buy index CDS</td>
+                                <td>Imperfect correlation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Regulatory Capital</strong></td>
+                                <td>Reduce capital requirements</td>
+                                <td>Transfer credit risk</td>
+                                <td>Regulatory recognition</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-chart-line"></i>
+                    Trading and Speculation
+                </div>
+
+                <div class="content-text">
+                    CDS can be used to take directional views on credit risk without owning the underlying bonds:
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Long Credit Risk:</strong> Sell CDS to earn premiums when expecting credit improvement</li>
+                    <li><strong>Short Credit Risk:</strong> Buy CDS when expecting credit deterioration</li>
+                    <li><strong>Relative Value:</strong> Trade spread differences between entities or maturities</li>
+                    <li><strong>Curve Trading:</strong> Exploit term structure inefficiencies</li>
+                </ul>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Basis Trade Strategy
+                    </div>
+                    <div class="content-text">
+                        When CDS spreads are wide relative to bond spreads:
+                        <ul class="list-styled">
+                            <li>Buy the bond (long credit exposure)</li>
+                            <li>Buy CDS protection (hedge credit risk)</li>
+                            <li>Profit from basis convergence</li>
+                            <li>Carry positive spread differential</li>
+                        </ul>
+                        
+                        This strategy assumes the basis will narrow over time while earning the spread differential.
+                    </div>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-balance-scale"></i>
+                    Synthetic Instruments
+                </div>
+
+                <div class="content-text">
+                    CDS enable creation of synthetic credit exposure:
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Synthetic Long Bond:</strong> Sell CDS + Buy risk-free bond</li>
+                    <li><strong>Synthetic Short Bond:</strong> Buy CDS + Short risk-free bond</li>
+                    <li><strong>Total Return Swaps:</strong> Exchange total returns for funding costs</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">CDS Indices and Tranches</h2>
+                </div>
+                
+                <div class="content-text">
+                    CDS indices provide exposure to baskets of credits, while tranched products offer leveraged exposure to specific loss levels.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-layer-group"></i>
+                    Major CDS Indices
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Index</th>
+                                <th>Region</th>
+                                <th>Sector</th>
+                                <th>Constituents</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>CDX.NA.IG</strong></td>
+                                <td>North America</td>
+                                <td>Investment Grade</td>
+                                <td>125 names</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CDX.NA.HY</strong></td>
+                                <td>North America</td>
+                                <td>High Yield</td>
+                                <td>100 names</td>
+                            </tr>
+                            <tr>
+                                <td><strong>iTraxx Europe</strong></td>
+                                <td>Europe</td>
+                                <td>Investment Grade</td>
+                                <td>125 names</td>
+                            </tr>
+                            <tr>
+                                <td><strong>iTraxx Crossover</strong></td>
+                                <td>Europe</td>
+                                <td>Sub-Investment Grade</td>
+                                <td>75 names</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-cut"></i>
+                    Index Tranches
+                </div>
+
+                <div class="content-text">
+                    Tranched CDS products divide the credit risk of an index into different loss layers, providing leveraged exposure to specific risk levels.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Standard Index Tranches
+                    </div>
+                    <div class="content-text">
+                        For a typical CDS index:
+                        <ul class="list-styled">
+                            <li><strong>0-3% Tranche (First Loss):</strong> Highest risk, highest spread</li>
+                            <li><strong>3-7% Tranche:</strong> Mezzanine risk</li>
+                            <li><strong>7-10% Tranche:</strong> Senior mezzanine risk</li>
+                            <li><strong>10-15% Tranche:</strong> Senior risk</li>
+                            <li><strong>15-30% Tranche:</strong> Super senior risk</li>
+                        </ul>
+                        
+                        Each tranche absorbs losses within its attachment and detachment points.
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Tranche Risk Characteristics
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>Subordinate Tranches:</strong> High sensitivity to default correlation</li>
+                        <li><strong>Senior Tranches:</strong> Low sensitivity to individual defaults</li>
+                        <li><strong>Correlation Risk:</strong> Changes in default correlation affect tranche values differently</li>
+                        <li><strong>Leverage Effect:</strong> Small portfolio losses create large tranche losses</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">Risks and Regulatory Considerations</h2>
+                </div>
+                
+                <div class="content-text">
+                    While CDS provide valuable risk management tools, they also introduce specific risks and regulatory challenges.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Key Risks in CDS Trading
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Counterparty Risk
+                    </div>
+                    <div class="content-text">
+                        The protection buyer faces the risk that the protection seller may default, especially when protection is most needed during market stress. This risk has led to increased use of central clearing.
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Risk Type</th>
+                                <th>Description</th>
+                                <th>Mitigation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Counterparty Risk</strong></td>
+                                <td>Protection seller may default</td>
+                                <td>Central clearing, collateral</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Basis Risk</strong></td>
+                                <td>CDS and bond spreads diverge</td>
+                                <td>Close monitoring, basis trades</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Liquidity Risk</strong></td>
+                                <td>Difficulty unwinding positions</td>
+                                <td>Trade liquid names/indices</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Legal Risk</strong></td>
+                                <td>Disputes over credit events</td>
+                                <td>Standard ISDA documentation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Model Risk</strong></td>
+                                <td>Valuation model errors</td>
+                                <td>Multiple models, benchmarking</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-gavel"></i>
+                    Regulatory Developments
+                </div>
+
+                <div class="content-text">
+                    Post-financial crisis regulations have significantly changed the CDS landscape:
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Central Clearing:</strong> Mandatory clearing for standardized CDS</li>
+                    <li><strong>Trade Reporting:</strong> Transaction reporting to trade repositories</li>
+                    <li><strong>Capital Requirements:</strong> Increased capital charges for CDS exposures</li>
+                    <li><strong>Margin Requirements:</strong> Initial and variation margin for non-cleared trades</li>
+                    <li><strong>Position Limits:</strong> Restrictions on speculative positions in some jurisdictions</li>
+                </ul>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-balance-scale"></i>
+                        Market Impact of Regulation
+                    </div>
+                    <div class="content-text">
+                        Regulatory changes have led to:
+                        <ul class="list-styled">
+                            <li>Increased standardization of CDS contracts</li>
+                            <li>Greater market transparency</li>
+                            <li>Higher trading costs due to margin and capital requirements</li>
+                            <li>Concentration of trading in dealer banks and large institutions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

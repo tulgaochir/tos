@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 14: Understanding Fixed-Income Risk and Return - CFA Level I Fixed Income</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #06b6d4;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-secondary);
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid var(--success-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-header {
+            font-weight: 600;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--info-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .note-header {
+            font-weight: 600;
+            color: var(--info-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 4px solid var(--warning-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .warning-header {
+            font-weight: 600;
+            color: var(--warning-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .list-styled {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .nav-header {
+                padding: 1rem;
+                position: relative;
+                top: 0;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-title {
+                font-size: 1.2rem;
+            }
+            
+            .chapter-header {
+                padding: 2rem 1rem;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .chapter-icon {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-header">
+            <div class="nav-content">
+                <div class="nav-title">
+                    <i class="fas fa-chart-line chapter-icon"></i>
+                    CFA Level I - Fixed Income
+                </div>
+                <div class="nav-links">
+                    <span class="breadcrumb">Chapter 14 of 19</span>
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="13.html" class="nav-link">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                    <a href="15.html" class="nav-link">
+                        <i class="fas fa-chevron-right"></i> Next
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="chapter-header">
+            <div class="chapter-number">Chapter 14</div>
+            <h1 class="chapter-title">Understanding Fixed-Income Risk and Return</h1>
+            <p class="chapter-subtitle">Comprehensive analysis of risk factors, return attribution, and portfolio management techniques in fixed-income investing</p>
+        </header>
+
+        <main>
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Sources of Return in Fixed-Income Investing</h2>
+                </div>
+                
+                <div class="content-text">
+                    Fixed-income returns are generated from multiple sources, each with distinct risk characteristics and time horizons. Understanding these components is essential for effective portfolio management and risk assessment.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-coins"></i>
+                    Primary Return Components
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Return Source</th>
+                                <th>Description</th>
+                                <th>Time Sensitivity</th>
+                                <th>Risk Factors</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Coupon Income</strong></td>
+                                <td>Periodic interest payments</td>
+                                <td>Predictable timing</td>
+                                <td>Credit risk, default risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rolldown Return</strong></td>
+                                <td>Price appreciation as bond approaches maturity</td>
+                                <td>Time-dependent</td>
+                                <td>Yield curve shape changes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Capital Gains/Losses</strong></td>
+                                <td>Price changes due to spread/rate movements</td>
+                                <td>Market-dependent</td>
+                                <td>Interest rate, credit, liquidity</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Currency Effects</strong></td>
+                                <td>Foreign exchange gains/losses (if applicable)</td>
+                                <td>Continuous</td>
+                                <td>Currency volatility</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="formula-box">
+                    Total Return = Coupon Income + Rolldown Return + Capital Gains/Losses + Currency Effects
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Rolldown Return
+                    </div>
+                    <div class="content-text">
+                        Rolldown return occurs when the yield curve is not flat. As a bond approaches maturity, it "rolls down" the yield curve. In a normal upward-sloping curve, this generates positive returns even if yields don't change.
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Interest Rate Risk Decomposition</h2>
+                </div>
+                
+                <div class="content-text">
+                    Interest rate risk in fixed-income portfolios can be decomposed into various components, each requiring different management approaches and hedging strategies.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-chart-line"></i>
+                    Level, Slope, and Curvature Risk
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Yield Curve Risk Factors
+                    </div>
+                    <div class="content-text">
+                        <strong>Level Risk:</strong> Parallel shifts in the yield curve
+                        <ul class="list-styled">
+                            <li>Affects all maturities equally</li>
+                            <li>Measured by portfolio duration</li>
+                            <li>Most significant risk factor (typically 80-90% of total risk)</li>
+                        </ul>
+                        
+                        <strong>Slope Risk:</strong> Changes in yield curve steepness
+                        <ul class="list-styled">
+                            <li>Short vs. long-term rate differential changes</li>
+                            <li>Measured by key rate durations</li>
+                            <li>Important for bullet vs. barbell portfolios</li>
+                        </ul>
+                        
+                        <strong>Curvature Risk:</strong> Changes in yield curve convexity
+                        <ul class="list-styled">
+                            <li>Non-parallel, non-slope changes</li>
+                            <li>Butterfly spread movements</li>
+                            <li>Affects intermediate maturity bonds most</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-key"></i>
+                    Key Rate Duration
+                </div>
+
+                <div class="content-text">
+                    Key rate duration measures sensitivity to changes in specific points on the yield curve, providing more granular risk measurement than modified duration.
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Maturity Point</th>
+                                <th>Key Rate Duration</th>
+                                <th>Interpretation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2-year</td>
+                                <td>0.5</td>
+                                <td>0.5% price change for 1% change in 2-year rate</td>
+                            </tr>
+                            <tr>
+                                <td>5-year</td>
+                                <td>2.1</td>
+                                <td>2.1% price change for 1% change in 5-year rate</td>
+                            </tr>
+                            <tr>
+                                <td>10-year</td>
+                                <td>1.8</td>
+                                <td>1.8% price change for 1% change in 10-year rate</td>
+                            </tr>
+                            <tr>
+                                <td>30-year</td>
+                                <td>0.3</td>
+                                <td>0.3% price change for 1% change in 30-year rate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="formula-box">
+                    Portfolio Key Rate Duration = Σ(Weight_i × Key Rate Duration_i)
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Credit Risk Analysis and Measurement</h2>
+                </div>
+                
+                <div class="content-text">
+                    Credit risk represents the possibility of loss due to deterioration in issuer creditworthiness or outright default. This risk has multiple dimensions that require comprehensive analysis.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Components of Credit Risk
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-credit-card"></i>
+                        Credit Risk Breakdown
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>Default Risk:</strong> Probability of issuer failing to meet obligations</li>
+                        <li><strong>Credit Migration Risk:</strong> Loss due to rating downgrades</li>
+                        <li><strong>Credit Spread Risk:</strong> Changes in risk premiums demanded by market</li>
+                        <li><strong>Recovery Risk:</strong> Uncertainty about recovery rates in default</li>
+                    </ul>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-calculator"></i>
+                    Credit Risk Metrics
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Formula</th>
+                                <th>Application</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Credit Spread Duration</strong></td>
+                                <td>Modified Duration × Spread Beta</td>
+                                <td>Sensitivity to credit spread changes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Expected Loss</strong></td>
+                                <td>PD × LGD × EAD</td>
+                                <td>Expected credit loss over time horizon</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Credit VaR</strong></td>
+                                <td>Statistical model output</td>
+                                <td>Potential credit loss at confidence level</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Credit Spread Duration Example
+                    </div>
+                    <div class="content-text">
+                        A corporate bond has:
+                        <ul class="list-styled">
+                            <li>Modified Duration: 6.5 years</li>
+                            <li>Credit spread: 150 basis points</li>
+                            <li>Spread beta to index: 1.2</li>
+                        </ul>
+                        
+                        Credit Spread Duration = 6.5 × 1.2 = 7.8
+                        <br><br>
+                        If credit spreads widen by 50 basis points:
+                        <br>
+                        Price Impact = -7.8 × 0.50% = -3.9%
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        PD, LGD, and EAD Definitions
+                    </div>
+                    <div class="content-text">
+                        <strong>PD (Probability of Default):</strong> Likelihood of default within specified timeframe
+                        <br>
+                        <strong>LGD (Loss Given Default):</strong> Percentage of exposure lost if default occurs
+                        <br>
+                        <strong>EAD (Exposure at Default):</strong> Amount exposed to loss at time of default
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Liquidity Risk and Market Microstructure</h2>
+                </div>
+                
+                <div class="content-text">
+                    Liquidity risk in fixed-income markets can significantly impact portfolio performance, especially during periods of market stress. Understanding market microstructure helps in managing this risk.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-tint"></i>
+                    Types of Liquidity Risk
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Liquidity Risk Type</th>
+                                <th>Description</th>
+                                <th>Key Indicators</th>
+                                <th>Mitigation Strategies</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Market Liquidity</strong></td>
+                                <td>Ability to trade without price impact</td>
+                                <td>Bid-ask spreads, trading volume</td>
+                                <td>Focus on liquid sectors</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Funding Liquidity</strong></td>
+                                <td>Access to cash for margin calls</td>
+                                <td>Repo rates, cash reserves</td>
+                                <td>Maintain cash buffers</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Redemption Risk</strong></td>
+                                <td>Investor withdrawals forcing sales</td>
+                                <td>Fund flow patterns</td>
+                                <td>Liquidity tiering</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Liquidity Measurement
+                </div>
+
+                <div class="content-text">
+                    Several metrics help quantify liquidity risk in fixed-income portfolios:
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Common Liquidity Metrics
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>Average Daily Trading Volume:</strong> Historical trading activity measure</li>
+                        <li><strong>Bid-Ask Spread:</strong> Transaction cost indicator</li>
+                        <li><strong>Days to Liquidate (DTL):</strong> Time to liquidate position without excessive market impact</li>
+                        <li><strong>Market Impact Cost:</strong> Expected price impact of trading</li>
+                        <li><strong>Liquidity-Adjusted VaR:</strong> VaR including liquidity risk premium</li>
+                    </ul>
+                </example>
+
+                <div class="formula-box">
+                    Days to Liquidate = Position Size / (Daily Volume × Participation Rate)
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Liquidity Risk in Stress Periods
+                    </div>
+                    <div class="content-text">
+                        During market stress, liquidity can evaporate quickly:
+                        <ul class="list-styled">
+                            <li>Bid-ask spreads widen dramatically</li>
+                            <li>Trading volumes decline sharply</li>
+                            <li>Correlations increase toward 1.0</li>
+                            <li>Funding liquidity becomes constrained</li>
+                        </ul>
+                    </div>
+                </warning>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Portfolio Risk Attribution and Decomposition</h2>
+                </div>
+                
+                <div class="content-text">
+                    Understanding how different risk factors contribute to portfolio volatility enables more effective risk management and helps explain performance attribution.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-pie-chart"></i>
+                    Risk Factor Models
+                </div>
+
+                <div class="content-text">
+                    Multi-factor models decompose portfolio risk into systematic risk factors:
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Risk Factor</th>
+                                <th>Description</th>
+                                <th>Typical Contribution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Duration Risk</strong></td>
+                                <td>Interest rate level sensitivity</td>
+                                <td>60-80% of total risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Curve Risk</strong></td>
+                                <td>Yield curve shape changes</td>
+                                <td>10-20% of total risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Credit Spread Risk</strong></td>
+                                <td>Credit risk premium changes</td>
+                                <td>15-25% of total risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sector/Security Risk</strong></td>
+                                <td>Idiosyncratic factors</td>
+                                <td>5-15% of total risk</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-calculator"></i>
+                    Risk Attribution Calculation
+                </div>
+
+                <div class="formula-box">
+                    Portfolio Variance = Σᵢ Σⱼ wᵢ wⱼ σᵢⱼ
+                    <br><br>
+                    Where: wᵢ, wⱼ = portfolio weights, σᵢⱼ = covariance between assets i and j
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Risk Decomposition Example
+                    </div>
+                    <div class="content-text">
+                        A portfolio with 4% annual volatility might decompose as:
+                        <ul class="list-styled">
+                            <li><strong>Duration Risk:</strong> 3.2% (80% of total)</li>
+                            <li><strong>Credit Spread Risk:</strong> 0.8% (20% of total)</li>
+                            <li><strong>Curve Risk:</strong> 0.4% (10% of total)</li>
+                            <li><strong>Idiosyncratic Risk:</strong> 0.2% (5% of total)</li>
+                        </ul>
+                        
+                        Note: Components don't sum to total due to correlation effects.
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Marginal vs. Component Risk
+                    </div>
+                    <div class="content-text">
+                        <strong>Marginal Risk:</strong> Additional risk from small position increase
+                        <br>
+                        <strong>Component Risk:</strong> Portion of total risk attributable to each position
+                        <br><br>
+                        Component risks sum to total portfolio risk, while marginal risks indicate optimal position sizing.
+                    </div>
+                </note>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">Risk Management Techniques and Hedging</h2>
+                </div>
+                
+                <div class="content-text">
+                    Effective fixed-income risk management requires a combination of portfolio construction techniques, derivatives usage, and systematic monitoring processes.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Hedging Strategies
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Strategy</th>
+                                <th>Instrument</th>
+                                <th>Risk Hedged</th>
+                                <th>Considerations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Duration Hedging</strong></td>
+                                <td>Interest rate futures</td>
+                                <td>Parallel yield curve shifts</td>
+                                <td>Basis risk, rebalancing needs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Credit Hedging</strong></td>
+                                <td>CDS, credit indices</td>
+                                <td>Credit spread widening</td>
+                                <td>Counterparty risk, liquidity</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Curve Hedging</strong></td>
+                                <td>Multiple futures maturities</td>
+                                <td>Yield curve shape changes</td>
+                                <td>Complex implementation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Currency Hedging</strong></td>
+                                <td>FX forwards, swaps</td>
+                                <td>Foreign exchange risk</td>
+                                <td>Hedging costs, timing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-cog"></i>
+                    Portfolio Construction Techniques
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-balance-scale"></i>
+                        Risk Budgeting Approach
+                    </div>
+                    <div class="content-text">
+                        Allocate risk rather than capital:
+                        <ul class="list-styled">
+                            <li><strong>Total Risk Budget:</strong> Maximum acceptable portfolio volatility</li>
+                            <li><strong>Factor Risk Limits:</strong> Maximum exposure to each risk factor</li>
+                            <li><strong>Concentration Limits:</strong> Single issuer/sector exposure limits</li>
+                            <li><strong>Liquidity Requirements:</strong> Minimum liquidity buffer maintenance</li>
+                        </ul>
+                    </div>
+                </warning>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Hedge Ratio Calculation
+                    </div>
+                    <div class="content-text">
+                        To hedge duration risk using Treasury futures:
+                        <br><br>
+                        <strong>Hedge Ratio = (Portfolio Duration × Portfolio Value) / (Future Duration × Future Value × Conversion Factor)</strong>
+                        <br><br>
+                        Example:
+                        <ul class="list-styled">
+                            <li>Portfolio: $100M, Duration = 5.5</li>
+                            <li>Future: Duration = 6.2, Price = $125,000</li>
+                            <li>Conversion Factor = 0.95</li>
+                        </ul>
+                        
+                        Hedge Ratio = (5.5 × $100M) / (6.2 × $125,000 × 0.95) = 745 contracts
+                    </div>
+                </example>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-sync-alt"></i>
+                        Dynamic Risk Management
+                    </div>
+                    <div class="content-text">
+                        Risk management requires continuous monitoring and adjustment:
+                        <ul class="list-styled">
+                            <li><strong>Daily Risk Monitoring:</strong> Track key risk metrics</li>
+                            <li><strong>Stress Testing:</strong> Evaluate performance under adverse scenarios</li>
+                            <li><strong>Rebalancing Rules:</strong> Systematic approach to maintaining target risk</li>
+                            <li><strong>Performance Attribution:</strong> Understand sources of returns and risks</li>
+                        </ul>
+                    </div>
+                </note>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

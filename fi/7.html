@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yield and Yield Spread Measures for Fixed-Rate Bonds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --dark-blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --accent-gold: #f59e0b;
+            --light-gray: #f8fafc;
+            --medium-gray: #e2e8f0;
+            --dark-gray: #475569;
+            --text-dark: #1e293b;
+            --success-green: #10b981;
+            --warning-orange: #f97316;
+            --danger-red: #dc2626;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            counter-reset: section-counter;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-home {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-home:hover {
+            color: var(--dark-blue);
+        }
+
+        .chapter-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chapter-nav a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .chapter-nav a:hover {
+            background: var(--light-gray);
+            color: var(--primary-blue);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chapter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border-top: 4px solid var(--primary-blue);
+            position: relative;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        h2 {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2::before {
+            content: counter(section-counter);
+            counter-increment: section-counter;
+            background: var(--primary-blue);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--medium-gray);
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+
+        /* Enhanced Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--medium-gray);
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background: var(--light-gray);
+            transition: background-color 0.3s ease;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Enhanced Formula Boxes */
+        .formula {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 2px solid var(--light-blue);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--primary-blue);
+            position: relative;
+        }
+
+        .formula::before {
+            content: '📊';
+            position: absolute;
+            top: -0.75rem;
+            left: 1rem;
+            background: white;
+            padding: 0 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Enhanced Callout Boxes */
+        .explanation, .note, .example, .warning {
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            position: relative;
+            border-left: 5px solid;
+        }
+
+        .explanation {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-color: var(--success-green);
+            color: #166534;
+        }
+
+        .note {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-color: var(--light-blue);
+            color: #1e40af;
+        }
+
+        .example {
+            background: linear-gradient(135deg, #fdf4ff, #f3e8ff);
+            border-color: #8b5cf6;
+            color: #6b21a8;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fefce8, #fef3c7);
+            border-color: var(--warning-orange);
+            color: #a16207;
+        }
+
+        .explanation strong, .note strong, .example strong, .warning strong {
+            color: inherit;
+            font-weight: 700;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        li strong {
+            color: var(--primary-blue);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .footer-nav a:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .table-container {
+                font-size: 0.9rem;
+            }
+
+            .chapter-nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <a href="index.html" class="nav-home">
+                <i class="fas fa-home"></i> CFA Fixed Income Study Guide
+            </a>
+            <div class="chapter-nav">
+                <a href="6.html"><i class="fas fa-arrow-left"></i> Previous</a>
+                <a href="index.html"><i class="fas fa-list"></i> All Chapters</a>
+                <a href="8.html">Next Chapter <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="chapter-badge">Chapter 7</div>
+            <h1><i class="fas fa-chart-area"></i> Yield and Yield Spread Measures for Fixed-Rate Bonds</h1>
+            <p class="subtitle">Periodicity, embedded options, and comprehensive spread analysis</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="section-card">
+            <h2><i class="fas fa-info-circle"></i> Introduction</h2>
+            <p>This module delves into the nuances of bond yields. We will explore how compounding frequency affects a bond's yield, how to properly evaluate yields for bonds with embedded options (like callable bonds), and how to use yield spreads to compare bonds against benchmarks.</p>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-calendar-check"></i> Periodicity and Annualized Yields</h2>
+            <p>To compare bonds with different coupon payment frequencies, we must standardize their yields. This is done by converting them to a common periodicity.</p>
+            
+            <h3>The Importance of Annualizing</h3>
+            <ul>
+                <li><strong>Common Periodicity:</strong> Most government and corporate bonds pay coupons semiannually (periodicity of 2). The annualized yield for these bonds is called the <strong>semiannual bond basis yield</strong> or <strong>semiannual bond equivalent yield</strong>.</li>
+                <li><strong>Comparability:</strong> Annualized yields allow for a direct, apples-to-apples comparison between bonds with different payment schedules (e.g., comparing a semiannual-pay bond to a quarterly-pay bond).</li>
+            </ul>
+
+            <h3>The Relationship Between Compounding and Yield</h3>
+            <div class="explanation">
+                <strong>General Rule:</strong> More frequent compounding means a lower annual percentage rate (APR) is needed to achieve the same effective annual return. For example, a 10% annual rate compounded annually is equivalent to a 9.76% annual rate compounded semiannually.
+            </div>
+
+            <h3>Converting Between Periodicities</h3>
+            <p>We can convert an annual percentage rate (APR) from one compounding frequency to another using the following formula:</p>
+            <div class="formula">
+                (1 + APRₘ/m)ᵐ = (1 + APRₙ/n)ⁿ<br><br>
+                Where:<br>
+                <strong>APRₘ</strong> = APR with m compounding periods per year.<br>
+                <strong>APRₙ</strong> = APR with n compounding periods per year.
+            </div>
+            <div class="example">
+                <strong>Example: Converting Yields</strong><br>
+                A bond has a semiannual bond basis yield (APR with m=2) of 6%. What is its equivalent yield if it were compounded quarterly (n=4)?<br>
+                1.  <strong>Set up the equation:</strong> (1 + 0.06/2)² = (1 + APR₄/4)⁴<br>
+                2.  <strong>Solve for the quarterly rate:</strong> (1.03)² = (1 + APR₄/4)⁴ → 1.0609 = (1 + APR₄/4)⁴ → (1.0609)¹/⁴ = 1 + APR₄/4 → 1.014889 = 1 + APR₄/4.<br>
+                3.  <strong>Solve for APR₄:</strong> APR₄/4 = 0.014889 → APR₄ = 0.05956, or <strong>5.956%</strong>.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-cogs"></i> Other Yield Measures and Conventions</h2>
+            <p>While YTM is the standard measure, other conventions exist, and adjustments are needed for bonds with embedded options.</p>
+
+            <h3>Yield Measures and Conventions</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-tag"></i> Measure/Convention</th>
+                            <th><i class="fas fa-info"></i> Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Current Yield</strong></td>
+                            <td>A simple measure calculated as (Annual Coupon Payment / Bond Price). It ignores capital gains/losses and the reinvestment of coupons.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Street Convention Yield</strong></td>
+                            <td>The most common YTM calculation method. It assumes payments are made on their scheduled dates, ignoring weekends and holidays, which simplifies the calculation.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>True Yield</strong></td>
+                            <td>A more precise YTM that accounts for the actual payment dates, considering weekends and holidays. It is rarely used in practice.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Government Equivalent Yield</strong></td>
+                            <td>Restates the yield of a corporate bond (which is typically quoted on a 30/360 day-count basis) to be comparable to a government bond (which uses an actual/actual day-count basis).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Evaluating Bonds with Embedded Options</h3>
+            <p>Traditional YTM is not sufficient for bonds with embedded options because it doesn't account for the possibility of early redemption. </p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-phone"></i> Concept for Callable Bonds</th>
+                            <th><i class="fas fa-info"></i> Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Yield-to-Call (YTC)</strong></td>
+                            <td>Calculates the yield assuming the bond will be redeemed by the issuer on a specific call date. An investor should calculate the YTC for all possible call dates.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yield-to-Worst (YTW)</strong></td>
+                            <td>This is the <strong>lowest possible yield</strong> an investor can receive from a callable bond. It is the minimum of the Yield-to-Maturity and all of the Yields-to-Call. This is the most conservative and appropriate yield measure for a callable bond.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Option-Adjusted Price & Yield</strong></td>
+                            <td>The price of a callable bond is lower than an identical option-free bond because the call option benefits the issuer. The <strong>Option-Adjusted Yield</strong> is the yield on the bond after accounting for the effect of the call option. It will be lower than the yield of a non-callable bond.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Value of the Call Option</strong></td>
+                            <td>The value of the embedded call option can be calculated as:
+                                <div class="formula">Value of Call Option = Price of Option-Free Bond - Price of Callable Bond</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2><i class="fas fa-arrows-alt-h"></i> Yield Spread Measures</h2>
+            <p>A yield spread measures the additional return an investor receives for taking on risks beyond those of a risk-free benchmark rate (like a government bond).</p>
+            
+            <h3>Yield Spread Analysis</h3>
+            <div class="note">
+                <strong>YTM Breakdown:</strong> YTM = Benchmark Rate + Yield Spread.<br>
+                The yield spread compensates investors for credit risk, liquidity risk, and other issuer-specific factors. Analyzing spreads helps in assessing a bond's relative value independent of broad macroeconomic interest rate movements.
+            </div>
+
+            <h3>Types of Yield Spreads</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-layer-group"></i> Spread Type</th>
+                            <th><i class="fas fa-info"></i> Description</th>
+                            <th><i class="fas fa-chart-line"></i> Benchmark Used</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>G-Spread (Benchmark Spread)</strong></td>
+                            <td>The difference between a bond's YTM and the YTM of a government bond with the same maturity.</td>
+                            <td>Government Bond Yield</td>
+                        </tr>
+                        <tr>
+                            <td><strong>I-Spread (Interpolated Spread)</strong></td>
+                            <td>The difference between a bond's YTM and a swap rate of the same currency and tenure.</td>
+                            <td>Swap Rate Curve</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Z-Spread (Zero-Volatility Spread)</strong></td>
+                            <td>The constant spread that must be added to each spot rate on the government yield curve to make the present value of a bond's cash flows equal to its market price. It is a more precise measure than the G-spread.</td>
+                            <td>Government Spot Rate Curve</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Option-Adjusted Spread (OAS)</strong></td>
+                            <td>The most advanced spread measure, used for bonds with embedded options. It is the Z-spread adjusted to remove the value of the embedded option.
+                                <div class="formula">OAS = Z-Spread - Option Value</div>
+                                The OAS represents the pure credit and liquidity spread of a bond.
+                            </td>
+                            <td>Government Spot Rate Curve (adjusted for interest rate volatility)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-nav">
+                <a href="6.html"><i class="fas fa-arrow-left"></i> Previous Chapter</a>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="8.html"><i class="fas fa-arrow-right"></i> Next Chapter</a>
+                <a href="index.html#chapters"><i class="fas fa-list"></i> All Chapters</a>
+            </div>
+            <p>&copy; 2025 CFA Level I Study Guide | Yield and Yield Spread Measures for Fixed-Rate Bonds</p>
+        </div>
+    </footer>
+
+</body>
+</html>

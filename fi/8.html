@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Yield and Yield Spread Measures for Floating-Rate Instruments - CFA Level I Fixed Income</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #06b6d4;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-secondary);
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid var(--success-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-header {
+            font-weight: 600;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--info-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .note-header {
+            font-weight: 600;
+            color: var(--info-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 4px solid var(--warning-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .warning-header {
+            font-weight: 600;
+            color: var(--warning-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .list-styled {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .nav-header {
+                padding: 1rem;
+                position: relative;
+                top: 0;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-title {
+                font-size: 1.2rem;
+            }
+            
+            .chapter-header {
+                padding: 2rem 1rem;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .chapter-icon {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-header">
+            <div class="nav-content">
+                <div class="nav-title">
+                    <i class="fas fa-chart-line chapter-icon"></i>
+                    CFA Level I - Fixed Income
+                </div>
+                <div class="nav-links">
+                    <span class="breadcrumb">Chapter 8 of 19</span>
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="7.html" class="nav-link">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                    <a href="9.html" class="nav-link">
+                        <i class="fas fa-chevron-right"></i> Next
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="chapter-header">
+            <div class="chapter-number">Chapter 8</div>
+            <h1 class="chapter-title">Yield and Yield Spread Measures for Floating-Rate Instruments</h1>
+            <p class="chapter-subtitle">Understanding the unique yield measures and risk characteristics of floating-rate bonds and their valuation methodologies</p>
+        </header>
+
+        <main>
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Introduction to Floating-Rate Instruments</h2>
+                </div>
+                
+                <div class="content-text">
+                    Floating-rate bonds, also known as floaters or variable-rate notes, are debt securities where the coupon rate is reset periodically based on a reference rate (benchmark rate) plus a quoted margin. These instruments provide protection against interest rate risk by adjusting their coupon payments in response to changes in market interest rates.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-cog"></i>
+                    Key Characteristics of Floating-Rate Bonds
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Reference Rate:</strong> A benchmark rate such as LIBOR, SOFR, or Treasury rates</li>
+                    <li><strong>Quoted Margin:</strong> A fixed spread added to the reference rate</li>
+                    <li><strong>Reset Frequency:</strong> How often the coupon rate is adjusted (quarterly, semi-annually, etc.)</li>
+                    <li><strong>Reset Date:</strong> The date on which the new coupon rate becomes effective</li>
+                    <li><strong>Rate Cap and Floor:</strong> Maximum and minimum coupon rates that may apply</li>
+                </ul>
+
+                <div class="formula-box">
+                    Coupon Rate = Reference Rate + Quoted Margin
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Discount Margin (DM)</h2>
+                </div>
+                
+                <div class="content-text">
+                    The discount margin is the yield measure most commonly used for floating-rate bonds. It represents the margin over the reference rate that makes the present value of the bond's cash flows equal to its market price.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-calculator"></i>
+                    Discount Margin Calculation
+                </div>
+
+                <div class="content-text">
+                    The discount margin is found by trial and error, similar to calculating yield to maturity for fixed-rate bonds. The present value equation for a floating-rate bond is:
+                </div>
+
+                <div class="formula-box">
+                    PV = Σ[(Reference Rate + Quoted Margin) × Principal / n] / (1 + (Reference Rate + DM) / n)^t + Principal / (1 + (Reference Rate + DM) / n)^N
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Important Note
+                    </div>
+                    <div class="content-text">
+                        The discount margin assumes that the reference rate remains constant over the life of the bond, which is an important limitation of this measure.
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Example: Calculating Discount Margin
+                    </div>
+                    <div class="content-text">
+                        A floating-rate bond has:
+                        <ul class="list-styled">
+                            <li>Face value: $1,000</li>
+                            <li>Current reference rate: 3.5%</li>
+                            <li>Quoted margin: 150 basis points</li>
+                            <li>Semi-annual reset</li>
+                            <li>2 years to maturity</li>
+                            <li>Current market price: $995</li>
+                        </ul>
+                        
+                        The discount margin would be calculated by finding the DM that makes the present value equal to $995.
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Yield Spread Measures</h2>
+                </div>
+                
+                <div class="subsection-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Types of Yield Spreads for Floaters
+                </div>
+
+                <div class="content-text">
+                    Several spread measures are used to evaluate floating-rate bonds relative to benchmark securities:
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Spread Measure</th>
+                                <th>Definition</th>
+                                <th>Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Discount Margin</strong></td>
+                                <td>Margin over reference rate that equates PV to market price</td>
+                                <td>Primary yield measure for floaters</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quoted Margin</strong></td>
+                                <td>Fixed spread specified in the bond indenture</td>
+                                <td>Contractual spread determination</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Required Margin</strong></td>
+                                <td>Market-determined spread for similar credit risk</td>
+                                <td>Relative value analysis</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-balance-scale"></i>
+                    Relationship Between Margins
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>If Discount Margin > Quoted Margin:</strong> Bond trades at a discount to par</li>
+                    <li><strong>If Discount Margin = Quoted Margin:</strong> Bond trades at par</li>
+                    <li><strong>If Discount Margin < Quoted Margin:</strong> Bond trades at a premium to par</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Interest Rate Risk of Floating-Rate Bonds</h2>
+                </div>
+                
+                <div class="content-text">
+                    While floating-rate bonds provide protection against interest rate risk, they are not completely immune to price volatility due to several factors:
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Sources of Interest Rate Risk
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-clock"></i>
+                        Reset Period Risk
+                    </div>
+                    <div class="content-text">
+                        Between reset dates, the bond behaves like a fixed-rate bond for the remainder of the current coupon period. The longer the reset period, the greater the interest rate risk.
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-credit-card"></i>
+                        Credit Risk Changes
+                    </div>
+                    <div class="content-text">
+                        Changes in the issuer's creditworthiness can cause the required margin to differ from the quoted margin, leading to price changes.
+                    </div>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Caps and Floors Impact
+                </div>
+
+                <div class="content-text">
+                    Rate caps and floors can significantly affect the behavior of floating-rate bonds:
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Rate Cap:</strong> Limits the maximum coupon rate, providing downside protection to the issuer but limiting upside for investors</li>
+                    <li><strong>Rate Floor:</strong> Sets a minimum coupon rate, providing downside protection to investors</li>
+                    <li><strong>Collar:</strong> Combination of cap and floor that limits both maximum and minimum rates</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Valuation Considerations</h2>
+                </div>
+                
+                <div class="subsection-title">
+                    <i class="fas fa-chart-line"></i>
+                    Modified Duration of Floaters
+                </div>
+
+                <div class="content-text">
+                    The modified duration of a floating-rate bond is approximately equal to the time until the next reset date. This makes floaters much less sensitive to interest rate changes compared to fixed-rate bonds.
+                </div>
+
+                <div class="formula-box">
+                    Modified Duration ≈ Time to Next Reset Date
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-calculator"></i>
+                    Valuation at Reset Dates
+                </div>
+
+                <div class="content-text">
+                    On reset dates, a floating-rate bond without caps or floors will trade very close to par value, assuming:
+                </div>
+
+                <ul class="list-styled">
+                    <li>The quoted margin reflects the current required margin</li>
+                    <li>No changes in credit quality have occurred</li>
+                    <li>The reference rate is available and reliable</li>
+                </ul>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Example: Duration Calculation
+                    </div>
+                    <div class="content-text">
+                        A floating-rate bond resets quarterly. If today is 45 days after the last reset:
+                        <br><br>
+                        Time to next reset = (90 - 45) / 365 = 0.123 years
+                        <br>
+                        Modified Duration ≈ 0.123 years
+                        <br><br>
+                        This low duration explains why floaters are relatively insensitive to interest rate changes.
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">Inverse Floaters and Structured Notes</h2>
+                </div>
+                
+                <div class="content-text">
+                    Inverse floaters are structured securities where the coupon rate moves inversely to the reference rate. These instruments have unique risk and return characteristics.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-exchange-alt"></i>
+                    Inverse Floater Mechanics
+                </div>
+
+                <div class="formula-box">
+                    Inverse Floater Coupon = C - L × (Reference Rate)
+                    <br>
+                    Where: C = Maximum coupon rate, L = Leverage factor
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        High Interest Rate Sensitivity
+                    </div>
+                    <div class="content-text">
+                        Inverse floaters have very high modified duration, often several times that of a comparable fixed-rate bond. They are extremely sensitive to interest rate changes and are considered high-risk investments.
+                    </div>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-building"></i>
+                    Creation Through Structured Finance
+                </div>
+
+                <div class="content-text">
+                    Inverse floaters are often created by splitting the cash flows of fixed-rate bonds:
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Floater Class:</strong> Receives variable-rate coupons</li>
+                    <li><strong>Inverse Floater Class:</strong> Receives the residual cash flows</li>
+                    <li><strong>Total Cash Flow:</strong> Must equal the original fixed-rate bond</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

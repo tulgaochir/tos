@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: Interest Rate Risk and Return - CFA Level I Fixed Income</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #06b6d4;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-secondary);
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid var(--success-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-header {
+            font-weight: 600;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--info-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .note-header {
+            font-weight: 600;
+            color: var(--info-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 4px solid var(--warning-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .warning-header {
+            font-weight: 600;
+            color: var(--warning-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .list-styled {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .nav-header {
+                padding: 1rem;
+                position: relative;
+                top: 0;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-title {
+                font-size: 1.2rem;
+            }
+            
+            .chapter-header {
+                padding: 2rem 1rem;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .chapter-icon {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-header">
+            <div class="nav-content">
+                <div class="nav-title">
+                    <i class="fas fa-chart-line chapter-icon"></i>
+                    CFA Level I - Fixed Income
+                </div>
+                <div class="nav-links">
+                    <span class="breadcrumb">Chapter 10 of 19</span>
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="9.html" class="nav-link">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                    <a href="11.html" class="nav-link">
+                        <i class="fas fa-chevron-right"></i> Next
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="chapter-header">
+            <div class="chapter-number">Chapter 10</div>
+            <h1 class="chapter-title">Interest Rate Risk and Return</h1>
+            <p class="chapter-subtitle">Comprehensive analysis of duration, convexity, and their applications in measuring and managing interest rate risk</p>
+        </header>
+
+        <main>
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Sources of Return in Bond Investing</h2>
+                </div>
+                
+                <div class="content-text">
+                    Bond returns come from three primary sources, each contributing differently to total return depending on the investment horizon and market conditions.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-coins"></i>
+                    Components of Bond Returns
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Return Source</th>
+                                <th>Description</th>
+                                <th>Risk Factor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Coupon Income</strong></td>
+                                <td>Periodic interest payments from the bond</td>
+                                <td>Credit risk, default risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Capital Gain/Loss</strong></td>
+                                <td>Change in bond price from purchase to sale</td>
+                                <td>Interest rate risk, credit risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reinvestment Income</strong></td>
+                                <td>Return from reinvesting coupon payments</td>
+                                <td>Reinvestment risk</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="formula-box">
+                    Total Return = Coupon Income + Capital Gain/Loss + Reinvestment Income
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Key Insight
+                    </div>
+                    <div class="content-text">
+                        For buy-and-hold investors, reinvestment income becomes increasingly important for longer-maturity bonds and higher-coupon bonds. For a 30-year, 8% coupon bond held to maturity, reinvestment income typically represents about 80% of total return.
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Interest Rate Risk: Duration</h2>
+                </div>
+                
+                <div class="content-text">
+                    Duration measures a bond's sensitivity to interest rate changes. There are several duration measures, each with specific applications and limitations.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-clock"></i>
+                    Macaulay Duration
+                </div>
+
+                <div class="content-text">
+                    Macaulay duration is the weighted average time to receive the bond's cash flows, where weights are the present values of each cash flow.
+                </div>
+
+                <div class="formula-box">
+                    MacDur = Σ[t × (CF_t / (1+y)^t)] / Bond Price
+                    <br>
+                    Where: t = time period, CF_t = cash flow at time t, y = yield to maturity
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-chart-line"></i>
+                    Modified Duration
+                </div>
+
+                <div class="content-text">
+                    Modified duration measures the price sensitivity of a bond to changes in yield to maturity. It's the most commonly used duration measure for risk management.
+                </div>
+
+                <div class="formula-box">
+                    ModDur = MacDur / (1 + y)
+                    <br><br>
+                    % Price Change ≈ -ModDur × Δy
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Example: Duration Calculation
+                    </div>
+                    <div class="content-text">
+                        A bond has:
+                        <ul class="list-styled">
+                            <li>Macaulay duration = 5.2 years</li>
+                            <li>Yield to maturity = 6%</li>
+                        </ul>
+                        
+                        Modified Duration = 5.2 / (1.06) = 4.91
+                        <br><br>
+                        If yields increase by 100 basis points:
+                        <br>
+                        Price change ≈ -4.91 × 0.01 = -4.91%
+                    </div>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-money-bill"></i>
+                    Money Duration and Price Value of a Basis Point
+                </div>
+
+                <div class="content-text">
+                    These measures express interest rate sensitivity in dollar terms rather than percentages.
+                </div>
+
+                <div class="formula-box">
+                    Money Duration = Modified Duration × Bond Price
+                    <br>
+                    PVBP = Money Duration × 0.0001
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Properties of Duration</h2>
+                </div>
+                
+                <div class="subsection-title">
+                    <i class="fas fa-list-ul"></i>
+                    Key Duration Properties
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Maturity:</strong> Duration increases with maturity (but at a decreasing rate for coupon bonds)</li>
+                    <li><strong>Coupon Rate:</strong> Duration decreases as coupon rate increases</li>
+                    <li><strong>Yield to Maturity:</strong> Duration decreases as yield increases</li>
+                    <li><strong>Zero-Coupon Bonds:</strong> Duration equals time to maturity</li>
+                    <li><strong>Perpetual Bonds:</strong> Duration = (1 + y) / y</li>
+                </ul>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Change</th>
+                                <th>Effect on Duration</th>
+                                <th>Explanation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Maturity</strong></td>
+                                <td>Increase</td>
+                                <td>Increase</td>
+                                <td>More distant cash flows</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coupon Rate</strong></td>
+                                <td>Increase</td>
+                                <td>Decrease</td>
+                                <td>More cash flows received earlier</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Yield</strong></td>
+                                <td>Increase</td>
+                                <td>Decrease</td>
+                                <td>Higher discount rate reduces PV of distant cash flows</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Duration Limitations
+                    </div>
+                    <ul class="list-styled">
+                        <li>Assumes parallel shifts in yield curve</li>
+                        <li>Linear approximation becomes less accurate for large yield changes</li>
+                        <li>Does not capture convexity effects</li>
+                        <li>Assumes cash flows are fixed (not applicable to bonds with embedded options)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Convexity</h2>
+                </div>
+                
+                <div class="content-text">
+                    Convexity measures the curvature of the price-yield relationship and improves duration-based price change estimates, especially for large yield changes.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-curve"></i>
+                    Understanding Convexity
+                </div>
+
+                <div class="content-text">
+                    The price-yield relationship for bonds is not linear but convex. This convexity means that:
+                </div>
+
+                <ul class="list-styled">
+                    <li>Bond prices rise more when yields fall than they decline when yields rise by the same amount</li>
+                    <li>Duration underestimates price increases and overestimates price decreases</li>
+                    <li>Higher convexity is generally beneficial to investors</li>
+                </ul>
+
+                <div class="formula-box">
+                    Convexity = [1 / (P × (1+y)²)] × Σ[t × (t+1) × CF_t / (1+y)^t]
+                    <br><br>
+                    % Price Change ≈ -ModDur × Δy + 0.5 × Convexity × (Δy)²
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Example: Duration vs. Duration + Convexity
+                    </div>
+                    <div class="content-text">
+                        A bond has:
+                        <ul class="list-styled">
+                            <li>Modified duration = 7.2</li>
+                            <li>Convexity = 65</li>
+                            <li>Yield change = -200 basis points (-0.02)</li>
+                        </ul>
+                        
+                        Duration estimate: -7.2 × (-0.02) = +14.4%
+                        <br>
+                        Duration + Convexity: 14.4% + 0.5 × 65 × (-0.02)² = 14.4% + 1.3% = 15.7%
+                        <br><br>
+                        The convexity adjustment adds 1.3% to the price change estimate.
+                    </div>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-balance-scale"></i>
+                    Factors Affecting Convexity
+                </div>
+
+                <ul class="list-styled">
+                    <li><strong>Maturity:</strong> Longer maturity generally increases convexity</li>
+                    <li><strong>Coupon Rate:</strong> Lower coupon rates increase convexity</li>
+                    <li><strong>Yield Level:</strong> Lower yields increase convexity</li>
+                    <li><strong>Embedded Options:</strong> Call options reduce convexity (negative convexity), put options increase it</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Effective Duration and Convexity</h2>
+                </div>
+                
+                <div class="content-text">
+                    For bonds with embedded options or uncertain cash flows, effective duration and convexity provide better risk measures than traditional duration and convexity.
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-cog"></i>
+                    Effective Duration
+                </div>
+
+                <div class="content-text">
+                    Effective duration is calculated using a numerical approach that considers how bond prices change when the entire yield curve shifts up or down.
+                </div>
+
+                <div class="formula-box">
+                    Effective Duration = (P₋ - P₊) / (2 × P₀ × Δy)
+                    <br>
+                    Where: P₋ = price when yield decreases, P₊ = price when yield increases, P₀ = initial price
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-options"></i>
+                    Application to Bonds with Embedded Options
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bond Type</th>
+                                <th>Effective vs. Modified Duration</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Callable Bonds</strong></td>
+                                <td>Effective Duration < Modified Duration</td>
+                                <td>Call option limits price appreciation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Putable Bonds</strong></td>
+                                <td>Effective Duration < Modified Duration</td>
+                                <td>Put option limits price decline</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Plain Vanilla Bonds</strong></td>
+                                <td>Effective Duration ≈ Modified Duration</td>
+                                <td>No embedded options</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="note-box">
+                    <div class="note-header">
+                        <i class="fas fa-info-circle"></i>
+                        Key Duration Applications
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>Portfolio Duration:</strong> Weighted average of individual bond durations</li>
+                        <li><strong>Immunization:</strong> Matching portfolio duration to investment horizon</li>
+                        <li><strong>Hedge Ratios:</strong> Determining futures contracts needed to hedge interest rate risk</li>
+                        <li><strong>Active Management:</strong> Positioning for expected yield curve changes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">Interest Rate Risk Management</h2>
+                </div>
+                
+                <div class="subsection-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Immunization Strategies
+                </div>
+
+                <div class="content-text">
+                    Immunization protects a portfolio against interest rate risk by structuring it so that the target return will be achieved regardless of interest rate changes.
+                </div>
+
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <i class="fas fa-clock"></i>
+                        Classical Immunization Conditions
+                    </div>
+                    <ul class="list-styled">
+                        <li>Portfolio duration must equal the investment horizon</li>
+                        <li>Present value of assets must equal present value of liabilities</li>
+                        <li>Portfolio must be rebalanced when duration drifts from the target</li>
+                        <li>Assumes parallel shifts in the yield curve</li>
+                    </ul>
+                </div>
+
+                <div class="subsection-title">
+                    <i class="fas fa-balance-scale"></i>
+                    Duration Matching vs. Cash Flow Matching
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Strategy</th>
+                                <th>Approach</th>
+                                <th>Advantages</th>
+                                <th>Disadvantages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Duration Matching</strong></td>
+                                <td>Match portfolio duration to horizon</td>
+                                <td>Lower cost, flexibility</td>
+                                <td>Requires rebalancing, model risk</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cash Flow Matching</strong></td>
+                                <td>Match cash flows to liability payments</td>
+                                <td>No rebalancing, perfect match</td>
+                                <td>Higher cost, less flexibility</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-lightbulb"></i>
+                        Example: Portfolio Duration Calculation
+                    </div>
+                    <div class="content-text">
+                        Portfolio with two bonds:
+                        <ul class="list-styled">
+                            <li>Bond A: $2 million, Duration = 4.5 years</li>
+                            <li>Bond B: $3 million, Duration = 7.2 years</li>
+                        </ul>
+                        
+                        Portfolio Duration = [(2/5) × 4.5] + [(3/5) × 7.2] = 1.8 + 4.32 = 6.12 years
+                        <br><br>
+                        This portfolio has interest rate sensitivity equivalent to a single bond with 6.12 years duration.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
