@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 6: Analysis of Inventories</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .subsection {
+      margin: 1.5rem 0;
+    }
+
+    .subsection h3 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .subsection h4 {
+      color: var(--primary-light);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .formula-box {
+      background: #f0f9ff;
+      border: 1px solid #0ea5e9;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .example-box {
+      background: #fefce8;
+      border: 1px solid #facc15;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .example-box h4 {
+      margin-top: 0;
+      color: #a16207;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: #ecfdf5;
+      border: 1px solid #10b981;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .comparison-table th {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .comparison-table tr:hover {
+      background: #f1f5f9;
+    }
+
+    .key-term {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .toc {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 2rem;
+      z-index: 10;
+    }
+
+    .toc h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .toc {
+        position: static;
+      }
+      
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .section-number {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <div class="gradient-bg text-white">
+    <div class="max-w-6xl mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Chapter 6: Analysis of Inventories</h1>
+      <p class="text-xl opacity-90">Understanding Inventory Accounting and Analysis Techniques</p>
+    </div>
+  </div>
+
+  <!-- Navigation Breadcrumb -->
+  <div class="bg-white border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-3">
+      <div class="flex items-center space-x-2 text-sm text-gray-600">
+        <a href="index.html" class="hover:text-blue-600">Financial Statement Analysis</a>
+        <span>›</span>
+        <span class="text-gray-900 font-medium">Chapter 6: Analysis of Inventories</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Table of Contents (Sidebar) -->
+      <div class="lg:col-span-1">
+        <div class="toc">
+          <h3>📚 Table of Contents</h3>
+          <ul>
+            <li><a href="#section-1">1. Inventory Cost Flow Methods</a></li>
+            <li><a href="#section-2">2. Inventory Valuation</a></li>
+            <li><a href="#section-3">3. Inventory Management Ratios</a></li>
+            <li><a href="#section-4">4. Presentation and Disclosure</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="lg:col-span-3">
+
+        <!-- Section 1 -->
+        <div id="section-1" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Inventory Cost Flow Methods</h2>
+          </div>
+
+          <p><span class="key-term">Cost flow assumptions</span> determine the cost of goods sold (COGS) and ending inventory. The main methods are <strong>First-In, First-Out (FIFO)</strong>, <strong>Last-In, First-Out (LIFO)</strong>, and <strong>Weighted Average</strong>.</p>
+
+          <div class="subsection">
+            <h3>Impact During Inflation (Rising Prices)</h3>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>FIFO</th>
+                  <th>LIFO</th>
+                  <th>Weighted Average</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Cost of Goods Sold (COGS)</strong></td>
+                  <td>Lowest</td>
+                  <td>Highest</td>
+                  <td>Between FIFO and LIFO</td>
+                </tr>
+                <tr>
+                  <td><strong>Net Income</strong></td>
+                  <td>Highest</td>
+                  <td>Lowest</td>
+                  <td>Between FIFO and LIFO</td>
+                </tr>
+                <tr>
+                  <td><strong>Income Taxes</strong></td>
+                  <td>Highest</td>
+                  <td>Lowest</td>
+                  <td>Between FIFO and LIFO</td>
+                </tr>
+                <tr>
+                  <td><strong>Ending Inventory</strong></td>
+                  <td>Highest</td>
+                  <td>Lowest</td>
+                  <td>Between FIFO and LIFO</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="subsection">
+            <h3>Impact During Deflation (Falling Prices)</h3>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>FIFO</th>
+                  <th>LIFO</th>
+                  <th>Weighted Average</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Cost of Goods Sold (COGS)</strong></td>
+                  <td>Highest</td>
+                  <td>Lowest</td>
+                  <td>Between FIFO and LIFO</td>
+                </tr>
+                <tr>
+                  <td><strong>Net Income</strong></td>
+                  <td>Lowest</td>
+                  <td>Highest</td>
+                  <td>Between FIFO and LIFO</td>
+                </tr>
+                <tr>
+                  <td><strong>Income Taxes</strong></td>
+                  <td>Lowest</td>
+                  <td>Highest</td>
+                  <td>Between FIFO and LIFO</td>
+                </tr>
+                <tr>
+                  <td><strong>Ending Inventory</strong></td>
+                  <td>Lowest</td>
+                  <td>Highest</td>
+                  <td>Between FIFO and LIFO</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="highlight-box">
+            <p><strong>📝 Note on LIFO Liquidation:</strong> This occurs when sales exceed purchases, resulting in the sale of older, lower-priced inventory layers. This can inflate reported profits.</p>
+          </div>
+
+          <div class="highlight-box">
+            <p><strong>📝 Note on Constant Prices:</strong> If prices remain constant, all cost flow methods yield identical financial results.</p>
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div id="section-2" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Inventory Valuation</h2>
+          </div>
+
+          <p>Inventory is reported on the balance sheet at the <span class="key-term">lower of cost or market value</span> to avoid overstatement when inventory value declines.</p>
+
+          <div class="subsection">
+            <h3>Valuation Rules: IFRS vs. US GAAP</h3>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Standard</th>
+                  <th>Valuation Rule</th>
+                  <th>Reversal of Write-Downs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>IFRS</strong></td>
+                  <td>Carried at the lower of <strong>cost</strong> and <strong>Net Realizable Value (NRV)</strong>. NRV is the estimated selling price less selling and completion costs.</td>
+                  <td><span class="text-green-600 font-semibold">✅ Allowed.</span> Recovery in value allows for a write-up, limited to the original write-down amount.</td>
+                </tr>
+                <tr>
+                  <td><strong>US GAAP</strong></td>
+                  <td>For LIFO/retail methods, carried at the lower of <strong>cost</strong> or <strong>market</strong>. "Market" is replacement cost within an upper and lower bound. For other methods, it's the lower of cost or NRV.</td>
+                  <td><span class="text-red-600 font-semibold">❌ Not allowed.</span> After a write-down, the new lower value becomes the new cost basis.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="subsection">
+            <h3>Effects of Inventory Write-Downs</h3>
+            <ul class="space-y-2">
+              <li>• Reduces reported profit and the inventory carrying amount.</li>
+              <li>• Negatively impacts profitability, liquidity, and solvency ratios.</li>
+              <li>• Positively impacts activity ratios like inventory turnover, which may falsely suggest improved efficiency.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div id="section-3" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Inventory Management Ratios</h2>
+          </div>
+
+          <div class="subsection">
+            <h4>Inventory Turnover</h4>
+            <div class="formula-box">
+              COGS / Average Inventory
+            </div>
+            <p>This ratio indicates how many times inventory is sold and replaced during a period. A high ratio generally suggests efficient inventory management.</p>
+            
+            <div class="example-box">
+              <h4>💡 Example</h4>
+              <p>If COGS is $500,000 and Average Inventory is $100,000:</p>
+              <p><strong>Turnover</strong> = $500,000 / $100,000 = <strong>5.0 times</strong></p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h4>Days of Inventory on Hand (DOH)</h4>
+            <div class="formula-box">
+              365 / Inventory Turnover Ratio
+            </div>
+            <p>This measures the average number of days inventory is held before being sold. A lower DOH suggests efficiency but could risk stockouts. A higher DOH may indicate slow-moving inventory or strategic stockpiling.</p>
+            
+            <div class="example-box">
+              <h4>💡 Example</h4>
+              <p>Using a turnover ratio of 5.0:</p>
+              <p><strong>DOH</strong> = 365 / 5.0 = <strong>73 days</strong></p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h4>Gross Profit Margin</h4>
+            <div class="formula-box">
+              Gross Profit / Revenue
+            </div>
+            <p>This indicates profitability. Higher margins may suggest stronger pricing power or a less competitive market, while lower margins can indicate a highly competitive industry.</p>
+            
+            <div class="example-box">
+              <h4>💡 Example</h4>
+              <p>If Revenue is $800,000 and COGS is $500,000, Gross Profit is $300,000:</p>
+              <p><strong>Margin</strong> = $300,000 / $800,000 = <strong>37.5%</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div id="section-4" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Presentation and Disclosure Requirements</h2>
+          </div>
+
+          <p>IFRS and US GAAP have similar disclosure requirements, with a few key differences.</p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Disclosure Item</th>
+                <th>IFRS</th>
+                <th>US GAAP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Accounting Policies & Carrying Amounts</strong></td>
+                <td>Required</td>
+                <td>Required</td>
+              </tr>
+              <tr>
+                <td><strong>Inventory Recognized as Expense (COGS)</strong></td>
+                <td>Required</td>
+                <td>Required</td>
+              </tr>
+              <tr>
+                <td><strong>Write-Downs</strong></td>
+                <td>Disclosure of write-downs to NRV is required.</td>
+                <td>Disclosure of write-downs is required.</td>
+              </tr>
+              <tr>
+                <td><strong>Reversals of Write-Downs</strong></td>
+                <td>Required to disclose reversals and the related circumstances.</td>
+                <td>Not applicable as reversals are not permitted.</td>
+              </tr>
+              <tr>
+                <td><strong>LIFO Liquidation</strong></td>
+                <td>Not applicable as LIFO is not permitted.</td>
+                <td>Disclosure of income from LIFO liquidation is mandatory.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+          <a href="5. Advanced Analysis of Cash Flow Statements.html" class="flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+            ← Chapter 5: Advanced Cash Flow Analysis
+          </a>
+          <a href="7. Analysis of Long-Term Assets.html" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+            Chapter 7: Long-Term Assets →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Menu Button -->
+  <div class="fixed bottom-6 left-6 z-50">
+    <a href="index.html" class="flex items-center px-4 py-3 bg-indigo-600 text-white rounded-lg shadow-lg hover:bg-indigo-700 transition-colors">
+      ← Back to Menu
+    </a>
+  </div>
+
+</body>
+</html>

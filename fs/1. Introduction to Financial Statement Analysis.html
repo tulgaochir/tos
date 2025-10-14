@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 1: Introduction to Financial Statement Analysis</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      font-size: 1.125rem;
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .key-term {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
+    .example-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #0ea5e9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .example-box::before {
+      content: "💡 Example";
+      position: absolute;
+      top: -12px;
+      left: 1rem;
+      background: #0ea5e9;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid #f59e0b;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .nav-buttons {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .toc h3 {
+      margin: 0 0 1rem 0;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.875rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .toc a:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .comparison-table th {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .comparison-table tr:hover {
+      background: #f3f4f6;
+    }
+
+    @media (max-width: 768px) {
+      .nav-buttons {
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        justify-content: space-between;
+      }
+      
+      .nav-btn {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="gradient-bg text-white">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="flex items-center mb-4">
+            <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-medium">Chapter 1</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">Introduction to Financial Statement Analysis</h1>
+          <p class="text-xl opacity-90 max-w-3xl">A comprehensive guide for CFA candidates covering the framework, users, and regulatory sources of financial analysis</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Table of Contents -->
+      <div class="lg:col-span-1">
+        <div class="toc">
+          <h3>Table of Contents</h3>
+          <ul>
+            <li><a href="#section-1">1. Introduction to Financial Analysis</a></li>
+            <li><a href="#section-2">2. The Financial Statement Analysis Framework</a></li>
+            <li><a href="#section-3">3. Scope of Financial Statement Analysis</a></li>
+            <li><a href="#section-4">4. Regulated Sources of Information</a></li>
+            <li><a href="#section-5">5. Comparison of IFRS and U.S. GAAP</a></li>
+            <li><a href="#section-6">6. Other Sources of Information</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="lg:col-span-3">
+
+        <section id="section-1" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Introduction to Financial Analysis</h2>
+          </div>
+          
+          <p>
+            <span class="key-term">Financial analysis</span> is the process of using a company's financial data to assess its performance, financial health, and future prospects. It's essential for making informed investment, lending, and management decisions.
+          </p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Who Uses Financial Analysis?</h3>
+          <p>Different stakeholders have different goals:</p>
+          
+          <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 class="font-semibold text-blue-800 mb-3">🏦 Debt Investors (Creditors)</h4>
+              <p class="text-sm text-gray-700 mb-2">Banks, bondholders, and lenders. Their main concern is whether the company can <strong>repay its debt</strong> on time.</p>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Focus on <strong>liquidity</strong> (short-term cash flow)</li>
+                <li>• Focus on <strong>solvency</strong> (long-term ability to meet obligations)</li>
+                <li>• Key questions: Can the company pay interest? Will it repay the principal?</li>
+              </ul>
+            </div>
+            
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-3">📈 Equity Investors (Shareholders)</h4>
+              <p class="text-sm text-gray-700 mb-2">Owners of the company. They care about <strong>profitability</strong>, <strong>growth</strong>, and <strong>long-term value creation</strong>.</p>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Want rising earnings and strong returns on capital</li>
+                <li>• Desire sustainable dividends</li>
+                <li>• Key questions: Is the stock undervalued? Can the company grow earnings?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="example-box mt-6">
+            <h4 class="font-semibold text-blue-800 mb-2">Different Perspectives</h4>
+            <p class="mb-3">A company reports strong profits but has high debt and weak cash flow.</p>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <p class="font-medium text-red-600">🔴 Creditors may avoid it</p>
+                <p class="text-sm text-gray-600">Too risky to repay loans</p>
+              </div>
+              <div>
+                <p class="font-medium text-green-600">🟢 Equity investors might still buy</p>
+                <p class="text-sm text-gray-600">If they believe profits will grow and debt can be managed</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-2" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">The Financial Statement Analysis Framework</h2>
+          </div>
+          
+          <p>
+            A structured, six-step framework ensures consistent and thorough analysis. This is the gold standard used by CFA charterholders and professional analysts.
+          </p>
+
+          <div class="space-y-6 mt-6">
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">1</div>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Define the Purpose and Context</h4>
+                <ul class="text-gray-600 space-y-1">
+                  <li>• Why are you analyzing the company? (Investment, credit, M&A?)</li>
+                  <li>• Define the output: report, presentation, or internal memo</li>
+                  <li>• Set time constraints and data availability</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">2</div>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Collect Input Data</h4>
+                <ul class="text-gray-600 space-y-1">
+                  <li>• <strong>Primary sources:</strong> Financial statements (I/S, B/S, SCF, Statement of Shareholders' Equity)</li>
+                  <li>• <strong>Secondary sources:</strong> Industry reports, economic data, competitor filings</li>
+                  <li>• Use reliable platforms: SEC EDGAR, Bloomberg, company websites</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">3</div>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Process the Data</h4>
+                <ul class="text-gray-600 space-y-1">
+                  <li>• Calculate financial ratios (profitability, liquidity, leverage, efficiency)</li>
+                  <li>• Create common-size statements (e.g., income statement as % of revenue)</li>
+                  <li>• Perform trend analysis and regression if needed</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">4</div>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Analyze and Interpret</h4>
+                <ul class="text-gray-600 space-y-1">
+                  <li>• Turn processed data into insights</li>
+                  <li>• Compare results to peers, historical performance, and industry benchmarks</li>
+                  <li>• Identify strengths, weaknesses, risks, and growth drivers</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">5</div>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Develop and Communicate Conclusions</h4>
+                <ul class="text-gray-600 space-y-1">
+                  <li>• Form clear conclusions: "The stock is undervalued," "Credit risk is high"</li>
+                  <li>• Present findings in a well-structured report</li>
+                  <li>• <strong>Disclose limitations</strong> and risks — required by CFA Institute Code of Ethics</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">6</div>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Follow Up</h4>
+                <ul class="text-gray-600 space-y-1">
+                  <li>• Financial analysis is not a one-time task</li>
+                  <li>• Update your analysis with new data (quarterly earnings, economic shifts)</li>
+                  <li>• Revise recommendations as needed</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-3" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Scope of Financial Statement Analysis</h2>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Financial Reporting vs. Financial Analysis</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <h4 class="font-semibold text-purple-800 mb-2">📄 Financial Reporting</h4>
+              <p class="text-sm text-gray-700 mb-2">The process of preparing and disclosing financial statements. It provides the <strong>raw data</strong>.</p>
+              <p class="text-sm text-purple-700 font-medium">Goal: Present a true and fair view of performance and financial position</p>
+            </div>
+            
+            <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+              <h4 class="font-semibold text-orange-800 mb-2">🔍 Financial Statement Analysis</h4>
+              <p class="text-sm text-gray-700 mb-2">The process of interpreting that data to make decisions.</p>
+              <p class="text-sm text-orange-700 font-medium">Goal: Evaluate profitability, risk, cash flow generation, and valuation</p>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Primary Uses of Financial Analysis</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">💰</span>
+                <div>
+                  <h4 class="font-semibold">Equity Valuation</h4>
+                  <p class="text-sm text-gray-600">Estimate intrinsic value to decide buy/sell/hold</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">⚠️</span>
+                <div>
+                  <h4 class="font-semibold">Credit Risk Assessment</h4>
+                  <p class="text-sm text-gray-600">Evaluate ability to repay debt — critical for bond investors</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">🤝</span>
+                <div>
+                  <h4 class="font-semibold">M&A Due Diligence</h4>
+                  <p class="text-sm text-gray-600">Investigate target company's financial health</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">📊</span>
+                <div>
+                  <h4 class="font-semibold">Performance Evaluation</h4>
+                  <p class="text-sm text-gray-600">Assess profitability of business units or subsidiaries</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-4" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Regulated Sources of Information</h2>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Standard-Setting Bodies vs. Regulatory Authorities</h3>
+          
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 class="font-semibold text-blue-800 mb-3">📝 Standard-Setting Bodies</h4>
+              <p class="text-sm text-gray-700 mb-3">Develop accounting rules</p>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• <strong>FASB:</strong> Sets U.S. GAAP for U.S. companies</li>
+                <li>• <strong>IASB:</strong> Sets IFRS, used globally</li>
+              </ul>
+            </div>
+            
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+              <h4 class="font-semibold text-red-800 mb-3">🏛️ Regulatory Authorities</h4>
+              <p class="text-sm text-gray-700 mb-3">Enforce compliance</p>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• <strong>SEC:</strong> Regulates U.S. public companies</li>
+                <li>• <strong>IOSCO:</strong> Global body promoting investor protection</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4 class="font-semibold mb-2">🇪🇺 European Context</h4>
+            <ul class="text-sm space-y-1">
+              <li>• <strong>IFRS is mandatory</strong> for all listed companies in the EU since 2005</li>
+              <li>• <strong>ESMA:</strong> Coordinates financial regulation across EU countries</li>
+              <li>• <strong>EFRAG:</strong> Advises the EU on IFRS adoption</li>
+            </ul>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Key SEC Filings (U.S. Public Companies)</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Form</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Form 10-K</strong></td>
+                <td>Annual report with audited financial statements and detailed business analysis</td>
+              </tr>
+              <tr>
+                <td><strong>Form 10-Q</strong></td>
+                <td>Quarterly report with unaudited financial statements</td>
+              </tr>
+              <tr>
+                <td><strong>Form 8-K</strong></td>
+                <td>Reports major events (e.g., CEO change, acquisition, bankruptcy)</td>
+              </tr>
+              <tr>
+                <td><strong>Form 144</strong></td>
+                <td>Notice of intent to sell restricted securities</td>
+              </tr>
+              <tr>
+                <td><strong>Forms 3, 4, 5</strong></td>
+                <td>Report insider trading by executives and directors</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Key Components of Financial Reports</h3>
+          
+          <div class="space-y-4">
+            <div class="border border-gray-200 rounded-lg p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">📖 Management Discussion & Analysis (MD&A)</h4>
+              <p class="text-sm text-gray-600 mb-2">Narrative from management explaining financial results, trends, risks, and outlook. Required by SEC and encouraged under IFRS.</p>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">✅ Auditor's Report</h4>
+              <p class="text-sm text-gray-600 mb-3">Independent opinion on whether financial statements are fairly presented.</p>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                <div class="bg-green-100 text-green-800 p-2 rounded">
+                  <strong>Unqualified (Clean):</strong> No material issues
+                </div>
+                <div class="bg-yellow-100 text-yellow-800 p-2 rounded">
+                  <strong>Qualified:</strong> Some issues, but overall fair
+                </div>
+                <div class="bg-red-100 text-red-800 p-2 rounded">
+                  <strong>Adverse:</strong> Major misstatements
+                </div>
+                <div class="bg-gray-100 text-gray-800 p-2 rounded">
+                  <strong>Disclaimer:</strong> Couldn't gather enough evidence
+                </div>
+              </div>
+              <p class="text-sm text-gray-500 mt-2"><strong>CAMs/KAMs:</strong> Critical/Key Audit Matters highlight high-risk areas like revenue recognition.</p>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">📋 Financial Notes</h4>
+              <p class="text-sm text-gray-600">Essential disclosures on accounting policies, estimates, contingent liabilities, and related-party transactions. Analysts must read these carefully — they often reveal key risks.</p>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg p-4">
+              <h4 class="font-semibold text-gray-800 mb-2">🌐 Segment Reporting</h4>
+              <p class="text-sm text-gray-600">Companies must break down financial data by business unit or geography if segments are material and regularly reviewed by management.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-5" class="content-section">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <h2 class="section-title">Comparison of IFRS and U.S. GAAP</h2>
+          </div>
+          
+          <p>
+            Most countries use <strong>IFRS</strong>, while U.S. public companies use <strong>U.S. GAAP</strong>. Analysts must understand key differences because they affect financial statements and comparability.
+          </p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Key Differences Between IFRS and U.S. GAAP</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th>U.S. GAAP</th>
+                <th>IFRS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Inventory Valuation</strong></td>
+                <td>Allows <strong>LIFO</strong> (Last-In, First-Out)</td>
+                <td><strong>Prohibits LIFO</strong> — only FIFO and weighted average allowed</td>
+              </tr>
+              <tr>
+                <td><strong>Extraordinary Items</strong></td>
+                <td>Separately reported on income statement (rare)</td>
+                <td><strong>No segregation</strong> — all items part of normal operations</td>
+              </tr>
+              <tr>
+                <td><strong>Development Costs</strong></td>
+                <td>Expensed as incurred (reduces profit)</td>
+                <td><strong>Can be capitalized</strong> if criteria met (e.g., technical feasibility)</td>
+              </tr>
+              <tr>
+                <td><strong>Inventory Write-Down Reversals</strong></td>
+                <td><strong>Not allowed</strong> — once written down, stays down</td>
+                <td><strong>Allowed</strong> if market value recovers</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="highlight-box mt-6">
+            <h4 class="font-semibold mb-3">⚡ Why These Differences Matter</h4>
+            <ul class="space-y-2 text-sm">
+              <li>• <strong>LIFO vs. FIFO:</strong> In inflation, LIFO increases COGS and lowers profit → lower taxes but lower reported earnings</li>
+              <li>• <strong>Development costs:</strong> Capitalizing R&D under IFRS increases assets and future profits; expensing under GAAP reduces current profit</li>
+              <li>• <strong>Write-down reversals:</strong> IFRS allows profit boosts if inventory value recovers — can be used to manage earnings</li>
+            </ul>
+          </div>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Stay Updated on Standard Changes</h4>
+            <p>Accounting standards evolve. The IASB, FASB, and CFA Institute regularly issue updates. Analysts must monitor changes to understand their impact on financials and valuations.</p>
+          </div>
+        </section>
+
+        <section id="section-6" class="content-section">
+          <div class="section-header">
+            <div class="section-number">6</div>
+            <h2 class="section-title">Other Sources of Information</h2>
+          </div>
+          
+          <p>Smart analysts go beyond financial statements to get a complete picture.</p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Issuer Sources (From the Company)</h3>
+          <div class="grid md:grid-cols-2 gap-4 mb-6">
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <span class="text-xl mr-3">🎧</span>
+                <div>
+                  <h4 class="font-semibold text-sm">Earnings Calls</h4>
+                  <p class="text-xs text-gray-600">Listen to management discuss results and answer analyst questions</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <span class="text-xl mr-3">📊</span>
+                <div>
+                  <h4 class="font-semibold text-sm">Investor Presentations</h4>
+                  <p class="text-xs text-gray-600">Slides from conferences — often include strategic plans and KPIs</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <span class="text-xl mr-3">📢</span>
+                <div>
+                  <h4 class="font-semibold text-sm">Press Releases</h4>
+                  <p class="text-xs text-gray-600">Announcements on earnings, M&A, or new products</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <span class="text-xl mr-3">💬</span>
+                <div>
+                  <h4 class="font-semibold text-sm">Direct Communication</h4>
+                  <p class="text-xs text-gray-600">Talking to IR teams or management (where permitted)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Third-Party Sources</h3>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-3">🌐 Public Sources</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Industry reports (McKinsey, Gartner)</li>
+                <li>• Economic data (GDP, inflation, employment)</li>
+                <li>• News outlets (Reuters, Bloomberg)</li>
+                <li>• Social media (sentiment analysis)</li>
+              </ul>
+            </div>
+            
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <h4 class="font-semibold text-purple-800 mb-3">🔒 Proprietary Sources</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Analyst research reports (sell-side)</li>
+                <li>• Data platforms: Bloomberg, FactSet, Wind</li>
+                <li>• Consultancy reports (supply chain risks)</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Proprietary Primary Research</h3>
+          <p class="mb-4">Some analysts conduct their own research for unique insights:</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+              <span class="text-2xl mb-2 block">🗳️</span>
+              <h4 class="font-semibold text-sm">Customer Surveys</h4>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+              <span class="text-2xl mb-2 block">🏪</span>
+              <h4 class="font-semibold text-sm">Store Visits</h4>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+              <span class="text-2xl mb-2 block">👨‍💼</span>
+              <h4 class="font-semibold text-sm">Expert Interviews</h4>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600 mt-4">This "on-the-ground" research can uncover trends before they appear in financials.</p>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="nav-buttons">
+    <a href="./index.html" class="nav-btn">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to Menu
+    </a>
+    <a href="./2. Analyzing Income Statements.html" class="nav-btn">
+      Next Chapter
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </a>
+  </div>
+
+</body>
+</html>

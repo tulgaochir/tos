@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 7: Analysis of Long-Term Assets</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- MathJax for mathematical formulas -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .subsection {
+      margin: 1.5rem 0;
+    }
+
+    .subsection h3 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .subsection h4 {
+      color: var(--primary-light);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .formula-box {
+      background: #f0f9ff;
+      border: 1px solid #0ea5e9;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .example-box {
+      background: #fefce8;
+      border: 1px solid #facc15;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .example-box h4 {
+      margin-top: 0;
+      color: #a16207;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: #ecfdf5;
+      border: 1px solid #10b981;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .comparison-table th {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .comparison-table tr:hover {
+      background: #f1f5f9;
+    }
+
+    .key-term {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .toc {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 2rem;
+      z-index: 10;
+    }
+
+    .toc h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .toc {
+        position: static;
+      }
+      
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .section-number {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <div class="gradient-bg text-white">
+    <div class="max-w-6xl mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Chapter 7: Analysis of Long-Term Assets</h1>
+      <p class="text-xl opacity-90">Intangible Assets, Impairment, and Financial Analysis</p>
+    </div>
+  </div>
+
+  <!-- Navigation Breadcrumb -->
+  <div class="bg-white border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-3">
+      <div class="flex items-center space-x-2 text-sm text-gray-600">
+        <a href="index.html" class="hover:text-blue-600">Financial Statement Analysis</a>
+        <span>›</span>
+        <span class="text-gray-900 font-medium">Chapter 7: Analysis of Long-Term Assets</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Table of Contents (Sidebar) -->
+      <div class="lg:col-span-1">
+        <div class="toc">
+          <h3>📚 Table of Contents</h3>
+          <ul>
+            <li><a href="#section-1">1. Introduction to Long-Lived Assets</a></li>
+            <li><a href="#section-2">2. Acquiring Intangible Assets</a></li>
+            <li><a href="#section-3">3. Impairment and Derecognition</a></li>
+            <li><a href="#section-4">4. Presentation and Disclosures</a></li>
+            <li><a href="#section-5">5. Financial Analysis Applications</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="lg:col-span-3">
+
+        <!-- Section 1 -->
+        <div id="section-1" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Introduction to Long-Lived Assets</h2>
+          </div>
+
+          <p><strong>Long-lived assets</strong> are resources a company owns and uses in its operations for more than one year. They are expected to provide economic benefits over an extended period. While a company may have many valuable resources, accounting standards are specific about which ones can be formally recognized as assets on the balance sheet.</p>
+        </div>
+
+        <!-- Section 2 -->
+        <div id="section-2" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Acquiring Intangible Assets</h2>
+          </div>
+
+          <p><strong>Intangible assets</strong> are identifiable, non-monetary assets that do not have a physical form. Common examples include patents, copyrights, trademarks, and franchise rights.</p>
+
+          <div class="subsection">
+            <h3>IFRS Recognition Criteria for Intangible Assets</h3>
+            <p>Under IFRS, for an identifiable intangible asset to be recognized on the balance sheet, it must meet several criteria:</p>
+            <ul class="space-y-2">
+              <li>• <strong>Identifiable:</strong> The asset can be separated from the company or arises from contractual or legal rights.</li>
+              <li>• <strong>Control:</strong> The company must have control over the asset.</li>
+              <li>• <strong>Future Economic Benefits:</strong> It is expected to generate future economic benefits such as revenue or cost savings for the company. This must be probable.</li>
+              <li>• <strong>Reliable Measurement:</strong> The cost of the asset can be measured reliably.</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Methods of Acquiring Intangible Assets</h3>
+            <p>The accounting treatment for an intangible asset depends on how it was acquired.</p>
+
+            <h4>A. Assets Acquired Outside of a Business Combination</h4>
+            <p>This refers to purchasing an intangible asset directly, not as part of acquiring an entire company.</p>
+            <ul class="space-y-2">
+              <li>• The asset is initially recorded at its <strong>fair value</strong> at the time of acquisition, which is typically its purchase price.</li>
+              <li>• The cost is classified as an <strong>investing cash outflow</strong> on the cash flow statement.</li>
+              <li>• If multiple assets are bought together in a <strong>lump-sum purchase</strong>, the total purchase price is allocated to each individual asset based on their relative fair market values.</li>
+            </ul>
+
+            <h4>B. Internally Developed Intangible Assets</h4>
+            <p>This covers assets a company creates for itself, such as a new patent from its research efforts. The accounting rules differ significantly between IFRS and U.S. GAAP.</p>
+
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Standard</th>
+                  <th>Treatment of Research & Development (R&D) Costs</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>IFRS</strong></td>
+                  <td>
+                    IFRS splits R&D into two phases:<br>
+                    1. <strong>Research Phase:</strong> All costs in this phase are expensed as incurred.<br>
+                    2. <strong>Development Phase:</strong> Costs in this phase can be capitalized (recorded as an asset) if specific criteria are met, demonstrating the project's technical and commercial viability.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>U.S. GAAP</strong></td>
+                  <td>
+                    Generally, all R&D costs for internally created intangibles are expensed.<br>
+                    A major exception exists for certain <strong>software development costs</strong>, which can be capitalized after technological feasibility has been established.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>C. Assets Acquired in a Business Combination</h4>
+            <p>When one company acquires another, the intangible assets of the acquired company are recorded using the <strong>acquisition method</strong>.</p>
+            <ul class="space-y-2">
+              <li>• The total purchase price is allocated to each identifiable asset and liability of the acquired company based on their fair values.</li>
+              <li>• <strong>Goodwill</strong> is created when the acquisition price is greater than the fair value of the net identifiable assets (tangible assets + identifiable intangible assets - liabilities).</li>
+            </ul>
+
+            <div class="info-box">
+              <p><strong>IFRS vs. U.S. GAAP Separation Rules:</strong></p>
+              <ul class="space-y-1 mt-2">
+                <li>• <strong>IFRS:</strong> Any unidentifiable assets are simply recognized as part of goodwill.</li>
+                <li>• <strong>U.S. GAAP:</strong> An acquired intangible asset must be reported separately from goodwill if it meets specific contractual/legal or separability criteria.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div id="section-3" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Impairment and Derecognition of Assets</h2>
+          </div>
+
+          <p><strong>Impairment</strong> occurs when an asset's carrying value on the balance sheet exceeds its recoverable amount. <strong>Derecognition</strong> is the removal of an asset from the financial statements.</p>
+
+          <div class="subsection">
+            <h3>Impairment of Property, Plant & Equipment (PP&E)</h3>
+            <ul class="space-y-2">
+              <li>• PP&E is not tested for impairment on a regular schedule.</li>
+              <li>• Instead, a company must assess for impairment when there are <strong>indicators of impairment</strong> (triggering events).</li>
+              <li>• <strong>Financial Statement Impact:</strong> Reduces asset carrying amount, decreases net income, increases leverage ratios, but has no direct impact on operating cash flow (non-cash expense).</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Impairment Recognition: IFRS vs. U.S. GAAP</h3>
+            
+            <h4>IFRS: One-Step Approach</h4>
+            <p>Under IFRS, an asset is impaired if its <strong>Carrying Amount > Recoverable Amount</strong>.</p>
+            <ul class="space-y-2">
+              <li>• <strong>Carrying Amount:</strong> The asset's value on the balance sheet (historical cost less accumulated depreciation).</li>
+              <li>• <strong>Recoverable Amount:</strong> The <strong>higher</strong> of:
+                <ul class="ml-4 mt-1 space-y-1">
+                  <li>1. Fair Value less Costs to Sell</li>
+                  <li>2. Value in Use (present value of future cash flows from continued use)</li>
+                </ul>
+              </li>
+              <li>• <strong>Impairment Loss</strong> = Carrying Amount - Recoverable Amount</li>
+            </ul>
+
+            <div class="example-box">
+              <h4>💡 Example (IFRS)</h4>
+              <p>A machine has a carrying amount of $100,000. Its fair value less costs to sell is $75,000, and its value in use is $80,000.</p>
+              <ol class="list-decimal ml-4 space-y-1">
+                <li><strong>Determine Recoverable Amount:</strong> Higher of $75,000 and $80,000 = $80,000</li>
+                <li><strong>Test for Impairment:</strong> $100,000 > $80,000, so the asset is impaired</li>
+                <li><strong>Calculate Loss:</strong> $100,000 - $80,000 = $20,000 impairment loss</li>
+              </ol>
+            </div>
+
+            <h4>U.S. GAAP: Two-Step Approach</h4>
+            <ol class="list-decimal space-y-2">
+              <li><strong>Step 1: Recoverability Test.</strong> Asset is tested for impairment only if <strong>Carrying Amount > Undiscounted Future Cash Flows</strong>.</li>
+              <li><strong>Step 2: Loss Measurement.</strong> If failed, impairment loss = <strong>Carrying Amount - Fair Value</strong>.</li>
+            </ol>
+
+            <div class="example-box">
+              <h4>💡 Example (U.S. GAAP)</h4>
+              <p>A machine has carrying amount of $100,000, undiscounted cash flows of $90,000, fair value of $75,000.</p>
+              <ol class="list-decimal ml-4 space-y-1">
+                <li><strong>Step 1:</strong> $100,000 > $90,000, asset fails recoverability test</li>
+                <li><strong>Step 2:</strong> Impairment loss = $100,000 - $75,000 = $25,000</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Reversals of Impairment Losses</h3>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Standard</th>
+                  <th>Reversal Policy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>IFRS</strong></td>
+                  <td>Allows reversal of impairment losses for both assets held for use and held for sale, up to previous carrying amount before impairment.</td>
+                </tr>
+                <tr>
+                  <td><strong>U.S. GAAP</strong></td>
+                  <td>Prohibits reversal for assets held for use. Reversals allowed <strong>only</strong> for assets held for sale.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div id="section-4" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Presentation and Disclosure Requirements</h2>
+          </div>
+
+          <p>Both IFRS and U.S. GAAP require detailed disclosures about long-lived assets to help analysts understand a company's financial position.</p>
+
+          <div class="subsection">
+            <h3>Common Disclosures for PP&E (Both Standards)</h3>
+            <ul class="space-y-2">
+              <li>• Depreciation methods used</li>
+              <li>• Gross carrying amount and accumulated depreciation</li>
+              <li>• Depreciation expense for the period</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Impairment Loss Disclosures</h3>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>IFRS Disclosures</th>
+                  <th>U.S. GAAP Disclosures</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <ul class="space-y-1">
+                      <li>• Total amount of impairment losses and reversals by asset class</li>
+                      <li>• Main events and circumstances causing impairments</li>
+                    </ul>
+                  </td>
+                  <td>
+                    <ul class="space-y-1">
+                      <li>• Description of impaired asset</li>
+                      <li>• Factors leading to impairment</li>
+                      <li>• Fair value determination method</li>
+                      <li>• Amount and location of impairment loss</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div id="section-5" class="content-section">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <h2 class="section-title">Using Disclosures in Financial Analysis</h2>
+          </div>
+
+          <p>The detailed disclosures about long-lived assets can be used to calculate several important analytical ratios.</p>
+
+          <div class="subsection">
+            <h3>Fixed Asset Turnover Ratio</h3>
+            <div class="formula-box">
+              Fixed Asset Turnover = Total Revenue / Average Net Fixed Assets
+            </div>
+            <p><strong>What it means:</strong> Measures how efficiently a company uses its fixed assets to generate sales. Higher ratio suggests better asset utilization.</p>
+            
+            <div class="example-box">
+              <h4>💡 Example</h4>
+              <p>Company reports revenue of $500,000. Net fixed assets: beginning $180,000, ending $220,000.</p>
+              <ol class="list-decimal ml-4 space-y-1">
+                <li>Average Net Fixed Assets = ($180,000 + $220,000) ÷ 2 = $200,000</li>
+                <li>Turnover Ratio = $500,000 ÷ $200,000 = <strong>2.5</strong></li>
+                <li>Company generates $2.5 in revenue for every $1 of fixed assets</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Asset Age Ratios</h3>
+            <p>These ratios help estimate the age and remaining life of a company's asset base.</p>
+
+            <h4>Average Asset Age</h4>
+            <div class="formula-box">
+              Average Age = Accumulated Depreciation / Depreciation Expense
+            </div>
+
+            <h4>Remaining Useful Life</h4>
+            <div class="formula-box">
+              Remaining Useful Life = Net PPE / Depreciation Expense
+            </div>
+
+            <div class="example-box">
+              <h4>💡 Example (Asset Age Analysis)</h4>
+              <p>Company data: Accumulated Depreciation = $60,000; Annual Depreciation = $10,000; Net PPE = $40,000</p>
+              <ul class="space-y-1">
+                <li>• <strong>Average Age:</strong> $60,000 ÷ $10,000 = 6 years</li>
+                <li>• <strong>Remaining Life:</strong> $40,000 ÷ $10,000 = 4 years</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Straight-Line Depreciation Analysis</h3>
+
+            <h4>Annual Depreciation Expense</h4>
+            <div class="formula-box">
+              Annual Depreciation = (Total Historical Cost - Salvage Value) / Estimated Useful Life
+            </div>
+
+            <h4>Estimated Total Useful Life</h4>
+            <div class="formula-box">
+              Estimated Life = (Total Historical Cost - Salvage Value) / Annual Depreciation
+            </div>
+
+            <div class="example-box">
+              <h4>💡 Example (Depreciation Analysis)</h4>
+              <p>Equipment cost: $120,000; Salvage value: $20,000; Useful life: 10 years</p>
+              <ul class="space-y-1">
+                <li>• <strong>Annual Depreciation:</strong> ($120,000 - $20,000) ÷ 10 = $10,000/year</li>
+                <li>• <strong>Verification:</strong> ($120,000 - $20,000) ÷ $10,000 = 10 years ✓</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+          <a href="6. Analysis of Inventories.html" class="flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+            ← Chapter 6: Analysis of Inventories
+          </a>
+          <a href="8. Topics in Long-Term Liabilities and Equity.html" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+            Chapter 8: Long-Term Liabilities →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Menu Button -->
+  <div class="fixed bottom-6 left-6 z-50">
+    <a href="index.html" class="flex items-center px-4 py-3 bg-indigo-600 text-white rounded-lg shadow-lg hover:bg-indigo-700 transition-colors">
+      ← Back to Menu
+    </a>
+  </div>
+
+</body>
+</html>

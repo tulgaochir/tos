@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 4: Analyzing the Statement of Cash Flows</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      font-size: 1.125rem;
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .key-term {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
+    .formula-box {
+      font-family: 'Fira Code', monospace;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #0ea5e9;
+      border-left: 5px solid var(--accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      font-size: 1.05em;
+      overflow-x: auto;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      line-height: 1.8;
+    }
+
+    .example-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #0ea5e9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .example-box::before {
+      content: "💡 Example";
+      position: absolute;
+      top: -12px;
+      left: 1rem;
+      background: #0ea5e9;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid #f59e0b;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .nav-buttons {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .toc h3 {
+      margin: 0 0 1rem 0;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.875rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .toc a:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    .icon {
+      font-weight: bold;
+      color: #00796b;
+    }
+
+    @media (max-width: 768px) {
+      .nav-buttons {
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        justify-content: space-between;
+      }
+      
+      .nav-btn {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="gradient-bg text-white">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="flex items-center mb-4">
+            <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-medium">Chapter 4</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">Analyzing the Statement of Cash Flows</h1>
+          <p class="text-xl opacity-90 max-w-3xl">Understanding operating, investing, and financing activities; direct vs. indirect method</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Table of Contents -->
+      <div class="lg:col-span-1">
+        <div class="toc">
+          <h3>Table of Contents</h3>
+          <ul>
+            <li><a href="#section-1">1. Introduction to SCF</a></li>
+            <li><a href="#section-2">2. Linkages Between Statements</a></li>
+            <li><a href="#section-3">3. Cash Flow from Operations</a></li>
+            <li><a href="#section-4">4. Cash Flow from Investing</a></li>
+            <li><a href="#section-5">5. Cash Flow from Financing</a></li>
+            <li><a href="#section-6">6. Complete SCF</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="lg:col-span-3">
+
+        <section id="section-1" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Introduction to the Statement of Cash Flows</h2>
+          </div>
+          
+          <p>
+            The <span class="key-term">Statement of Cash Flows (SCF)</span> shows how cash moves in and out of a company over a period (e.g., a quarter or year). It explains the change in the cash balance reported on the balance sheet.
+          </p>
+          
+          <p>
+            Unlike the income statement (which uses <strong>accrual accounting</strong>), the SCF focuses on <strong>actual cash transactions</strong>.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-4 mt-6">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 class="font-semibold text-blue-800 mb-3">📊 Income Statement</h4>
+              <p class="text-sm text-gray-600">Revenue is recognized when <em>earned</em>, even if cash hasn't been received</p>
+            </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-3">💰 Statement of Cash Flows</h4>
+              <p class="text-sm text-gray-600">Cash is recorded only when it is <em>received or paid</em></p>
+            </div>
+          </div>
+
+          <div class="example-box mt-6">
+            <h4 class="font-semibold text-blue-800 mb-2">Accrual vs. Cash</h4>
+            <p class="mb-3">A company sells $10,000 of goods on credit in Q1.</p>
+            <ul class="text-sm space-y-1">
+              <li>• <strong>Income Statement:</strong> Records $10,000 revenue in Q1</li>
+              <li>• <strong>Cash Flow Statement:</strong> $0 cash from operations in Q1</li>
+              <li>• When the customer pays in Q2, the SCF records the $10,000 as cash received</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="section-2" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Linkages Between Financial Statements</h2>
+          </div>
+          
+          <p>The four core financial statements are interconnected:</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">⚖️</span>
+                <div>
+                  <h4 class="font-semibold">Balance Sheet</h4>
+                  <p class="text-sm text-gray-600">Snapshot of assets, liabilities, and equity at a point in time</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">📊</span>
+                <div>
+                  <h4 class="font-semibold">Income Statement</h4>
+                  <p class="text-sm text-gray-600">Profitability over a period</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">💰</span>
+                <div>
+                  <h4 class="font-semibold">Statement of Cash Flows</h4>
+                  <p class="text-sm text-gray-600">Explains the change in cash</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">🏛️</span>
+                <div>
+                  <h4 class="font-semibold">Statement of Shareholders' Equity</h4>
+                  <p class="text-sm text-gray-600">Tracks changes in equity (e.g., retained earnings, stock issuance)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">How Accrual Accounting Connects the Statements</h3>
+          <p class="mb-4">Net income ≠ Change in cash. Why? Because accrual accounting recognizes revenue and expenses when they occur, not when cash moves.</p>
+          
+          <p class="mb-4">These timing differences create changes in working capital accounts, which link the income statement to the cash flow statement:</p>
+          
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-center">
+              <h4 class="font-semibold text-red-800 text-sm mb-1">📈 Accounts Receivable ↑</h4>
+              <p class="text-xs text-gray-600">Revenue earned but cash not yet received</p>
+            </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+              <h4 class="font-semibold text-green-800 text-sm mb-1">📈 Accounts Payable ↑</h4>
+              <p class="text-xs text-gray-600">Expense incurred but cash not yet paid</p>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+              <h4 class="font-semibold text-blue-800 text-sm mb-1">📈 Unearned Revenue ↑</h4>
+              <p class="text-xs text-gray-600">Cash received before revenue is earned</p>
+            </div>
+          </div>
+
+          <div class="formula-box text-center mt-6">
+            Beginning Cash + Net Cash Inflows = Ending Cash
+          </div>
+        </section>
+
+        <section id="section-3" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Cash Flow from Operating Activities (CFO)</h2>
+          </div>
+          
+          <p><strong>Operating activities</strong> are the core revenue-generating activities of a business (e.g., selling goods, paying suppliers).</p>
+          <p>There are two methods to present CFO:</p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">The Indirect Method (Most Common)</h3>
+          <p class="mb-4">Starts with net income and adjusts for non-cash items and changes in working capital.</p>
+          
+          <div class="space-y-4">
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">1</div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Start with Net Income</h4>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">2</div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Add back non-cash expenses</h4>
+                <ul class="text-sm text-gray-600 mt-1">
+                  <li>• Depreciation & Amortization</li>
+                  <li>• Losses on asset sales</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">3</div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Subtract gains on asset sales</h4>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold mr-4">4</div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Adjust for changes in working capital</h4>
+                <ul class="text-sm text-gray-600 mt-1">
+                  <li>• ↑ Accounts Receivable → Subtract (cash not received)</li>
+                  <li>• ↑ Inventory → Subtract (cash tied up)</li>
+                  <li>• ↑ Accounts Payable → Add (cash not yet paid)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">The Direct Method</h3>
+          <p class="mb-4">Shows actual cash inflows and outflows from operations.</p>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                <h4 class="font-semibold text-green-800 text-sm">Cash received from customers</h4>
+              </div>
+              <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                <h4 class="font-semibold text-red-800 text-sm">Cash paid to suppliers</h4>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                <h4 class="font-semibold text-red-800 text-sm">Cash paid to employees</h4>
+              </div>
+              <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                <h4 class="font-semibold text-red-800 text-sm">Cash paid for interest and taxes</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight-box mt-4">
+            <em>Note:</em> U.S. GAAP and IFRS require the indirect method to be disclosed even if the direct method is used.
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Calculating Direct Method Items</h3>
+          <p class="mb-4">To convert accrual data to cash, use related balance sheet accounts.</p>
+
+          <h4 class="font-semibold mt-6 mb-3 text-gray-800">1. Cash Received from Customers</h4>
+          <div class="formula-box">
+            Cash Received = Revenue − ΔAccounts Receivable
+          </div>
+          
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Example</h4>
+            <p class="mb-2">Revenue = $500,000, A/R ↑ by $20,000.</p>
+            <p>Cash Received = $500,000 − $20,000 = <strong>$480,000</strong></p>
+          </div>
+
+          <h4 class="font-semibold mt-6 mb-3 text-gray-800">2. Cash Paid for Inventory</h4>
+          <p><strong>Step 1: Calculate Purchases</strong></p>
+          <div class="formula-box">
+            Purchases = COGS + ΔInventory
+          </div>
+          <p><strong>Step 2: Calculate Cash Paid</strong></p>
+          <div class="formula-box">
+            Cash Paid = Purchases − ΔAccounts Payable
+          </div>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Example</h4>
+            <p class="mb-2">COGS = $300,000, Inventory ↑ $10,000 → Purchases = $310,000</p>
+            <p>A/P ↓ $5,000 → Cash Paid = $310,000 − (−$5,000) = <strong>$315,000</strong></p>
+          </div>
+
+          <h4 class="font-semibold mt-6 mb-3 text-gray-800">3. Cash Paid to Employees</h4>
+          <div class="formula-box">
+            Cash Paid = Salaries Expense − ΔSalaries Payable
+          </div>
+
+          <h4 class="font-semibold mt-6 mb-3 text-gray-800">4. Cash Paid for Interest</h4>
+          <div class="formula-box">
+            Cash Paid = Interest Expense − ΔInterest Payable
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Converting Indirect to Direct Method</h3>
+          <ol class="space-y-2">
+            <li class="flex">
+              <span class="text-blue-600 mr-2">1.</span>
+              <span>Start with accrual income statement items (e.g., revenue, COGS)</span>
+            </li>
+            <li class="flex">
+              <span class="text-blue-600 mr-2">2.</span>
+              <span>Remove non-cash components (e.g., depreciation)</span>
+            </li>
+            <li class="flex">
+              <span class="text-blue-600 mr-2">3.</span>
+              <span>Adjust for changes in related balance sheet accounts to get cash flows</span>
+            </li>
+          </ol>
+        </section>
+
+        <section id="section-4" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Cash Flow from Investing Activities (CFI)</h2>
+          </div>
+          
+          <p><strong>Investing activities</strong> involve long-term assets and investments.</p>
+          
+          <div class="grid md:grid-cols-2 gap-4 mt-6">
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-3">✅ Cash Inflows</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Sale of property, plant, and equipment (PPE)</li>
+                <li>• Sale of investments (stocks, bonds)</li>
+              </ul>
+            </div>
+            
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+              <h4 class="font-semibold text-red-800 mb-3">❌ Cash Outflows</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Purchase of PPE</li>
+                <li>• Purchase of investments</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="formula-box mt-6">
+            Net CFI = Proceeds from Asset Sales − Purchases of Long-Term Assets
+          </div>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Example</h4>
+            <p class="mb-3">A company sells old equipment for $50,000 and buys new machinery for $200,000.</p>
+            <p>Net CFI = $50,000 − $200,000 = <strong>−$150,000</strong></p>
+          </div>
+        </section>
+
+        <section id="section-5" class="content-section">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <h2 class="section-title">Cash Flow from Financing Activities (CFF)</h2>
+          </div>
+          
+          <p><strong>Financing activities</strong> involve transactions with owners and creditors.</p>
+          
+          <div class="grid md:grid-cols-2 gap-4 mt-6">
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-3">✅ Cash Inflows</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Issuing debt (bonds, loans)</li>
+                <li>• Issuing common stock</li>
+              </ul>
+            </div>
+            
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+              <h4 class="font-semibold text-red-800 mb-3">❌ Cash Outflows</h4>
+              <ul class="text-sm text-gray-600 space-y-1">
+                <li>• Repaying debt (principal)</li>
+                <li>• Paying dividends</li>
+                <li>• Buying back stock (treasury stock)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="formula-box mt-6">
+            Net CFF = Proceeds from Debt + Proceeds from Stock − Debt Repayments − Dividends − Stock Buybacks
+          </div>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Example</h4>
+            <p class="mb-3">A company:</p>
+            <ul class="text-sm space-y-1 mb-3">
+              <li>• Borrows $100,000</li>
+              <li>• Repays $30,000 of old debt</li>
+              <li>• Pays $20,000 in dividends</li>
+              <li>• Issues $50,000 in new stock</li>
+            </ul>
+            <p>Net CFF = $100K + $50K − $30K − $20K = <strong>$100,000</strong></p>
+          </div>
+        </section>
+
+        <section id="section-6" class="content-section">
+          <div class="section-header">
+            <div class="section-number">6</div>
+            <h2 class="section-title">The Complete Statement of Cash Flows</h2>
+          </div>
+          
+          <p>The final statement combines all three sections to explain the change in cash.</p>
+
+          <div class="formula-box">
+            Net Cash from Operating Activities<br>
+            + Net Cash from Investing Activities<br>
+            + Net Cash from Financing Activities<br>
+            = Total Net Change in Cash<br>
+            + Beginning Cash Balance<br>
+            = Ending Cash Balance
+          </div>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Full Cash Flow Statement</h4>
+            <ul class="text-sm space-y-1 mb-3">
+              <li>• <strong>CFO:</strong> +$200,000</li>
+              <li>• <strong>CFI:</strong> −$150,000</li>
+              <li>• <strong>CFF:</strong> +$100,000</li>
+              <li>• <strong>Total Change in Cash:</strong> $150,000</li>
+              <li>• <strong>Beginning Cash:</strong> $50,000</li>
+              <li>• <strong>Ending Cash:</strong> $200,000</li>
+            </ul>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Why the SCF Matters</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">🔍</span>
+                <div>
+                  <h4 class="font-semibold text-sm">Assess quality of earnings</h4>
+                  <p class="text-xs text-gray-600">Is net income backed by real cash?</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">💧</span>
+                <div>
+                  <h4 class="font-semibold text-sm">Check liquidity</h4>
+                  <p class="text-xs text-gray-600">Can the company fund operations?</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">🎯</span>
+                <div>
+                  <h4 class="font-semibold text-sm">Understand strategy</h4>
+                  <p class="text-xs text-gray-600">Is the company investing heavily? Paying dividends?</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <span class="text-2xl mr-3">📈</span>
+                <div>
+                  <h4 class="font-semibold text-sm">Forecast future cash flows</h4>
+                  <p class="text-xs text-gray-600">Essential for valuation models like DCF</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="nav-buttons">
+    <a href="./3. Analysis of Balance Sheets.html" class="nav-btn">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Previous
+    </a>
+    <a href="./index.html" class="nav-btn">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+      </svg>
+      Menu
+    </a>
+    <a href="./5. Advanced Analysis of Cash Flow Statements.html" class="nav-btn">
+      Next
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </a>
+  </div>
+
+</body>
+</html>

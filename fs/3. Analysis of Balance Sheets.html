@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 3: Analysis of Balance Sheets</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      font-size: 1.125rem;
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .key-term {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
+    .formula-box {
+      font-family: 'Fira Code', monospace;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #0ea5e9;
+      border-left: 5px solid var(--accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      font-size: 1.05em;
+      overflow-x: auto;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      line-height: 1.8;
+    }
+
+    .example-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #0ea5e9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .example-box::before {
+      content: "💡 Example";
+      position: absolute;
+      top: -12px;
+      left: 1rem;
+      background: #0ea5e9;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid #f59e0b;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .nav-buttons {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .toc h3 {
+      margin: 0 0 1rem 0;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.875rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .toc a:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .comparison-table th {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .comparison-table tr:hover {
+      background: #f3f4f6;
+    }
+
+    .table-sub-header {
+      background-color: #ecf0f1;
+      font-weight: 600;
+      color: var(--primary-light);
+    }
+
+    .sub-item {
+      padding-left: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-buttons {
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        justify-content: space-between;
+      }
+      
+      .nav-btn {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="gradient-bg text-white">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="flex items-center mb-4">
+            <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-medium">Chapter 3</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">Analysis of Balance Sheets</h1>
+          <p class="text-xl opacity-90 max-w-3xl">Understanding assets, liabilities, equity, intangibles, and financial instruments analysis</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Table of Contents -->
+      <div class="lg:col-span-1">
+        <div class="toc">
+          <h3>Table of Contents</h3>
+          <ul>
+            <li><a href="#section-1">1. Introduction to Balance Sheet</a></li>
+            <li><a href="#section-2">2. Structure of Balance Sheet</a></li>
+            <li><a href="#section-3">3. Intangible Assets</a></li>
+            <li><a href="#section-4">4. Goodwill</a></li>
+            <li><a href="#section-5">5. Financial Instruments</a></li>
+            <li><a href="#section-6">6. Non-Current Liabilities</a></li>
+            <li><a href="#section-7">7. Common-Size Analysis</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="lg:col-span-3">
+
+        <section id="section-1" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Introduction to the Balance Sheet</h2>
+          </div>
+          
+          <p>
+            The <span class="key-term">Balance Sheet</span> is a financial snapshot of a company's financial position at a specific point in time. It follows the fundamental equation:
+          </p>
+          
+          <div class="formula-box text-center text-lg">
+            Assets = Liabilities + Shareholders' Equity
+          </div>
+          
+          <p>For analysts, the balance sheet is essential for assessing:</p>
+          
+          <div class="grid md:grid-cols-3 gap-4 mt-6">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+              <span class="text-3xl mb-2 block">💧</span>
+              <h4 class="font-semibold text-blue-800 mb-2">Liquidity</h4>
+              <p class="text-sm text-gray-600">Can the company pay its short-term bills?</p>
+            </div>
+            
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+              <span class="text-3xl mb-2 block">🏛️</span>
+              <h4 class="font-semibold text-green-800 mb-2">Solvency</h4>
+              <p class="text-sm text-gray-600">Can it meet long-term obligations?</p>
+            </div>
+            
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center">
+              <span class="text-3xl mb-2 block">❤️</span>
+              <h4 class="font-semibold text-purple-800 mb-2">Financial Health</h4>
+              <p class="text-sm text-gray-600">Is the company over-leveraged or under-invested?</p>
+            </div>
+          </div>
+
+          <p class="mt-6">Analysts use balance sheet ratios to compare companies and track trends over time.</p>
+        </section>
+        
+        <section id="section-2" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Structure of the Balance Sheet</h2>
+          </div>
+          
+          <p>A <span class="key-term">classified balance sheet</span> groups similar items together. Here is a detailed breakdown of its typical structure.</p>
+          
+          <table class="comparison-table">
+              <thead>
+                  <tr>
+                      <th>Component</th>
+                      <th>Description</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="table-sub-header">
+                      <td colspan="2"><strong>Assets (What the company owns)</strong></td>
+                  </tr>
+                  <tr>
+                      <td><strong>Current Assets</strong></td>
+                      <td><em>Assets expected to be converted to cash or used up within one year.</em></td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Cash & Cash Equivalents</td>
+                      <td>The most liquid assets, including currency, bank deposits, and short-term money market instruments.</td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Marketable Securities</td>
+                      <td>Short-term debt or equity investments that are readily marketable.</td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Accounts Receivable</td>
+                      <td>Money owed to the company by customers for goods or services already delivered.</td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Inventory</td>
+                      <td>Raw materials, work-in-process goods, and finished goods held for sale.</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Non-Current Assets</strong></td>
+                      <td><em>Long-term assets not expected to be converted to cash within one year.</em></td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Property, Plant & Equipment (PP&E)</td>
+                      <td>Tangible, long-lived assets used in operations, such as land, buildings, and machinery.</td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Intangible Assets</td>
+                      <td>Non-physical assets like patents, trademarks, and copyrights.</td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Goodwill</td>
+                      <td>Arises from acquiring another company for more than the fair value of its net assets.</td>
+                  </tr>
+
+                  <tr class="table-sub-header">
+                      <td colspan="2"><strong>Liabilities (What the company owes)</strong></td>
+                  </tr>
+                   <tr>
+                      <td><strong>Current Liabilities</strong></td>
+                      <td><em>Obligations due within one year.</em></td>
+                  </tr>
+                   <tr>
+                      <td class="sub-item">Accounts Payable</td>
+                      <td>Money owed to suppliers for goods or services received on credit.</td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Short-Term Debt</td>
+                      <td>Loans and other borrowings due within one year.</td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Accrued Expenses</td>
+                      <td>Expenses that have been incurred but not yet paid (e.g., salaries, rent).</td>
+                  </tr>
+                   <tr>
+                      <td><strong>Non-Current Liabilities</strong></td>
+                      <td><em>Obligations due after one year.</em></td>
+                  </tr>
+                   <tr>
+                      <td class="sub-item">Long-Term Debt</td>
+                      <td>Loans and other borrowings with maturities of more than one year.</td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Bonds Payable</td>
+                      <td>Long-term debt securities issued to investors.</td>
+                  </tr>
+                  <tr>
+                      <td class="sub-item">Deferred Tax Liabilities</td>
+                      <td>Taxes that will likely be paid in a future period.</td>
+                  </tr>
+
+                  <tr class="table-sub-header">
+                      <td colspan="2"><strong>Shareholders' Equity (Owners' claim on net assets)</strong></td>
+                  </tr>
+                   <tr>
+                        <td class="sub-item">Common Stock / Paid-in Capital</td>
+                        <td>The amount invested by shareholders to purchase stock from the company.</td>
+                   </tr>
+                   <tr>
+                      <td class="sub-item">Retained Earnings</td>
+                      <td>Cumulative net income that has been retained for reinvestment, not paid out as dividends.</td>
+                   </tr>
+                   <tr>
+                      <td class="sub-item">Treasury Stock</td>
+                      <td>Stock that the company has repurchased from the open market (a contra-equity account).</td>
+                   </tr>
+              </tbody>
+          </table>
+        </section>
+
+        <section id="section-3" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Intangible Assets</h2>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">What Are Intangible Assets?</h3>
+          <p>
+            <span class="key-term">Intangible assets</span> are non-physical, non-monetary assets that provide future economic benefits. Examples include:
+          </p>
+          
+          <div class="grid md:grid-cols-3 gap-4 mt-4">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+              <span class="text-2xl mb-2 block">⚖️</span>
+              <h4 class="font-semibold text-sm">Patents & Copyrights</h4>
+            </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+              <span class="text-2xl mb-2 block">🏪</span>
+              <h4 class="font-semibold text-sm">Licenses & Franchises</h4>
+            </div>
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 text-center">
+              <span class="text-2xl mb-2 block">💻</span>
+              <h4 class="font-semibold text-sm">Software & Customer Lists</h4>
+            </div>
+          </div>
+
+          <p class="mt-6">To be recognized on the balance sheet, an intangible must be:</p>
+          <ul class="mt-2">
+            <li>• <strong>Identifiable</strong> (separable or arising from legal rights), and</li>
+            <li>• <strong>Controlled</strong> by the company</li>
+          </ul>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Accounting Treatment: IFRS vs. U.S. GAAP</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th>IFRS</th>
+                <th>U.S. GAAP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Internally Created Intangibles</strong></td>
+                <td>
+                  Research costs: <strong>Expensed</strong><br>
+                  Development costs: <strong>Can be capitalized</strong> if criteria met
+                </td>
+                <td>All costs: <strong>Expensed</strong> (including R&D)</td>
+              </tr>
+              <tr>
+                <td><strong>Measurement Models</strong></td>
+                <td>Choice: <strong>Cost model</strong> or <strong>Revaluation model</strong></td>
+                <td>Only <strong>Cost model</strong> allowed</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="highlight-box">
+            <strong>Note:</strong> Costs for brands, start-up activities, and general overhead are always expensed under both standards.
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Amortization and Impairment</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 class="font-semibold text-blue-800 mb-2">⏰ Finite-Life Intangibles</h4>
+              <p class="text-sm text-gray-600">Amortized over useful life (e.g., patent with 10-year life)</p>
+            </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-2">∞ Indefinite-Life Intangibles</h4>
+              <p class="text-sm text-gray-600">Not amortized. Must be tested for <strong>impairment annually</strong> (e.g., trademarks)</p>
+            </div>
+          </div>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Patent Amortization</h4>
+            <p class="mb-2">A company capitalizes a $100,000 patent with a 10-year life.</p>
+            <div class="formula-box text-sm">
+              Annual amortization = $100,000 / 10 = $10,000/year
+            </div>
+          </div>
+        </section>
+
+        <section id="section-4" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Goodwill</h2>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Understanding Goodwill</h3>
+          <p>
+            <span class="key-term">Goodwill</span> arises only in a business acquisition. It's the excess of the purchase price over the fair value of the net identifiable assets acquired.
+          </p>
+          
+          <div class="formula-box text-center">
+            Goodwill = Purchase Price − Fair Value of Net Identifiable Assets
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4 mt-6">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 class="font-semibold text-blue-800 mb-2">📊 Accounting Goodwill</h4>
+              <p class="text-sm text-gray-600">Recorded on the balance sheet after an acquisition</p>
+            </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-2">💼 Economic Goodwill</h4>
+              <p class="text-sm text-gray-600">Not on the balance sheet — reflects brand strength, customer loyalty, or superior management</p>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Post-Acquisition Accounting</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <span class="text-red-600 mr-2">❌</span>
+              <span><strong>Not amortized</strong> under IFRS or U.S. GAAP</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">🔍</span>
+              <span><strong>Tested for impairment annually</strong></span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2">📈</span>
+              <span>Impairment loss is recorded on the <strong>income statement</strong> as a non-cash expense</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-orange-600 mr-2">📉</span>
+              <span>Reduces net income, total assets, and ROA</span>
+            </li>
+          </ul>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Goodwill Impairment</h4>
+            <p class="mb-3">A company has $50M in goodwill. After a market downturn, the recoverable amount is $40M.</p>
+            <div class="formula-box text-sm">
+              Impairment loss = $50M − $40M = $10M → reduces net income and assets
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Analyst Adjustments</h3>
+          <p>Because goodwill is subjective, analysts often adjust financials:</p>
+          <ul class="space-y-2 mt-4">
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">•</span>
+              <span><strong>Exclude goodwill from total assets</strong> when calculating ROA or debt ratios</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-green-600 mr-2">•</span>
+              <span><strong>Exclude impairment losses</strong> to assess core profitability</span>
+            </li>
+          </ul>
+        </section>
+
+        <section id="section-5" class="content-section">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <h2 class="section-title">Financial Instruments</h2>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Classification Based on Business Model and Intent</h3>
+          <p>
+            Under both IFRS 9 and U.S. GAAP, financial assets are classified based on the entity's <strong>business model</strong> and the <strong>contractual cash flow characteristics</strong>. Below is a clear comparison of the three primary classifications.
+          </p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Classification</th>
+                <th>Typical Assets</th>
+                <th>Intent / Business Model</th>
+                <th>Measurement Basis</th>
+                <th>Interest/Dividends</th>
+                <th>Unrealized Gains/Losses</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Held-to-Maturity (HTM)<br><small>(U.S. GAAP)</small></strong><br><strong>Amortized Cost<br><small>(IFRS)</small></strong></td>
+                <td>Bonds (debt securities)</td>
+                <td>Hold to maturity; collect contractual cash flows</td>
+                <td>Amortized cost</td>
+                <td>Income Statement</td>
+                <td>n/a — No recognition</td>
+              </tr>
+
+              <tr>
+                <td><strong>Trading<br><small>(Both U.S. GAAP & IFRS)</small></strong></td>
+                <td>Stocks, bonds, derivatives</td>
+                <td>Active trading for short-term profit</td>
+                <td>Fair Value Through Profit or Loss (FVPL)</td>
+                <td>Income Statement</td>
+                <td>Income Statement</td>
+              </tr>
+
+              <tr>
+                <td><strong>Available-for-Sale (AFS)<br><small>(U.S. GAAP)</small></strong><br><strong>FVOCI<br><small>(IFRS)</small></strong></td>
+                <td>Bonds, equities (non-trading)</td>
+                <td>May sell before maturity, but not actively traded</td>
+                <td>Fair Value Through Other Comprehensive Income (FVOCI)</td>
+                <td>Income Statement</td>
+                <td>Other Comprehensive Income (OCI) — Balance Sheet (AOCI)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="highlight-box">
+            <strong>Note:</strong> 
+            <ul class="mt-2 space-y-1">
+              <li>• Under U.S. GAAP, <strong>equity investments cannot be classified as HTM</strong> (no maturity date)</li>
+              <li>• Under IFRS, <strong>equity investments can be irrevocably designated as FVOCI</strong> (with recycling prohibited)</li>
+              <li>• "Available-for-Sale" is <strong>not used under IFRS</strong> — replaced by FVOCI</li>
+              <li>• Interest/dividend income is always recognized in P&L regardless of classification</li>
+            </ul>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Key Differences Summary</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>U.S. GAAP</th>
+                <th>IFRS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Equity Investments</strong></td>
+                <td>Generally FVPL unless designated as AFS</td>
+                <td>Can be FVOCI (irrevocable election)</td>
+              </tr>
+              <tr>
+                <td><strong>Debt Instruments</strong></td>
+                <td>HTM, AFS, Trading</td>
+                <td>Amortized Cost, FVOCI, FVPL</td>
+              </tr>
+              <tr>
+                <td><strong>Reclassification</strong></td>
+                <td>Permitted between AFS and Trading (rare)</td>
+                <td>Generally prohibited</td>
+              </tr>
+              <tr>
+                <td><strong>OCI Recycling</strong></td>
+                <td>Yes (for AFS debt)</td>
+                <td>No (for equity FVOCI); Yes (for debt FVOCI)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Bond Classification Decision</h4>
+            <p class="mb-3">A company buys corporate bonds expecting to hold them until maturity to receive interest payments. It does not plan to trade them.</p>
+            <p class="mb-2"><strong>Classification:</strong> Held-to-Maturity (U.S. GAAP) or Amortized Cost (IFRS)</p>
+            <p><strong>Impact:</strong> Unrealized price changes do not affect net income — only interest income is reported.</p>
+          </div>
+        </section>
+
+        <section id="section-6" class="content-section">
+          <div class="section-header">
+            <div class="section-number">6</div>
+            <h2 class="section-title">Non-Current Liabilities</h2>
+          </div>
+
+          <p>
+            <span class="key-term">Non-current liabilities</span> are obligations due beyond one year or the operating cycle.
+          </p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Long-Term Debt</h3>
+          <p class="mb-4">Includes long-term loans, bonds payable. Usually measured at <strong>amortized cost</strong>.</p>
+          <p class="mb-4">Exceptions (measured at fair value):</p>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-center">
+              <h4 class="font-semibold text-red-800 text-sm">Held-for-trading liabilities</h4>
+            </div>
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-center">
+              <h4 class="font-semibold text-yellow-800 text-sm">Derivative liabilities</h4>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+              <h4 class="font-semibold text-blue-800 text-sm">Hedged non-derivative liabilities</h4>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Deferred Tax Liabilities (DTL)</h3>
+          <p class="mb-4">A DTL arises when accounting income > taxable income due to temporary timing differences.</p>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+              <h4 class="font-semibold text-orange-800 mb-2">🔍 Cause</h4>
+              <p class="text-sm text-gray-600">Lower taxes paid now than reported on income statement</p>
+            </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-2">📊 Common Example</h4>
+              <p class="text-sm text-gray-600">Using accelerated depreciation for tax purposes but straight-line for financial reporting</p>
+            </div>
+          </div>
+
+          <p class="mt-4">The difference reverses in the future, creating a tax obligation.</p>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">Deferred Tax Liability</h4>
+            <p class="mb-3">A company uses straight-line depreciation ($10K/year) for financials but accelerated ($15K/year) for taxes.</p>
+            <ul class="text-sm space-y-1">
+              <li>• Year 1: Pre-tax income (financials) = $100K; (tax) = $95K</li>
+              <li>• Tax expense (financials) = $25K (25%)</li>
+              <li>• Taxes payable (tax return) = $23.75K</li>
+              <li>• <strong>DTL created = $25K − $23.75K = $1.25K</strong></li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="section-7" class="content-section">
+          <div class="section-header">
+            <div class="section-number">7</div>
+            <h2 class="section-title">Common-Size Analysis and Ratios</h2>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Common-Size Balance Sheet</h3>
+          <p class="mb-4">Each item is expressed as a percentage of <strong>total assets</strong>.</p>
+          
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <h4 class="font-semibold text-blue-800 mb-3">✨ Useful for:</h4>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Tracking changes in asset/liability structure over time</li>
+              <li>• Comparing companies of different sizes</li>
+              <li>• Identifying business models (e.g., high PPE = manufacturer; high goodwill = acquisitive firm)</li>
+            </ul>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Key Balance Sheet Ratios</h3>
+
+          <h4 class="font-semibold mt-6 mb-3 text-gray-800">💧 Liquidity Ratios</h4>
+          
+          <div class="space-y-4">
+            <div class="border border-gray-200 rounded-lg p-4">
+              <h5 class="font-semibold text-gray-800 mb-2">Current Ratio</h5>
+              <div class="formula-box text-sm">
+                Current Ratio = Current Assets / Current Liabilities
+              </div>
+              <p class="text-sm text-gray-600"><strong>Interpretation:</strong> Higher = better short-term liquidity</p>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg p-4">
+              <h5 class="font-semibold text-gray-800 mb-2">Quick Ratio (Acid-Test)</h5>
+              <div class="formula-box text-sm">
+                Quick Ratio = (Cash + Marketable Securities + Accounts Receivable) / Current Liabilities
+              </div>
+              <p class="text-sm text-gray-600"><strong>Why?</strong> Excludes inventory — more conservative measure</p>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg p-4">
+              <h5 class="font-semibold text-gray-800 mb-2">Cash Ratio</h5>
+              <div class="formula-box text-sm">
+                Cash Ratio = (Cash + Marketable Securities) / Current Liabilities
+              </div>
+              <p class="text-sm text-gray-600"><strong>Most conservative</strong> — only the most liquid assets included</p>
+            </div>
+          </div>
+
+          <h4 class="font-semibold mt-8 mb-3 text-gray-800">🏛️ Solvency Ratios</h4>
+          
+          <div class="border border-gray-200 rounded-lg p-4">
+            <h5 class="font-semibold text-gray-800 mb-2">Debt-to-Equity Ratio</h5>
+            <div class="formula-box text-sm">
+              D/E = Total Debt / Total Equity
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="nav-buttons">
+    <a href="./2. Analyzing Income Statements.html" class="nav-btn">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Previous
+    </a>
+    <a href="./index.html" class="nav-btn">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+      </svg>
+      Menu
+    </a>
+    <a href="./4. Analyzing the Statement of Cash Flows.html" class="nav-btn">
+      Next
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </a>
+  </div>
+
+</body>
+</html>

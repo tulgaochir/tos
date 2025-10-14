@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 5: Advanced Analysis of Cash Flow Statements</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      font-size: 1.125rem;
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .key-term {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
+    .formula-box {
+      font-family: 'Fira Code', monospace;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #0ea5e9;
+      border-left: 5px solid var(--accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      font-size: 1.05em;
+      overflow-x: auto;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .example-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #0ea5e9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+
+    .example-box::before {
+      content: "💡 Example";
+      position: absolute;
+      top: -12px;
+      left: 1rem;
+      background: #0ea5e9;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid #f59e0b;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .nav-buttons {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .toc h3 {
+      margin: 0 0 1rem 0;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.875rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .toc a:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    .ratio-section {
+      margin-bottom: 1.8rem;
+      padding: 1rem;
+      background-color: #f8faff;
+      border: 1px dashed #d0e7ff;
+      border-radius: 8px;
+    }
+
+    .ratio-section p {
+      margin-bottom: 0.6rem;
+      color: var(--text-light);
+    }
+
+    .flex-container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+
+    .flex-item {
+      flex: 1 1 300px;
+      padding: 1rem;
+      background-color: #f1f8ff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .flex-item h4 {
+      margin-top: 0;
+      color: var(--primary-light);
+    }
+
+    @media (max-width: 768px) {
+      .nav-buttons {
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        justify-content: space-between;
+      }
+      
+      .nav-btn {
+        flex: 1;
+        justify-content: center;
+      }
+      
+      .flex-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="gradient-bg text-white">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="flex items-center mb-4">
+            <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm font-medium">Chapter 5</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">Advanced Analysis of Cash Flow Statements</h1>
+          <p class="text-xl opacity-90 max-w-3xl">Free cash flow, cash flow ratios, and advanced analytical techniques for CFA candidates</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Table of Contents -->
+      <div class="lg:col-span-1">
+        <div class="toc">
+          <h3>Table of Contents</h3>
+          <ul>
+            <li><a href="#section-1">1. Evaluating Sources and Uses</a></li>
+            <li><a href="#section-2">2. Analytical Tools</a></li>
+            <li><a href="#section-3">3. Key Cash Flow Ratios</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="lg:col-span-3">
+
+        <section id="section-1" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Evaluating Sources and Uses of Cash</h2>
+          </div>
+          
+          <p>
+            The <span class="key-term">Statement of Cash Flows</span> is essential for understanding a company's financial health, forecasting performance, and valuing debt and equity. The core of analysis is identifying where cash comes from and where it goes.
+          </p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Purpose of Cash Flow Analysis</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <div class="flex items-center">
+                <span class="text-green-600 mr-2">•</span>
+                <span>Forecast future cash flows based on business operations</span>
+              </div>
+              <div class="flex items-center">
+                <span class="text-blue-600 mr-2">•</span>
+                <span>Assess ability to meet obligations (debt, dividends)</span>
+              </div>
+              <div class="flex items-center">
+                <span class="text-purple-600 mr-2">•</span>
+                <span>Determine need for external financing</span>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center">
+                <span class="text-orange-600 mr-2">•</span>
+                <span>Evaluate financial strategy effectiveness</span>
+              </div>
+              <div class="flex items-center">
+                <span class="text-red-600 mr-2">•</span>
+                <span>Analyze consistency and quality of operating cash flow</span>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Cash Flow by Business Lifecycle</h3>
+          <div class="flex-container">
+            <div class="flex-item">
+              <h4>🌱 Growth Companies</h4>
+              <ul class="text-sm space-y-1">
+                <li>• Operating cash flow (CFO) may be negative initially due to heavy reinvestment</li>
+                <li>• Sustained positive CFO is key to long-term viability</li>
+              </ul>
+            </div>
+            <div class="flex-item">
+              <h4>🏢 Mature Companies</h4>
+              <ul class="text-sm space-y-1">
+                <li>• Operating activities should be the primary source of cash</li>
+                <li>• Negative CFO may signal strategic payouts (dividends, buybacks)</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Why Positive Operating Cash Flow Matters</h3>
+          <p class="mb-4">Consistently positive CFO indicates financial strength:</p>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                <h4 class="font-semibold text-green-800 text-sm">💰 Covers capital expenditures (CapEx)</h4>
+              </div>
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <h4 class="font-semibold text-blue-800 text-sm">🏦 Supports debt servicing</h4>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <div class="bg-purple-50 border border-purple-200 rounded-lg p-3">
+                <h4 class="font-semibold text-purple-800 text-sm">📈 Improves financing terms with lenders</h4>
+              </div>
+              <div class="bg-orange-50 border border-orange-200 rounded-lg p-3">
+                <h4 class="font-semibold text-orange-800 text-sm">✅ Signals a sustainable business model</h4>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Net Income vs. Operating Cash Flow</h3>
+          <p class="mb-4">A large gap between net income and CFO can be a red flag:</p>
+          
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-center">
+              <h4 class="font-semibold text-red-800 text-sm mb-1">⚠️ Low-quality earnings</h4>
+              <p class="text-xs text-gray-600">Aggressive accounting</p>
+            </div>
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-center">
+              <h4 class="font-semibold text-yellow-800 text-sm mb-1">📉 Poor operational cash</h4>
+              <p class="text-xs text-gray-600">Generation issues</p>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+              <h4 class="font-semibold text-blue-800 text-sm mb-1">🔍 Analyst assessment</h4>
+              <p class="text-xs text-gray-600">Earnings quality</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-2" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Analytical Tools and Techniques</h2>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Common-Size Analysis</h3>
+          <p class="mb-4">Standardizes the cash flow statement for trend analysis and comparison:</p>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 class="font-semibold text-blue-800 mb-2">📊 As % of total inflows/outflows</h4>
+              <p class="text-sm text-gray-600">Shows proportion of each activity</p>
+            </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-2">💰 As % of Net Revenue</h4>
+              <p class="text-sm text-gray-600">Assesses cash efficiency relative to sales</p>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Free Cash Flow (FCF)</h3>
+          <p class="mb-6">Free cash flow is the cash available after essential reinvestment. It's crucial for valuation.</p>
+
+          <h4 class="font-semibold mt-6 mb-3 text-gray-800">Free Cash Flow to the Firm (FCFF)</h4>
+          <p class="mb-4">The cash available to all investors (debt and equity holders).</p>
+          
+          <div class="formula-box">
+            FCFF = CFO + Interest × (1 − Tax Rate) − FCInv
+          </div>
+          
+          <p class="mb-2">Or from Net Income:</p>
+          <div class="formula-box">
+            FCFF = NI + NCC + Interest × (1 − Tax Rate) − FCInv − WCInv
+          </div>
+          
+          <p class="text-sm text-gray-600 italic mb-6">Where: NI = Net Income, NCC = Non-Cash Charges, FCInv = Fixed Capital Investment, WCInv = Working Capital Investment.</p>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">FCFF Example</h4>
+            <p class="mb-3">CFO = $500K, Interest = $50K, Tax Rate = 30%, FCInv = $120K</p>
+            <p class="mb-2">After-tax interest = <span class="bg-yellow-100 px-2 py-1 rounded text-sm font-mono">$50K × (1 − 0.30) = $35K</span></p>
+            <p>FCFF = <span class="bg-green-100 px-2 py-1 rounded text-sm font-mono">$500K + $35K − $120K = $415K</span></p>
+          </div>
+
+          <h4 class="font-semibold mt-8 mb-3 text-gray-800">Free Cash Flow to Equity (FCFE)</h4>
+          <p class="mb-4">The cash available to common shareholders after all obligations.</p>
+          
+          <div class="formula-box">
+            FCFE = CFO − FCInv + Net Borrowing
+          </div>
+          
+          <p class="mb-2">Or from Net Income:</p>
+          <div class="formula-box">
+            FCFE = NI + NCC − FCInv − WCInv + Net Borrowing
+          </div>
+          
+          <p class="mb-4"><strong>Net Borrowing</strong> = New Debt Issued − Debt Repaid</p>
+
+          <div class="example-box">
+            <h4 class="font-semibold text-blue-800 mb-2">FCFE Example</h4>
+            <p class="mb-3">CFO = $500K, FCInv = $120K, New Debt = $80K, Debt Repaid = $50K</p>
+            <p class="mb-2">Net Borrowing = <span class="bg-yellow-100 px-2 py-1 rounded text-sm font-mono">$80K − $50K = $30K</span></p>
+            <p>FCFE = <span class="bg-green-100 px-2 py-1 rounded text-sm font-mono">$500K − $120K + $30K = $410K</span></p>
+          </div>
+        </section>
+
+        <section id="section-3" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Key Cash Flow Ratios</h2>
+          </div>
+          
+          <p>Ratios help assess performance, risk, and sustainability.</p>
+
+          <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Performance Ratios</h3>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Cash Flow to Revenue</h4>
+            <div class="formula-box text-base">
+              CFO / Net Revenue
+            </div>
+            <p><strong>Purpose:</strong> Measures how much operating cash is generated per dollar of sales.</p>
+            <p class="text-sm italic">Example: CFO = $150K, Revenue = $1M → Ratio = 15% → $0.15 cash per $1 of revenue.</p>
+          </div>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Cash Return on Assets (CROA)</h4>
+            <div class="formula-box text-base">
+              CFO / Average Total Assets
+            </div>
+            <p><strong>Purpose:</strong> Measures cash efficiency of asset investment.</p>
+            <p class="text-sm italic">Example: CFO = $150K, Avg Assets = $2M → 7.5%</p>
+          </div>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Cash Return on Equity (CROE)</h4>
+            <div class="formula-box text-base">
+              CFO / Average Shareholders' Equity
+            </div>
+            <p><strong>Purpose:</strong> Measures cash return to owners.</p>
+            <p class="text-sm italic">Example: CFO = $150K, Avg Equity = $800K → 18.75%</p>
+          </div>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Cash to Income</h4>
+            <div class="formula-box text-base">
+              CFO / Operating Income
+            </div>
+            <p><strong>Purpose:</strong> Assesses quality of earnings.</p>
+            <p class="text-sm italic">Example: CFO = $150K, Operating Income = $140K → Ratio = 1.07 → strong conversion.</p>
+          </div>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Cash Flow per Share</h4>
+            <div class="formula-box text-base">
+              (CFO − Preferred Dividends) / Weighted Avg Shares
+            </div>
+            <p><strong>Purpose:</strong> Operating cash flow on a per-share basis.</p>
+            <p class="text-sm italic">Example: CFO = $150K, Pref Div = $10K, Shares = 100K → $1.40/share</p>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Coverage Ratios</h3>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Debt Coverage</h4>
+            <div class="formula-box text-base">
+              CFO / Total Debt
+            </div>
+            <p><strong>Purpose:</strong> Ability to cover total debt with operating cash.</p>
+            <p class="text-sm italic">Example: CFO = $150K, Debt = $500K → 30%</p>
+          </div>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Interest Coverage</h4>
+            <div class="formula-box text-base">
+              (CFO + Interest Paid + Taxes Paid) / Interest Paid
+            </div>
+            <p><strong>Purpose:</strong> Ability to meet interest obligations.</p>
+            <p class="text-sm italic">Example: CFO = $150K, Int = $30K, Taxes = $40K → ($220K)/$30K = 7.33x</p>
+          </div>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Reinvestment Ratio</h4>
+            <div class="formula-box text-base">
+              CFO / Cash Paid for Long-Term Assets
+            </div>
+            <p><strong>Purpose:</strong> Can operations fund asset purchases?</p>
+            <p class="text-sm italic">Example: CFO = $150K, CapEx = $100K → 1.5x</p>
+          </div>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Debt Payment Coverage</h4>
+            <div class="formula-box text-base">
+              CFO / Debt Repayments
+            </div>
+            <p><strong>Purpose:</strong> Ability to pay down debt.</p>
+            <p class="text-sm italic">Example: CFO = $150K, Debt Paid = $75K → 2.0x</p>
+          </div>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Dividend Payment Coverage</h4>
+            <div class="formula-box text-base">
+              CFO / Dividends Paid
+            </div>
+            <p><strong>Purpose:</strong> Sustainability of dividend payouts.</p>
+            <p class="text-sm italic">Example: CFO = $150K, Dividends = $50K → 3.0x</p>
+          </div>
+
+          <div class="ratio-section">
+            <h4 class="font-semibold text-lg mb-2">Investing & Financing Coverage</h4>
+            <div class="formula-box text-base">
+              CFO / (Investing + Financing Outflows)
+            </div>
+            <p><strong>Purpose:</strong> Can operations fund all external outflows?</p>
+            <p class="text-sm italic">Example: CFO = $150K, Outflows = $180K → 0.83 → deficit</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="nav-buttons">
+    <a href="./4. Analyzing the Statement of Cash Flows.html" class="nav-btn">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Previous
+    </a>
+    <a href="./index.html" class="nav-btn">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+      </svg>
+      Menu
+    </a>
+    <a href="./6. Analysis of Inventories.html" class="nav-btn">
+      Next
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </a>
+  </div>
+
+</body>
+</html>

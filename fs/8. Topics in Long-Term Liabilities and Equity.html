@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 8: Topics in Long-Term Liabilities and Equity</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .subsection {
+      margin: 1.5rem 0;
+    }
+
+    .subsection h3 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .subsection h4 {
+      color: var(--primary-light);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .comparison-table th {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .comparison-table tr:hover {
+      background: #eff6ff;
+    }
+
+    .toc {
+      position: sticky;
+      top: 2rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+
+    .toc h3 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 100;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+    }
+
+    @media (max-width: 1024px) {
+      .toc {
+        position: static;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .section-number {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+      
+      .back-button {
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <header class="gradient-bg text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Topics in Long-Term Liabilities and Equity</h1>
+      <p class="text-xl opacity-90">Chapter 8: CFA Level 1 Financial Statement Analysis</p>
+      <p class="text-lg opacity-75 mt-2">Comprehensive coverage of leases, postemployment benefits, and share-based compensation</p>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+      
+      <!-- Table of Contents -->
+      <div class="lg:w-1/4">
+        <div class="toc">
+          <h3>📋 Chapter Contents</h3>
+          <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#leases">2. Leases</a></li>
+            <li><a href="#lease-classification">2.1 Lease Classification</a></li>
+            <li><a href="#financial-reporting-leases">2.2 Financial Reporting</a></li>
+            <li><a href="#postemployment">3. Postemployment Benefits</a></li>
+            <li><a href="#share-based">3.1 Share-Based Compensation</a></li>
+            <li><a href="#disclosures">4. Presentation & Disclosures</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="lg:w-3/4">
+
+        <!-- Introduction -->
+        <section id="introduction" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Introduction</h2>
+          </div>
+          
+          <p>This topic covers the accounting and reporting standards under IFRS and U.S. GAAP for key non-current (long-term) liabilities and equity components. We will explore the details of leases, postemployment benefits like pension plans, and share-based compensation.</p>
+          
+          <div class="info-box">
+            <p><strong>Learning Objectives:</strong> Understanding the complex accounting treatments for long-term liabilities and equity components that significantly impact financial statement analysis and company valuation.</p>
+          </div>
+        </section>
+
+        <!-- Leases -->
+        <section id="leases" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Leases</h2>
+          </div>
+          
+          <p>A <strong>lease</strong> is a contract where an asset owner (the <strong>lessor</strong>) gives another party (the <strong>lessee</strong>) the right to use an asset for a specific period in exchange for periodic payments.</p>
+          
+          <div class="highlight-box">
+            <p><strong>💡 Advantages of Leasing:</strong> Leases are a popular form of financing. For the lessee, it provides access to an asset without the large initial cash outlay of a purchase. For the lessor, it's an investment that generates income and can be an effective way to facilitate sales of their products.</p>
+          </div>
+
+          <div id="lease-classification" class="subsection">
+            <h3>2.1 Lease Classification</h3>
+            <p>Leases are generally classified as either <strong>finance leases</strong> or <strong>operating leases</strong>. A lease is classified as a finance lease if it effectively transfers the risks and rewards of owning the asset to the lessee.</p>
+            
+            <h4>Key Classification Criteria:</h4>
+            <ul class="space-y-2">
+              <li><strong>🏠 Ownership Transfer:</strong> The lease transfers ownership of the asset to the lessee by the end of the lease term.</li>
+              <li><strong>💰 Purchase Option:</strong> The lessee has an option to purchase the asset at a price that is substantially lower than its expected fair value (a "bargain purchase option").</li>
+              <li><strong>⏰ Lease Term:</strong> The lease term covers a major part of the asset's economic life.</li>
+              <li><strong>📊 Present Value:</strong> The present value of the lease payments is substantially all of the asset's fair value.</li>
+              <li><strong>🔧 Asset Specialization:</strong> The asset is so specialized that only the lessee can use it without major modifications.</li>
+            </ul>
+          </div>
+
+          <div id="financial-reporting-leases" class="subsection">
+            <h3>2.2 Financial Reporting for Leases</h3>
+            <p>The accounting treatment for leases differs significantly for the lessee and lessor, with notable differences between IFRS and U.S. GAAP.</p>
+
+            <h4>Lessee Accounting</h4>
+            <p>This is where we see the most significant difference between the two accounting standards.</p>
+            
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Standard</th>
+                  <th>Treatment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>IFRS</strong></td>
+                  <td>
+                    Under IFRS, there is a single model for lessee accounting. For <strong>both finance and operating leases</strong>, the lessee must:
+                    <ol class="mt-2 space-y-1">
+                      <li>At the start of the lease, recognize a <strong>Right-of-Use (ROU) asset</strong> and a corresponding <strong>Lease Liability</strong> on the balance sheet.</li>
+                      <li>In subsequent periods, recognize <strong>amortization expense</strong> on the ROU asset (typically straight-line) and <strong>interest expense</strong> on the lease liability on the income statement.</li>
+                    </ol>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>U.S. GAAP</strong></td>
+                  <td>
+                    U.S. GAAP also requires lessees to recognize an ROU asset and a lease liability for both lease types at inception. However, the income statement recognition differs:
+                    <ul class="mt-2 space-y-1">
+                      <li><strong>Finance Leases:</strong> The treatment is the same as under IFRS, with separate amortization and interest expenses reported.</li>
+                      <li><strong>Operating Leases:</strong> The lessee recognizes a single, straight-line <strong>total lease expense</strong> on the income statement.</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Lessor Accounting</h4>
+            <p>For lessors, the classification of the lease as either operating or finance determines the accounting treatment.</p>
+            
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+              <div class="info-box">
+                <h5 class="font-semibold text-primary mb-2">Finance Leases:</h5>
+                <ul class="space-y-1">
+                  <li>• Remove leased asset from balance sheet</li>
+                  <li>• Recognize <strong>lease receivable</strong> asset</li>
+                  <li>• Allocate payments between receivable reduction and <strong>interest income</strong></li>
+                </ul>
+              </div>
+              <div class="info-box">
+                <h5 class="font-semibold text-primary mb-2">Operating Leases:</h5>
+                <ul class="space-y-1">
+                  <li>• Keep asset on balance sheet</li>
+                  <li>• Continue to depreciate the asset</li>
+                  <li>• Recognize lease payments as <strong>lease revenue</strong></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Postemployment Benefits -->
+        <section id="postemployment" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Financial Reporting for Postemployment and Share-Based Compensation</h2>
+          </div>
+
+          <div class="subsection">
+            <h3>Employee Compensation Overview</h3>
+            <p>Companies offer various forms of compensation to attract, retain, and motivate employees. Key components include salary, bonuses, and deferred compensation plans. The accounting principle of matching requires that compensation expense be recognized in the period it is earned by the employee, which is tied to the <strong>vesting</strong> period.</p>
+          </div>
+
+          <div class="subsection">
+            <h3>Postemployment Benefit Plans</h3>
+            <p>These are forms of deferred compensation designed to provide for employees' retirement.</p>
+            
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Plan Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Defined Contribution (DC) Plans</strong></td>
+                  <td>The employer contributes a specified amount to an employee's individual retirement account. The employer's obligation ends once the contribution is made. The employee bears the investment risk. Accounting is simple: the employer expenses the contribution when it is made.</td>
+                </tr>
+                <tr>
+                  <td><strong>Defined Benefit (DB) Plans</strong></td>
+                  <td>The employer guarantees a specific retirement benefit to the employee, often based on a formula involving salary and years of service. The <strong>employer bears the investment risk</strong>. Accounting is complex because the future obligation must be estimated.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Defined Benefit (DB) Pension Plans in Detail</h4>
+            <div class="info-box">
+              <p><strong>Net Pension Asset/Liability:</strong> A company with a DB plan reports this on its balance sheet as the difference between the plan's assets and the estimated pension obligation. A surplus results in an asset; a deficit results in a liability.</p>
+            </div>
+            
+            <h5 class="font-semibold text-primary-light mt-4 mb-2">Periodic Pension Cost Components:</h5>
+            <ul class="space-y-2">
+              <li><strong>Service Cost:</strong> The present value of benefits earned by employees in the current period.</li>
+              <li><strong>Interest Expense:</strong> The increase in the pension obligation due to the passage of time.</li>
+              <li><strong>Expected Return on Plan Assets:</strong> The expected earnings on the plan's investments, which reduces the total pension cost.</li>
+              <li><strong>Past Service Cost:</strong> The cost of retroactive benefits from plan amendments.</li>
+              <li><strong>Actuarial Gains and Losses:</strong> Changes in the pension obligation resulting from changes in actuarial assumptions.</li>
+            </ul>
+          </div>
+
+          <div id="share-based" class="subsection">
+            <h3>3.1 Share-Based Compensation</h3>
+            <p>This type of compensation aligns the interests of employees with those of shareholders. It motivates employees without requiring immediate cash outlays from the company.</p>
+            
+            <div class="highlight-box">
+              <p><strong>⚠️ Disadvantages:</strong> Employee influence on market value is limited, it can encourage excessive risk-aversion, and it can dilute the ownership of existing shareholders.</p>
+            </div>
+
+            <h4>Types of Share-Based Compensation</h4>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Accounting Treatment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Stock Grants</strong></td>
+                  <td>Outright grants of company stock. These can be unrestricted, restricted (requiring conditions to be met), or performance-based.</td>
+                  <td>The compensation expense is the <strong>fair value of the stock at the grant date</strong>. This total expense is recognized over the service period.</td>
+                </tr>
+                <tr>
+                  <td><strong>Stock Options</strong></td>
+                  <td>Gives employees the right to purchase company stock at a predetermined price (the exercise price) for a specific period.</td>
+                  <td>Compensation expense is based on the <strong>fair value of the options at the grant date</strong>, estimated using a valuation model like Black-Scholes. This expense is recognized over the vesting period.</td>
+                </tr>
+                <tr>
+                  <td><strong>Stock Appreciation Rights (SARs)</strong></td>
+                  <td>Cash-settled compensation based on the increase in the company's share price over a predetermined period. No shares are issued, so there is no ownership dilution.</td>
+                  <td>Compensation expense is tied to the change in the stock price.</td>
+                </tr>
+                <tr>
+                  <td><strong>Phantom Shares</strong></td>
+                  <td>Cash-settled compensation based on the performance of hypothetical stock. Similar to SARs, it provides the economic benefits of share ownership without issuing actual shares.</td>
+                  <td>Compensation expense is tied to the performance of the hypothetical shares.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Key Dates for Stock Options</h4>
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+              <div class="info-box">
+                <ul class="space-y-2">
+                  <li><strong>📅 Grant Date:</strong> The date the options are granted to the employee.</li>
+                  <li><strong>⏱️ Service Period:</strong> The period between the grant date and the vesting date.</li>
+                </ul>
+              </div>
+              <div class="info-box">
+                <ul class="space-y-2">
+                  <li><strong>✅ Vesting Date:</strong> The date when the employee is first able to exercise the options.</li>
+                  <li><strong>💼 Exercise Date:</strong> The date when the employee exercises the options and converts them into stock.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Presentation and Disclosure Requirements -->
+        <section id="disclosures" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Presentation and Disclosure Requirements</h2>
+          </div>
+          
+          <p>The objective of disclosures is to provide financial statement users with information about the amount, timing, and uncertainty of cash flows related to these long-term items.</p>
+
+          <div class="subsection">
+            <h3>Lease Disclosures</h3>
+            
+            <h4>Lessee Disclosures</h4>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="info-box">
+                <h5 class="font-semibold text-primary mb-2">📊 Quantitative Data:</h5>
+                <ul class="space-y-1">
+                  <li>• Carrying amount of ROU assets by class</li>
+                  <li>• Depreciation charges for ROU assets</li>
+                  <li>• Interest expense on lease liabilities</li>
+                  <li>• Total cash outflow for leases</li>
+                  <li>• Maturity analysis of lease liabilities</li>
+                </ul>
+              </div>
+              <div class="info-box">
+                <h5 class="font-semibold text-primary mb-2">📝 Qualitative Data:</h5>
+                <ul class="space-y-1">
+                  <li>• Nature of leasing activities</li>
+                  <li>• Future cash outflows not yet reflected</li>
+                  <li>• Restrictions or covenants from leases</li>
+                </ul>
+              </div>
+            </div>
+
+            <h4>Lessor Disclosures</h4>
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+              <div class="info-box">
+                <h5 class="font-semibold text-primary mb-2">Finance Leases:</h5>
+                <ul class="space-y-1">
+                  <li>• Selling profit or loss at inception</li>
+                  <li>• Finance income on net investment</li>
+                  <li>• Maturity analysis of receivables</li>
+                </ul>
+              </div>
+              <div class="info-box">
+                <h5 class="font-semibold text-primary mb-2">Operating Leases:</h5>
+                <ul class="space-y-1">
+                  <li>• Lease income recognized</li>
+                  <li>• Maturity analysis of payments</li>
+                  <li>• Risk management information</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Postemployment Plan Disclosures</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="info-box">
+                <h5 class="font-semibold text-primary mb-2">DC Plans:</h5>
+                <p>The amount recognized as an expense on the income statement must be disclosed.</p>
+              </div>
+              <div class="info-box">
+                <h5 class="font-semibold text-primary mb-2">DB Plans (IAS 19):</h5>
+                <ul class="space-y-1">
+                  <li>• Plan characteristics and risks</li>
+                  <li>• Reconciliation of net pension asset/liability</li>
+                  <li>• Sensitivity analysis of assumptions</li>
+                  <li>• Breakdown of plan assets by category</li>
+                  <li>• Effect on future cash flows</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Share-Based Compensation Disclosures</h3>
+            <div class="info-box">
+              <h5 class="font-semibold text-primary mb-2">Required Disclosures:</h5>
+              <ul class="space-y-2">
+                <li><strong>Plan Description:</strong> Terms, vesting requirements, maximum option term, and settlement methods</li>
+                <li><strong>Stock Options:</strong>
+                  <ul class="ml-4 mt-1 space-y-1">
+                    <li>• Reconciliation of options outstanding</li>
+                    <li>• Number and weighted-average exercise price</li>
+                  </ul>
+                </li>
+                <li><strong>Non-Option Instruments:</strong>
+                  <ul class="ml-4 mt-1 space-y-1">
+                    <li>• Number and weighted-average fair value</li>
+                    <li>• Fair value determination method</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Menu Button -->
+  <a href="./index.html" class="back-button">
+    ← Back to Menu
+  </a>
+
+</body>
+</html>

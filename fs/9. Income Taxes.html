@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 9: Income Taxes</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .subsection {
+      margin: 1.5rem 0;
+    }
+
+    .subsection h3 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .subsection h4 {
+      color: var(--primary-light);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .formula-box {
+      background: #f0f9ff;
+      border: 2px solid var(--accent);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .comparison-table th {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .comparison-table tr:hover {
+      background: #eff6ff;
+    }
+
+    .tax-positive {
+      color: #dc2626;
+      font-weight: 600;
+    }
+
+    .tax-negative {
+      color: #16a34a;
+      font-weight: 600;
+    }
+
+    .toc {
+      position: sticky;
+      top: 2rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+
+    .toc h3 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 100;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+    }
+
+    @media (max-width: 1024px) {
+      .toc {
+        position: static;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .section-number {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+      
+      .back-button {
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <header class="gradient-bg text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Income Taxes</h1>
+      <p class="text-xl opacity-90">Chapter 9: CFA Level 1 Financial Statement Analysis</p>
+      <p class="text-lg opacity-75 mt-2">Understanding deferred tax accounting and effective tax rate analysis</p>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+      
+      <!-- Table of Contents -->
+      <div class="lg:w-1/4">
+        <div class="toc">
+          <h3>📋 Chapter Contents</h3>
+          <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#key-differences">2. Key Differences</a></li>
+            <li><a href="#deferred-taxes">3. Deferred Tax Assets & Liabilities</a></li>
+            <li><a href="#tax-rates">4. Corporate Income Tax Rates</a></li>
+            <li><a href="#presentation">5. Presentation & Disclosure</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="lg:w-3/4">
+
+        <!-- Introduction -->
+        <section id="introduction" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Introduction to Income Tax Accounting</h2>
+          </div>
+          
+          <p>A company's financial statements are prepared using accounting principles (like IFRS or U.S. GAAP), while its tax obligations are determined by tax laws set by the government. These two sets of rules are often different, leading to discrepancies between the profit a company reports to investors and the income on which it actually pays taxes.</p>
+          
+          <div class="highlight-box">
+            <h4 class="text-lg font-semibold mb-3">🔑 Key Concepts:</h4>
+            <ul class="space-y-2">
+              <li><strong>Tax vs. Accounting Rules:</strong> This difference is the root cause of all income tax accounting complexities.</li>
+              <li><strong>Temporary vs. Permanent Differences:</strong> Some discrepancies will reverse over time (temporary), creating deferred tax items. Others will not (permanent).</li>
+              <li><strong>Effective Tax Rate:</strong> This rate reflects a company's actual tax burden and is a key metric for analyzing profitability after taxes.</li>
+              <li><strong>Disclosures:</strong> Companies provide detailed notes in their financial statements to explain their tax accounting and reconcile these differences.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Key Differences -->
+        <section id="key-differences" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Key Differences: Accounting Profit vs. Taxable Income</h2>
+          </div>
+          
+          <p>Understanding the following core terms is essential for income tax analysis:</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Term</th>
+                <th>Definition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Accounting Profit</strong></td>
+                <td>The pre-tax profit reported on a company's income statement, calculated according to accounting standards (IFRS/GAAP).</td>
+              </tr>
+              <tr>
+                <td><strong>Taxable Income</strong></td>
+                <td>The profit subject to income tax, calculated according to the rules set by tax authorities. This is the amount used to determine the actual tax payable for the period.</td>
+              </tr>
+              <tr>
+                <td><strong>Tax Expense</strong></td>
+                <td>The total tax reported on the income statement. It includes both the current tax payable and changes in deferred tax assets/liabilities.</td>
+              </tr>
+              <tr>
+                <td><strong>Taxes Payable</strong></td>
+                <td>The actual amount of tax that a company must pay to the tax authorities for the current period.</td>
+              </tr>
+              <tr>
+                <td><strong>Deferred Taxes</strong></td>
+                <td>The difference between the tax expense and the tax payable, arising from timing differences.</td>
+              </tr>
+              <tr>
+                <td><strong>Temporary Differences</strong></td>
+                <td>Differences between the carrying amount of an asset or liability on the balance sheet and its tax base. These differences will reverse in future periods.</td>
+              </tr>
+              <tr>
+                <td><strong>Permanent Differences</strong></td>
+                <td>Differences between accounting and tax rules that will <strong>never</strong> reverse. Examples include non-deductible expenses or non-taxable income.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="subsection">
+            <h3>Tax Rate Definitions</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="info-box">
+                <h4 class="font-semibold text-primary mb-2">Statutory Tax Rate</h4>
+                <p>The official corporate income tax rate enacted by law in a specific jurisdiction.</p>
+              </div>
+              <div class="info-box">
+                <h4 class="font-semibold text-primary mb-2">Effective Tax Rate</h4>
+                <div class="formula-box">
+                  Tax Expense ÷ Accounting Profit
+                </div>
+                <p>This represents the company's actual tax burden on its reported profit.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Deferred Tax Assets and Liabilities -->
+        <section id="deferred-taxes" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Deferred Tax Assets and Liabilities (DTAs and DTLs)</h2>
+          </div>
+          
+          <p>Deferred taxes arise from temporary differences between accounting profit and taxable income. They represent future tax effects of transactions that have already been recognized in the financial statements.</p>
+          
+          <div class="highlight-box">
+            <p><strong>💡 Core Idea:</strong> The goal of deferred tax accounting is to match the tax expense with the accounting profit in the period it is earned, regardless of when the tax is actually paid.</p>
+          </div>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Deferred Tax Liability (DTL)</th>
+                <th>Deferred Tax Asset (DTA)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>What is it?</strong></td>
+                <td>An obligation to pay <strong>more tax</strong> in the future.</td>
+                <td>A right to pay <strong>less tax</strong> in the future.</td>
+              </tr>
+              <tr>
+                <td><strong>When does it arise?</strong></td>
+                <td>When accounting profit is <strong>less than</strong> taxable income now, but will be higher in the future. This happens when:
+                  <ul class="mt-2 space-y-1">
+                    <li>• The carrying amount of an asset > its tax base.</li>
+                    <li>• The tax base of a liability > its carrying amount.</li>
+                  </ul>
+                </td>
+                <td>When accounting profit is <strong>greater than</strong> taxable income now, but will be lower in the future. This happens when:
+                  <ul class="mt-2 space-y-1">
+                    <li>• The tax base of an asset > its carrying amount.</li>
+                    <li>• The carrying amount of a liability > its tax base.</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Common Causes</strong></td>
+                <td>
+                  <div class="space-y-3">
+                    <div>
+                      <strong>🚀 Accelerated Depreciation for Tax:</strong>
+                      <p class="text-sm mt-1">A company gets larger tax deductions for an asset upfront than the depreciation expense it reports on its income statement.</p>
+                    </div>
+                    <div>
+                      <strong>📈 Unrealized Gains:</strong>
+                      <p class="text-sm mt-1">Gains on investments are reported on the income statement but are not taxed until the investment is sold.</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="space-y-3">
+                    <div>
+                      <strong>🛡️ Warranty Expenses:</strong>
+                      <p class="text-sm mt-1">A company estimates and expenses future warranty costs on its income statement, but can only deduct them for tax purposes when the costs are actually paid.</p>
+                    </div>
+                    <div>
+                      <strong>📉 Unrealized Losses:</strong>
+                      <p class="text-sm mt-1">Losses on investments are reported on the income statement but are not tax-deductible until the investment is sold.</p>
+                    </div>
+                    <div>
+                      <strong>🔄 Tax Loss Carryforwards:</strong>
+                      <p class="text-sm mt-1">When a company has a net loss for tax purposes, it can often use that loss to reduce taxable income in future years.</p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Effect on Future Taxes</strong></td>
+                <td><span class="tax-positive">📈 Increases future taxes payable</span></td>
+                <td><span class="tax-negative">📉 Decreases future taxes payable</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="subsection">
+            <h3>Recognizing Deferred Tax Assets</h3>
+            <div class="info-box">
+              <p><strong>⚠️ Important:</strong> While DTLs are generally always recognized, a DTA is only recognized if it is <strong>probable</strong> that the company will have sufficient future taxable profit to actually use the asset (i.e., to realize the future tax deduction). This involves management judgment about future profitability.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Corporate Income Tax Rates -->
+        <section id="tax-rates" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Corporate Income Tax Rates for Analysis</h2>
+          </div>
+          
+          <p>Analysts use different tax rates to evaluate a company's earnings and cash flows:</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Tax Rate</th>
+                <th>How to Calculate</th>
+                <th>What it Tells an Analyst</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Statutory Tax Rate</strong></td>
+                <td>The official rate in the company's home country.</td>
+                <td>The baseline rate before any adjustments. A starting point for analysis.</td>
+              </tr>
+              <tr>
+                <td><strong>Effective Tax Rate</strong></td>
+                <td>
+                  <div class="formula-box">
+                    Tax Expense ÷ Pre-Tax Income
+                  </div>
+                </td>
+                <td>Shows the actual tax burden on reported profits. It is crucial for forecasting future earnings. A rate consistently different from the statutory rate requires investigation.</td>
+              </tr>
+              <tr>
+                <td><strong>Cash Tax Rate</strong></td>
+                <td>
+                  <div class="formula-box">
+                    Cash Taxes Paid ÷ Pre-Tax Income
+                  </div>
+                </td>
+                <td>Measures the actual cash that went out the door for taxes. This is vital for cash flow modeling and valuation.</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="info-box">
+            <p><strong>💭 Analysis Note:</strong> The effective tax rate often differs from the statutory rate due to factors like tax credits, permanent differences, and different tax rates in various countries where the company operates (geographic mix of profits).</p>
+          </div>
+        </section>
+
+        <!-- Presentation and Disclosure -->
+        <section id="presentation" class="content-section">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <h2 class="section-title">Presentation and Disclosure in Financial Statements</h2>
+          </div>
+
+          <div class="subsection">
+            <h3>Classification on the Balance Sheet</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="info-box">
+                <h4 class="font-semibold text-primary mb-2">IFRS</h4>
+                <p>Requires companies to present DTAs and DTLs as separate line items. It also requires a breakdown of components and their recovery timing (e.g., reversing in more or less than 12 months).</p>
+              </div>
+              <div class="info-box">
+                <h4 class="font-semibold text-primary mb-2">U.S. GAAP</h4>
+                <p>Generally classifies all DTAs and DTLs as <strong>non-current</strong> on the balance sheet.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>Offsetting DTAs and DTLs</h3>
+            <p>A company can only present a single net deferred tax asset or liability if specific conditions are met:</p>
+            <ul class="space-y-2 mt-3">
+              <li>• The entity must have a legally enforceable right to offset current tax assets and liabilities.</li>
+              <li>• The deferred tax items must relate to the same tax authority (e.g., both are federal taxes in the same country).</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Reconciliation of Income Tax Expense</h3>
+            <p>Companies must provide a reconciliation to explain why their reported income tax expense is different from the amount that would result from applying the statutory tax rate to their accounting profit.</p>
+            
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+              <div class="info-box">
+                <h4 class="font-semibold text-primary mb-2">IFRS Requirements:</h4>
+                <ul class="space-y-1">
+                  <li>• Required for both public and private companies</li>
+                  <li>• Allows two formats: monetary amounts or tax rates</li>
+                  <li>• Can compare average effective rate to applicable rate</li>
+                </ul>
+              </div>
+              <div class="info-box">
+                <h4 class="font-semibold text-primary mb-2">U.S. GAAP Requirements:</h4>
+                <ul class="space-y-1">
+                  <li>• Required only for public companies</li>
+                  <li>• Must use domestic federal statutory tax rate</li>
+                  <li>• Reconciliation shows specific adjustments</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Menu Button -->
+  <a href="./index.html" class="back-button">
+    ← Back to Menu
+  </a>
+
+</body>
+</html>

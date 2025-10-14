@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 13: Key Differences IFRS vs. U.S. GAAP</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --ifrs: #16a34a;
+      --gaap: #dc2626;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .subsection {
+      margin: 1.5rem 0;
+    }
+
+    .subsection h3 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .success-box {
+      background: #ecfdf5;
+      border-left: 4px solid var(--success);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .warning-box {
+      background: #fffbeb;
+      border-left: 4px solid var(--warning);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .comparison-table th {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .comparison-table tr:hover {
+      background: #eff6ff;
+    }
+
+    .ifrs-badge {
+      background: var(--ifrs);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .gaap-badge {
+      background: var(--gaap);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .difference-highlight {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .impact-card {
+      background: #f0f9ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .impact-card h4 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .standards-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .standard-card {
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .ifrs-card {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border: 2px solid var(--ifrs);
+    }
+
+    .gaap-card {
+      background: linear-gradient(135deg, #fee2e2, #fecaca);
+      border: 2px solid var(--gaap);
+    }
+
+    .toc {
+      position: sticky;
+      top: 2rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+
+    .toc h3 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 100;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+    }
+
+    @media (max-width: 1024px) {
+      .toc {
+        position: static;
+        margin-bottom: 2rem;
+      }
+      
+      .standards-comparison {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .section-number {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+      
+      .back-button {
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <header class="gradient-bg text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Key Differences: IFRS vs. U.S. GAAP</h1>
+      <p class="text-xl opacity-90">Chapter 13: CFA Level 1 Financial Statement Analysis</p>
+      <p class="text-lg opacity-75 mt-2">Understanding critical differences between international accounting standards</p>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+      
+      <!-- Table of Contents -->
+      <div class="lg:w-1/4">
+        <div class="toc">
+          <h3>📋 Chapter Contents</h3>
+          <ul>
+            <li><a href="#framework">1. General Framework</a></li>
+            <li><a href="#income-statement">2. Income Statement</a></li>
+            <li><a href="#balance-sheet">3. Balance Sheet</a></li>
+            <li><a href="#cash-flow">4. Cash Flow Statement</a></li>
+            <li><a href="#other-areas">5. Other Key Areas</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="lg:w-3/4">
+
+        <!-- Standards Overview -->
+        <section class="content-section mb-6">
+          <div class="standards-comparison">
+            <div class="standard-card ifrs-card">
+              <div class="ifrs-badge mb-3">IFRS</div>
+              <h3 class="text-lg font-semibold text-green-800">International Financial Reporting Standards</h3>
+              <p class="text-green-700">Principles-based approach with broad frameworks requiring significant professional judgment</p>
+              <p class="text-sm text-green-600 mt-2">Issued by IASB</p>
+            </div>
+            <div class="standard-card gaap-card">
+              <div class="gaap-badge mb-3">U.S. GAAP</div>
+              <h3 class="text-lg font-semibold text-red-800">Generally Accepted Accounting Principles</h3>
+              <p class="text-red-700">Rules-based approach with detailed, prescriptive guidance for specific transactions</p>
+              <p class="text-sm text-red-600 mt-2">Issued by FASB</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- General Framework -->
+        <section id="framework" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">General Framework</h2>
+          </div>
+          
+          <p>Understanding the foundational differences in standard-setting and philosophy is key to interpreting financial statements accurately.</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th><span class="ifrs-badge">IFRS</span></th>
+                <th><span class="gaap-badge">U.S. GAAP</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Standard-Setting Bodies</strong></td>
+                <td>Issued by the <strong>International Accounting Standards Board (IASB)</strong>.</td>
+                <td>Issued by the <strong>Financial Accounting Standards Board (FASB)</strong>.</td>
+              </tr>
+              <tr>
+                <td><strong>Underlying Approach</strong></td>
+                <td><strong>Principles-based:</strong> Provides broad frameworks requiring significant professional judgment.</td>
+                <td><strong>Rules-based:</strong> Offers detailed, prescriptive guidance for specific transactions.</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="difference-highlight">
+            <p><strong>🔑 Key Difference:</strong> This is the most fundamental difference. IFRS allows more flexibility but requires deeper judgment. U.S. GAAP reduces ambiguity but can lead to mechanical application.</p>
+          </div>
+        </section>
+
+        <!-- Income Statement -->
+        <section id="income-statement" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Income Statement</h2>
+          </div>
+          
+          <p>Key differences in revenue recognition and expense treatment impact profitability reporting.</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th><span class="ifrs-badge">IFRS</span></th>
+                <th><span class="gaap-badge">U.S. GAAP</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Revenue Recognition</strong></td>
+                <td>Uses the converged 5-step model. "Probable" collection is generally interpreted as >50% likelihood.</td>
+                <td>Same 5-step model, but "probable" may be interpreted more strictly (e.g., >75%), leading to delayed recognition in some cases.</td>
+              </tr>
+              <tr>
+                <td><strong>Development Costs</strong></td>
+                <td><strong>Capitalized</strong> if criteria (e.g., technical feasibility) are met. Treated as an intangible asset.</td>
+                <td><strong>Expensed</strong> as incurred, except for software development costs after technological feasibility.</td>
+              </tr>
+              <tr>
+                <td><strong>Non-Recurring Items</strong></td>
+                <td>Discloses "significant" or "exceptional" items. Discontinued operations shown net of tax below continuing income.</td>
+                <td>No "extraordinary items." Discontinued operations presented similarly.</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="impact-card">
+            <h4>📊 Impact Analysis</h4>
+            <p>IFRS companies may report higher profits and stronger balance sheets due to capitalization of development costs. Revenue timing differences are usually minor but can affect growth trends.</p>
+          </div>
+        </section>
+
+        <!-- Balance Sheet -->
+        <section id="balance-sheet" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Balance Sheet</h2>
+          </div>
+          
+          <p>Differences in asset valuation and impairment rules affect reported equity and asset quality.</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th><span class="ifrs-badge">IFRS</span></th>
+                <th><span class="gaap-badge">U.S. GAAP</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Inventory Valuation</strong></td>
+                <td><strong>LIFO prohibited.</strong> Uses FIFO or weighted average. Measured at lower of cost or Net Realizable Value (NRV).</td>
+                <td><strong>LIFO permitted.</strong> Measured at lower of cost or "market" (replacement cost).</td>
+              </tr>
+              <tr>
+                <td><strong>Reversal of Write-Downs</strong></td>
+                <td><strong>Allowed</strong> if inventory value recovers (up to original cost).</td>
+                <td><strong>Prohibited.</strong> Write-downs are permanent.</td>
+              </tr>
+              <tr>
+                <td><strong>Revaluation of PPE & Intangibles</strong></td>
+                <td><strong>Permitted.</strong> Gains go to revaluation surplus in equity.</td>
+                <td><strong>Not allowed.</strong> Historical cost model only.</td>
+              </tr>
+              <tr>
+                <td><strong>Impairment of Long-Lived Assets</strong></td>
+                <td><strong>One-step test</strong> (carrying amount vs. recoverable amount). <strong>Reversals allowed</strong> (except goodwill).</td>
+                <td><strong>Two-step test.</strong> <strong>Reversals prohibited.</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Goodwill</strong></td>
+                <td colspan="2" class="text-center">
+                  <div class="bg-blue-50 p-3 rounded">
+                    Not amortized under either standard. Tested annually for impairment.<br>
+                    Impairment losses <strong>cannot be reversed</strong> under both standards.
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Deferred Taxes</strong></td>
+                <td>All deferred tax assets/liabilities classified as <strong>non-current</strong>. Netted by jurisdiction.</td>
+                <td>Now aligned: also <strong>non-current</strong> and netted.</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="warning-box">
+            <h4 class="font-semibold mb-2">⚠️ Analytical Implications</h4>
+            <p>In inflation, U.S. GAAP LIFO users show lower profits and inventory values. IFRS companies can boost profits later via reversal of write-downs. Revaluation can inflate asset values on IFRS balance sheets.</p>
+          </div>
+        </section>
+
+        <!-- Cash Flow Statement -->
+        <section id="cash-flow" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Cash Flow Statement</h2>
+          </div>
+          
+          <p>Classification differences affect comparability of operating cash flow.</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th><span class="ifrs-badge">IFRS</span></th>
+                <th><span class="gaap-badge">U.S. GAAP</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Interest Paid</strong></td>
+                <td>Can be classified as <strong>Operating or Financing</strong> (policy must be consistent).</td>
+                <td>Mandatory <strong>Operating</strong> activity.</td>
+              </tr>
+              <tr>
+                <td><strong>Interest Received</strong></td>
+                <td>Can be <strong>Operating or Investing</strong>.</td>
+                <td>Mandatory <strong>Operating</strong>.</td>
+              </tr>
+              <tr>
+                <td><strong>Dividends Paid</strong></td>
+                <td>Can be <strong>Operating or Financing</strong>.</td>
+                <td>Mandatory <strong>Financing</strong>.</td>
+              </tr>
+              <tr>
+                <td><strong>Dividends Received</strong></td>
+                <td>Can be <strong>Operating or Investing</strong>.</td>
+                <td>Mandatory <strong>Operating</strong>.</td>
+              </tr>
+              <tr>
+                <td><strong>Bank Overdrafts</strong></td>
+                <td>Can be part of <strong>cash and cash equivalents</strong> if part of cash management.</td>
+                <td>Treated as <strong>short-term borrowing</strong> (liability).</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="info-box">
+            <p><strong>💡 Analyst Adjustment:</strong> These differences make CFO less comparable. Analysts often reclassify interest/dividends to ensure consistency. Overdraft treatment affects reported cash balances.</p>
+          </div>
+        </section>
+
+        <!-- Other Key Areas -->
+        <section id="other-areas" class="content-section">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <h2 class="section-title">Other Key Areas</h2>
+          </div>
+          
+          <p>Additional differences that impact financial analysis and comparability.</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th><span class="ifrs-badge">IFRS</span></th>
+                <th><span class="gaap-badge">U.S. GAAP</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Lease Accounting (Lessee)</strong></td>
+                <td><strong>Single model:</strong> All leases (except short-term) recognized on balance sheet. Expense is split into interest and amortization.</td>
+                <td><strong>Dual model:</strong> Finance and operating leases treated differently. Operating leases show straight-line total expense.</td>
+              </tr>
+              <tr>
+                <td><strong>Pension Accounting</strong></td>
+                <td>Remeasurements (gains/losses) go directly to <strong>Other Comprehensive Income (OCI)</strong>.</td>
+                <td>Gains/losses go to OCI but may be amortized into income via the "corridor" method.</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="success-box">
+            <h4 class="font-semibold mb-2">📈 Summary Impact</h4>
+            <p>Lease differences affect income statement expense patterns. Pension differences can cause smoother reported pension expense under U.S. GAAP due to amortization.</p>
+          </div>
+
+          <div class="subsection">
+            <h3>🔍 Key Takeaways for Analysts</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="impact-card">
+                <h4>🎯 Comparability Challenges</h4>
+                <ul class="space-y-1">
+                  <li>• Cash flow classifications vary significantly</li>
+                  <li>• Asset valuation methods differ</li>
+                  <li>• Revenue recognition timing can vary</li>
+                  <li>• Impairment reversals create asymmetry</li>
+                </ul>
+              </div>
+              <div class="impact-card">
+                <h4>🛠️ Analyst Adjustments Needed</h4>
+                <ul class="space-y-1">
+                  <li>• Reclassify cash flow items for consistency</li>
+                  <li>• Adjust for development cost capitalization</li>
+                  <li>• Consider LIFO inventory effects</li>
+                  <li>• Normalize for revaluation gains</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Menu Button -->
+  <a href="./index.html" class="back-button">
+    ← Back to Menu
+  </a>
+
+</body>
+</html>

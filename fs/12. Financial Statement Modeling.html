@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 12: Financial Statement Modeling</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .subsection {
+      margin: 1.5rem 0;
+    }
+
+    .subsection h3 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .subsection h4 {
+      color: var(--primary-light);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .success-box {
+      background: #ecfdf5;
+      border-left: 4px solid var(--success);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .warning-box {
+      background: #fffbeb;
+      border-left: 4px solid var(--warning);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 2px solid var(--accent);
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15);
+    }
+
+    .formula-content {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .formula-fraction {
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      margin: 0 0.5rem;
+    }
+
+    .formula-numerator, .formula-denominator {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      background: white;
+      margin: 0.25rem 0;
+    }
+
+    .formula-line {
+      height: 2px;
+      background: var(--primary);
+      margin: 0.5rem 0;
+    }
+
+    .formula-note {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .comparison-table th {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .comparison-table tr:hover {
+      background: #eff6ff;
+    }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .step-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .step-number {
+      background: var(--primary);
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .bias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .bias-card {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .bias-card h4 {
+      color: var(--danger);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .toc {
+      position: sticky;
+      top: 2rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+
+    .toc h3 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 100;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+    }
+
+    @media (max-width: 1024px) {
+      .toc {
+        position: static;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .section-number {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+      
+      .back-button {
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <header class="gradient-bg text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Financial Statement Modeling</h1>
+      <p class="text-xl opacity-90">Chapter 12: CFA Level 1 Financial Statement Analysis</p>
+      <p class="text-lg opacity-75 mt-2">Building robust financial models for valuation and forecasting</p>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+      
+      <!-- Table of Contents -->
+      <div class="lg:w-1/4">
+        <div class="toc">
+          <h3>📋 Chapter Contents</h3>
+          <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#building-model">2. Building Financial Model</a></li>
+            <li><a href="#behavioral-finance">3. Behavioral Finance & Biases</a></li>
+            <li><a href="#inflation-modeling">4. Modeling Inflation & Deflation</a></li>
+            <li><a href="#terminal-value">5. Forecast Horizon & Terminal Value</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="lg:w-3/4">
+
+        <!-- Introduction -->
+        <section id="introduction" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Introduction</h2>
+          </div>
+          
+          <p>Financial modeling is the process of building a forecast of a company's future financial performance. The primary goal is typically to perform a valuation. The process starts with forecasting revenue and then flows through the rest of the financial statements.</p>
+          
+          <p>It's essential for analysts to be aware of their own biases and external factors like competition, economic trends, and technology, as these can significantly impact the model's accuracy.</p>
+          
+          <div class="info-box">
+            <p><strong>🎯 Key Purpose:</strong> Financial models serve as the foundation for investment decisions, providing a structured approach to value companies and assess future performance under different scenarios.</p>
+          </div>
+        </section>
+
+        <!-- Building a Financial Statement Model -->
+        <section id="building-model" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">Building a Financial Statement Model</h2>
+          </div>
+          
+          <p>Constructing a robust model involves a systematic process, starting with a broad industry view and progressively narrowing down to company-specific details.</p>
+
+          <div class="subsection">
+            <h3>📊 Step 1: Industry and Company Overview</h3>
+            <div class="step-grid">
+              <div class="step-card">
+                <div class="step-number">1A</div>
+                <h4 class="font-semibold text-primary">Industry Analysis</h4>
+                <p>Analyze the industry structure using Porter's Five Forces:</p>
+                <ul class="space-y-1 mt-2">
+                  <li>• Threat of new entrants</li>
+                  <li>• Bargaining power of suppliers</li>
+                  <li>• Bargaining power of buyers</li>
+                  <li>• Threat of substitute products</li>
+                  <li>• Rivalry among competitors</li>
+                </ul>
+              </div>
+              <div class="step-card">
+                <div class="step-number">1B</div>
+                <h4 class="font-semibold text-primary">Company Analysis</h4>
+                <p>Identify the company's different business segments, their respective revenue streams, and their contributions to overall profit.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>🏗️ Step 2: Constructing the Pro Forma Income Statement</h3>
+            <p>This is the core of the financial model, where you project the company's future income.</p>
+            
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Forecasting Approach</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Revenue Forecast</strong></td>
+                  <td>
+                    Combine a <strong>top-down approach</strong> (considering broad economic factors like regional GDP growth) with a <strong>bottom-up approach</strong> (analyzing company-specific segment trends). Key drivers to consider include changes in volume, price, product mix, and foreign exchange rates.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Cost of Goods Sold (COGS)</strong></td>
+                  <td>
+                    Often forecasted as a percentage of revenue (COGS margin). Consider factors like pricing power and supply constraints, which can affect the gross margin. For example, high prices due to limited supply might improve the gross margin, even if COGS is declining.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Selling, General, & Administrative (SG&A)</strong></td>
+                  <td>
+                    Also typically forecasted as a percentage of revenue. This may increase if the company is expanding its distribution network or increasing advertising spending.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Profitability Metrics</strong></td>
+                  <td>
+                    From the above forecasts, you can calculate:
+                    <ul class="mt-2 space-y-1">
+                      <li>• Gross Profit = Revenue − COGS</li>
+                      <li>• EBIT = Gross Profit − SG&A</li>
+                      <li>• EBITDA = EBIT + Depreciation & Amortization</li>
+                    </ul>
+                    If the company operates in segments, the individual segment EBITs should sum to the consolidated company EBIT.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Non-Operating Items & Taxes</strong></td>
+                  <td>
+                    Include any non-operating income or expenses. Forecast the corporate income tax by considering historical effective tax rates and any expected changes.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Behavioral Finance and Analyst Forecasts -->
+        <section id="behavioral-finance" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Behavioral Finance and Analyst Forecasts</h2>
+          </div>
+          
+          <div class="warning-box">
+            <p><strong>⚠️ Analyst Awareness:</strong> Analysts must be vigilant about their own psychological biases, which can systematically skew forecasts. Recognizing these biases is the first step to mitigating them.</p>
+          </div>
+
+          <div class="bias-grid">
+            <div class="bias-card">
+              <h4>🎯 Overconfidence</h4>
+              <p><strong>Description:</strong> Overestimating one's own forecasting abilities and the precision of the forecast.</p>
+              <p><strong>Mitigation:</strong> Rigorously track and analyze past forecast errors. Use scenario and sensitivity analysis to consider a range of outcomes.</p>
+            </div>
+            
+            <div class="bias-card">
+              <h4>🎮 Illusion of Control</h4>
+              <p><strong>Description:</strong> Believing one can control or influence outcomes that are, in fact, uncontrollable. This often leads to overly complex models.</p>
+              <p><strong>Mitigation:</strong> Acknowledge limitations, focus on the most relevant data, and avoid information overload.</p>
+            </div>
+            
+            <div class="bias-card">
+              <h4>⚓ Conservatism Bias</h4>
+              <p><strong>Description:</strong> Failing to fully incorporate new information, instead clinging to prior beliefs or forecasts (anchoring).</p>
+              <p><strong>Mitigation:</strong> Consciously evaluate the impact of new information without being too heavily anchored on past data.</p>
+            </div>
+            
+            <div class="bias-card">
+              <h4>📊 Representativeness Bias</h4>
+              <p><strong>Description:</strong> Classifying new information based on past experiences or familiar patterns, leading to misinterpretations.</p>
+              <p><strong>Mitigation:</strong> Consider all relevant information, including underlying base rates and overall context.</p>
+            </div>
+            
+            <div class="bias-card">
+              <h4>✅ Confirmation Bias</h4>
+              <p><strong>Description:</strong> Seeking out information that confirms existing beliefs while ignoring contradictory evidence.</p>
+              <p><strong>Mitigation:</strong> Actively seek out opposing viewpoints and consult independent sources for unbiased assessment.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Modeling Inflation and Deflation -->
+        <section id="inflation-modeling" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Modeling Inflation and Deflation</h2>
+          </div>
+          
+          <p>Changes in the general price level have a significant but varied impact on company forecasts.</p>
+          
+          <div class="grid md:grid-cols-2 gap-6 mt-4">
+            <div class="info-box">
+              <h4 class="font-semibold text-primary mb-2">📈 Inflationary Environment</h4>
+              <p>Companies with strong pricing power can better protect their profit margins by passing cost increases to customers through higher prices.</p>
+            </div>
+            <div class="info-box">
+              <h4 class="font-semibold text-primary mb-2">📉 Deflationary Environment</h4>
+              <p>Falling input costs can boost margins, but companies must balance price cuts to maintain volume without eroding profitability.</p>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>🔍 Key Impact Areas</h3>
+            <ul class="space-y-3">
+              <li><strong>💰 Sales:</strong> The ability to pass on cost increases to customers through higher prices depends on brand strength, competitive intensity, and price elasticity of demand.</li>
+              <li><strong>💸 Costs:</strong> The impact on costs depends on purchasing practices (e.g., long-term contracts, hedging) and input substitution flexibility.</li>
+            </ul>
+          </div>
+
+          <div class="success-box">
+            <p><strong>🔑 Key Insight:</strong> Inflation modeling requires distinguishing between nominal and real growth. Always assess whether revenue growth is driven by volume or price increases, and whether cost increases can be passed through.</p>
+          </div>
+        </section>
+
+        <!-- The Forecast Horizon and Terminal Value -->
+        <section id="terminal-value" class="content-section">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <h2 class="section-title">The Forecast Horizon and Terminal Value</h2>
+          </div>
+
+          <div class="subsection">
+            <h3>📅 Choosing the Forecast Horizon</h3>
+            <p>The explicit forecast period (e.g., 3, 5, or 10 years) should be long enough to allow the company to reach a "normalized" level of earnings. The choice depends on:</p>
+            
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+              <div class="info-box">
+                <ul class="space-y-2">
+                  <li>• Investment strategy (short-term vs. long-term)</li>
+                  <li>• Industry cyclicality</li>
+                </ul>
+              </div>
+              <div class="info-box">
+                <ul class="space-y-2">
+                  <li>• Company maturity and growth stage</li>
+                  <li>• Portfolio turnover (e.g., 25% annual turnover → ~4-year horizon)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3>💎 Estimating the Terminal Value</h3>
+            <p>Since a company is assumed to operate indefinitely, terminal value captures cash flows beyond the forecast horizon. Common methods:</p>
+            
+            <ul class="space-y-2 mt-4">
+              <li><strong>📊 Historical Multiples:</strong> Apply a multiple (e.g., EV/EBITDA, P/E) based on historical averages. Adjust for expected changes in growth or margins.</li>
+              <li><strong>💹 Discounted Cash Flow (Gordon Growth Model):</strong></li>
+            </ul>
+
+            <div class="formula-box">
+              <div class="formula-content">Terminal Value =</div>
+              <div class="formula-fraction">
+                <div class="formula-numerator">Free Cash Flow in Year (n+1)</div>
+                <div class="formula-line"></div>
+                <div class="formula-denominator">Discount Rate − Perpetual Growth Rate</div>
+              </div>
+              <div class="formula-note">This assumes stable, long-term growth and constant free cash flow generation.</div>
+            </div>
+
+            <div class="warning-box">
+              <h4 class="font-semibold mb-2">🚨 Terminal Value Sensitivity</h4>
+              <p>Small changes in assumptions have large effects:</p>
+              <div class="grid md:grid-cols-2 gap-4 mt-3">
+                <div>
+                  <p><strong>Example 1:</strong><br>
+                  FCF = $100M, discount rate = 10%, growth rate = 3%<br>
+                  → Terminal Value = <strong>$1.43 billion</strong></p>
+                </div>
+                <div>
+                  <p><strong>Example 2:</strong><br>
+                  Growth rate increases to 4%<br>
+                  → Terminal Value = <strong>$1.67 billion</strong> (17% increase)</p>
+                </div>
+              </div>
+              <p class="mt-3"><strong>💡 Always perform sensitivity analysis on terminal value assumptions.</strong></p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Menu Button -->
+  <a href="./index.html" class="back-button">
+    ← Back to Menu
+  </a>
+
+</body>
+</html>

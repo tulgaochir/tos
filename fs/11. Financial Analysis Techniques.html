@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 11: Financial Analysis Techniques</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #06b6d4;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
+    }
+
+    .content-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .subsection {
+      margin: 1.5rem 0;
+    }
+
+    .subsection h3 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .subsection h4 {
+      color: var(--primary-light);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .success-box {
+      background: #ecfdf5;
+      border-left: 4px solid var(--success);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .warning-box {
+      background: #fffbeb;
+      border-left: 4px solid var(--warning);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 2px solid var(--accent);
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 12px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(6, 182, 212, 0.1);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .comparison-table th {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .comparison-table tr:hover {
+      background: #eff6ff;
+    }
+
+    .ratio-category {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .ratio-category h3 {
+      margin-top: 0;
+      color: var(--primary);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.5rem;
+    }
+
+    .dupont-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 2px solid var(--warning);
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .dupont-formula {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .process-step {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      background: var(--primary);
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-weight: 600;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .tool-card {
+      background: #f0f9ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .tool-card h4 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .toc {
+      position: sticky;
+      top: 2rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+
+    .toc h3 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 100;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+    }
+
+    @media (max-width: 1024px) {
+      .toc {
+        position: static;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .section-number {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+      
+      .back-button {
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .formula-box {
+        font-size: 0.9rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <header class="gradient-bg text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Financial Analysis Techniques</h1>
+      <p class="text-xl opacity-90">Chapter 11: CFA Level 1 Financial Statement Analysis</p>
+      <p class="text-lg opacity-75 mt-2">Comprehensive ratio analysis and financial modeling techniques</p>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+      
+      <!-- Table of Contents -->
+      <div class="lg:w-1/4">
+        <div class="toc">
+          <h3>📋 Chapter Contents</h3>
+          <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#analysis-process">2. Analysis Process</a></li>
+            <li><a href="#analytical-tools">3. Analytical Tools</a></li>
+            <li><a href="#ratio-categories">4. Categories of Ratios</a></li>
+            <li><a href="#activity-ratios">4A. Activity Ratios</a></li>
+            <li><a href="#liquidity-ratios">4B. Liquidity Ratios</a></li>
+            <li><a href="#solvency-ratios">4C. Solvency Ratios</a></li>
+            <li><a href="#profitability-ratios">4D. Profitability Ratios</a></li>
+            <li><a href="#dupont-analysis">5. DuPont Analysis</a></li>
+            <li><a href="#modeling-forecasting">6. Model Building</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="lg:w-3/4">
+
+        <!-- Introduction -->
+        <section id="introduction" class="content-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <h2 class="section-title">Introduction</h2>
+          </div>
+          
+          <p>Financial analysis is the process of interpreting a company's financial data to assess its performance, valuation, and risk. It forms the foundation of informed investment and credit decisions.</p>
+          
+          <div class="info-box">
+            <p><strong>🎯 Purpose:</strong> Financial analysis helps investors, creditors, and other stakeholders make informed decisions by providing insights into a company's financial health, operational efficiency, and future prospects.</p>
+          </div>
+        </section>
+
+        <!-- The Financial Analysis Process -->
+        <section id="analysis-process" class="content-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <h2 class="section-title">The Financial Analysis Process</h2>
+          </div>
+          
+          <p>A thorough financial analysis follows a structured, multi-phase framework to ensure a comprehensive and objective outcome.</p>
+
+          <div class="subsection">
+            <h3>🔄 The Six Phases of Financial Statement Analysis</h3>
+            <div class="process-steps">
+              <div class="process-step">
+                <div class="step-number">1</div>
+                <h4 class="font-semibold text-primary">Articulation of Purpose</h4>
+                <p>Define the goal of the analysis. Are you evaluating an equity investment, a credit extension, or something else? Establish objectives and communication lines.</p>
+              </div>
+              <div class="process-step">
+                <div class="step-number">2</div>
+                <h4 class="font-semibold text-primary">Data Collection</h4>
+                <p>Gather necessary information, including financial statements, industry data, economic forecasts, and discussions with company management.</p>
+              </div>
+              <div class="process-step">
+                <div class="step-number">3</div>
+                <h4 class="font-semibold text-primary">Data Processing</h4>
+                <p>Adjust raw financial data for accounting differences, create common-size statements, calculate financial ratios, and prepare graphs.</p>
+              </div>
+              <div class="process-step">
+                <div class="step-number">4</div>
+                <h4 class="font-semibold text-primary">Data Analysis & Interpretation</h4>
+                <p>Analyze processed data to identify trends, strengths, and weaknesses. Use data to build forecasts and valuation models.</p>
+              </div>
+              <div class="process-step">
+                <div class="step-number">5</div>
+                <h4 class="font-semibold text-primary">Conclusion Development</h4>
+                <p>Formulate conclusions and recommendations based on the analysis and communicate them in an analytical report.</p>
+              </div>
+              <div class="process-step">
+                <div class="step-number">6</div>
+                <h4 class="font-semibold text-primary">Follow-up</h4>
+                <p>Periodically review the analysis by comparing actual results to forecasts, revising models and recommendations as needed.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Analytical Tools and Techniques -->
+        <section id="analytical-tools" class="content-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <h2 class="section-title">Analytical Tools and Techniques</h2>
+          </div>
+          
+          <p>Analysts use several core tools to dissect financial statements. These tools are designed to be "size-neutral" to allow for effective comparison between companies of different scales.</p>
+          
+          <div class="tools-grid">
+            <div class="tool-card">
+              <h4>📊 Financial Ratio Analysis</h4>
+              <p>The calculation and interpretation of ratios that relate different financial statement items to each other. This is the cornerstone of financial analysis.</p>
+            </div>
+            <div class="tool-card">
+              <h4>📈 Vertical Analysis (Common-Size)</h4>
+              <p>Expresses each line item as a percentage of a common base item. For income statements, the base is total revenue; for balance sheets, it's total assets.</p>
+            </div>
+            <div class="tool-card">
+              <h4>📉 Horizontal Analysis (Trend)</h4>
+              <p>Compares financial statement items across different time periods to identify patterns and growth trends.</p>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <h4 class="font-semibold mb-2">⚠️ Considerations for Comparison</h4>
+            <p>When comparing companies, especially internationally, analysts must make adjustments for differences in:</p>
+            <ul class="mt-2 space-y-1">
+              <li><strong>💱 Currency:</strong> Translate statements into a common currency</li>
+              <li><strong>📋 Accounting Standards:</strong> Adjust for differences between IFRS and U.S. GAAP</li>
+              <li><strong>📅 Fiscal Year-Ends:</strong> Be mindful of seasonality and economic conditions</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Categories of Financial Ratios -->
+        <section id="ratio-categories" class="content-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <h2 class="section-title">Categories of Financial Ratios</h2>
+          </div>
+          
+          <p>Financial ratios are typically grouped into categories that measure different aspects of a company's performance and financial health.</p>
+
+          <div class="success-box">
+            <h4 class="font-semibold mb-2">✅ The Value and Limitations of Ratio Analysis</h4>
+            <div class="grid md:grid-cols-2 gap-4 mt-3">
+              <div>
+                <p><strong>Benefits:</strong></p>
+                <ul class="space-y-1">
+                  <li>• Allow comparison of companies of different sizes</li>
+                  <li>• Help analyze past performance and future potential</li>
+                  <li>• Monitor effectiveness of management strategies</li>
+                </ul>
+              </div>
+              <div>
+                <p><strong>Limitations:</strong></p>
+                <ul class="space-y-1">
+                  <li>• Require context and comparison</li>
+                  <li>• Affected by different accounting policies</li>
+                  <li>• Can be manipulated</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Activity Ratios -->
+        <section id="activity-ratios" class="ratio-category">
+          <h3>A. 🔄 Activity Ratios (Efficiency Ratios)</h3>
+          <p>These ratios measure how efficiently a company is managing its assets and operations.</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Ratio</th>
+                <th>Formula</th>
+                <th>What It Measures</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Inventory Turnover</strong></td>
+                <td>
+                  <div class="formula-box">COGS ÷ Average Inventory</div>
+                </td>
+                <td>How many times a company sells and replaces its inventory over a period.</td>
+              </tr>
+              <tr>
+                <td><strong>Days of Inventory on Hand (DOH)</strong></td>
+                <td>
+                  <div class="formula-box">365 ÷ Inventory Turnover</div>
+                </td>
+                <td>The average number of days inventory is held before being sold.</td>
+              </tr>
+              <tr>
+                <td><strong>Receivables Turnover</strong></td>
+                <td>
+                  <div class="formula-box">Revenue ÷ Average Accounts Receivable</div>
+                </td>
+                <td>How many times a company collects its average accounts receivable over a period.</td>
+              </tr>
+              <tr>
+                <td><strong>Days of Sales Outstanding (DOS)</strong></td>
+                <td>
+                  <div class="formula-box">365 ÷ Receivables Turnover</div>
+                </td>
+                <td>The average number of days it takes to collect payment after a sale.</td>
+              </tr>
+              <tr>
+                <td><strong>Payables Turnover</strong></td>
+                <td>
+                  <div class="formula-box">Purchases ÷ Average Trade Payables</div>
+                </td>
+                <td>How many times a company pays off its suppliers during a period.</td>
+              </tr>
+              <tr>
+                <td><strong>Days of Payables</strong></td>
+                <td>
+                  <div class="formula-box">365 ÷ Payables Turnover</div>
+                </td>
+                <td>The average number of days it takes for the company to pay its suppliers.</td>
+              </tr>
+              <tr>
+                <td><strong>Working Capital Turnover</strong></td>
+                <td>
+                  <div class="formula-box">Revenue ÷ Average Working Capital</div>
+                </td>
+                <td>How effectively working capital is used to generate revenue.</td>
+              </tr>
+              <tr>
+                <td><strong>Fixed Asset Turnover</strong></td>
+                <td>
+                  <div class="formula-box">Revenue ÷ Average Net Fixed Assets</div>
+                </td>
+                <td>How efficiently the company uses its fixed assets to generate sales.</td>
+              </tr>
+              <tr>
+                <td><strong>Total Asset Turnover</strong></td>
+                <td>
+                  <div class="formula-box">Revenue ÷ Average Total Assets</div>
+                </td>
+                <td>The overall efficiency in using all available assets to generate sales.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Liquidity Ratios -->
+        <section id="liquidity-ratios" class="ratio-category">
+          <h3>B. 💧 Liquidity Ratios</h3>
+          <p>These ratios measure a company's ability to meet its short-term obligations.</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Ratio</th>
+                <th>Formula</th>
+                <th>What It Measures</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Current Ratio</strong></td>
+                <td>
+                  <div class="formula-box">Current Assets ÷ Current Liabilities</div>
+                </td>
+                <td>The ability to cover short-term liabilities with short-term assets.</td>
+              </tr>
+              <tr>
+                <td><strong>Quick Ratio (Acid-Test)</strong></td>
+                <td>
+                  <div class="formula-box">(Cash + Mkt. Securities + Receivables) ÷ Current Liabilities</div>
+                </td>
+                <td>A more conservative liquidity measure that excludes less-liquid inventory.</td>
+              </tr>
+              <tr>
+                <td><strong>Cash Ratio</strong></td>
+                <td>
+                  <div class="formula-box">(Cash + Marketable Securities) ÷ Current Liabilities</div>
+                </td>
+                <td>The ability to cover current liabilities with only cash and cash equivalents.</td>
+              </tr>
+              <tr>
+                <td><strong>Defensive Interval Ratio</strong></td>
+                <td>
+                  <div class="formula-box">(Cash + Mkt. Securities + Receivables) ÷ Average Daily Expenditures</div>
+                </td>
+                <td>The number of days the company can operate without needing additional financing.</td>
+              </tr>
+              <tr>
+                <td><strong>Cash Conversion Cycle</strong></td>
+                <td>
+                  <div class="formula-box">DOH + DOS - Days of Payables</div>
+                </td>
+                <td>The length of time it takes to convert investments in inventory into cash from sales. A shorter cycle is better.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Solvency Ratios -->
+        <section id="solvency-ratios" class="ratio-category">
+          <h3>C. 🏦 Solvency Ratios</h3>
+          <p>These ratios assess a company's ability to meet its long-term debt obligations.</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Ratio</th>
+                <th>Formula</th>
+                <th>What It Measures</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Debt-to-Assets Ratio</strong></td>
+                <td>
+                  <div class="formula-box">Total Debt ÷ Total Assets</div>
+                </td>
+                <td>The proportion of assets financed through debt.</td>
+              </tr>
+              <tr>
+                <td><strong>Debt-to-Capital Ratio</strong></td>
+                <td>
+                  <div class="formula-box">Total Debt ÷ (Total Debt + Total Equity)</div>
+                </td>
+                <td>The proportion of a company's capital structure that is debt.</td>
+              </tr>
+              <tr>
+                <td><strong>Debt-to-Equity Ratio</strong></td>
+                <td>
+                  <div class="formula-box">Total Debt ÷ Total Equity</div>
+                </td>
+                <td>The amount of debt relative to shareholders' equity.</td>
+              </tr>
+              <tr>
+                <td><strong>Financial Leverage Ratio</strong></td>
+                <td>
+                  <div class="formula-box">Average Total Assets ÷ Average Total Equity</div>
+                </td>
+                <td>How much of the asset base is supported by equity. A higher ratio means more leverage and risk.</td>
+              </tr>
+              <tr>
+                <td><strong>Interest Coverage Ratio</strong></td>
+                <td>
+                  <div class="formula-box">EBIT ÷ Interest Payments</div>
+                </td>
+                <td>The ability to cover interest payments from earnings before interest and taxes.</td>
+              </tr>
+              <tr>
+                <td><strong>Fixed-Charge Coverage Ratio</strong></td>
+                <td>
+                  <div class="formula-box">(EBIT + Lease Payments) ÷ (Interest Payments + Lease Payments)</div>
+                </td>
+                <td>A broader coverage measure that includes lease payments, an often significant fixed obligation.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Profitability Ratios -->
+        <section id="profitability-ratios" class="ratio-category">
+          <h3>D. 💰 Profitability Ratios</h3>
+          <p>These ratios measure a company's ability to generate profits from its sales and assets.</p>
+          
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Ratio</th>
+                <th>Formula</th>
+                <th>What It Measures</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Gross Profit Margin</strong></td>
+                <td>
+                  <div class="formula-box">Gross Profit ÷ Revenue</div>
+                </td>
+                <td>Profitability after accounting for the cost of goods sold.</td>
+              </tr>
+              <tr>
+                <td><strong>Operating Profit Margin</strong></td>
+                <td>
+                  <div class="formula-box">Operating Income ÷ Revenue</div>
+                </td>
+                <td>Profitability from core business operations before interest and taxes.</td>
+              </tr>
+              <tr>
+                <td><strong>Net Profit Margin</strong></td>
+                <td>
+                  <div class="formula-box">Net Income ÷ Revenue</div>
+                </td>
+                <td>The overall profitability, representing the percentage of revenue that becomes profit.</td>
+              </tr>
+              <tr>
+                <td><strong>Return on Assets (ROA)</strong></td>
+                <td>
+                  <div class="formula-box">Net Income ÷ Average Total Assets</div>
+                </td>
+                <td>How efficiently assets are used to generate net income.</td>
+              </tr>
+              <tr>
+                <td><strong>Return on Equity (ROE)</strong></td>
+                <td>
+                  <div class="formula-box">Net Income ÷ Average Total Equity</div>
+                </td>
+                <td>The return generated for the company's shareholders. This is a key measure of profitability.</td>
+              </tr>
+              <tr>
+                <td><strong>Return on Common Equity</strong></td>
+                <td>
+                  <div class="formula-box">(Net Income - Preferred Dividends) ÷ Average Common Equity</div>
+                </td>
+                <td>The return specifically available to common shareholders.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- DuPont Analysis -->
+        <section id="dupont-analysis" class="content-section">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <h2 class="section-title">DuPont Analysis: The Decomposition of ROE</h2>
+          </div>
+          
+          <p>DuPont analysis breaks down Return on Equity (ROE) into its key components, providing deeper insight into what drives a company's profitability.</p>
+
+          <div class="dupont-box">
+            <h3 class="text-lg font-semibold mb-4">🔍 The DuPont Models</h3>
+            
+            <div class="dupont-formula">
+              <h4 class="font-semibold text-primary mb-2">3-Part Model:</h4>
+              <div class="text-lg font-bold">ROE = Net Profit Margin × Asset Turnover × Financial Leverage</div>
+              <div class="text-sm mt-2 text-gray-600">ROE = (Net Income ÷ Revenue) × (Revenue ÷ Avg Assets) × (Avg Assets ÷ Avg Equity)</div>
+            </div>
+            
+            <div class="dupont-formula">
+              <h4 class="font-semibold text-primary mb-2">5-Part Model:</h4>
+              <div class="text-lg font-bold">ROE = Tax Burden × Interest Burden × EBIT Margin × Asset Turnover × Financial Leverage</div>
+              <div class="text-sm mt-2 text-gray-600">ROE = (Net Income ÷ EBT) × (EBT ÷ EBIT) × (EBIT ÷ Revenue) × (Revenue ÷ Avg Assets) × (Avg Assets ÷ Avg Equity)</div>
+            </div>
+          </div>
+
+          <div class="success-box">
+            <h4 class="font-semibold mb-2">🔑 Key Insights from DuPont Analysis:</h4>
+            <div class="grid md:grid-cols-2 gap-4 mt-3">
+              <div>
+                <ul class="space-y-2">
+                  <li><strong>💹 Profit Margin:</strong> A measure of operating efficiency</li>
+                  <li><strong>🔄 Asset Turnover:</strong> A measure of asset use efficiency</li>
+                </ul>
+              </div>
+              <div>
+                <ul class="space-y-2">
+                  <li><strong>⚖️ Financial Leverage:</strong> Shows how the company uses debt to amplify returns</li>
+                  <li><strong>🏦 Tax & Interest Burden:</strong> Isolate the effects of financing and tax strategy</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Model Building and Forecasting -->
+        <section id="modeling-forecasting" class="content-section">
+          <div class="section-header">
+            <div class="section-number">6</div>
+            <h2 class="section-title">Model Building and Forecasting</h2>
+          </div>
+          
+          <p>Ratio analysis is a critical input for building pro-forma financial statements and forecasting future performance. Analysts use several techniques to handle uncertainty.</p>
+          
+          <div class="tools-grid">
+            <div class="tool-card">
+              <h4>📈 Sensitivity Analysis</h4>
+              <p>A "what-if" analysis that shows how changing one variable (e.g., sales growth) impacts a forecast. Helps identify key value drivers.</p>
+            </div>
+            <div class="tool-card">
+              <h4>🎭 Scenario Analysis</h4>
+              <p>Explores different outcomes ("worst-case," "base-case," "best-case") by changing multiple variables at once to model different business environments.</p>
+            </div>
+            <div class="tool-card">
+              <h4>🎲 Simulation (Monte Carlo)</h4>
+              <p>A computer-based technique that runs thousands of scenarios based on probability distributions for key variables to model a range of possible outcomes.</p>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <p><strong>💡 Best Practice:</strong> Combine multiple forecasting techniques and always validate models against historical performance and industry benchmarks. Remember that financial analysis is as much art as science, requiring judgment and experience to interpret results correctly.</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Menu Button -->
+  <a href="./index.html" class="back-button">
+    ← Back to Menu
+  </a>
+
+</body>
+</html>
