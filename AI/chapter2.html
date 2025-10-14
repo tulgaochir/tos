@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Performance and Returns | CFA Alternative Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            border-left: 6px solid #3b82f6;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4);
+        }
+        .card {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #3b82f6;
+        }
+        .card-title {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 1.375rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .card-title svg {
+            margin-right: 0.75rem;
+            color: #3b82f6;
+        }
+        .formula {
+            background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 100%);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: #1e1b4b;
+            border-left: 6px solid #4f46e5;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.1);
+        }
+        .formula-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+            color: white;
+            padding: 0.375rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+        }
+        .example {
+            border: 2px solid #e2e8f0;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            border-radius: 1rem;
+            background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 6px solid #0ea5e9;
+            position: relative;
+        }
+        .example::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #0ea5e9, #06b6d4);
+            border-radius: 1rem;
+            z-index: -1;
+        }
+        .example-title {
+            font-weight: 700;
+            color: #0c4a6e;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem;
+        }
+        .example-title svg {
+            margin-right: 0.75rem;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .key-term {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            border: 1px solid #cbd5e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .list-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.7;
+        }
+        .list-item:before {
+            content: "●";
+            color: #3b82f6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        .numbered-list {
+            counter-reset: item;
+            margin-left: 1rem;
+        }
+        .numbered-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.7;
+        }
+        .numbered-list li:before {
+            counter-increment: item;
+            content: counter(item) ".";
+            color: #3b82f6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+        .sub-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid #e2e8f0;
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 0 1rem 1rem 0;
+        }
+        .navigation-bar {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 1rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .chapter-nav {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .chapter-nav-item {
+            display: block;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            background: #f1f5f9;
+            color: #64748b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .chapter-nav-item:hover {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            transform: scale(1.1);
+        }
+        .chapter-nav-item.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1001;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            transition: width 0.3s ease;
+            border-radius: 0 2px 2px 0;
+        }
+        .j-curve-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 1rem;
+            border: 2px solid #e2e8f0;
+        }
+        .j-curve-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 1rem 0;
+        }
+        .j-curve-path {
+            stroke: #3b82f6;
+            stroke-width: 3;
+            fill: none;
+        }
+        .j-curve-points {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .j-curve-point {
+            text-align: center;
+            width: 30%;
+        }
+        .j-curve-point .dot {
+            width: 16px;
+            height: 16px;
+            background: #3b82f6;
+            border-radius: 50%;
+            margin: 0 auto 0.5rem;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #3b82f6;
+        }
+        .toc {
+            background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #bae6fd;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .toc h3 {
+            color: #0c4a6e;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+        .toc-link {
+            color: #0369a1;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .toc-link:hover {
+            background: rgba(14, 165, 233, 0.1);
+            color: #0c4a6e;
+        }
+        @media (max-width: 1024px) {
+            .chapter-nav {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-blue-50">
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    </div>
+
+    <!-- Chapter Navigation -->
+    <div class="chapter-nav">
+        <a href="index.html" class="chapter-nav-item" title="Home">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="#overview" class="chapter-nav-item" title="Overview">
+            <i class="fas fa-eye"></i>
+        </a>
+        <a href="#section1" class="chapter-nav-item active" title="Challenges">
+            <i class="fas fa-exclamation-triangle"></i>
+        </a>
+        <a href="#section2" class="chapter-nav-item" title="Metrics">
+            <i class="fas fa-chart-bar"></i>
+        </a>
+        <a href="#section3" class="chapter-nav-item" title="Factors">
+            <i class="fas fa-cogs"></i>
+        </a>
+        <a href="#section4" class="chapter-nav-item" title="Hedge Funds">
+            <i class="fas fa-shield-alt"></i>
+        </a>
+    </div>
+
+    <!-- Header -->
+    <section id="overview" class="hero-gradient text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="mb-6">
+                    <i class="fas fa-chart-line text-5xl opacity-80"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                    Chapter 2: Alternative Investment Performance and Returns
+                </h1>
+                <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
+                    A Guide to Navigating the Unique Challenges of Performance Appraisal
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Navigation Bar -->
+        <div class="navigation-bar">
+            <div class="flex items-center justify-between flex-wrap">
+                <div class="flex items-center text-sm text-gray-600">
+                    <a href="index.html" class="text-blue-600 hover:text-blue-700 font-medium">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <i class="fas fa-chevron-right mx-3"></i>
+                    <span class="font-medium text-gray-800">Chapter 2: Performance and Returns</span>
+                </div>
+                <div class="flex items-center space-x-4 mt-2 sm:mt-0">
+                    <a href="chapter1.html" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Previous Chapter
+                    </a>
+                    <a href="chapter3.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Next Chapter <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>
+                <i class="fas fa-list mr-2"></i>
+                Chapter Contents
+            </h3>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#section1" class="toc-link">1. Unique Challenges in Performance Appraisal</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section2" class="toc-link">2. Key Performance Metrics</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section3" class="toc-link">3. Complicating Factors: Valuation, Leverage, and Fees</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section4" class="toc-link">4. Hedge Fund Returns and Common Biases</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 1. Challenges in Performance Appraisal -->
+        <div id="section1" class="content-section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="text-3xl font-bold text-gray-800">Unique Challenges in Performance Appraisal</h2>
+            </div>
+            <p class="text-lg mb-6">Measuring the performance of alternative investments is far more complex than for traditional assets like stocks and bonds. This is due to several unique characteristics that complicate standard evaluation methods.</p>
+            
+            <div class="highlight-box">
+                <h3 class="text-xl font-semibold">Why Alternative Investments Are Different</h3>
+                <p>Illiquidity, irregular cash flows, complex fee structures, and valuation challenges make performance measurement particularly difficult for alternative investments.</p>
+            </div>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">The Investment Life Cycle and the J-Curve Effect</h3>
+                <p class="mb-4">Alternative investments follow a distinct life cycle:</p>
+                
+                <div class="j-curve-visual">
+                    <h4 class="text-lg font-semibold text-gray-700 mb-4">The J-Curve Effect</h4>
+                    <div class="j-curve-container">
+                        <svg width="100%" height="100%" viewBox="0 0 300 200">
+                            <defs>
+                                <linearGradient id="jCurveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Axes -->
+                            <line x1="50" y1="50" x2="50" y2="150" stroke="#6b7280" stroke-width="2"/>
+                            <line x1="50" y1="100" x2="250" y2="100" stroke="#6b7280" stroke-width="2"/>
+                            <!-- J-Curve -->
+                            <path d="M 50 100 Q 100 130, 150 110 Q 200 90, 250 70" class="j-curve-path" stroke="url(#jCurveGradient)"/>
+                            <!-- Time axis labels -->
+                            <text x="100" y="190" text-anchor="middle" class="text-xs fill-gray-600">Early Years</text>
+                            <text x="150" y="190" text-anchor="middle" class="text-xs fill-gray-600">Mid-Life</text>
+                            <text x="200" y="190" text-anchor="middle" class="text-xs fill-gray-600">Mature</text>
+                            <!-- Return axis labels -->
+                            <text x="40" y="80" text-anchor="middle" class="text-xs fill-gray-600">+</text>
+                            <text x="40" y="105" text-anchor="middle" class="text-xs fill-gray-600">0</text>
+                            <text x="40" y="130" text-anchor="middle" class="text-xs fill-gray-600">-</text>
+                        </svg>
+                    </div>
+                    <div class="j-curve-points">
+                        <div class="j-curve-point">
+                            <div class="dot"></div>
+                            <div class="text-sm font-medium">Capital Commitment</div>
+                            <div class="text-xs text-gray-500">Initial negative returns</div>
+                        </div>
+                        <div class="j-curve-point">
+                            <div class="dot"></div>
+                            <div class="text-sm font-medium">Capital Deployment</div>
+                            <div class="text-xs text-gray-500">Investment phase</div>
+                        </div>
+                        <div class="j-curve-point">
+                            <div class="dot"></div>
+                            <div class="text-sm font-medium">Capital Distribution</div>
+                            <div class="text-xs text-gray-500">Positive returns</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <ol class="numbered-list mt-6">
+                    <li><span class="key-term">Capital Commitment:</span> Investors commit capital, which is drawn down over time. Early returns are often negative due to fees and initial setup costs.</li>
+                    <li><span class="key-term">Capital Deployment:</span> The fund invests the capital into projects or companies.</li>
+                    <li><span class="key-term">Capital Distribution:</span> Successful investments are exited (sold), and profits are distributed to investors.</li>
+                </ol>
+                <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p class="text-blue-800">
+                        <strong>J-Curve Effect:</strong> This life cycle creates a pattern where a fund's net returns are typically negative in the early years before turning positive as investments mature and are harvested.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2. Key Performance Metrics -->
+        <div id="section2" class="content-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="text-3xl font-bold text-gray-800">Key Performance Metrics</h2>
+            </div>
+            <p class="text-lg mb-6">Because of the J-curve and irregular cash flows, simple time-weighted returns are often inappropriate. Instead, analysts use money-weighted metrics.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                        </svg>
+                        Internal Rate of Return (IRR)
+                    </h3>
+                    <div class="mb-4">
+                        <div class="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <div class="text-2xl font-bold text-blue-600">IRR</div>
+                            <p class="text-sm text-blue-700">Most Common Metric</p>
+                        </div>
+                    </div>
+                    <p class="mb-4">The IRR is the discount rate that makes the net present value (NPV) of all cash flows (initial investment, contributions, and distributions) equal to zero.</p>
+                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <p class="text-sm text-yellow-800">
+                            <strong>Note:</strong> It is the most common measure of performance for private funds, but it is sensitive to the timing of cash flows.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                        </svg>
+                        Multiple of Invested Capital (MOIC)
+                    </h3>
+                    <div class="mb-4">
+                        <div class="text-center p-4 bg-green-50 rounded-lg border border-green-200">
+                            <div class="text-2xl font-bold text-green-600">TVPI</div>
+                            <p class="text-sm text-green-700">Total Value to Paid-In</p>
+                        </div>
+                    </div>
+                    <p class="mb-4">Also known as "Total Value to Paid-In" (TVPI), this metric compares the fund's total value (realized distributions + unrealized value) to the total capital invested.</p>
+                    <div class="formula">
+                        <div class="formula-label">FORMULA</div>
+                        MOIC = (Realized Value + Unrealized Value) / Total Invested Capital
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                        <p class="text-sm text-orange-800">
+                            <strong>Limitation:</strong> Simple to calculate but ignores the time value of money.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Valuation, Leverage, and Fees -->
+        <div id="section3" class="content-section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="text-3xl font-bold text-gray-800">Complicating Factors: Valuation, Leverage, and Fees</h2>
+            </div>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Valuation Challenges</h3>
+                <p class="mb-4">Alternative investments are often illiquid and lack public market prices. Their valuation relies on estimates, which are classified into a three-level hierarchy:</p>
+                
+                <div class="grid md:grid-cols-3 gap-6 mt-6">
+                    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-bold text-green-800 mb-2 flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Level 1 - Most Reliable
+                        </h4>
+                        <p class="text-green-700">Based on quoted prices for identical assets in active markets (e.g., publicly traded stocks).</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-bold text-yellow-800 mb-2 flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            Level 2 - Less Reliable
+                        </h4>
+                        <p class="text-yellow-700">Based on observable inputs other than quoted prices (e.g., pricing for a similar, more liquid asset).</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-bold text-red-800 mb-2 flex items-center">
+                            <i class="fas fa-times-circle mr-2"></i>
+                            Level 3 - Least Reliable
+                        </h4>
+                        <p class="text-red-700">Based on unobservable inputs and the fund manager's own models ("mark-to-model"). Alternative investments frequently fall into this category.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p class="text-red-800">
+                        <strong>Impact:</strong> Level 3 valuations can lead to smoothed returns and understated volatility.
+                    </p>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">The Use of Borrowed Funds (Leverage)</h3>
+                <p class="mb-4">Leverage is frequently used to amplify returns. The return on a leveraged portfolio depends on the return of the invested assets and the cost of borrowing.</p>
+                
+                <div class="formula">
+                    <div class="formula-label">LEVERAGE FORMULA</div>
+                    Leveraged Return (r<sub>L</sub>) = r + [V<sub>b</sub> / V<sub>c</sub> × (r - r<sub>b</sub>)]
+                </div>
+                
+                <div class="grid md:grid-cols-4 gap-4 mb-6">
+                    <div class="text-center p-3 bg-blue-50 rounded-lg">
+                        <div class="font-bold text-blue-600">r</div>
+                        <div class="text-xs text-blue-700">Return on assets</div>
+                    </div>
+                    <div class="text-center p-3 bg-green-50 rounded-lg">
+                        <div class="font-bold text-green-600">V<sub>b</sub></div>
+                        <div class="text-xs text-green-700">Amount borrowed</div>
+                    </div>
+                    <div class="text-center p-3 bg-purple-50 rounded-lg">
+                        <div class="font-bold text-purple-600">V<sub>c</sub></div>
+                        <div class="text-xs text-purple-700">Investor's cash equity</div>
+                    </div>
+                    <div class="text-center p-3 bg-orange-50 rounded-lg">
+                        <div class="font-bold text-orange-600">r<sub>b</sub></div>
+                        <div class="text-xs text-orange-700">Borrowing cost</div>
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <p class="example-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                        Illustrative Example: Leveraged Return
+                    </p>
+                    <p class="mb-4">An investor puts in $40 of their own cash (V<sub>c</sub>) and borrows $60 (V<sub>b</sub>) at a cost of 5% (r<sub>b</sub>). The total $100 portfolio earns a return of 10% (r).</p>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <p class="font-bold text-blue-800 mb-2">Step 1: Calculate the leveraged return</p>
+                        <div class="bg-white p-4 rounded border font-mono text-sm">
+                            r<sub>L</sub> = 10% + [$60 / $40 × (10% - 5%)]<br>
+                            r<sub>L</sub> = 10% + [1.5 × 5%]<br>
+                            r<sub>L</sub> = 10% + 7.5% = <strong class="text-green-600">17.5%</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <p class="font-bold text-green-800">Conclusion:</p>
+                        <p class="text-green-700">Leverage amplified the 10% asset return to a 17.5% return on the investor's equity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Complex Fee Structures</h3>
+                <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-200">
+                    <h4 class="font-bold text-indigo-800 mb-2">Impact of "2 and 20" Structure</h4>
+                    <p class="text-indigo-700">The "2 and 20" fee structure and its various clauses (hurdle rates, high-water marks, clawbacks) make it difficult to compare net returns across different funds and even among different investors in the same fund, depending on when they invested.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. Hedge Fund Returns and Common Biases -->
+        <div id="section4" class="content-section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="text-3xl font-bold text-gray-800">Hedge Fund Returns and Common Biases</h2>
+            </div>
+            <p class="text-lg mb-6">Hedge funds are private, unregulated investment pools, and their self-reported returns are subject to several biases that can inflate performance.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                        Survivorship Bias
+                    </h3>
+                    <div class="mb-4">
+                        <div class="text-center p-4 bg-red-50 rounded-lg border border-red-200">
+                            <i class="fas fa-exclamation-triangle text-2xl text-red-600 mb-2"></i>
+                            <p class="text-sm text-red-700 font-medium">Upward Bias in Returns</p>
+                        </div>
+                    </div>
+                    <p>Failed or poorly performing funds stop reporting their results and are excluded from historical databases. This means that the average return of the surviving funds is artificially high, as it doesn't account for the losers.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                        Backfill Bias (Inclusion Bias)
+                    </h3>
+                    <div class="mb-4">
+                        <div class="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
+                            <i class="fas fa-chart-line text-2xl text-orange-600 mb-2"></i>
+                            <p class="text-sm text-orange-700 font-medium">Selective Reporting</p>
+                        </div>
+                    </div>
+                    <p>When a new fund is added to a database, it often "backfills" its past performance history. Managers are only incentivized to do this if their past performance was good, which again inflates the historical average of the database.</p>
+                </div>
+            </div>
+
+            <div class="sub-section mt-8">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Managing Liquidity and Redemptions</h3>
+                <p class="mb-6">To protect against mass withdrawals during periods of poor performance, hedge funds use several tools to manage liquidity:</p>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                        <h4 class="font-bold text-blue-800 mb-2 flex items-center">
+                            <i class="fas fa-lock mr-2"></i>
+                            Lockup Periods
+                        </h4>
+                        <p class="text-blue-700">A period after the initial investment during which investors cannot withdraw their capital.</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-bold text-yellow-800 mb-2 flex items-center">
+                            <i class="fas fa-clock mr-2"></i>
+                            Notice Periods
+                        </h4>
+                        <p class="text-yellow-700">Require investors to give advance notice (e.g., 30-90 days) before a withdrawal.</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-bold text-red-800 mb-2 flex items-center">
+                            <i class="fas fa-ban mr-2"></i>
+                            Gate Provisions
+                        </h4>
+                        <p class="text-red-700">Limit the amount of capital that can be withdrawn from the fund during any given redemption period.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-6 mt-12 border border-gray-200">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="chapter1.html" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Chapter 1: Features</span>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm text-gray-500 mb-1">Chapter 2 of 7</p>
+                    <p class="font-semibold text-gray-700">Performance and Returns</p>
+                </div>
+                <div>
+                    <a href="chapter3.html" class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        <span>Next: Private Capital</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Progress bar animation
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation item based on scroll position
+        const sections = document.querySelectorAll('[id^="section"]');
+        const navItems = document.querySelectorAll('.chapter-nav-item');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

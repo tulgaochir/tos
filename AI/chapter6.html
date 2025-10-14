@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Hedge Funds | CFA Alternative Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+        }
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            border-left: 6px solid #8b5cf6;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 8px 15px -3px rgba(139, 92, 246, 0.4);
+        }
+        .card {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8b5cf6, #6366f1);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #8b5cf6;
+        }
+        .card-title {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 1.375rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .card-title svg {
+            margin-right: 0.75rem;
+            color: #8b5cf6;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        tr:hover {
+            background: linear-gradient(145deg, #f3e8ff 0%, #e9d5ff 100%);
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .key-term {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            border: 1px solid #cbd5e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .list-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.7;
+        }
+        .list-item:before {
+            content: "●";
+            color: #8b5cf6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        .sub-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid #e2e8f0;
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 0 1rem 1rem 0;
+        }
+        .navigation-bar {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 1rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .chapter-nav {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .chapter-nav-item {
+            display: block;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            background: #f1f5f9;
+            color: #64748b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .chapter-nav-item:hover {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+            transform: scale(1.1);
+        }
+        .chapter-nav-item.active {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+        }
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1001;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6, #6366f1);
+            transition: width 0.3s ease;
+            border-radius: 0 2px 2px 0;
+        }
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .strategy-card {
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #8b5cf6;
+            transition: all 0.3s ease;
+        }
+        .strategy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .strategy-card h4 {
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        .return-components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .return-component {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 1rem;
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .return-component:hover {
+            transform: translateY(-4px);
+        }
+        .return-component.beta {
+            border-top: 4px solid #3b82f6;
+        }
+        .return-component.alpha {
+            border-top: 4px solid #10b981;
+        }
+        .return-component h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        .return-component.beta h4 {
+            color: #3b82f6;
+        }
+        .return-component.alpha h4 {
+            color: #10b981;
+        }
+        .investment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .investment-option {
+            padding: 2rem;
+            border-radius: 1rem;
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #8b5cf6;
+            transition: all 0.3s ease;
+        }
+        .investment-option:hover {
+            transform: translateY(-4px);
+        }
+        .investment-option h4 {
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        .toc {
+            background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #bae6fd;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .toc h3 {
+            color: #0c4a6e;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+        .toc-link {
+            color: #0369a1;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .toc-link:hover {
+            background: rgba(14, 165, 233, 0.1);
+            color: #0c4a6e;
+        }
+        @media (max-width: 1024px) {
+            .chapter-nav {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-purple-50">
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    </div>
+
+    <!-- Chapter Navigation -->
+    <div class="chapter-nav">
+        <a href="index.html" class="chapter-nav-item" title="Home">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="#overview" class="chapter-nav-item" title="Overview">
+            <i class="fas fa-eye"></i>
+        </a>
+        <a href="#section1" class="chapter-nav-item active" title="Introduction">
+            <i class="fas fa-info-circle"></i>
+        </a>
+        <a href="#section2" class="chapter-nav-item" title="Characteristics">
+            <i class="fas fa-list-ul"></i>
+        </a>
+        <a href="#section3" class="chapter-nav-item" title="Strategies">
+            <i class="fas fa-chess"></i>
+        </a>
+        <a href="#section4" class="chapter-nav-item" title="Structures">
+            <i class="fas fa-building"></i>
+        </a>
+        <a href="#section5" class="chapter-nav-item" title="Risk & Return">
+            <i class="fas fa-chart-line"></i>
+        </a>
+    </div>
+
+    <!-- Header -->
+    <section id="overview" class="hero-gradient text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="mb-6">
+                    <i class="fas fa-shield-alt text-5xl opacity-80"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                    Chapter 6: Hedge Funds
+                </h1>
+                <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
+                    Understanding Their Strategies, Structures, and Role in a Portfolio
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Navigation Bar -->
+        <div class="navigation-bar">
+            <div class="flex items-center justify-between flex-wrap">
+                <div class="flex items-center text-sm text-gray-600">
+                    <a href="index.html" class="text-purple-600 hover:text-purple-700 font-medium">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <i class="fas fa-chevron-right mx-3"></i>
+                    <span class="font-medium text-gray-800">Chapter 6: Hedge Funds</span>
+                </div>
+                <div class="flex items-center space-x-4 mt-2 sm:mt-0">
+                    <a href="chapter5.html" class="text-gray-600 hover:text-purple-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Previous Chapter
+                    </a>
+                    <a href="chapter7.html" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        Next Chapter <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>
+                <i class="fas fa-list mr-2"></i>
+                Chapter Contents
+            </h3>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#section1" class="toc-link">1. What is a Hedge Fund?</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section2" class="toc-link">2. Distinguishing Characteristics of Hedge Funds</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section3" class="toc-link">3. Hedge Fund Strategies</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section4" class="toc-link">4. Hedge Fund Structures and Investment Forms</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section5" class="toc-link">5. Risk, Return, and Diversification</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 1. Introduction to Hedge Funds -->
+        <div id="section1" class="content-section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="text-3xl font-bold text-gray-800">What is a Hedge Fund?</h2>
+            </div>
+            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 mb-6">
+                <p class="text-lg text-purple-800">
+                    <span class="key-term">Hedge funds</span> are private investment funds that use a wide variety of complex strategies to generate returns. Unlike traditional mutual funds, they are lightly regulated, open only to accredited (wealthy and sophisticated) investors, and have the flexibility to use tools like leverage, short selling, and derivatives. Their primary goal is often to generate <span class="key-term">alpha</span> (absolute, market-beating returns) regardless of market direction.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
+                        <i class="fas fa-target mr-3"></i>
+                        Primary Objective
+                    </h3>
+                    <p class="text-blue-700">Generate alpha (absolute returns) that are uncorrelated with market movements through sophisticated investment strategies.</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                    <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center">
+                        <i class="fas fa-users mr-3"></i>
+                        Investor Base
+                    </h3>
+                    <p class="text-green-700">Limited to accredited investors - wealthy individuals, institutions, and sophisticated investors who meet specific criteria.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2. Distinguishing Characteristics of Hedge Funds -->
+        <div id="section2" class="content-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="text-3xl font-bold text-gray-800">Distinguishing Characteristics of Hedge Funds</h2>
+            </div>
+            
+            <div class="card">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Key Features That Set Hedge Funds Apart</h3>
+                <ul class="space-y-4">
+                    <li class="list-item"><span class="key-term">Flexible Mandates:</span> Can invest across a broad range of assets and use aggressive strategies.</li>
+                    <li class="list-item"><span class="key-term">Leverage:</span> Frequently use borrowed money to amplify potential returns (and risks).</li>
+                    <li class="list-item"><span class="key-term">Short Selling:</span> Can profit from falling asset prices.</li>
+                    <li class="list-item"><span class="key-term">Less Regulated:</span> Face fewer legal and regulatory constraints than mutual funds.</li>
+                    <li class="list-item"><span class="key-term">Liquidity Constraints:</span> Often have lockup periods (when investors cannot withdraw money) and gates (limits on withdrawals) to manage liquidity.</li>
+                    <li class="list-item"><span class="key-term">Performance Fees:</span> Typically charge a "two and twenty" fee structure—a 2% management fee and a 20% performance (incentive) fee on profits.</li>
+                    <li class="list-item"><span class="key-term">Less Transparency:</span> Provide limited information to partners and have lower reporting requirements.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3. Hedge Fund Strategies -->
+        <div id="section3" class="content-section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="text-3xl font-bold text-gray-800">Hedge Fund Strategies</h2>
+            </div>
+            <p class="text-lg mb-6">Hedge fund strategies are diverse and are typically grouped into broad categories.</p>
+            
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h4>Equity Hedge</h4>
+                    <div class="mb-4">
+                        <div class="text-center p-3 bg-blue-50 rounded border border-blue-200">
+                            <i class="fas fa-chart-line text-xl text-blue-600 mb-1"></i>
+                            <p class="text-xs text-blue-700 font-medium">Long/Short Equity</p>
+                        </div>
+                    </div>
+                    <p class="mb-4">Takes long and short positions in equity securities. This is the original and most common hedge fund strategy.</p>
+                    <div class="bg-gray-50 p-3 rounded border">
+                        <p class="text-sm font-medium text-gray-600 mb-1">Sub-Strategies:</p>
+                        <p class="text-sm text-gray-700">Fundamental Long/Short, Market Neutral, Short Biased</p>
+                    </div>
+                </div>
+                <div class="strategy-card">
+                    <h4>Event-Driven</h4>
+                    <div class="mb-4">
+                        <div class="text-center p-3 bg-green-50 rounded border border-green-200">
+                            <i class="fas fa-handshake text-xl text-green-600 mb-1"></i>
+                            <p class="text-xs text-green-700 font-medium">Corporate Events</p>
+                        </div>
+                    </div>
+                    <p class="mb-4">Seeks to profit from specific corporate events, such as mergers, acquisitions, bankruptcies, or restructurings.</p>
+                    <div class="bg-gray-50 p-3 rounded border">
+                        <p class="text-sm font-medium text-gray-600 mb-1">Sub-Strategies:</p>
+                        <p class="text-sm text-gray-700">Merger Arbitrage, Distressed/Restructuring, Activist</p>
+                    </div>
+                </div>
+                <div class="strategy-card">
+                    <h4>Relative Value</h4>
+                    <div class="mb-4">
+                        <div class="text-center p-3 bg-yellow-50 rounded border border-yellow-200">
+                            <i class="fas fa-balance-scale text-xl text-yellow-600 mb-1"></i>
+                            <p class="text-xs text-yellow-700 font-medium">Price Discrepancies</p>
+                        </div>
+                    </div>
+                    <p class="mb-4">Exploits small pricing discrepancies between related securities. This strategy often uses significant leverage.</p>
+                    <div class="bg-gray-50 p-3 rounded border">
+                        <p class="text-sm font-medium text-gray-600 mb-1">Sub-Strategies:</p>
+                        <p class="text-sm text-gray-700">Convertible Bond Arbitrage, Fixed-Income Arbitrage</p>
+                    </div>
+                </div>
+                <div class="strategy-card">
+                    <h4>Opportunistic / Macro</h4>
+                    <div class="mb-4">
+                        <div class="text-center p-3 bg-purple-50 rounded border border-purple-200">
+                            <i class="fas fa-globe text-xl text-purple-600 mb-1"></i>
+                            <p class="text-xs text-purple-700 font-medium">Macro Trends</p>
+                        </div>
+                    </div>
+                    <p class="mb-4">Makes bets on the direction of broad markets (e.g., interest rates, currencies, commodities) based on macroeconomic trends.</p>
+                    <div class="bg-gray-50 p-3 rounded border">
+                        <p class="text-sm font-medium text-gray-600 mb-1">Sub-Strategies:</p>
+                        <p class="text-sm text-gray-700">Global Macro, Managed Futures</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. Hedge Fund Structures and Investment Forms -->
+        <div id="section4" class="content-section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="text-3xl font-bold text-gray-800">Hedge Fund Structures and Investment Forms</h2>
+            </div>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Legal Structure</h3>
+                <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-200">
+                    <h4 class="font-bold text-indigo-800 mb-2">Limited Partnership Structure</h4>
+                    <p class="text-indigo-700 mb-4">Hedge funds are typically structured as <span class="key-term">limited partnerships</span>, with the fund manager acting as the General Partner (GP) and investors as Limited Partners (LPs).</p>
+                    
+                    <h4 class="font-bold text-indigo-800 mb-2">Master-Feeder Structure</h4>
+                    <p class="text-indigo-700">A common structure for global funds is the <span class="key-term">Master-Feeder Structure</span>, which combines capital from both U.S. (onshore) and non-U.S. (offshore) investors into a central master fund.</p>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">How to Invest in Hedge Funds</h3>
+                
+                <div class="investment-options">
+                    <div class="investment-option">
+                        <h4>Direct Investment</h4>
+                        <div class="mb-3">
+                            <i class="fas fa-direct-hit text-2xl text-purple-600 mb-2"></i>
+                        </div>
+                        <p class="mb-4">Investing directly into a single hedge fund or a Separately Managed Account (SMA) tailored to an investor's specific needs.</p>
+                        <div class="bg-green-50 p-3 rounded border border-green-200">
+                            <p class="text-sm text-green-700"><strong>Best for:</strong> Large institutions with due diligence capabilities</p>
+                        </div>
+                    </div>
+                    <div class="investment-option">
+                        <h4>Indirect Investment</h4>
+                        <div class="mb-3">
+                            <i class="fas fa-layer-group text-2xl text-purple-600 mb-2"></i>
+                        </div>
+                        <p class="mb-4">Investing in a vehicle that, in turn, invests in multiple hedge funds. The most common form is a <span class="key-term">Fund of Hedge Funds (FOF)</span>.</p>
+                        <div class="bg-blue-50 p-3 rounded border border-blue-200">
+                            <p class="text-sm text-blue-700"><strong>Benefits:</strong> Diversification but adds extra layer of fees</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Risk, Return, and Diversification -->
+        <div id="section5" class="content-section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="text-3xl font-bold text-gray-800">Risk, Return, and Diversification</h2>
+            </div>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Sources of Return</h3>
+                <p class="mb-6">Hedge fund returns can be broken down into three components:</p>
+                
+                <div class="return-components">
+                    <div class="return-component beta">
+                        <i class="fas fa-chart-area text-2xl text-blue-600 mb-3"></i>
+                        <h4>Market Beta</h4>
+                        <p class="text-gray-600">Return from exposure to broad market risk.</p>
+                    </div>
+                    <div class="return-component beta">
+                        <i class="fas fa-chess-knight text-2xl text-blue-600 mb-3"></i>
+                        <h4>Strategy Beta</h4>
+                        <p class="text-gray-600">Return from the specific risk factors of the fund's strategy.</p>
+                    </div>
+                    <div class="return-component alpha">
+                        <i class="fas fa-star text-2xl text-green-600 mb-3"></i>
+                        <h4>Alpha</h4>
+                        <p class="text-gray-600">The excess return generated by the manager's skill, independent of market and strategy betas. This is what hedge funds are paid to deliver.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Challenges and Biases</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-bold text-red-800 mb-3 flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            Survivorship Bias
+                        </h4>
+                        <p class="text-red-700">Failed funds are excluded from databases, artificially inflating average returns of surviving funds.</p>
+                    </div>
+                    
+                    <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500">
+                        <h4 class="font-bold text-orange-800 mb-3 flex items-center">
+                            <i class="fas fa-chart-line mr-2"></i>
+                            Backfill Bias
+                        </h4>
+                        <p class="text-orange-700">New funds add strong past performance to databases, inflating historical averages.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p class="text-yellow-800">
+                        <strong>Impact:</strong> Measuring true hedge fund performance is difficult due to several reporting biases in hedge fund databases.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Liquidity Management Tools</h3>
+                <p class="mb-6">To protect against mass withdrawals during periods of poor performance, hedge funds use several tools to manage liquidity:</p>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                        <h4 class="font-bold text-blue-800 mb-2 flex items-center">
+                            <i class="fas fa-lock mr-2"></i>
+                            Lockup Periods
+                        </h4>
+                        <p class="text-blue-700">A period after the initial investment during which investors cannot withdraw their capital.</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-bold text-yellow-800 mb-2 flex items-center">
+                            <i class="fas fa-clock mr-2"></i>
+                            Notice Periods
+                        </h4>
+                        <p class="text-yellow-700">Require investors to give advance notice (e.g., 30-90 days) before a withdrawal.</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-bold text-red-800 mb-2 flex items-center">
+                            <i class="fas fa-ban mr-2"></i>
+                            Gate Provisions
+                        </h4>
+                        <p class="text-red-700">Limit the amount of capital that can be withdrawn from the fund during any given redemption period.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Diversification Benefits</h3>
+                <div class="highlight-box">
+                    <h3 class="text-xl font-semibold">Why Include Hedge Funds?</h3>
+                    <p>A key attraction of hedge funds is their potential to provide diversification. Many strategies have low correlation to traditional stock and bond markets. Adding a carefully selected allocation of hedge funds to a traditional portfolio can potentially reduce overall portfolio volatility and increase risk-adjusted returns (as measured by the Sharpe ratio), especially during market downturns.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="text-center p-6 bg-green-50 rounded-lg border border-green-200">
+                        <i class="fas fa-chart-pie text-3xl text-green-600 mb-4"></i>
+                        <h4 class="font-bold text-green-800 mb-2">Portfolio Correlation</h4>
+                        <p class="text-green-700 text-sm">Low correlation with traditional assets can improve risk-adjusted returns</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-blue-50 rounded-lg border border-blue-200">
+                        <i class="fas fa-shield-alt text-3xl text-blue-600 mb-4"></i>
+                        <h4 class="font-bold text-blue-800 mb-2">Downside Protection</h4>
+                        <p class="text-blue-700 text-sm">Many strategies designed to perform well during market stress</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="bg-gradient-to-r from-gray-50 to-purple-50 rounded-lg p-6 mt-12 border border-gray-200">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="chapter5.html" class="inline-flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Chapter 5: Natural Resources</span>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm text-gray-500 mb-1">Chapter 6 of 7</p>
+                    <p class="font-semibold text-gray-700">Hedge Funds</p>
+                </div>
+                <div>
+                    <a href="chapter7.html" class="inline-flex items-center bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                        <span>Next: Digital Assets</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Progress bar animation
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation item based on scroll position
+        const sections = document.querySelectorAll('[id^="section"]');
+        const navItems = document.querySelectorAll('.chapter-nav-item');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
