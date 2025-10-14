@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFA Economics: International Trade Explained</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        /* Navigation Styles */
+        .chapter-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .floating-toc {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .toc-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .toc-item.active {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+            color: white;
+            transform: translateX(-5px);
+        }
+        
+        /* Enhanced Content Styles - Pink theme */
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ec4899, #f472b6, #f9a8d4);
+        }
+        
+        .header-gradient {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-gradient::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="0,0 1000,50 1000,100 0,100"></polygon></svg>');
+            background-size: cover;
+        }
+        
+        .header-gradient h1 {
+            color: white;
+            font-weight: 800;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .header-gradient p {
+            color: #fce7f3;
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+            position: relative;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+            color: white;
+            border-radius: 12px;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+        
+        .active-step .step-circle {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+            border-color: #ec4899;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+        
+        .active-step .step-label {
+            color: #ec4899;
+            font-weight: 600;
+        }
+        
+        .card::before {
+            background: linear-gradient(90deg, #ec4899, #f472b6);
+        }
+        
+        .card:hover {
+            border-color: #ec4899;
+        }
+        
+        .section-header::after {
+            background: linear-gradient(90deg, #ec4899, #f472b6);
+        }
+        
+        .section-subtitle::after {
+            background: linear-gradient(90deg, #ec4899, #f472b6);
+        }
+        
+        .policy-card::before {
+            background: linear-gradient(90deg, #ec4899, #f472b6);
+        }
+        
+        .policy-title {
+            color: #ec4899;
+        }
+        
+        .back-to-top {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+        }
+        
+        .back-to-top:hover {
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+        }
+        
+        .callout-note {
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+            color: #9d174d;
+        }
+        
+        .callout-note::before {
+            background: #ec4899;
+        }
+        
+        .key-point {
+            border-left: 4px solid #ec4899;
+        }
+        
+        .definition {
+            border-left: 4px solid #ec4899;
+        }
+        
+        .example-title::before {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+        }
+        
+        /* All other base styles */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            font-weight: 600;
+            color: #2d3748;
+        }
+        tbody tr:hover {
+            background-color: #f8fafc;
+            transform: translateX(2px);
+            transition: all 0.2s ease;
+        }
+        .callout {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.75rem 0;
+            position: relative;
+        }
+        .callout::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            border-radius: 0 0.75rem 0.75rem 0;
+        }
+        .callout-warning {
+            background: linear-gradient(135deg, #fffaf0, #fef3c7);
+            color: #92400e;
+        }
+        .callout-warning::before {
+            background: #dd6b20;
+        }
+        .callout-success {
+            background: linear-gradient(135deg, #f0fff4, #dcfce7);
+            color: #166534;
+        }
+        .callout-success::before {
+            background: #38a169;
+        }
+        .key-point {
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            margin: 1.25rem 0;
+            transition: all 0.3s ease;
+        }
+        .key-point:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .key-point-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        .progress-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            position: sticky;
+            top: 100px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .progress-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+        }
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #e2e8f0, #ec4899, #e2e8f0);
+            z-index: 1;
+        }
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            min-width: 120px;
+        }
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .step-label {
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover::before {
+            transform: translateX(0);
+        }
+        .card-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            color: #2d3748;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+        }
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1a202c;
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+        }
+        .highlight-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .definition {
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        .definition::before {
+            content: '💡';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+        }
+        .definition-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        .section-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        .section-subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+        }
+        .policy-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .policy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .policy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        .policy-card:hover::before {
+            transform: scaleX(1);
+        }
+        .policy-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .example {
+            border: 1px solid #e2e8f0;
+            padding: 1.75rem;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            position: relative;
+            overflow: hidden;
+        }
+        .example::before {
+            content: '📊';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+        .example-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .example-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            margin-right: 0.5rem;
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            .header-gradient h1 {
+                font-size: 2rem;
+            }
+            .header-gradient p {
+                font-size: 1rem;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .section-number {
+                margin-bottom: 1rem;
+            }
+            .floating-toc {
+                display: none;
+            }
+            .progress-container {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+
+    <!-- Navigation Bar -->
+    <nav class="chapter-nav fixed top-0 left-0 right-0 z-50 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="flex items-center space-x-2 text-pink-600 hover:text-pink-700 transition-colors">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="font-semibold">Back to Chapters</span>
+                </a>
+                <div class="h-6 w-px bg-gray-300"></div>
+                <h1 class="text-lg font-semibold text-gray-800">Chapter 6: International Trade</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="toggleToc" class="lg:hidden p-2 text-gray-600 hover:text-pink-600 transition-colors">
+                    <i class="fas fa-list"></i>
+                </button>
+                <div class="flex space-x-2">
+                    <a href="chapter5.html" class="px-3 py-2 text-gray-600 hover:text-pink-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-1"></i> Previous
+                    </a>
+                    <a href="chapter7.html" class="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors">
+                        Next Chapter <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Table of Contents -->
+    <div class="floating-toc hidden lg:block">
+        <div class="bg-white rounded-lg shadow-xl p-4 w-64 max-h-96 overflow-y-auto">
+            <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                <i class="fas fa-list mr-2 text-pink-600"></i>
+                Table of Contents
+            </h3>
+            <div class="space-y-2">
+                <div class="toc-item active px-3 py-2 rounded text-sm cursor-pointer transition-all" data-section="section1">
+                    1. Introduction
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section2">
+                    2. Benefits & Costs
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section3">
+                    3. Restrictions
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section4">
+                    4. Trading Blocs
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-8 pt-24">
+        <header class="header-gradient text-center rounded-lg mb-10">
+            <h1 class="text-4xl font-bold">International Trade: A Comprehensive Guide</h1>
+            <p>Understanding Global Trade Policies and Their Impact on Investments</p>
+        </header>
+
+
+        <!-- 1. Introduction -->
+        <div class="content-section" id="section1">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Why International Trade Matters for Investors</h2>
+            </div>
+            
+            <p class="text-lg">Understanding international trade policies is critical for global investors. These policies directly influence the volume and value of trade, which in turn impacts corporate profits, economic growth, and ultimately, the return on your investments.</p>
+        </div>
+        
+        <!-- 2. Benefits and Costs of International Trade -->
+        <div class="content-section" id="section2">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">The Two Sides of International Trade</h2>
+            </div>
+            
+            <p class="text-lg mb-6">While international trade is a powerful engine for growth, it comes with both benefits and drawbacks.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="section-subtitle text-green-700">Advantages</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h3 class="card-title">Gains from Exchange</h3>
+                            <p>Countries can consume more than they can produce domestically.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Economic Growth</h3>
+                            <p>Trade facilitates growth by opening up larger markets.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Access to Markets</h3>
+                            <p>Firms gain access to larger capital and product markets.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Increased Efficiency</h3>
+                            <p>Competition from imports forces domestic firms to become more efficient.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Specialization</h3>
+                            <p>Countries can specialize in producing what they are best at, increasing global output.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Capital Flow</h3>
+                            <p>Facilitates the movement of financial capital to where it is most productive.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Enhanced Productivity</h3>
+                            <p>Access to new technologies and processes enhances overall productivity.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="section-subtitle text-red-700">Disadvantages</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h3 class="card-title">Income Inequality</h3>
+                            <p>The benefits of trade may not be distributed evenly, potentially widening the gap between skilled and unskilled labor.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Job Losses</h3>
+                            <p>Industries that compete directly with cheaper imports may experience significant job losses.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Trade Restrictions -->
+        <div class="content-section" id="section3">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">Common Trade Restrictions</h2>
+            </div>
+            
+            <p class="text-lg mb-6">Despite the benefits of free trade, many countries implement restrictions to protect domestic industries or achieve other policy goals.</p>
+            
+            <div class="space-y-6">
+                <div class="policy-card">
+                    <h3 class="policy-title">Tariffs</h3>
+                    <p>A tariff is simply a <strong>tax imposed by a government on imported goods</strong>. Its main objectives are to protect domestic industries from foreign competition and to reduce trade deficits.</p>
+                    <p class="mt-4">However, tariffs lead to higher prices for consumers and an overall decrease in global economic welfare. This is because the loss to consumers is often greater than the gains captured by domestic producers and the government.</p>
+                    <div class="example">
+                         <p class="example-title">Understanding the Welfare Effect of a Tariff</p>
+                         <p><strong>Net Welfare Effect</strong> = Loss in Consumer Surplus - (Gain in Producer Surplus + Government Tariff Revenue)</p>
+                         <p>A <strong>Deadweight Loss</strong> occurs when the loss in consumer surplus is greater than the combined gain for producers and the government. This represents a net loss of economic efficiency for the country.</p>
+                    </div>
+                </div>
+                <div class="policy-card">
+                    <h3 class="policy-title">Quotas</h3>
+                    <p>A quota is a <strong>limit on the quantity of a good that can be imported</strong> during a specific period. While tariffs generate revenue for the government, the financial benefit of a quota goes to whoever is granted the license to import the goods.</p>
+                    
+                    <div class="card-grid mt-4">
+                        <div class="card">
+                            <h3 class="card-title">Quota Rents</h3>
+                            <p>These are the extra profits earned by the holders of the import licenses, who can buy the good at the world price and sell it at the higher domestic price.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Voluntary Export Restraint (VER)</h3>
+                            <p>A special type of quota where the exporting country "voluntarily" agrees to limit its exports. In this case, the quota rents are captured by the foreign exporters.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="policy-card">
+                    <h3 class="policy-title">Export Subsidies</h3>
+                    <p>An export subsidy is a payment from the government to a domestic firm to encourage it to export its goods. The objective is to stimulate exports.</p>
+                    <p class="mt-4">The main disadvantage is that subsidies decrease national welfare by encouraging the production of goods in which the country does not have a comparative advantage. This misallocates resources.</p>
+                    
+                    <div class="callout callout-warning mt-4">
+                        <h4 class="font-bold text-lg">Countervailing Duties</h4>
+                        <p>To fight against this, an importing country may impose its own tariffs, known as countervailing duties, on the subsidized goods to offset the subsidy's effect.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Trading Blocs and Regional Integration -->
+        <div class="content-section" id="section4">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">Trading Blocs and Regional Integration</h2>
+            </div>
+            
+            <p class="text-lg mb-6">A <strong>Regional Trading Bloc</strong> is a group of countries that agree to reduce or eliminate trade barriers among themselves, allowing for freer trade.</p>
+            
+            <h3 class="section-subtitle">Levels of Integration</h3>
+            <p>Trading blocs can have different levels of economic integration, forming a spectrum:</p>
+            
+            <div class="card-grid mt-4">
+                <div class="card">
+                    <h3 class="card-title">1. Free Trade Area</h3>
+                    <p>Members remove all trade barriers among themselves, but each country maintains its own trade policies with non-members (e.g., NAFTA/USMCA).</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">2. Customs Union</h3>
+                    <p>A free trade area plus a common set of trade restrictions against non-members.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">3. Common Market</h3>
+                    <p>A customs union that also allows for the free movement of factors of production (labor and capital) among member countries.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">4. Economic Union</h3>
+                    <p>A common market with common economic institutions and a coordination of economic policies among members (e.g., the European Union).</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">5. Monetary Union</h3>
+                    <p>An economic union that adopts a single, common currency (e.g., the Eurozone).</p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Effects of Forming a Trading Bloc</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="policy-card">
+                    <h4 class="policy-title text-green-700">Trade Creation (Welfare Enhancing)</h4>
+                    <p>Occurs when forming the bloc leads to the replacement of high-cost domestic production with lower-cost imports from other member countries. This increases overall economic welfare.</p>
+                </div>
+                <div class="policy-card">
+                    <h4 class="policy-title text-red-700">Trade Diversion (Welfare Reducing)</h4>
+                    <p>Occurs when the bloc leads to the replacement of low-cost imports from efficient non-member countries with higher-cost imports from less-efficient member countries. This happens because the member country's goods are now tariff-free, while the non-member's are not.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced navigation and interaction functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            const steps = document.querySelectorAll('.progress-step');
+            const tocItems = document.querySelectorAll('.toc-item');
+            const backToTop = document.getElementById('backToTop');
+            
+            // Function to reset all steps and toc items
+            function resetActiveStates() {
+                steps.forEach(step => step.classList.remove('active-step'));
+                tocItems.forEach(item => item.classList.remove('active'));
+            }
+            
+            // Function to update progress steps and TOC based on scroll position
+            function updateActiveSection() {
+                const scrollPosition = window.scrollY + 200;
+                
+                let currentSectionIndex = 0;
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    if (sections[i].offsetTop <= scrollPosition) {
+                        currentSectionIndex = i;
+                        break;
+                    }
+                }
+                
+                resetActiveStates();
+                
+                // Update progress steps
+                for (let i = 0; i <= currentSectionIndex; i++) {
+                    if (steps[i]) {
+                        steps[i].classList.add('active-step');
+                    }
+                }
+                
+                // Update TOC
+                if (tocItems[currentSectionIndex]) {
+                    tocItems[currentSectionIndex].classList.add('active');
+                }
+            }
+            
+            // Scroll event listener
+            window.addEventListener('scroll', () => {
+                updateActiveSection();
+                
+                // Show/hide back to top button
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // TOC item click handlers
+            tocItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    const targetSection = document.getElementById(`section${index + 1}`);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Progress step click handlers
+            steps.forEach((step, index) => {
+                step.addEventListener('click', () => {
+                    const targetSection = document.getElementById(`section${index + 1}`);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Back to top functionality
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Mobile TOC toggle
+            const toggleToc = document.getElementById('toggleToc');
+            const floatingToc = document.querySelector('.floating-toc');
+            
+            if (toggleToc && floatingToc) {
+                toggleToc.addEventListener('click', () => {
+                    floatingToc.classList.toggle('hidden');
+                    floatingToc.classList.toggle('lg:block');
+                });
+            }
+            
+            // Initial call
+            updateActiveSection();
+        });
+    </script>
+
+</body>
+</html>

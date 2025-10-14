@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CFA Economics: Fiscal Policy Explained</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        /* Navigation Styles */
+        .chapter-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .floating-toc {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .toc-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .toc-item.active {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: white;
+            transform: translateX(-5px);
+        }
+        
+        /* Enhanced Content Styles */
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #059669, #10b981, #34d399);
+        }
+        
+        .header-gradient {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: white;
+            border-radius: 12px;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+        
+        .progress-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            position: sticky;
+            top: 100px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .active-step .step-circle {
+            background: linear-gradient(135deg, #059669, #10b981);
+            border-color: #059669;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+        
+        .active-step .step-label {
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        .card::before {
+            background: linear-gradient(90deg, #059669, #10b981);
+        }
+        
+        .card:hover {
+            border-color: #059669;
+        }
+        
+        .section-header::after {
+            background: linear-gradient(90deg, #059669, #10b981);
+        }
+        
+        .section-subtitle::after {
+            background: linear-gradient(90deg, #059669, #10b981);
+        }
+        
+        .back-to-top {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+        
+        .back-to-top:hover {
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+        }
+        
+        /* Fiscal policy specific styles */
+        .formula {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 0.75rem;
+            border-left: 5px solid #059669;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .formula::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), transparent);
+            border-radius: 0 0.75rem 0 50px;
+        }
+        
+        .formula-main {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .formula-numerator,
+        .formula-denominator {
+            display: block;
+            text-align: center;
+        }
+        
+        .formula-line {
+            display: block;
+            height: 2px;
+            background-color: #4a5568;
+            margin: 0.25rem auto;
+            width: 80%;
+        }
+        
+        .policy-card::before {
+            background: linear-gradient(90deg, #059669, #10b981);
+        }
+        
+        .callout-note {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            color: #065f46;
+        }
+        
+        .callout-note::before {
+            background: #059669;
+        }
+        
+        /* All other existing styles remain the same as in previous chapters */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            font-weight: 600;
+            color: #2d3748;
+        }
+        tbody tr:hover {
+            background-color: #f8fafc;
+            transform: translateX(2px);
+            transition: all 0.2s ease;
+        }
+        .callout {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.75rem 0;
+            position: relative;
+        }
+        .callout::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            border-radius: 0 0.75rem 0.75rem 0;
+        }
+        .callout-warning {
+            background: linear-gradient(135deg, #fffaf0, #fef3c7);
+            color: #92400e;
+        }
+        .callout-warning::before {
+            background: #dd6b20;
+        }
+        .callout-success {
+            background: linear-gradient(135deg, #f0fff4, #dcfce7);
+            color: #166534;
+        }
+        .callout-success::before {
+            background: #38a169;
+        }
+        .header-gradient::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="0,0 1000,50 1000,100 0,100"></polygon></svg>');
+            background-size: cover;
+        }
+        .header-gradient h1 {
+            color: white;
+            font-weight: 800;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .header-gradient p {
+            color: #d1fae5;
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+            position: relative;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .key-point {
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            margin: 1.25rem 0;
+            border-left: 4px solid #059669;
+            transition: all 0.3s ease;
+        }
+        .key-point:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .key-point-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        .progress-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+        }
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #e2e8f0, #059669, #e2e8f0);
+            z-index: 1;
+        }
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            min-width: 120px;
+        }
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .step-label {
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover::before {
+            transform: translateX(0);
+        }
+        .card-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            color: #2d3748;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+        }
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1a202c;
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+        }
+        .highlight-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .definition {
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #059669;
+            position: relative;
+        }
+        .definition::before {
+            content: '💡';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+        }
+        .definition-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+        .section-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        .section-subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            .header-gradient h1 {
+                font-size: 2rem;
+            }
+            .header-gradient p {
+                font-size: 1rem;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .section-number {
+                margin-bottom: 1rem;
+            }
+            .floating-toc {
+                display: none;
+            }
+            .progress-container {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+
+    <!-- Navigation Bar -->
+    <nav class="chapter-nav fixed top-0 left-0 right-0 z-50 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="flex items-center space-x-2 text-green-600 hover:text-green-700 transition-colors">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="font-semibold">Back to Chapters</span>
+                </a>
+                <div class="h-6 w-px bg-gray-300"></div>
+                <h1 class="text-lg font-semibold text-gray-800">Chapter 3: Fiscal Policy</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="toggleToc" class="lg:hidden p-2 text-gray-600 hover:text-green-600 transition-colors">
+                    <i class="fas fa-list"></i>
+                </button>
+                <div class="flex space-x-2">
+                    <a href="chapter2.html" class="px-3 py-2 text-gray-600 hover:text-green-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-1"></i> Previous
+                    </a>
+                    <a href="chapter4.html" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                        Next Chapter <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Table of Contents -->
+    <div class="floating-toc hidden lg:block">
+        <div class="bg-white rounded-lg shadow-xl p-4 w-64 max-h-96 overflow-y-auto">
+            <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                <i class="fas fa-list mr-2 text-green-600"></i>
+                Table of Contents
+            </h3>
+            <div class="space-y-2">
+                <div class="toc-item active px-3 py-2 rounded text-sm cursor-pointer transition-all" data-section="section1">
+                    1. Introduction
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section2">
+                    2. Objectives
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section3">
+                    3. Budgets & Debt
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section4">
+                    4. Policy Tools
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section5">
+                    5. Multiplier Effect
+                </div>
+                <div class="toc-item px-3 py-2 rounded text-sm cursor-pointer transition-all hover:bg-gray-100" data-section="section6">
+                    6. Implementation
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-8 pt-24">
+        <!-- Header -->
+        <header class="header-gradient text-center rounded-lg mb-10">
+            <h1 class="text-4xl font-bold">Fiscal Policy: A Comprehensive Guide</h1>
+            <p>Understanding Government's Impact on the Economy</p>
+        </header>
+
+
+        <!-- 1. Introduction -->
+        <div class="content-section" id="section1">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Introduction to Government Economic Policy</h2>
+            </div>
+            
+            <p class="text-lg mb-6">Governments wield significant influence over the economy through their roles as major employers, spenders, and borrowers in global markets. They use two primary sets of tools to manage economic conditions:</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Fiscal Policy</h3>
+                    <p>This involves the government's decisions on <strong>spending and taxation</strong> to influence the broader economy. Think of it as the government opening or closing its wallet.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Monetary Policy</h3>
+                    <p>This is managed by the central bank, which influences the economy by controlling the <strong>quantity of money and credit</strong> available.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Roles and Objectives -->
+        <div class="content-section" id="section2">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">Roles and Objectives of Fiscal Policy</h2>
+            </div>
+            
+            <p class="text-lg mb-6">Fiscal policy is not just about balancing budgets; it's a powerful tool used to steer the economy toward specific goals.</p>
+
+            <h3 class="section-subtitle">Primary Objectives</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Manage Aggregate Demand</h3>
+                    <p>The core objective is to influence the total demand for goods and services to achieve stable prices (low inflation) and high employment.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Redistribute Income and Wealth</h3>
+                    <p>Through progressive taxation and social programs, fiscal policy can aim for a fairer distribution of wealth.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Allocate Resources</h3>
+                    <p>Government spending on infrastructure, education, and defense directs resources to specific sectors of the economy.</p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Schools of Thought on Fiscal Policy's Impact</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">The Keynesian View</h3>
+                    <p>Keynesian economists argue that fiscal policy is a powerful tool for managing aggregate demand, especially when the economy is operating below its potential (e.g., during a recession with low capacity utilization). Direct government spending can stimulate demand when private spending is weak.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">The Monetarist View</h3>
+                    <p>Monetarists believe that monetary policy is more effective than fiscal policy. They argue that fiscal policy changes can have only a temporary impact on aggregate demand and may be offset by changes in private sector behavior (like saving).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Budgets, Deficits, Debt -->
+        <div class="content-section" id="section3">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">Government Budgets, Deficits, and the National Debt</h2>
+            </div>
+            
+            <p class="text-lg mb-6">A government's budget reflects its fiscal policy decisions.</p>
+            
+            <div class="definition">
+                <div class="definition-title">Key Budget Concepts</div>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>Government Revenue:</strong> Primarily tax revenues minus transfer payments (like social security).</li>
+                    <li><strong>Budget Balance:</strong>
+                        <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                            <li><strong>Budget Surplus:</strong> Occurs when tax revenue (T) is greater than government spending (G). (T > G)</li>
+                            <li><strong>Budget Deficit:</strong> Occurs when government spending (G) is greater than tax revenue (T). (G > T)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Automatic Stabilizers:</strong> These are built-in features of fiscal policy that automatically help to stabilize the economy without any new government action. For example, during a recession, tax revenues automatically fall and unemployment benefits automatically rise, which helps to cushion the economic downturn.</li>
+                </ul>
+            </div>
+
+            <h3 class="section-subtitle">The National Debt and Debt-to-GDP Ratio</h3>
+            
+            <p class="mb-4">Persistent deficits lead to an accumulation of national debt. The sustainability of this debt is often measured by the debt-to-GDP ratio. Two key factors influence this ratio:</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Inflation</h3>
+                    <p>When inflation and nominal GDP rise, the real value of previously issued debt falls, which can help lower the debt-to-GDP ratio.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Growth vs. Interest Rates</h3>
+                    <p>If the real interest rate on government debt is higher than the real growth rate of the economy, the debt burden will grow faster than the economy's ability to pay it off, causing the debt-to-GDP ratio to rise.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Fiscal Policy Tools -->
+        <div class="content-section" id="section4">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">The Tools of Fiscal Policy</h2>
+            </div>
+            
+            <p class="text-lg mb-6">Governments have several tools at their disposal to implement fiscal policy.</p>
+
+            <h3 class="section-subtitle">Spending Tools vs. Revenue Tools (Taxes)</h3>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tool Category</th>
+                            <th>Description</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Spending Tools</strong></td>
+                            <td>Includes transfer payments (e.g., unemployment benefits) and direct spending on goods, services, and capital projects (e.g., infrastructure).</td>
+                            <td>Direct spending can provide a powerful boost to the economy.</td>
+                            <td>Capital spending projects can be very slow to implement. Changes can be politically difficult.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Revenue Tools (Taxes)</strong></td>
+                            <td>Includes direct taxes (on income and wealth) and indirect taxes (on goods and services, like VAT).</td>
+                            <td>Indirect taxes can be adjusted quickly and can influence spending behavior. Generate revenue for government services.</td>
+                            <td>Can have unintended consequences (e.g., discouraging work or investment). Direct tax changes can be slow to implement.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="section-subtitle">Characteristics of a Desirable Tax Policy</h3>
+            
+            <p class="mb-4">An effective tax system should be:</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Simple</h3>
+                    <p>Easy for taxpayers to understand and comply with.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Efficient</h3>
+                    <p>Minimizes interference with market decisions and economic efficiency.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Fair</h3>
+                    <p>Perceived as equitable by the population.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Revenue-Sufficient</h3>
+                    <p>Generates enough revenue to fund government spending.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Multiplier & Ricardian Equivalence -->
+        <div class="content-section" id="section5">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="section-title">The Multiplier Effect and Its Limits</h2>
+            </div>
+            
+            <h3 class="section-subtitle">The Fiscal Multiplier</h3>
+            
+            <p class="mb-4">The fiscal multiplier describes how an initial change in government spending or taxation leads to a larger final change in aggregate demand. A portion of new income is spent, creating income for someone else, who then spends a portion of it, and so on.</p>
+            
+            <p class="mb-4">The size of the multiplier depends on the <strong>Marginal Propensity to Consume (MPC)</strong>—the proportion of each extra dollar of income that is spent.</p>
+
+            <div class="formula">
+                <div>
+                    <span class="formula-main">Fiscal Multiplier</span><br>
+                    <span class="formula-numerator">1</span>
+                    <span class="formula-line"></span>
+                    <span class="formula-denominator">1 − MPC(1 − t)</span>
+                </div>
+            </div>
+            
+            <p class="mt-2 text-center text-gray-600">Where 't' is the tax rate.</p>
+
+            <div class="callout callout-note mt-6">
+                <p class="font-semibold text-lg mb-2">Illustrative Example: Calculating the Multiplier Effect</p>
+                <p>Assume the MPC is 0.8 (people spend 80% of new disposable income) and the tax rate (t) is 0.25 (25%). The government decides to increase spending by $100 billion to build new roads.</p>
+                <p class="mt-4"><strong>Step 1: Calculate the multiplier.</strong><br>
+                Multiplier = 1 / (1 − 0.8 × (1 − 0.25))<br>
+                Multiplier = 1 / (1 − 0.8 × 0.75)<br>
+                Multiplier = 1 / (1 − 0.6)<br>
+                Multiplier = 1 / 0.4 = 2.5</p>
+                <p class="mt-4"><strong>Step 2: Calculate the total impact on GDP.</strong><br>
+                Total Impact = Initial Spending × Multiplier<br>
+                Total Impact = $100 billion × 2.5 = $250 billion</p>
+                <p class="mt-4 font-semibold text-gray-800">Conclusion: The initial $100 billion of government spending leads to a total increase in GDP of $250 billion.</p>
+            </div>
+
+            <h3 class="section-subtitle">The Balanced Budget Multiplier</h3>
+            
+            <p>This concept examines the effect of an equal change in both government spending and taxes. Even if a spending increase is fully funded by a tax increase (leaving the budget balance unchanged), it will still have a small expansionary effect on GDP because the initial spending boost is more powerful than the dampening effect of the taxes.</p>
+
+            <h3 class="section-subtitle">A Counterargument: Ricardian Equivalence</h3>
+            
+            <div class="callout callout-warning">
+                <p>This theory suggests that fiscal multipliers may be ineffective. It argues that when a government finances a tax cut by issuing debt, rational consumers will anticipate that they will have to pay higher taxes in the future to repay that debt. Therefore, instead of spending the tax cut, they will save it to pay for the future tax liability. This increase in private saving exactly offsets the decrease in public saving (the deficit), leading to no change in national saving and no impact on aggregate demand.</p>
+            </div>
+        </div>
+
+        <!-- 6. Implementation Challenges -->
+        <div class="content-section" id="section6">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <h2 class="section-title">Fiscal Policy Implementation: Challenges and Lags</h2>
+            </div>
+            
+            <p class="text-lg mb-6">Even with the right tools, implementing effective fiscal policy is difficult in practice.</p>
+
+            <h3 class="section-subtitle">Understanding Deficits: Cyclical vs. Structural</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="card-title">Cyclical Deficit</h3>
+                    <p>A temporary deficit caused by the business cycle. During a recession, tax revenues fall and spending on social support rises, creating a deficit automatically.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Structural Deficit</h3>
+                    <p>A deficit that persists even when the economy is at full employment. This indicates a long-term imbalance between government spending and revenue. It is also called the "cyclically adjusted budget deficit."</p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Difficulties in Executing Fiscal Policy</h3>
+            
+            <p class="mb-4">Fiscal policy is notoriously slow to implement due to several time lags:</p>
+            
+            <div class="space-y-4">
+                <div class="callout callout-warning">
+                    <h4 class="font-bold text-lg">Recognition Lag</h4>
+                    <p>The time it takes for policymakers to collect data and realize that the economy is heading into a recession or an inflationary period.</p>
+                </div>
+                <div class="callout callout-warning">
+                    <h4 class="font-bold text-lg">Action Lag</h4>
+                    <p>The time it takes for the government to debate, pass, and enact a new fiscal policy law. This is often the longest lag due to the political process.</p>
+                </div>
+                <div class="callout callout-success">
+                    <h4 class="font-bold text-lg">Impact Lag</h4>
+                    <p>The time it takes for the enacted policy to filter through the economy and have its full effect on aggregate demand, output, and employment.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced navigation and interaction functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            const steps = document.querySelectorAll('.progress-step');
+            const tocItems = document.querySelectorAll('.toc-item');
+            const backToTop = document.getElementById('backToTop');
+            
+            // Function to reset all steps and toc items
+            function resetActiveStates() {
+                steps.forEach(step => step.classList.remove('active-step'));
+                tocItems.forEach(item => item.classList.remove('active'));
+            }
+            
+            // Function to update progress steps and TOC based on scroll position
+            function updateActiveSection() {
+                const scrollPosition = window.scrollY + 200;
+                
+                let currentSectionIndex = 0;
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    if (sections[i].offsetTop <= scrollPosition) {
+                        currentSectionIndex = i;
+                        break;
+                    }
+                }
+                
+                resetActiveStates();
+                
+                // Update progress steps
+                for (let i = 0; i <= currentSectionIndex; i++) {
+                    if (steps[i]) {
+                        steps[i].classList.add('active-step');
+                    }
+                }
+                
+                // Update TOC
+                if (tocItems[currentSectionIndex]) {
+                    tocItems[currentSectionIndex].classList.add('active');
+                }
+            }
+            
+            // Scroll event listener
+            window.addEventListener('scroll', () => {
+                updateActiveSection();
+                
+                // Show/hide back to top button
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // TOC item click handlers
+            tocItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    const targetSection = document.getElementById(`section${index + 1}`);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Progress step click handlers
+            steps.forEach((step, index) => {
+                step.addEventListener('click', () => {
+                    const targetSection = document.getElementById(`section${index + 1}`);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Back to top functionality
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Mobile TOC toggle
+            const toggleToc = document.getElementById('toggleToc');
+            const floatingToc = document.querySelector('.floating-toc');
+            
+            if (toggleToc && floatingToc) {
+                toggleToc.addEventListener('click', () => {
+                    floatingToc.classList.toggle('hidden');
+                    floatingToc.classList.toggle('lg:block');
+                });
+            }
+            
+            // Initial call
+            updateActiveSection();
+        });
+    </script>
+
+</body>
+</html>
