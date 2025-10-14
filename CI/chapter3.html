@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Working Capital & Liquidity | CFA Corporate Issuers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .section-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            border-radius: 2px;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .active-step .step-circle {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            border-color: #4facfe;
+            color: white;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin: 2rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 1.5rem 1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        td {
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title::before {
+            content: '';
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+        
+        .formula {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border-left: 6px solid #4facfe;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+        }
+        
+        .example {
+            background: linear-gradient(to right, #f7fafc, #edf2f7);
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border-left: 6px solid #48bb78;
+        }
+        
+        .example-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .nav-link {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            transform: translateX(8px);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin: 0.5rem 0;
+        }
+        
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chapter-navigation {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .approach-card {
+            border-left: 6px solid;
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+        }
+        
+        .conservative {
+            background-color: #f0fff4;
+            border-left-color: #38a169;
+        }
+        
+        .aggressive {
+            background-color: #fff5f5;
+            border-left-color: #f56565;
+        }
+        
+        .moderate {
+            background-color: #fffaf0;
+            border-left-color: #ed8936;
+        }
+        
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-cyan-100 to-blue-200">
+    <!-- Navigation Sidebar -->
+    <div class="fixed left-0 top-0 h-full w-80 sidebar z-40 overflow-y-auto">
+        <div class="p-6">
+            <div class="mb-8">
+                <a href="index.html" class="flex items-center text-xl font-bold text-gray-800">
+                    <i class="fas fa-arrow-left mr-3"></i>
+                    CFA Corporate Issuers
+                </a>
+            </div>
+            
+            <div class="mb-6">
+                <div class="text-sm text-gray-600 mb-2">Chapter 3 Progress</div>
+                <div class="bg-gray-200 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-3 rounded-full transition-all duration-300" style="width: 25%"></div>
+                </div>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="#section-1" class="nav-link active flex items-center text-gray-700">
+                    <i class="fas fa-sync-alt w-5 mr-3"></i>
+                    Cash Conversion Cycle
+                </a>
+                <a href="#section-2" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-chart-pie w-5 mr-3"></i>
+                    Working Capital
+                </a>
+                <a href="#section-3" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-tint w-5 mr-3"></i>
+                    Liquidity Management
+                </a>
+                <a href="#section-4" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-money-bill-wave w-5 mr-3"></i>
+                    Short-Term Funding
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-80 min-h-screen">
+        <div class="max-w-5xl mx-auto px-8 py-12">
+            <!-- Chapter Header -->
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h1 class="text-4xl font-bold mb-4">Working Capital & Liquidity</h1>
+                <p class="text-xl opacity-90">Managing Short-Term Assets and Liabilities for Corporate Health</p>
+            </div>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="chapter2.html" class="flex items-center text-gray-600 hover:text-cyan-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Previous: Corporate Governance
+                    </a>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-500">Chapter 3 of 7</span>
+                        <a href="chapter4.html" class="flex items-center text-cyan-600 hover:text-cyan-800 font-semibold">
+                            Next: Capital Allocation
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="progress-step active-step">
+                    <div class="step-circle">1</div>
+                    <div class="text-sm font-medium">Cash Conversion</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">2</div>
+                    <div class="text-sm font-medium">Working Capital</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">3</div>
+                    <div class="text-sm font-medium">Liquidity</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">4</div>
+                    <div class="text-sm font-medium">Funding</div>
+                </div>
+            </div>
+
+            <!-- Section 1: The Cash Conversion Cycle (CCC) -->
+            <div id="section-1" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">The Cash Conversion Cycle (CCC)</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">The Cash Conversion Cycle measures the time it takes for a company to convert its investments in inventory and other resources into cash from sales. It's a key indicator of operational efficiency.</p>
+                
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Understanding the Operating and Cash Conversion Cycles</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-cogs text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Operating Cycle</h3>
+                        <p>The time from acquiring raw materials to collecting cash from customers. It encompasses inventory production, sales, and receivables collection.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-sync-alt text-4xl text-cyan-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Cash Conversion Cycle (CCC)</h3>
+                        <p>This refines the operating cycle by factoring in the company's payment schedule to its own suppliers.</p>
+                    </div>
+                </div>
+                
+                <div class="formula">
+                    <div class="text-2xl mb-2">CCC = DOH + DSO - DPO</div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-boxes text-4xl text-orange-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">DOH (Days of Inventory Outstanding)</h3>
+                        <p>Average number of days inventory is held before being sold.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-receipt text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">DSO (Days of Sales Outstanding)</h3>
+                        <p>Average number of days it takes to collect cash from sales.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-credit-card text-4xl text-purple-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">DPO (Days Payable Outstanding)</h3>
+                        <p>Average number of days the company takes to pay its suppliers.</p>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <p class="example-title">Illustrative Example: Calculating CCC</p>
+                    <p>A company has DOH of 60 days, DSO of 45 days, and DPO of 50 days.</p>
+                    <p class="mt-4"><strong>Calculation:</strong><br>
+                    CCC = 60 (DOH) + 45 (DSO) - 50 (DPO) = 55 days.</p>
+                    <p class="mt-4"><strong>Conclusion:</strong> It takes this company 55 days to turn its inventory investments into cash. A shorter CCC is generally better, indicating efficient management. A <strong>negative CCC</strong> is excellent, meaning the company receives cash from customers before it has to pay its suppliers.</p>
+                </div>
+
+                <h3 class="text-2xl font-semibold mt-12 mb-6 text-gray-800">Strategies to Shorten the CCC</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-arrow-down text-4xl text-red-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Minimize DOH</h3>
+                        <p>Optimize inventory levels, reduce slow-moving products, and use frequent deliveries.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-rocket text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Accelerate DSO</h3>
+                        <p>Offer prompt payment discounts, enforce late payment penalties, and tighten credit terms.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-clock text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Extend DPO</h3>
+                        <p>Negotiate longer payment terms with suppliers.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 2: Working Capital and its Management -->
+            <div id="section-2" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Working Capital and its Management</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Working capital measures a company's short-term operational liquidity.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-calculator text-4xl text-purple-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Total Working Capital</h3>
+                        <p class="text-xl font-semibold mb-2">Current Assets - Current Liabilities</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-chart-line text-4xl text-indigo-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Net Working Capital</h3>
+                        <p class="mb-2">A more refined measure, typically excluding cash and short-term debt.</p>
+                        <p class="text-sm text-gray-600">(Current Assets - Cash & Securities) - (Current Liabilities - Short-term Debt)</p>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 border-l-6 border-blue-500 p-6 rounded-r-xl mt-8">
+                    <p class="text-blue-800">A high working capital-to-sales ratio might indicate inefficiencies like aging inventory. Generally, holding less working capital is preferred so that funds can be invested in higher-return projects.</p>
+                </div>
+
+                <h3 class="text-2xl font-semibold mt-12 mb-6 text-gray-800">Working Capital Funding Approaches</h3>
+                <p class="mb-6 text-gray-700">Companies balance risk and cost when deciding how to fund their working capital needs:</p>
+                
+                <div class="space-y-4">
+                    <div class="approach-card conservative">
+                        <h4 class="font-bold text-lg mb-2 text-green-800">Conservative Approach</h4>
+                        <p class="text-green-700">Relies more on stable but expensive long-term funding. Holds more current assets. Preferred for companies in early-growth stages or with unpredictable cash flows.</p>
+                    </div>
+                    <div class="approach-card aggressive">
+                        <h4 class="font-bold text-lg mb-2 text-red-800">Aggressive Approach</h4>
+                        <p class="text-red-700">Uses more cheap but risky short-term funding. Holds fewer current assets. Suitable for companies with stable and predictable sales.</p>
+                    </div>
+                    <div class="approach-card moderate">
+                        <h4 class="font-bold text-lg mb-2 text-orange-800">Moderate Approach</h4>
+                        <p class="text-orange-700">A balanced approach, mixing long- and short-term funding to optimize cost and risk.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Liquidity Management -->
+            <div id="section-3" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Liquidity Management</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Liquidity refers to a company's ability to meet its short-term obligations. It is managed by drawing from primary and secondary sources of cash.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">Primary Liquidity Sources</h3>
+                        <div class="space-y-4">
+                            <div class="card">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-coins text-yellow-600 mr-3 text-xl"></i>
+                                    <p class="font-semibold">Cash and marketable securities</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-chart-line text-green-600 mr-3 text-xl"></i>
+                                    <p class="font-semibold">Cash flow from operations</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-credit-card text-blue-600 mr-3 text-xl"></i>
+                                    <p class="font-semibold">Available borrowing capacity (e.g., credit lines)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">Secondary Liquidity Sources</h3>
+                        <p class="text-sm text-gray-600 mb-4">These are typically used when primary sources are exhausted and may signal financial distress.</p>
+                        <div class="space-y-4">
+                            <div class="card">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-pause-circle text-red-600 mr-3 text-xl"></i>
+                                    <p class="font-semibold">Suspending dividends</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-store text-orange-600 mr-3 text-xl"></i>
+                                    <p class="font-semibold">Selling assets</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-share-square text-purple-600 mr-3 text-xl"></i>
+                                    <p class="font-semibold">Issuing new equity</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-shield-alt text-gray-600 mr-3 text-xl"></i>
+                                    <p class="font-semibold">Bankruptcy protection</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="text-2xl font-semibold mt-12 mb-6 text-gray-800">Factors Affecting Liquidity: Drags and Pulls</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card bg-red-50 border-l-6 border-red-500">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-arrow-down text-4xl text-red-600 mb-3"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-red-800">Liquidity Drags</h3>
+                        <p class="text-red-700">Factors that reduce or slow down cash inflows (e.g., uncollected receivables, obsolete inventory)</p>
+                    </div>
+                    <div class="card bg-orange-50 border-l-6 border-orange-500">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-tachometer-alt text-4xl text-orange-600 mb-3"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-orange-800">Liquidity Pulls</h3>
+                        <p class="text-orange-700">Factors that accelerate cash outflows (e.g., making early payments to suppliers, reduced credit limits from banks)</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mt-12 mb-6 text-gray-800">Measuring Liquidity with Ratios</h3>
+                <p class="mb-6 text-gray-700">Analysts use several ratios to evaluate a company's liquidity position. Higher ratios generally indicate a stronger ability to meet short-term obligations.</p>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ratio</th>
+                                <th>Formula</th>
+                                <th>Interpretation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold">Current Ratio</td>
+                                <td class="font-mono">Current Assets / Current Liabilities</td>
+                                <td>The most basic measure of liquidity</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Quick Ratio (Acid-Test)</td>
+                                <td class="font-mono">(Cash + Securities + Receivables) / Current Liabilities</td>
+                                <td>A more stringent test that excludes less-liquid inventory</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Cash Ratio</td>
+                                <td class="font-mono">(Cash + Securities) / Current Liabilities</td>
+                                <td>The most conservative measure, showing ability to pay obligations without selling inventory or collecting receivables</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Section 4: Short-Term Funding -->
+            <div id="section-4" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Managing Short-Term Funding</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Effective management of short-term funding is crucial for maintaining flexibility and minimizing borrowing costs.</p>
+                
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Goals of Short-Term Funding</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-network-wired text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Diversify Credit Sources</h3>
+                        <p>Avoid reliance on a single lender to maintain financial flexibility</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-shield-check text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Secure Sufficient Funding</h3>
+                        <p>Ensure adequate funding to accommodate varying cash needs throughout business cycles</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-piggy-bank text-4xl text-purple-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Minimize Borrowing Costs</h3>
+                        <p>Secure competitive rates and favorable terms to reduce financing expenses</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mt-12 mb-6 text-gray-800">Factors Influencing Funding Options</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-building text-4xl text-indigo-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Company Size</h3>
+                        <p>Larger firms typically have more funding options than smaller ones</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-star text-4xl text-yellow-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Creditworthiness</h3>
+                        <p>A strong credit profile leads to better loan terms and lower rates</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-gavel text-4xl text-red-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Legal System</h3>
+                        <p>Less developed legal systems may limit options, forcing greater reliance on trade credit</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-home text-4xl text-teal-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Assets</h3>
+                        <p>Suitable collateral can provide access to secured funding options</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter Navigation Footer -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="chapter2.html" class="flex items-center text-gray-600 hover:text-cyan-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Previous: Corporate Governance
+                    </a>
+                    <div class="text-center">
+                        <div class="text-sm text-gray-500 mb-1">Next Chapter</div>
+                        <a href="chapter4.html" class="flex items-center text-cyan-600 hover:text-cyan-800 font-semibold text-lg">
+                            Capital Allocation
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav">
+        <a href="#" id="scroll-top" class="nav-button mb-2">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+        <a href="chapter2.html" class="nav-button mb-2">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="chapter4.html" class="nav-button">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation based on scroll
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const progressSteps = document.querySelectorAll('.progress-step');
+
+        function updateActiveSection() {
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    // Update sidebar navigation
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    if (navLinks[index]) {
+                        navLinks[index].classList.add('active');
+                    }
+                    
+                    // Update progress steps
+                    progressSteps.forEach((step, stepIndex) => {
+                        if (stepIndex <= index) {
+                            step.classList.add('active-step');
+                        } else {
+                            step.classList.remove('active-step');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveSection);
+
+        // Scroll to top functionality
+        document.getElementById('scroll-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mark chapter as completed when user reaches the end
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+            
+            if (scrollPosition + windowHeight >= documentHeight - 100) {
+                let completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '[]');
+                if (!completedChapters.includes(3)) {
+                    completedChapters.push(3);
+                    localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+                }
+            }
+        });
+    </script>
+</body>
+</html>

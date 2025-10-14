@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Capital Allocation | CFA Corporate Issuers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .section-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .active-step .step-circle {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: #667eea;
+            color: white;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title::before {
+            content: '';
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+        
+        .formula {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border-left: 6px solid #667eea;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+        }
+        
+        .example {
+            background: linear-gradient(to right, #f7fafc, #edf2f7);
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border-left: 6px solid #48bb78;
+        }
+        
+        .example-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .process-step {
+            counter-increment: step-counter;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            padding-left: 5rem;
+        }
+        
+        .process-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .key-point {
+            background-color: #ebf8ff;
+            border-left: 6px solid #667eea;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 16px 16px 0;
+        }
+        
+        .key-point strong {
+            color: #2c5282;
+        }
+        
+        .tool-card {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .bias-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            border-left: 6px solid;
+        }
+        
+        .cognitive-bias {
+            background-color: #fffaf0;
+            border-left-color: #ed8936;
+        }
+        
+        .behavioral-bias {
+            background-color: #fff5f5;
+            border-left-color: #f56565;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin: 2rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        td {
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        .nav-link {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateX(8px);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin: 0.5rem 0;
+        }
+        
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chapter-navigation {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 to-purple-200">
+    <!-- Navigation Sidebar -->
+    <div class="fixed left-0 top-0 h-full w-80 sidebar z-40 overflow-y-auto">
+        <div class="p-6">
+            <div class="mb-8">
+                <a href="index.html" class="flex items-center text-xl font-bold text-gray-800">
+                    <i class="fas fa-arrow-left mr-3"></i>
+                    CFA Corporate Issuers
+                </a>
+            </div>
+            
+            <div class="mb-6">
+                <div class="text-sm text-gray-600 mb-2">Chapter 4 Progress</div>
+                <div class="bg-gray-200 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-3 rounded-full transition-all duration-300" style="width: 20%"></div>
+                </div>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="#section-1" class="nav-link active flex items-center text-gray-700">
+                    <i class="fas fa-layer-group w-5 mr-3"></i>
+                    Types of Investments
+                </a>
+                <a href="#section-2" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-cogs w-5 mr-3"></i>
+                    Allocation Process
+                </a>
+                <a href="#section-3" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-calculator w-5 mr-3"></i>
+                    Analytical Tools
+                </a>
+                <a href="#section-4" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-lightbulb w-5 mr-3"></i>
+                    Principles & Pitfalls
+                </a>
+                <a href="#section-5" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-chess-knight w-5 mr-3"></i>
+                    Real Options
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-80 min-h-screen">
+        <div class="max-w-5xl mx-auto px-8 py-12">
+            <!-- Chapter Header -->
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h1 class="text-4xl font-bold mb-4">Capital Allocation</h1>
+                <p class="text-xl opacity-90">Investment analysis, capital budgeting processes, and analytical tools</p>
+            </div>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="chapter3.html" class="flex items-center text-gray-600 hover:text-indigo-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Previous: Working Capital
+                    </a>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-500">Chapter 4 of 7</span>
+                        <a href="chapter5.html" class="flex items-center text-indigo-600 hover:text-indigo-800 font-semibold">
+                            Next: Capital Structure
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="progress-step active-step">
+                    <div class="step-circle">1</div>
+                    <div class="text-sm font-medium">Investment Types</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">2</div>
+                    <div class="text-sm font-medium">Process</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">3</div>
+                    <div class="text-sm font-medium">Tools</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">4</div>
+                    <div class="text-sm font-medium">Principles</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">5</div>
+                    <div class="text-sm font-medium">Real Options</div>
+                </div>
+            </div>
+
+            <!-- Section 1: Types of Capital Investments -->
+            <div id="section-1" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Types of Capital Investments</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Capital investments, or capital expenditures (CapEx), are funds used by a company to acquire, upgrade, and maintain physical assets like property, buildings, or equipment. These investments are broadly categorized into two main purposes:</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Business Maintenance -->
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-wrench text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Business Maintenance Projects</h3>
+                        <p class="mb-4 text-gray-700">These projects are necessary to keep the business running smoothly. They don't typically generate new revenue but are essential for efficiency and compliance.</p>
+                        <div class="space-y-3">
+                            <div class="bg-blue-50 p-3 rounded-lg border-left-4 border-blue-500">
+                                <strong class="text-blue-800">Going Concern Projects:</strong> 
+                                <span class="text-blue-700">Focus on maintaining or improving efficiency. Examples include replacing old equipment or updating technology.</span>
+                            </div>
+                            <div class="bg-purple-50 p-3 rounded-lg border-left-4 border-purple-500">
+                                <strong class="text-purple-800">Regulatory/Compliance Projects:</strong> 
+                                <span class="text-purple-700">Mandatory projects imposed by external bodies, such as installing pollution control equipment.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Business Growth -->
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-rocket text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Business Growth Projects</h3>
+                        <p class="mb-4 text-gray-700">These projects aim to expand the business and increase its size and profitability. They are generally more uncertain and capital-intensive.</p>
+                        <div class="space-y-3">
+                            <div class="bg-green-50 p-3 rounded-lg border-left-4 border-green-500">
+                                <strong class="text-green-800">Expansion Projects:</strong> 
+                                <span class="text-green-700">Increase business size through new product lines, market expansion, or mergers and acquisitions (M&A).</span>
+                            </div>
+                            <div class="bg-orange-50 p-3 rounded-lg border-left-4 border-orange-500">
+                                <strong class="text-orange-800">New Lines of Business:</strong> 
+                                <span class="text-orange-700">Ventures into unrelated areas, often involving new technologies or industries. These are typically high-risk.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 2: The Capital Allocation Process -->
+            <div id="section-2" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">The Capital Allocation Process</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">A disciplined capital allocation process is crucial for maximizing shareholder value. It typically involves four key steps:</p>
+                
+                <div class="space-y-4" style="counter-reset: step-counter;">
+                    <div class="process-step">
+                        <h4 class="text-xl font-bold mb-2 text-gray-800">Idea Generation</h4>
+                        <p class="text-gray-700">Sourcing investment ideas from all levels of the company based on an understanding of the competitive landscape.</p>
+                    </div>
+                    <div class="process-step">
+                        <h4 class="text-xl font-bold mb-2 text-gray-800">Investment Analysis</h4>
+                        <p class="text-gray-700">Forecasting the cash flows (quantity, timing, and volatility) of potential projects and evaluating them using analytical tools.</p>
+                    </div>
+                    <div class="process-step">
+                        <h4 class="text-xl font-bold mb-2 text-gray-800">Planning and Prioritization</h4>
+                        <p class="text-gray-700">Selecting projects whose expected returns exceed the investors' opportunity cost of capital.</p>
+                    </div>
+                    <div class="process-step">
+                        <h4 class="text-xl font-bold mb-2 text-gray-800">Monitoring and Post-investment Review</h4>
+                        <p class="text-gray-700">Comparing actual performance against projections to validate assumptions, promote discipline, and generate insights for future decisions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Analytical Tools for Investment Analysis -->
+            <div id="section-3" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Analytical Tools for Investment Analysis</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Companies use several quantitative methods to evaluate the financial viability of capital projects.</p>
+                
+                <div class="space-y-8">
+                    <!-- Net Present Value (NPV) -->
+                    <div class="card tool-card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-chart-line text-4xl text-green-600 mr-4"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Net Present Value (NPV)</h3>
+                        </div>
+                        <div class="formula">NPV = Σ [ CF<sub>t</sub> / (1 + r)<sup>t</sup> ] - Initial Investment</div>
+                        <p class="mb-4 text-gray-700">NPV calculates the present value of all expected future cash flows (inflows and outflows) of a project, discounted at the required rate of return (r).</p>
+                        <div class="key-point">
+                            <strong>Decision Rule:</strong> Accept a project if its <strong>NPV is greater than or equal to zero</strong>. A positive NPV indicates the project is expected to create value for the firm.
+                        </div>
+                    </div>
+
+                    <!-- Internal Rate of Return (IRR) -->
+                    <div class="card tool-card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-percentage text-4xl text-blue-600 mr-4"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Internal Rate of Return (IRR)</h3>
+                        </div>
+                        <p class="mb-4 text-gray-700">The IRR is the discount rate that makes the NPV of a project equal to zero. It represents the project's expected rate of return.</p>
+                        <div class="key-point mb-4">
+                            <strong>Decision Rule:</strong> Accept a project if its <strong>IRR is greater than or equal to the required rate of return (r)</strong>.
+                        </div>
+                        <div class="example">
+                            <div class="example-title">Limitation</div>
+                            <p class="text-gray-700">IRR can yield multiple values for projects with unconventional cash flows (changing signs). In such cases, NPV is the preferred method.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Return on Invested Capital (ROIC) -->
+                    <div class="card tool-card">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-coins text-4xl text-purple-600 mr-4"></i>
+                            <h3 class="text-2xl font-bold text-gray-800">Return on Invested Capital (ROIC)</h3>
+                        </div>
+                        <div class="formula">ROIC = After-Tax Operating Profit / Average Invested Capital</div>
+                        <p class="mb-4 text-gray-700">ROIC measures the return a company generates on the capital it has invested. It's an accounting-based metric used to assess profitability and value creation.</p>
+                        <div class="example">
+                            <div class="example-title">Limitation</div>
+                            <p class="text-gray-700">Being backward-looking and based on accounting data, it can be volatile and may not reflect future prospects accurately.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Principles and Pitfalls of Capital Allocation -->
+            <div id="section-4" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Principles and Pitfalls of Capital Allocation</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Effective capital allocation requires adherence to sound principles and an awareness of common behavioral and cognitive biases.</p>
+                
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Key Principles for Better Decisions</h3>
+                
+                <div class="grid md:grid-cols-1 gap-4 mb-8">
+                    <div class="card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-dollar-sign text-green-600 text-2xl mr-3"></i>
+                            <strong class="text-lg text-gray-800">Use After-Tax Cash Flows:</strong>
+                        </div>
+                        <p class="text-gray-700">Always analyze investments based on their actual cash impact, not accounting profits.</p>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-plus-minus text-blue-600 text-2xl mr-3"></i>
+                            <strong class="text-lg text-gray-800">Focus on Incremental Cash Flows:</strong>
+                        </div>
+                        <p class="text-gray-700">Exclude sunk costs and consider all changes (positive and negative) the project brings to the entire firm.</p>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-clock text-purple-600 text-2xl mr-3"></i>
+                            <strong class="text-lg text-gray-800">Analyze Timing:</strong>
+                        </div>
+                        <p class="text-gray-700">Recognize that the timing of cash flows is critical and significantly impacts NPV and IRR.</p>
+                    </div>
+                </div>
+                
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Common Biases and Errors to Avoid</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bias-card cognitive-bias">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-brain text-orange-600 text-2xl mr-3"></i>
+                            <h4 class="text-lg font-bold text-orange-800">Cognitive Errors</h4>
+                        </div>
+                        <ul class="list-disc list-inside space-y-2 text-orange-700">
+                            <li>Forecasting errors (misjudging costs or competitor responses)</li>
+                            <li>Ignoring the opportunity cost of internal funds</li>
+                            <li>Failing to consider alternative scenarios or options</li>
+                        </ul>
+                    </div>
+                    <div class="bias-card behavioral-bias">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-user-cog text-red-600 text-2xl mr-3"></i>
+                            <h4 class="text-lg font-bold text-red-800">Behavioral Biases</h4>
+                        </div>
+                        <ul class="list-disc list-inside space-y-2 text-red-700">
+                            <li><strong>Inertia:</strong> Sticking with previous allocation levels despite diminishing returns</li>
+                            <li><strong>Short-term focus:</strong> Prioritizing projects that boost short-term accounting metrics</li>
+                            <li><strong>"Pet Project" Bias:</strong> Favoring projects based on personal preference rather than rigorous analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Real Options in Capital Allocation -->
+            <div id="section-5" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Real Options</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">Real options are choices a company can make to adjust a capital investment decision in the future based on new information. Unlike financial options, they apply to "real" assets (i.e., projects). They add value by providing managerial flexibility.</p>
+                
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Types of Real Options</h3>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Option Type</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold">Timing Options</td>
+                                <td>The option to delay an investment to await better information</td>
+                                <td>Waiting to build a factory until demand becomes more certain</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Sizing Options</td>
+                                <td>The option to change the scale of the project. Includes abandonment (stopping) and growth/expansion (investing more)</td>
+                                <td>Expanding a successful product line into a new country</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Flexibility Options</td>
+                                <td>The option to alter operational aspects of the project, such as changing prices or production methods</td>
+                                <td>Using overtime labor during periods of high demand</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">Fundamental Options</td>
+                                <td>The entire project is essentially an option. The payoff depends on an underlying variable</td>
+                                <td>The decision to drill an oil well depends on the future price of oil</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-expand-arrows-alt text-4xl text-indigo-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Value of Real Options</h3>
+                        <p class="text-gray-700">Real options provide managers with the flexibility to respond to changing market conditions, technological advances, and competitive pressures. This flexibility has economic value that traditional DCF analysis often underestimates.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-chess text-4xl text-purple-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Strategic Importance</h3>
+                        <p class="text-gray-700">Real options thinking encourages managers to view investments as creating future opportunities rather than just generating predictable cash flows. This perspective is particularly valuable in uncertain environments.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter Navigation Footer -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="chapter3.html" class="flex items-center text-gray-600 hover:text-indigo-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Previous: Working Capital
+                    </a>
+                    <div class="text-center">
+                        <div class="text-sm text-gray-500 mb-1">Next Chapter</div>
+                        <a href="chapter5.html" class="flex items-center text-indigo-600 hover:text-indigo-800 font-semibold text-lg">
+                            Capital Structure
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav">
+        <a href="#" id="scroll-top" class="nav-button mb-2">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+        <a href="chapter3.html" class="nav-button mb-2">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="chapter5.html" class="nav-button">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation based on scroll
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const progressSteps = document.querySelectorAll('.progress-step');
+
+        function updateActiveSection() {
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    // Update sidebar navigation
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    if (navLinks[index]) {
+                        navLinks[index].classList.add('active');
+                    }
+                    
+                    // Update progress steps
+                    progressSteps.forEach((step, stepIndex) => {
+                        if (stepIndex <= index) {
+                            step.classList.add('active-step');
+                        } else {
+                            step.classList.remove('active-step');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveSection);
+
+        // Scroll to top functionality
+        document.getElementById('scroll-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mark chapter as completed when user reaches the end
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+            
+            if (scrollPosition + windowHeight >= documentHeight - 100) {
+                let completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '[]');
+                if (!completedChapters.includes(4)) {
+                    completedChapters.push(4);
+                    localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Corporate Governance | CFA Corporate Issuers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .section-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            border-radius: 2px;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .active-step .step-circle {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            border-color: #f093fb;
+            color: white;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title::before {
+            content: '';
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+        
+        .callout {
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border-left: 6px solid;
+        }
+        
+        .callout-note {
+            background-color: #ebf8ff;
+            border-left-color: #3182ce;
+        }
+        
+        .callout-warning {
+            background-color: #fffaf0;
+            border-left-color: #dd6b20;
+        }
+        
+        .callout-success {
+            background-color: #f0fff4;
+            border-left-color: #38a169;
+        }
+        
+        .nav-link {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            transform: translateX(8px);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin: 0.5rem 0;
+        }
+        
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chapter-navigation {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .bias-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            border-left: 6px solid;
+        }
+        
+        .cognitive-bias {
+            background-color: #fffaf0;
+            border-left-color: #ed8936;
+        }
+        
+        .behavioral-bias {
+            background-color: #fff5f5;
+            border-left-color: #f56565;
+        }
+        
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 to-red-100">
+    <!-- Navigation Sidebar -->
+    <div class="fixed left-0 top-0 h-full w-80 sidebar z-40 overflow-y-auto">
+        <div class="p-6">
+            <div class="mb-8">
+                <a href="index.html" class="flex items-center text-xl font-bold text-gray-800">
+                    <i class="fas fa-arrow-left mr-3"></i>
+                    CFA Corporate Issuers
+                </a>
+            </div>
+            
+            <div class="mb-6">
+                <div class="text-sm text-gray-600 mb-2">Chapter 2 Progress</div>
+                <div class="bg-gray-200 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-pink-500 to-red-500 h-3 rounded-full transition-all duration-300" style="width: 25%"></div>
+                </div>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="#section-1" class="nav-link active flex items-center text-gray-700">
+                    <i class="fas fa-info-circle w-5 mr-3"></i>
+                    Introduction
+                </a>
+                <a href="#section-2" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-users w-5 mr-3"></i>
+                    Stakeholders & Conflicts
+                </a>
+                <a href="#section-3" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-cogs w-5 mr-3"></i>
+                    Governance Mechanisms
+                </a>
+                <a href="#section-4" class="nav-link flex items-center text-gray-700">
+                    <i class="fas fa-balance-scale w-5 mr-3"></i>
+                    Risks & Benefits
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-80 min-h-screen">
+        <div class="max-w-5xl mx-auto px-8 py-12">
+            <!-- Chapter Header -->
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h1 class="text-4xl font-bold mb-4">Corporate Governance</h1>
+                <p class="text-xl opacity-90">Understanding conflicts, mechanisms, risks, and benefits</p>
+            </div>
+
+            <!-- Chapter Navigation -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="chapter1.html" class="flex items-center text-gray-600 hover:text-pink-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Previous: Business Structures
+                    </a>
+                    <div class="flex space-x-4">
+                        <span class="text-gray-500">Chapter 2 of 7</span>
+                        <a href="chapter3.html" class="flex items-center text-pink-600 hover:text-pink-800 font-semibold">
+                            Next: Working Capital
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="progress-step active-step">
+                    <div class="step-circle">1</div>
+                    <div class="text-sm font-medium">Introduction</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">2</div>
+                    <div class="text-sm font-medium">Stakeholders</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">3</div>
+                    <div class="text-sm font-medium">Mechanisms</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">4</div>
+                    <div class="text-sm font-medium">Risks & Benefits</div>
+                </div>
+            </div>
+
+            <!-- Section 1: Introduction to Corporate Governance -->
+            <div id="section-1" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">What is Corporate Governance?</h2>
+                
+                <p class="text-lg text-gray-700">Corporate governance is the system of relationships, rules, and processes by which a corporation is directed and controlled. Its primary goal is to protect the interests of all stakeholders, including owners (shareholders), lenders (creditors), managers, and others.</p>
+            </div>
+            
+            <!-- Section 2: Stakeholder Relationships and Conflicts -->
+            <div id="section-2" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Stakeholder Relationships and Conflicts</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">A core challenge in corporate governance is managing the inherent conflicts of interest among different stakeholder groups.</p>
+
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">The Principal-Agent Relationship</h3>
+                <p class="mb-6 text-gray-700">This relationship is central to corporate structure. <strong>Principals</strong> (e.g., shareholders) hire <strong>Agents</strong> (e.g., managers) to act on their behalf. However, conflicts arise because the agent may have different interests than the principal, and the principal cannot perfectly monitor the agent's actions (a problem called <strong>information asymmetry</strong>).</p>
+                
+                <div class="callout callout-note">
+                    <h4 class="font-bold text-lg mb-3 text-blue-800">Agency Costs</h4>
+                    <p class="mb-3 text-blue-700">These are the costs that arise from managing these conflicts. They include:</p>
+                    <ul class="list-disc list-inside space-y-2 text-blue-700">
+                        <li><strong>Direct Costs:</strong> Explicit expenses, such as hiring an external auditor to verify financial statements.</li>
+                        <li><strong>Indirect Costs:</strong> Lost opportunities, such as a manager avoiding a profitable but risky project to protect their job.</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Common Stakeholder Conflicts</h3>
+                
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="card">
+                        <h3 class="card-title">Shareholders vs. Management/Board</h3>
+                        <p>Managers might prioritize their own job security or compensation over maximizing shareholder value.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Controlling vs. Minority Shareholders</h3>
+                        <p><strong>Controlling shareholders</strong> hold enough shares to control the company. Conflicts arise when they use this power to benefit themselves at the expense of <strong>minority shareholders</strong> (e.g., through related-party transactions). A <strong>dual-class share structure</strong> (where insiders hold shares with multiple votes) can institutionalize this control.</p>
+                    </div>
+                </div>
+
+                <div class="card mt-6">
+                    <h3 class="card-title">Shareholders vs. Creditors</h3>
+                    <p class="mb-4">Their interests diverge primarily over risk:</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="callout callout-warning">
+                            <h4 class="font-bold text-lg mb-2 text-orange-800">Shareholders (Risk-Seeking)</h4>
+                            <p class="text-orange-700">Benefit from high-risk projects and prefer higher leverage (debt) and more dividend payments.</p>
+                        </div>
+                        <div class="callout callout-success">
+                            <h4 class="font-bold text-lg mb-2 text-green-800">Creditors (Risk-Averse)</h4>
+                            <p class="text-green-700">Prefer stable, low-risk projects to ensure repayment. They favor less debt and fewer dividends to keep cash in the company.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Corporate Governance Mechanisms -->
+            <div id="section-3" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Corporate Governance Mechanisms</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">To manage conflicts and align interests, various mechanisms are put in place to give stakeholders a voice and protect their rights.</p>
+                
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Key Mechanisms by Stakeholder Group</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-users text-4xl text-pink-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Shareholder Mechanisms</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <div><strong>Shareholder Meetings (AGM/EGM):</strong> Annual or extraordinary meetings to vote on crucial matters.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-vote-yea text-blue-500 mr-2 mt-1"></i>
+                                <div><strong>Proxy Voting:</strong> Allows shareholders to vote without attending the meeting in person.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-dollar-sign text-yellow-500 mr-2 mt-1"></i>
+                                <div><strong>Say on Pay:</strong> A non-binding shareholder vote on executive compensation plans.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-handshake text-4xl text-purple-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Creditor Mechanisms</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-file-contract text-indigo-500 mr-2 mt-1"></i>
+                                <div><strong>Bond Indentures:</strong> The legal contract that outlines the company's duties and the bondholders' rights.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-users-cog text-red-500 mr-2 mt-1"></i>
+                                <div><strong>Creditor Committees:</strong> Formed during bankruptcy to represent bondholders' interests.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mt-12 mb-6 text-gray-800">Board and Management Mechanisms</h3>
+                <p class="mb-6 text-gray-700">The Board of Directors is the primary internal governance mechanism. It establishes committees to oversee critical functions:</p>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-search-dollar text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Audit Committee</h3>
+                        <p>Oversees financial reporting, internal controls, and the relationship with external auditors. Ensures compliance with accounting standards.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-user-check text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Nomination/Governance Committee</h3>
+                        <p>Manages board nominations and elections. Develops and oversees the company's corporate governance policies.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-coins text-4xl text-orange-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Compensation/Remuneration Committee</h3>
+                        <p>Sets the compensation policies for directors and senior executives, aiming to align their incentives with shareholder interests.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mt-12 mb-6 text-gray-800">External Mechanisms</h3>
+                <p class="mb-6 text-gray-700">Governments, regulators, and other external parties also play a crucial role through:</p>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-gavel text-4xl text-red-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Laws and Regulations</h3>
+                        <p>Covering contracts, property rights, consumer protection, etc.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-clipboard-list text-4xl text-purple-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Corporate Governance Codes</h3>
+                        <p>Standards for publicly traded firms, often on a "comply or explain" basis.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-eye text-4xl text-teal-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Corporate Reporting & Transparency</h3>
+                        <p>Requirements for public disclosure, enabling stakeholder oversight.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Governance Risks and Benefits -->
+            <div id="section-4" class="content-section">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Corporate Governance: Risks and Benefits</h2>
+                
+                <p class="text-lg mb-8 text-gray-700">The quality of a company's governance has a direct impact on its performance and value.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Weak Governance -->
+                    <div class="card bg-red-50 border-l-6 border-red-500">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-exclamation-triangle text-4xl text-red-600 mb-3"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-red-800">Risks of Weak Governance</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                <span>Increased risk of fraud and mismanagement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-line-down text-red-500 mr-3 mt-1"></i>
+                                <span>Negative impact on financial performance and company value</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-percentage text-red-500 mr-3 mt-1"></i>
+                                <span>Higher cost of debt and lower investor confidence</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-red-500 mr-3 mt-1"></i>
+                                <span>Increased legal, regulatory, and reputational risks from compliance failures</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Strong Governance -->
+                    <div class="card bg-green-50 border-l-6 border-green-500">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-check-circle text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-green-800">Benefits of Strong Governance</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-check text-green-500 mr-3 mt-1"></i>
+                                <span>Mitigates financial, legal, and operational risks</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-cogs text-green-500 mr-3 mt-1"></i>
+                                <span>Improves operational efficiency and decision-making</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-line text-green-500 mr-3 mt-1"></i>
+                                <span>Lowers the cost of capital (both debt and equity)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-handshake text-green-500 mr-3 mt-1"></i>
+                                <span>Enhances alignment of interests between managers and shareholders, leading to better results</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Key Considerations for Financial Analysts</h3>
+                <p class="mb-6 text-gray-700">When evaluating a company's governance, analysts should focus on:</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-sitemap text-4xl text-indigo-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Ownership Structure</h3>
+                        <p>Dual-class shares, controlling shareholders, and their impact on decision-making.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-users-cog text-4xl text-purple-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Board Composition</h3>
+                        <p>The skills, experience, and independence of board members and their ability to oversee management.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-money-bill-wave text-4xl text-green-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Executive Compensation</h3>
+                        <p>Structure of management's compensation and its alignment with long-term performance.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-vote-yea text-4xl text-blue-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Shareholder Rights</h3>
+                        <p>The strength of shareholder rights and ability to influence corporate decisions.</p>
+                    </div>
+                    <div class="card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-shield-alt text-4xl text-red-600 mb-3"></i>
+                        </div>
+                        <h3 class="card-title">Risk Management</h3>
+                        <p>The company's approach to long-term risk management and strategic planning.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter Navigation Footer -->
+            <div class="chapter-navigation">
+                <div class="flex justify-between items-center">
+                    <a href="chapter1.html" class="flex items-center text-gray-600 hover:text-pink-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Previous: Business Structures
+                    </a>
+                    <div class="text-center">
+                        <div class="text-sm text-gray-500 mb-1">Next Chapter</div>
+                        <a href="chapter3.html" class="flex items-center text-pink-600 hover:text-pink-800 font-semibold text-lg">
+                            Working Capital & Liquidity
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <div class="floating-nav">
+        <a href="#" id="scroll-top" class="nav-button mb-2">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+        <a href="chapter1.html" class="nav-button mb-2">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="chapter3.html" class="nav-button">
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation based on scroll
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const progressSteps = document.querySelectorAll('.progress-step');
+
+        function updateActiveSection() {
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    // Update sidebar navigation
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    if (navLinks[index]) {
+                        navLinks[index].classList.add('active');
+                    }
+                    
+                    // Update progress steps
+                    progressSteps.forEach((step, stepIndex) => {
+                        if (stepIndex <= index) {
+                            step.classList.add('active-step');
+                        } else {
+                            step.classList.remove('active-step');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveSection);
+
+        // Scroll to top functionality
+        document.getElementById('scroll-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mark chapter as completed when user reaches the end
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+            
+            if (scrollPosition + windowHeight >= documentHeight - 100) {
+                let completedChapters = JSON.parse(localStorage.getItem('completedChapters') || '[]');
+                if (!completedChapters.includes(2)) {
+                    completedChapters.push(2);
+                    localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
