@@ -77,3 +77,26 @@ header p {
     margin: 0;
     line-height: 1.4;
 }
+
+/* ========================================= */
+/* Stile für mobile Geräte (Responsive Part) */
+/* ========================================= */
+@media (max-width: 768px) {
+
+    /* Passt den Body-Abstand für kleinere Bildschirme an */
+    body {
+        padding: 25px 15px;
+    }
+
+    /* Verkleinert die Hauptüberschrift auf dem Handy */
+    header h1 {
+        font-size: 2.2em;
+    }
+    
+    /* Lässt die Karten die volle Breite einnehmen */
+    .card {
+        width: 90%; /* Anstatt fester 280px, nehmen sie 90% der Bildschirmbreite ein */
+        max-width: 400px; /* Verhindert, dass sie auf mittelgroßen Tablets zu breit werden */
+    }
+
+}
