@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Real Estate and Infrastructure | CFA Alternative Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            border-left: 6px solid #f59e0b;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 8px 15px -3px rgba(245, 158, 11, 0.4);
+        }
+        .card {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #f59e0b;
+        }
+        .card-title {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 1.375rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .card-title svg {
+            margin-right: 0.75rem;
+            color: #f59e0b;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        tr:hover {
+            background: linear-gradient(145deg, #fef3c7 0%, #fde68a 100%);
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .key-term {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            border: 1px solid #cbd5e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .list-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.7;
+        }
+        .list-item:before {
+            content: "●";
+            color: #f59e0b;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        .sub-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid #e2e8f0;
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 0 1rem 1rem 0;
+        }
+        .navigation-bar {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 1rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .chapter-nav {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .chapter-nav-item {
+            display: block;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            background: #f1f5f9;
+            color: #64748b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .chapter-nav-item:hover {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            transform: scale(1.1);
+        }
+        .chapter-nav-item.active {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1001;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            transition: width 0.3s ease;
+            border-radius: 0 2px 2px 0;
+        }
+        .risk-meter {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+            padding: 2rem;
+            background: linear-gradient(145deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 1rem;
+            border: 2px solid #fbbf24;
+        }
+        .risk-meter:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(to right, #10b981, #fbbf24, #ef4444);
+            transform: translateY(-50%);
+            border-radius: 2px;
+        }
+        .risk-level {
+            text-align: center;
+            width: 22%;
+            position: relative;
+            z-index: 1;
+        }
+        .risk-level .dot {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            border: 4px solid;
+            box-shadow: 0 0 0 3px;
+        }
+        .risk-level.core .dot {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px #10b981;
+        }
+        .risk-level.core-plus .dot {
+            border-color: #34d399;
+            box-shadow: 0 0 0 3px #34d399;
+        }
+        .risk-level.value-add .dot {
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 3px #fbbf24;
+        }
+        .risk-level.opportunistic .dot {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px #ef4444;
+        }
+        .risk-level .label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .risk-level.core .label { color: #065f46; }
+        .risk-level.core-plus .label { color: #047857; }
+        .risk-level.value-add .label { color: #92400e; }
+        .risk-level.opportunistic .label { color: #991b1b; }
+        .investment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .investment-type {
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #f59e0b;
+        }
+        .investment-type h4 {
+            font-weight: 700;
+            color: #f59e0b;
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+        .infrastructure-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+            padding: 2rem;
+            background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 1rem;
+            border: 2px solid #7dd3fc;
+        }
+        .infrastructure-timeline:before {
+            content: "";
+            position: absolute;
+            top: 3rem;
+            left: 15%;
+            right: 15%;
+            height: 3px;
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+        .infrastructure-stage {
+            text-align: center;
+            width: 30%;
+            position: relative;
+            z-index: 1;
+        }
+        .infrastructure-stage .dot {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #f59e0b, 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .infrastructure-stage .label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #d97706;
+            margin-bottom: 0.25rem;
+        }
+        .infrastructure-stage .description {
+            font-size: 0.75rem;
+            color: #92400e;
+        }
+        .toc {
+            background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #bae6fd;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .toc h3 {
+            color: #0c4a6e;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+        .toc-link {
+            color: #0369a1;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .toc-link:hover {
+            background: rgba(14, 165, 233, 0.1);
+            color: #0c4a6e;
+        }
+        @media (max-width: 1024px) {
+            .chapter-nav {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+            .investment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-orange-50">
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    </div>
+
+    <!-- Chapter Navigation -->
+    <div class="chapter-nav">
+        <a href="index.html" class="chapter-nav-item" title="Home">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="#overview" class="chapter-nav-item" title="Overview">
+            <i class="fas fa-eye"></i>
+        </a>
+        <a href="#section1" class="chapter-nav-item active" title="Introduction">
+            <i class="fas fa-info-circle"></i>
+        </a>
+        <a href="#section2" class="chapter-nav-item" title="Real Estate">
+            <i class="fas fa-building"></i>
+        </a>
+        <a href="#section3" class="chapter-nav-item" title="Risk & Return">
+            <i class="fas fa-chart-line"></i>
+        </a>
+        <a href="#section4" class="chapter-nav-item" title="Infrastructure">
+            <i class="fas fa-city"></i>
+        </a>
+    </div>
+
+    <!-- Header -->
+    <section id="overview" class="hero-gradient text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="mb-6">
+                    <i class="fas fa-building text-5xl opacity-80"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                    Chapter 4: Real Estate and Infrastructure Investments
+                </h1>
+                <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
+                    A Comprehensive Guide to Investing in Real Assets
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Navigation Bar -->
+        <div class="navigation-bar">
+            <div class="flex items-center justify-between flex-wrap">
+                <div class="flex items-center text-sm text-gray-600">
+                    <a href="index.html" class="text-orange-600 hover:text-orange-700 font-medium">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <i class="fas fa-chevron-right mx-3"></i>
+                    <span class="font-medium text-gray-800">Chapter 4: Real Estate & Infrastructure</span>
+                </div>
+                <div class="flex items-center space-x-4 mt-2 sm:mt-0">
+                    <a href="chapter3.html" class="text-gray-600 hover:text-orange-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Previous Chapter
+                    </a>
+                    <a href="chapter5.html" class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                        Next Chapter <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>
+                <i class="fas fa-list mr-2"></i>
+                Chapter Contents
+            </h3>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#section1" class="toc-link">1. Introduction to Real Assets</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section2" class="toc-link">2. Real Estate Investments</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section3" class="toc-link">3. Real Estate Risk, Return, and Diversification</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section4" class="toc-link">4. Infrastructure Investments</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 1. Introduction to Real Assets -->
+        <div id="section1" class="content-section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="text-3xl font-bold text-gray-800">Introduction to Real Assets</h2>
+            </div>
+            <div class="bg-orange-50 p-6 rounded-lg border border-orange-200 mb-6">
+                <p class="text-lg text-orange-800">
+                    Real assets are physical assets that have value due to their substance and properties. This guide focuses on two major categories within alternative investments:
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
+                        <i class="fas fa-home mr-3"></i>
+                        Real Estate
+                    </h3>
+                    <p class="text-blue-700">Land and buildings, including residential, commercial, and industrial properties.</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                    <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center">
+                        <i class="fas fa-road mr-3"></i>
+                        Infrastructure
+                    </h3>
+                    <p class="text-green-700">Long-lived assets that provide essential services to the public, such as transportation networks, utilities, and communication systems.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2. Real Estate Investments -->
+        <div id="section2" class="content-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="text-3xl font-bold text-gray-800">Real Estate Investments</h2>
+            </div>
+            <p class="text-lg mb-6">Real estate investing involves the purchase, ownership, management, and sale of land and buildings. It's a diverse asset class with unique features.</p>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Key Features of Real Estate</h3>
+                <div class="card">
+                    <ul class="space-y-4">
+                        <li class="list-item"><span class="key-term">Heterogeneous:</span> Every property is unique.</li>
+                        <li class="list-item"><span class="key-term">Location Dependent:</span> Value is heavily influenced by location ("location, location, location").</li>
+                        <li class="list-item"><span class="key-term">Illiquid:</span> Cannot be bought or sold quickly.</li>
+                        <li class="list-item"><span class="key-term">High Upfront Costs & Transaction Costs:</span> Requires significant capital and involves substantial fees.</li>
+                        <li class="list-item"><span class="key-term">Requires Specialized Knowledge:</span> Successful investing demands expertise in property management, valuation, and local markets.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Investment Structures: How to Invest</h3>
+                <p class="mb-6">Investors can gain exposure to real estate through various structures, which can be categorized as direct or indirect, and as equity or debt.</p>
+                
+                <div class="investment-grid">
+                    <div class="investment-type">
+                        <h4 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                            </svg>
+                            Direct Investment
+                        </h4>
+                        <p class="mb-3">Outright ownership of a property. Offers full control but requires high capital and active management.</p>
+                        <div class="bg-green-50 p-3 rounded border border-green-200">
+                            <p class="text-sm text-green-700"><strong>Best for:</strong> Experienced investors with significant capital</p>
+                        </div>
+                    </div>
+                    <div class="investment-type">
+                        <h4 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" />
+                            </svg>
+                            Indirect Investment
+                        </h4>
+                        <p class="mb-3">Owning shares in a company or fund that owns and manages properties, such as a Real Estate Investment Trust (REIT), mutual fund, or limited partnership.</p>
+                        <div class="bg-blue-50 p-3 rounded border border-blue-200">
+                            <p class="text-sm text-blue-700"><strong>Benefits:</strong> Liquidity and diversification</p>
+                        </div>
+                    </div>
+                    <div class="investment-type">
+                        <h4 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                            </svg>
+                            Equity
+                        </h4>
+                        <p class="mb-3">Ownership of the property (direct) or shares in a property-owning entity (indirect, e.g., Equity REITs).</p>
+                        <div class="bg-purple-50 p-3 rounded border border-purple-200">
+                            <p class="text-sm text-purple-700"><strong>Returns:</strong> Rental income and capital appreciation</p>
+                        </div>
+                    </div>
+                    <div class="investment-type">
+                        <h4 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                            </svg>
+                            Debt
+                        </h4>
+                        <p class="mb-3">Lending money secured by real estate, such as through mortgages or mortgage-backed securities (MBS).</p>
+                        <div class="bg-indigo-50 p-3 rounded border border-indigo-200">
+                            <p class="text-sm text-indigo-700"><strong>Returns:</strong> Interest payments</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Real Estate Risk, Return, and Diversification -->
+        <div id="section3" class="content-section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="text-3xl font-bold text-gray-800">Real Estate Risk, Return, and Diversification</h2>
+            </div>
+            <p class="text-lg mb-6">Real estate returns come from two main sources and offer valuable portfolio benefits.</p>
+            
+            <div class="highlight-box">
+                <h3 class="text-xl font-semibold">Portfolio Benefits of Real Estate</h3>
+                <p>Real estate provides stable income, growth potential, diversification benefits, and acts as a natural inflation hedge - making it a valuable component of a well-balanced investment portfolio.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mt-8">
+                <div class="text-center p-6 bg-blue-50 rounded-lg border border-blue-200">
+                    <i class="fas fa-money-bill-wave text-3xl text-blue-600 mb-4"></i>
+                    <h4 class="font-bold text-blue-800 mb-2">Sources of Return</h4>
+                    <p class="text-blue-700 text-sm">Rental income (stable, bond-like) + Capital appreciation (growth potential)</p>
+                </div>
+                
+                <div class="text-center p-6 bg-green-50 rounded-lg border border-green-200">
+                    <i class="fas fa-chart-pie text-3xl text-green-600 mb-4"></i>
+                    <h4 class="font-bold text-green-800 mb-2">Diversification</h4>
+                    <p class="text-green-700 text-sm">Low correlation with traditional stocks and bonds</p>
+                </div>
+                
+                <div class="text-center p-6 bg-orange-50 rounded-lg border border-orange-200">
+                    <i class="fas fa-shield-alt text-3xl text-orange-600 mb-4"></i>
+                    <h4 class="font-bold text-orange-800 mb-2">Inflation Hedge</h4>
+                    <p class="text-orange-700 text-sm">Lease payments can be adjusted for inflation</p>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">The Real Estate Risk-Return Spectrum</h3>
+                <p class="mb-6">Strategies in real estate are often categorized by their risk level, from safest to riskiest:</p>
+                
+                <div class="risk-meter">
+                    <div class="risk-level core">
+                        <div class="dot"></div>
+                        <div class="label">Core</div>
+                    </div>
+                    <div class="risk-level core-plus">
+                        <div class="dot"></div>
+                        <div class="label">Core-Plus</div>
+                    </div>
+                    <div class="risk-level value-add">
+                        <div class="dot"></div>
+                        <div class="label">Value-Add</div>
+                    </div>
+                    <div class="risk-level opportunistic">
+                        <div class="dot"></div>
+                        <div class="label">Opportunistic</div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Strategy</th>
+                                <th>Risk Level</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong class="text-green-600">Core</strong></td>
+                                <td><span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Low</span></td>
+                                <td>Investing in high-quality, stable, fully-leased properties in prime locations for steady income.</td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-blue-600">Core-Plus</strong></td>
+                                <td><span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Low-Medium</span></td>
+                                <td>Similar to core, but with minor enhancements or leasing improvements to boost returns.</td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-yellow-600">Value-Add</strong></td>
+                                <td><span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">Medium-High</span></td>
+                                <td>Acquiring properties that need redevelopment, repositioning, or re-leasing to increase their value.</td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-red-600">Opportunistic</strong></td>
+                                <td><span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">High</span></td>
+                                <td>Developing raw land or acquiring distressed properties. Involves the highest risk and highest potential return.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. Infrastructure Investments -->
+        <div id="section4" class="content-section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="text-3xl font-bold text-gray-800">Infrastructure Investments</h2>
+            </div>
+            <p class="text-lg mb-6">Infrastructure assets are the backbone of a modern economy. While traditionally funded by governments, private investment through mechanisms like Public-Private Partnerships (PPPs) is increasingly common.</p>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Key Features of Infrastructure</h3>
+                <div class="card">
+                    <ul class="space-y-4">
+                        <li class="list-item">Long-lived assets with long investment horizons.</li>
+                        <li class="list-item">Capital-intensive, requiring large upfront investments.</li>
+                        <li class="list-item">Provide essential, often monopolistic, public services.</li>
+                        <li class="list-item">Cash flows are often stable and predictable, backed by long-term contracts or regulated pricing.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Categories and Stages of Infrastructure</h3>
+                
+                <div class="infrastructure-timeline">
+                    <div class="infrastructure-stage">
+                        <div class="dot"></div>
+                        <div class="label">Greenfield</div>
+                        <div class="description">New Development</div>
+                    </div>
+                    <div class="infrastructure-stage">
+                        <div class="dot"></div>
+                        <div class="label">Brownfield</div>
+                        <div class="description">Existing Assets</div>
+                    </div>
+                    <div class="infrastructure-stage">
+                        <div class="dot"></div>
+                        <div class="label">Secondary</div>
+                        <div class="description">Operational Assets</div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                            </svg>
+                            Categories
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="list-item"><span class="key-term">Economic Infrastructure:</span> Supports economic activity (e.g., roads, airports, utilities, data centers).</li>
+                            <li class="list-item"><span class="key-term">Social Infrastructure:</span> Supports public services (e.g., schools, hospitals, public housing).</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                            </svg>
+                            Investment Stages
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="list-item"><span class="key-term">Greenfield:</span> Developing entirely new assets from the ground up. This is the riskiest stage.</li>
+                            <li class="list-item"><span class="key-term">Brownfield:</span> Investing in existing assets, either to expand or privatize them.</li>
+                            <li class="list-item"><span class="key-term">Secondary:</span> Acquiring fully operational assets with established cash flows. This is the least risky stage.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Investment Appeal</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-3">Stable Cash Flows</h4>
+                        <p class="text-green-700">Infrastructure investments typically provide predictable, long-term cash flows backed by essential service demand.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                        <h4 class="font-bold text-blue-800 mb-3">Inflation Protection</h4>
+                        <p class="text-blue-700">Many infrastructure investments have built-in inflation adjustments or pricing power that helps preserve real returns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="bg-gradient-to-r from-gray-50 to-orange-50 rounded-lg p-6 mt-12 border border-gray-200">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="chapter3.html" class="inline-flex items-center text-gray-600 hover:text-orange-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Chapter 3: Private Capital</span>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm text-gray-500 mb-1">Chapter 4 of 7</p>
+                    <p class="font-semibold text-gray-700">Real Estate & Infrastructure</p>
+                </div>
+                <div>
+                    <a href="chapter5.html" class="inline-flex items-center bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors">
+                        <span>Next: Natural Resources</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Progress bar animation
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation item based on scroll position
+        const sections = document.querySelectorAll('[id^="section"]');
+        const navItems = document.querySelectorAll('.chapter-nav-item');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

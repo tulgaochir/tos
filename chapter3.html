@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Private Capital | CFA Alternative Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            border-left: 6px solid #059669;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 8px 15px -3px rgba(5, 150, 105, 0.4);
+        }
+        .card {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #059669, #047857);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #059669;
+        }
+        .card-title {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 1.375rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .card-title svg {
+            margin-right: 0.75rem;
+            color: #059669;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        tr:hover {
+            background: linear-gradient(145deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .key-term {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            border: 1px solid #cbd5e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .list-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.7;
+        }
+        .list-item:before {
+            content: "●";
+            color: #059669;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        .numbered-list {
+            counter-reset: item;
+            margin-left: 1rem;
+        }
+        .numbered-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.7;
+        }
+        .numbered-list li:before {
+            counter-increment: item;
+            content: counter(item) ".";
+            color: #059669;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+        .sub-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid #e2e8f0;
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 0 1rem 1rem 0;
+        }
+        .navigation-bar {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 1rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .chapter-nav {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .chapter-nav-item {
+            display: block;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            background: #f1f5f9;
+            color: #64748b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .chapter-nav-item:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            transform: scale(1.1);
+        }
+        .chapter-nav-item.active {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+        }
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1001;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #059669, #047857);
+            transition: width 0.3s ease;
+            border-radius: 0 2px 2px 0;
+        }
+        .vc-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(145deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 1rem;
+            border: 2px solid #bbf7d0;
+        }
+        .vc-timeline:before {
+            content: "";
+            position: absolute;
+            top: 3rem;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, #059669, #047857);
+            border-radius: 2px;
+        }
+        .vc-stage {
+            text-align: center;
+            width: 18%;
+            position: relative;
+            z-index: 1;
+        }
+        .vc-stage .dot {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #059669, 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .vc-stage .label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #047857;
+            margin-bottom: 0.25rem;
+        }
+        .vc-stage .description {
+            font-size: 0.75rem;
+            color: #065f46;
+        }
+        .toc {
+            background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #bae6fd;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .toc h3 {
+            color: #0c4a6e;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+        .toc-link {
+            color: #0369a1;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .toc-link:hover {
+            background: rgba(14, 165, 233, 0.1);
+            color: #0c4a6e;
+        }
+        @media (max-width: 1024px) {
+            .chapter-nav {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-green-50">
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    </div>
+
+    <!-- Chapter Navigation -->
+    <div class="chapter-nav">
+        <a href="index.html" class="chapter-nav-item" title="Home">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="#overview" class="chapter-nav-item" title="Overview">
+            <i class="fas fa-eye"></i>
+        </a>
+        <a href="#section1" class="chapter-nav-item active" title="Introduction">
+            <i class="fas fa-info-circle"></i>
+        </a>
+        <a href="#section2" class="chapter-nav-item" title="Private Equity">
+            <i class="fas fa-briefcase"></i>
+        </a>
+        <a href="#section3" class="chapter-nav-item" title="Exit Strategies">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+        <a href="#section4" class="chapter-nav-item" title="Private Debt">
+            <i class="fas fa-coins"></i>
+        </a>
+        <a href="#section5" class="chapter-nav-item" title="Risk & Return">
+            <i class="fas fa-chart-line"></i>
+        </a>
+    </div>
+
+    <!-- Header -->
+    <section id="overview" class="hero-gradient text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="mb-6">
+                    <i class="fas fa-briefcase text-5xl opacity-80"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                    Chapter 3: Investments in Private Capital
+                </h1>
+                <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
+                    A Comprehensive Guide to Private Market Investing
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Navigation Bar -->
+        <div class="navigation-bar">
+            <div class="flex items-center justify-between flex-wrap">
+                <div class="flex items-center text-sm text-gray-600">
+                    <a href="index.html" class="text-green-600 hover:text-green-700 font-medium">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <i class="fas fa-chevron-right mx-3"></i>
+                    <span class="font-medium text-gray-800">Chapter 3: Private Capital</span>
+                </div>
+                <div class="flex items-center space-x-4 mt-2 sm:mt-0">
+                    <a href="chapter2.html" class="text-gray-600 hover:text-green-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Previous Chapter
+                    </a>
+                    <a href="chapter4.html" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Next Chapter <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>
+                <i class="fas fa-list mr-2"></i>
+                Chapter Contents
+            </h3>
+            <ul class="toc-list">
+                <li class="toc-item">
+                    <a href="#section1" class="toc-link">1. Introduction to Private Capital</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section2" class="toc-link">2. Private Equity Investment</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section3" class="toc-link">3. Private Equity Exit Strategies</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section4" class="toc-link">4. Private Debt Investment</a>
+                </li>
+                <li class="toc-item">
+                    <a href="#section5" class="toc-link">5. Risk, Return, and Diversification</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 1. Introduction to Private Capital -->
+        <div id="section1" class="content-section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="text-3xl font-bold text-gray-800">Introduction to Private Capital</h2>
+            </div>
+            <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+                <p class="text-lg text-green-800">
+                    <span class="key-term">Private capital</span> refers to investments made in companies that are not publicly traded on a stock exchange. It serves as an alternative to traditional public equity and debt markets, providing financing for a wide range of companies, from early-stage startups to mature firms undergoing restructuring.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4">Private Equity</h3>
+                    <p class="text-blue-700">Investment in ownership stakes of private companies or public companies being taken private, with the goal of improving operations and selling for a profit.</p>
+                </div>
+                <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
+                    <h3 class="text-xl font-bold text-purple-800 mb-4">Private Debt</h3>
+                    <p class="text-purple-700">Lending capital directly to private companies outside of traditional banking systems, often with higher returns and more flexible terms.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2. Private Equity Investment -->
+        <div id="section2" class="content-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="text-3xl font-bold text-gray-800">Private Equity Investment</h2>
+            </div>
+            <p class="text-lg mb-6">Private Equity (PE) involves taking ownership stakes in private companies with the goal of improving them and selling them for a profit, typically within a 5-10 year timeframe.</p>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Key Private Equity Strategies</h3>
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" />
+                            </svg>
+                            Leveraged Buyouts (LBOs)
+                        </h3>
+                        <div class="mb-4">
+                            <div class="text-center p-4 bg-red-50 rounded-lg border border-red-200">
+                                <i class="fas fa-chart-pie text-2xl text-red-600 mb-2"></i>
+                                <p class="text-sm text-red-700 font-medium">High Leverage Strategy</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">Acquiring a mature, stable company using a significant amount of debt. The company's own assets are often used as collateral for the loans.</p>
+                        <div class="bg-yellow-50 p-3 rounded border border-yellow-200">
+                            <p class="text-sm text-yellow-800"><strong>Goal:</strong> Improve operations, pay down debt, and sell for higher price</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                            </svg>
+                            Venture Capital (VC)
+                        </h3>
+                        <div class="mb-4">
+                            <div class="text-center p-4 bg-green-50 rounded-lg border border-green-200">
+                                <i class="fas fa-rocket text-2xl text-green-600 mb-2"></i>
+                                <p class="text-sm text-green-700 font-medium">High-Growth Focus</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">Providing capital to startups and young, high-growth-potential companies in exchange for an equity stake.</p>
+                        <div class="bg-red-50 p-3 rounded border border-red-200">
+                            <p class="text-sm text-red-800"><strong>Profile:</strong> High-risk but potential for very high returns</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-6">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z" />
+                        </svg>
+                        Growth Capital
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="mb-4">Investing in established, profitable companies that need capital to expand, enter new markets, or finance a major acquisition. This is a minority, non-controlling investment.</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded border border-blue-200">
+                            <p class="text-sm text-blue-800 font-medium">Key Features:</p>
+                            <ul class="text-sm text-blue-700 mt-2">
+                                <li>• Minority stake</li>
+                                <li>• Non-controlling position</li>
+                                <li>• Focus on expansion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">The Venture Capital Lifecycle</h3>
+                <p class="mb-6">VC investing occurs in stages, corresponding to a company's development:</p>
+                
+                <div class="vc-timeline">
+                    <div class="vc-stage">
+                        <div class="dot"></div>
+                        <div class="label">Pre-seed</div>
+                        <div class="description">Angel Investing</div>
+                    </div>
+                    <div class="vc-stage">
+                        <div class="dot"></div>
+                        <div class="label">Seed Stage</div>
+                        <div class="description">Product Development</div>
+                    </div>
+                    <div class="vc-stage">
+                        <div class="dot"></div>
+                        <div class="label">Early Stage</div>
+                        <div class="description">Start-up</div>
+                    </div>
+                    <div class="vc-stage">
+                        <div class="dot"></div>
+                        <div class="label">Later Stage</div>
+                        <div class="description">Expansion</div>
+                    </div>
+                    <div class="vc-stage">
+                        <div class="dot"></div>
+                        <div class="label">Mezzanine</div>
+                        <div class="description">Pre-IPO</div>
+                    </div>
+                </div>
+                
+                <ol class="numbered-list mt-6">
+                    <li><span class="key-term">Pre-seed (Angel Investing):</span> Initial small investment to develop an idea.</li>
+                    <li><span class="key-term">Seed Stage:</span> Funding for product development and market research.</li>
+                    <li><span class="key-term">Early Stage (Start-up):</span> Capital to support initial operations before revenue generation.</li>
+                    <li><span class="key-term">Later Stage (Expansion):</span> Financing to scale up operations for an existing product.</li>
+                    <li><span class="key-term">Mezzanine Stage:</span> Pre-IPO funding to accelerate growth and prepare for a public listing.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- 3. Private Equity Exit Strategies -->
+        <div id="section3" class="content-section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="text-3xl font-bold text-gray-800">Private Equity Exit Strategies</h2>
+            </div>
+            <p class="text-lg mb-6">The ultimate goal of a PE investment is a profitable exit. The choice of exit strategy depends on market conditions and the specific company.</p>
+            
+            <div class="highlight-box">
+                <h3 class="text-xl font-semibold">Maximizing Returns Through Strategic Exits</h3>
+                <p>Successful private equity firms carefully plan their exit strategies from the beginning of an investment, considering market conditions, company performance, and strategic alternatives.</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Exit Strategy</th>
+                            <th>Description</th>
+                            <th>Pros & Cons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong class="text-green-600">Trade Sale</strong></td>
+                            <td>Selling the company to another company, often a strategic competitor.</td>
+                            <td>
+                                <div class="text-green-600 font-medium">✓ Faster, confidential</div>
+                                <div class="text-green-600 font-medium">✓ Potential for higher price due to synergies</div>
+                                <div class="text-red-600 font-medium mt-1">✗ Limited buyers</div>
+                                <div class="text-red-600 font-medium">✗ Regulatory hurdles</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-blue-600">Public Listing (IPO)</strong></td>
+                            <td>Taking the company public by selling shares on a stock exchange.</td>
+                            <td>
+                                <div class="text-green-600 font-medium">✓ Can maximize value</div>
+                                <div class="text-green-600 font-medium">✓ Allows PE firm to retain a stake</div>
+                                <div class="text-red-600 font-medium mt-1">✗ Expensive, time-consuming</div>
+                                <div class="text-red-600 font-medium">✗ Subject to market volatility</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-purple-600">SPAC Merger</strong></td>
+                            <td>Merging with a Special Purpose Acquisition Company (SPAC), which is a publicly traded shell company.</td>
+                            <td>
+                                <div class="text-green-600 font-medium">✓ Faster than traditional IPO</div>
+                                <div class="text-green-600 font-medium">✓ More certainty on valuation</div>
+                                <div class="text-red-600 font-medium mt-1">✗ Higher costs</div>
+                                <div class="text-red-600 font-medium">✗ Potential for dilution</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-orange-600">Secondary Sale</strong></td>
+                            <td>Selling the company to another private equity firm.</td>
+                            <td>A common exit when an IPO or trade sale is not feasible.</td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-indigo-600">Recapitalization</strong></td>
+                            <td>The company takes on more debt to pay a large dividend to the PE firm. This allows the firm to realize some return without a full exit.</td>
+                            <td>Provides partial liquidity for the PE firm.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 4. Private Debt Investment -->
+        <div id="section4" class="content-section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="text-3xl font-bold text-gray-800">Private Debt Investment</h2>
+            </div>
+            <p class="text-lg mb-6"><span class="key-term">Private debt</span> (or private credit) involves non-bank lenders providing loans directly to private companies. It has grown significantly since the 2008 financial crisis as traditional banks have faced stricter lending regulations.</p>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Types of Private Debt</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                        <h4 class="font-bold text-blue-800 mb-3 flex items-center">
+                            <i class="fas fa-shield-alt mr-2"></i>
+                            Direct Lending
+                        </h4>
+                        <p class="text-blue-700">Senior secured loans, similar to traditional bank loans.</p>
+                    </div>
+                    
+                    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
+                        <h4 class="font-bold text-purple-800 mb-3 flex items-center">
+                            <i class="fas fa-layer-group mr-2"></i>
+                            Mezzanine Debt
+                        </h4>
+                        <p class="text-purple-700">A hybrid of debt and equity. Subordinate to senior debt but ranks above equity. Higher interest rate and often includes an "equity kicker".</p>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-bold text-green-800 mb-3 flex items-center">
+                            <i class="fas fa-seedling mr-2"></i>
+                            Venture Debt
+                        </h4>
+                        <p class="text-green-700">Loans for venture-backed startups that have little cash flow.</p>
+                    </div>
+                    
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-bold text-red-800 mb-3 flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            Distressed Debt
+                        </h4>
+                        <p class="text-red-700">Buying the debt of companies that are in or near bankruptcy at a deep discount, hoping to profit from a successful restructuring.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border border-green-200">
+                    <h4 class="font-bold text-green-800 mb-2">Investment Appeal</h4>
+                    <p class="text-green-700">Private debt offers investors higher returns than public debt due to its illiquidity and complexity, and interest rates are often floating, providing a hedge against rising rates.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Risk, Return, and Diversification -->
+        <div id="section5" class="content-section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="text-3xl font-bold text-gray-800">Risk, Return, and Diversification</h2>
+            </div>
+            <p class="text-lg mb-6">Private capital investments generally offer higher potential returns than their public market counterparts to compensate for higher risks, including illiquidity and the use of leverage.</p>
+
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">The Importance of Vintage Year</h3>
+                <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-200 mb-6">
+                    <h4 class="font-bold text-yellow-800 mb-2 flex items-center">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        Vintage Year Effect
+                    </h4>
+                    <p class="text-yellow-700"><span class="key-term">Vintage year</span> refers to the year a private equity or venture capital fund begins making investments. Fund performance is heavily influenced by the economic conditions of its vintage year.</p>
+                </div>
+                
+                <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                    <h4 class="font-bold text-blue-800 mb-2">Risk Mitigation Strategy</h4>
+                    <p class="text-blue-700">To mitigate this timing risk, investors often diversify their private capital commitments across multiple vintage years.</p>
+                </div>
+            </div>
+            
+            <div class="sub-section">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Diversification Benefits</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 bg-green-50 rounded-lg border border-green-200">
+                        <i class="fas fa-chart-line text-3xl text-green-600 mb-4"></i>
+                        <h4 class="font-bold text-green-800 mb-2">Portfolio Correlation</h4>
+                        <p class="text-green-700 text-sm">Low correlation with traditional stocks and bonds</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-blue-50 rounded-lg border border-blue-200">
+                        <i class="fas fa-balance-scale text-3xl text-blue-600 mb-4"></i>
+                        <h4 class="font-bold text-blue-800 mb-2">Risk-Return Profile</h4>
+                        <p class="text-blue-700 text-sm">Private equity is generally the riskiest with highest return potential</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-purple-50 rounded-lg border border-purple-200">
+                        <i class="fas fa-shield-alt text-3xl text-purple-600 mb-4"></i>
+                        <h4 class="font-bold text-purple-800 mb-2">Conservative Options</h4>
+                        <p class="text-purple-700 text-sm">Infrastructure debt is among the safest private capital investments</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box mt-6">
+                    <h3 class="text-xl font-semibold">Key Takeaway</h3>
+                    <p>While private capital is still correlated with public markets, it can offer moderate diversification benefits to a traditional portfolio of stocks and bonds. Within private capital, there's a spectrum from conservative infrastructure debt to high-risk venture capital.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="bg-gradient-to-r from-gray-50 to-green-50 rounded-lg p-6 mt-12 border border-gray-200">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="chapter2.html" class="inline-flex items-center text-gray-600 hover:text-green-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Chapter 2: Performance</span>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm text-gray-500 mb-1">Chapter 3 of 7</p>
+                    <p class="font-semibold text-gray-700">Private Capital</p>
+                </div>
+                <div>
+                    <a href="chapter4.html" class="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        <span>Next: Real Estate</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Progress bar animation
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation item based on scroll position
+        const sections = document.querySelectorAll('[id^="section"]');
+        const navItems = document.querySelectorAll('.chapter-nav-item');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

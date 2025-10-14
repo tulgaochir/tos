@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFA Alternative Investments: Complete Study Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .chapter-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #667eea;
+        }
+        .chapter-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .chapter-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 3px;
+            transition: width 0.8s ease;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 1rem;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-4px);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .navigation-breadcrumb {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 0.75rem;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .floating-nav {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .floating-nav-item {
+            display: block;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: #64748b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .floating-nav-item:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.1);
+        }
+        @media (max-width: 1024px) {
+            .floating-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Floating Navigation -->
+    <div class="floating-nav">
+        <a href="#overview" class="floating-nav-item" title="Overview">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="#chapters" class="floating-nav-item" title="Chapters">
+            <i class="fas fa-book"></i>
+        </a>
+        <a href="#features" class="floating-nav-item" title="Features">
+            <i class="fas fa-star"></i>
+        </a>
+        <a href="#stats" class="floating-nav-item" title="Statistics">
+            <i class="fas fa-chart-bar"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="overview" class="hero-gradient text-white py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="mb-8">
+                    <i class="fas fa-chart-line text-6xl opacity-80"></i>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    CFA Alternative Investments
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
+                    A comprehensive study guide covering all aspects of alternative investments including private capital, real estate, commodities, hedge funds, and digital assets.
+                </p>
+                
+                <!-- Progress Indicator -->
+                <div class="max-w-md mx-auto mb-8">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span>Study Progress</span>
+                        <span>7 Chapters Available</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#chapters" class="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
+                        <i class="fas fa-play mr-2"></i>
+                        Start Learning
+                    </a>
+                    <a href="#features" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors inline-flex items-center">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="stats" class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Study Guide Overview</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Everything you need to master alternative investments for the CFA exam
+                </p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="font-semibold">Comprehensive Chapters</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="font-semibold">Key Concepts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div class="font-semibold">Practice Examples</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="font-semibold">Learning Opportunities</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapters Grid -->
+    <section id="chapters" class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Navigation Breadcrumb -->
+            <div class="navigation-breadcrumb">
+                <div class="flex items-center text-sm text-gray-600">
+                    <i class="fas fa-home mr-2"></i>
+                    <span class="font-medium text-indigo-600">Home</span>
+                    <i class="fas fa-chevron-right mx-2"></i>
+                    <span>Alternative Investments Study Guide</span>
+                </div>
+            </div>
+            
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Study Chapters</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Navigate through each chapter to build your comprehensive understanding of alternative investments
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Chapter 1 -->
+                <div class="chapter-card group">
+                    <div class="chapter-number">1</div>
+                    <div class="chapter-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Features of Alternative Investments</h3>
+                    <p class="text-gray-600 mb-4">
+                        Understand what makes alternatives different from traditional investments, including their unique characteristics and investment methods.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-sm rounded-full">Characteristics</span>
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-sm rounded-full">Methods</span>
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-sm rounded-full">Structures</span>
+                    </div>
+                    <a href="chapter1.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
+                        Start Chapter 1
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Chapter 2 -->
+                <div class="chapter-card group">
+                    <div class="chapter-number">2</div>
+                    <div class="chapter-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Performance and Returns</h3>
+                    <p class="text-gray-600 mb-4">
+                        Learn the unique challenges in measuring alternative investment performance, including the J-curve effect and key metrics.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">IRR</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">J-Curve</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">Valuation</span>
+                    </div>
+                    <a href="chapter2.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
+                        Start Chapter 2
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Chapter 3 -->
+                <div class="chapter-card group">
+                    <div class="chapter-number">3</div>
+                    <div class="chapter-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Private Capital</h3>
+                    <p class="text-gray-600 mb-4">
+                        Explore private equity and private debt investments, including LBOs, venture capital, and exit strategies.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full">Private Equity</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full">VC</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full">Private Debt</span>
+                    </div>
+                    <a href="chapter3.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
+                        Start Chapter 3
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Chapter 4 -->
+                <div class="chapter-card group">
+                    <div class="chapter-number">4</div>
+                    <div class="chapter-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Real Estate & Infrastructure</h3>
+                    <p class="text-gray-600 mb-4">
+                        Master real estate investment strategies and infrastructure investments, from core to opportunistic approaches.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 text-sm rounded-full">REITs</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 text-sm rounded-full">Core/Core-Plus</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 text-sm rounded-full">Infrastructure</span>
+                    </div>
+                    <a href="chapter4.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
+                        Start Chapter 4
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Chapter 5 -->
+                <div class="chapter-card group">
+                    <div class="chapter-number">5</div>
+                    <div class="chapter-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Natural Resources</h3>
+                    <p class="text-gray-600 mb-4">
+                        Understand investments in commodities, farmland, and timberland, including contango and backwardation concepts.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-teal-100 text-teal-700 text-sm rounded-full">Commodities</span>
+                        <span class="px-3 py-1 bg-teal-100 text-teal-700 text-sm rounded-full">Farmland</span>
+                        <span class="px-3 py-1 bg-teal-100 text-teal-700 text-sm rounded-full">Timberland</span>
+                    </div>
+                    <a href="chapter5.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
+                        Start Chapter 5
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Chapter 6 -->
+                <div class="chapter-card group">
+                    <div class="chapter-number">6</div>
+                    <div class="chapter-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Hedge Funds</h3>
+                    <p class="text-gray-600 mb-4">
+                        Learn about hedge fund strategies, structures, and their role in portfolio diversification and alpha generation.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-sm rounded-full">Long/Short</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-sm rounded-full">Event-Driven</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-sm rounded-full">Macro</span>
+                    </div>
+                    <a href="chapter6.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
+                        Start Chapter 6
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Chapter 7 -->
+                <div class="chapter-card group">
+                    <div class="chapter-number">7</div>
+                    <div class="chapter-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Digital Assets</h3>
+                    <p class="text-gray-600 mb-4">
+                        Explore the emerging world of cryptocurrencies, tokens, and blockchain technology in investment portfolios.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-sm rounded-full">Cryptocurrency</span>
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-sm rounded-full">Blockchain</span>
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-sm rounded-full">NFTs</span>
+                    </div>
+                    <a href="chapter7.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
+                        Start Chapter 7
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Study Guide Features</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Designed specifically for CFA candidates with comprehensive coverage and practical examples
+                </p>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">CFA Focused</h3>
+                    <p class="text-gray-600">
+                        Aligned with CFA curriculum requirements and exam format
+                    </p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Interactive Examples</h3>
+                    <p class="text-gray-600">
+                        Real-world examples and practical calculations throughout
+                    </p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Mobile Friendly</h3>
+                    <p class="text-gray-600">
+                        Study anywhere with responsive design optimized for all devices
+                    </p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Easy Navigation</h3>
+                    <p class="text-gray-600">
+                        Quick access to any concept with intuitive chapter organization
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="mb-8">
+                    <i class="fas fa-chart-line text-4xl text-indigo-400 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-2">CFA Alternative Investments</h3>
+                    <p class="text-gray-400">Your comprehensive guide to mastering alternative investments</p>
+                </div>
+                
+                <div class="border-t border-gray-700 pt-8">
+                    <p class="text-gray-400">
+                        &copy; 2024 CFA Alternative Investments Study Guide. Created for educational purposes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth Scrolling Script -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate progress bar on scroll
+        const progressBar = document.querySelector('.progress-fill');
+        const animateProgress = () => {
+            const rect = progressBar.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                progressBar.style.width = '100%';
+            }
+        };
+
+        window.addEventListener('scroll', animateProgress);
+        window.addEventListener('load', animateProgress);
+    </script>
+
+</body>
+</html>
