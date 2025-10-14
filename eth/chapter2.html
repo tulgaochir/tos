@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: The CFA Institute Code of Ethics & Standards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .chapter-nav {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .content-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+        .card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            border-color: #3b82f6;
+        }
+        .card-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            color: #1f2937;
+        }
+        .card-title .icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            font-size: 0.875rem;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+        .highlight-box:hover::before {
+            transform: rotate(45deg) translateX(100%);
+        }
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .key-term {
+            background: linear-gradient(135deg, #dbeafe, #f3f4f6);
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            color: #1e40af;
+            border: 1px solid #e5e7eb;
+        }
+        .list-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #4b5563;
+        }
+        .list-item:before {
+            content: "•";
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 1.25rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .sub-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 0.75rem;
+            border-left: 4px solid #3b82f6;
+        }
+        .ethics-principles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .ethics-principle {
+            background: linear-gradient(135deg, #f0f9ff, #f8fafc);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid #bfdbfe;
+            border-left: 6px solid #3b82f6;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .ethics-principle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+        }
+        .ethics-principle h3 {
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        .ethics-principle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.5));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .ethics-principle:hover::before {
+            opacity: 1;
+        }
+        .standards-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .standard {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid #3b82f6;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .standard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        .standard h3 {
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .standard-number {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+        .sub-standard {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0.75rem;
+            border-left: 4px solid #60a5fa;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        .sub-standard:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        .sub-standard h4 {
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+        }
+        .sub-standard-letter {
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #60a5fa;
+            color: white;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 0.75rem;
+        }
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #f1f5f9;
+            z-index: 60;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .chapter-navigation {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            margin: 3rem 0;
+        }
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .nav-button.primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        .nav-button.secondary {
+            background: #f8fafc;
+            color: #4b5563;
+            border: 1px solid #e2e8f0;
+        }
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Chapter Navigation -->
+    <nav class="chapter-nav">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-white hover:text-blue-200 transition-colors mr-6">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                    </a>
+                    <div class="text-white">
+                        <span class="font-semibold">Chapter 2:</span>
+                        <span class="opacity-90">The CFA Institute Code of Ethics & Standards</span>
+                    </div>
+                </div>
+                <div class="text-white text-sm opacity-75" id="reading-time">
+                    <i class="fas fa-clock mr-1"></i>
+                    <span id="time-estimate">20 min read</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-6 py-8">
+        <!-- Chapter Header -->
+        <header class="text-center mb-12 py-12 bg-gradient-to-r from-blue-800 to-blue-600 text-white rounded-xl shadow-lg relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-white bg-opacity-20 rounded-full mb-6">
+                    <span class="text-2xl font-bold">2</span>
+                </div>
+                <h1 class="text-4xl font-bold mb-4">The CFA Institute Code of Ethics & Standards of Professional Conduct</h1>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto">A Comprehensive Guide for Investment Professionals</p>
+                <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-scroll mr-2"></i>Code of Ethics
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-gavel mr-2"></i>Seven Standards
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-shield-alt mr-2"></i>Professional Conduct
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative elements -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white bg-opacity-5 rounded-full -translate-y-32 translate-x-32"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-white bg-opacity-5 rounded-full translate-y-24 -translate-x-24"></div>
+        </header>
+
+        <!-- 1. The Importance of Ethics in the Investment Industry -->
+        <div class="content-section" id="section-1">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Why Ethics Matter in the Investment Industry</h2>
+            </div>
+            <p class="text-lg mb-6">Ethics are the moral principles that guide our behavior. In the investment industry, ethical conduct is not just a personal virtue—it's the bedrock of the entire system. <span class="key-term">Trust</span> is essential for capital markets to function efficiently, allocating capital to its most productive uses for the ultimate benefit of society.</p>
+            
+            <div class="highlight-box mt-8">
+                <h3><i class="fas fa-balance-scale mr-3"></i>Beyond Legal Compliance</h3>
+                <p>While laws and regulations provide a framework, they cannot ensure trust on their own. A strong ethical culture is required to combat misconduct, foster robust markets, and build the client and public trust that the profession depends on.</p>
+            </div>
+        </div>
+        
+        <!-- 2. The Code of Ethics -->
+        <div class="content-section" id="section-2">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">The CFA Institute Code of Ethics</h2>
+            </div>
+            <p class="text-lg mb-6">The Code of Ethics is a set of six core principles that all CFA Institute members and candidates must adhere to. It provides the overarching ethical framework for the investment profession.</p>
+            
+            <div class="ethics-principles">
+                <div class="ethics-principle">
+                    <h3>
+                        <i class="fas fa-check-circle mr-3"></i>
+                        Act with integrity, competence, diligence, and respect.
+                    </h3>
+                </div>
+                <div class="ethics-principle">
+                    <h3>
+                        <i class="fas fa-heart mr-3"></i>
+                        Place the integrity of the profession and the interests of clients above personal interests.
+                    </h3>
+                </div>
+                <div class="ethics-principle">
+                    <h3>
+                        <i class="fas fa-user-tie mr-3"></i>
+                        Use reasonable care and exercise independent professional judgment.
+                    </h3>
+                </div>
+                <div class="ethics-principle">
+                    <h3>
+                        <i class="fas fa-users mr-3"></i>
+                        Practice and encourage others to practice in a professional and ethical manner.
+                    </h3>
+                </div>
+                <div class="ethics-principle">
+                    <h3>
+                        <i class="fas fa-globe mr-3"></i>
+                        Promote the integrity and viability of the global capital markets.
+                    </h3>
+                </div>
+                <div class="ethics-principle">
+                    <h3>
+                        <i class="fas fa-graduation-cap mr-3"></i>
+                        Maintain and improve professional competence.
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. The Seven Standards of Professional Conduct -->
+        <div class="content-section" id="section-3">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">The Seven Standards of Professional Conduct</h2>
+            </div>
+            <p class="text-lg mb-6">The seven Standards of Professional Conduct provide specific, mandatory guidance for applying the principles of the Code of Ethics in practice. Each standard is broken down into more detailed sub-standards.</p>
+            
+            <div class="standards-container">
+                <div class="standard">
+                    <h3>
+                        <div class="standard-number">I</div>
+                        Professionalism
+                    </h3>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">A</div>
+                            Knowledge of the Law
+                        </h4>
+                        <p>Understand and comply with all applicable laws, rules, and regulations. In case of conflict, follow the more strict rule.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">B</div>
+                            Independence and Objectivity
+                        </h4>
+                        <p>Do not offer, solicit, or accept any gift or benefit that could compromise your independence or objectivity.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">C</div>
+                            Misrepresentation
+                        </h4>
+                        <p>Do not knowingly make any misrepresentations in your professional work.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">D</div>
+                            Misconduct
+                        </h4>
+                        <p>Do not engage in any conduct involving dishonesty, fraud, or deceit that harms your professional reputation.</p>
+                    </div>
+                </div>
+
+                <div class="standard">
+                    <h3>
+                        <div class="standard-number">II</div>
+                        Integrity of Capital Markets
+                    </h3>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">A</div>
+                            Material Nonpublic Information
+                        </h4>
+                        <p>Do not act or cause others to act on material nonpublic (insider) information.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">B</div>
+                            Market Manipulation
+                        </h4>
+                        <p>Do not engage in practices that distort prices or artificially inflate trading volume to mislead market participants.</p>
+                    </div>
+                </div>
+
+                <div class="standard">
+                    <h3>
+                        <div class="standard-number">III</div>
+                        Duties to Clients
+                    </h3>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">A</div>
+                            Loyalty, Prudence, and Care
+                        </h4>
+                        <p>Act for the benefit of your clients and place their interests before your employer's or your own.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">B</div>
+                            Fair Dealing
+                        </h4>
+                        <p>Deal fairly and objectively with all clients when disseminating recommendations or taking investment action.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">C</div>
+                            Suitability
+                        </h4>
+                        <p>Make a reasonable inquiry into a client's investment experience, risk/return objectives, and constraints, and ensure that any investment action is suitable.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">D</div>
+                            Performance Presentation
+                        </h4>
+                        <p>Ensure that performance information is fair, accurate, and complete.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">E</div>
+                            Preservation of Confidentiality
+                        </h4>
+                        <p>Keep information about current, former, and prospective clients confidential unless specific circumstances apply.</p>
+                    </div>
+                </div>
+
+                <div class="standard">
+                    <h3>
+                        <div class="standard-number">IV</div>
+                        Duties to Employers
+                    </h3>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">A</div>
+                            Loyalty
+                        </h4>
+                        <p>Act for the benefit of your employer and do not deprive them of your skills or abilities.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">B</div>
+                            Additional Compensation Arrangements
+                        </h4>
+                        <p>Do not accept gifts or benefits that compete with your employer's interest without written consent from all parties involved.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">C</div>
+                            Responsibilities of Supervisors
+                        </h4>
+                        <p>Make reasonable efforts to ensure that anyone subject to your supervision complies with applicable laws and the Code and Standards.</p>
+                    </div>
+                </div>
+
+                <div class="standard">
+                    <h3>
+                        <div class="standard-number">V</div>
+                        Investment Analysis, Recommendations, and Actions
+                    </h3>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">A</div>
+                            Diligence and Reasonable Basis
+                        </h4>
+                        <p>Have a reasonable and adequate basis for any investment analysis, recommendation, or action.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">B</div>
+                            Communication with Clients
+                        </h4>
+                        <p>Disclose the basic format and principles of your investment process and promptly disclose any changes. Clearly distinguish between fact and opinion.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">C</div>
+                            Record Retention
+                        </h4>
+                        <p>Develop and maintain appropriate records to support your analysis and recommendations.</p>
+                    </div>
+                </div>
+
+                <div class="standard">
+                    <h3>
+                        <div class="standard-number">VI</div>
+                        Conflicts of Interest
+                    </h3>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">A</div>
+                            Disclosure of Conflicts
+                        </h4>
+                        <p>Make full and fair disclosure of all matters that could impair your independence and objectivity.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">B</div>
+                            Priority of Transactions
+                        </h4>
+                        <p>Investment transactions for clients and employers must have priority over your own personal transactions.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">C</div>
+                            Referral Fees
+                        </h4>
+                        <p>Disclose to clients and employers any compensation received for the recommendation of products or services.</p>
+                    </div>
+                </div>
+
+                <div class="standard">
+                    <h3>
+                        <div class="standard-number">VII</div>
+                        Responsibilities as a CFA Institute Member or CFA Candidate
+                    </h3>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">A</div>
+                            Conduct as Participants in CFA Institute Programs
+                        </h4>
+                        <p>Do not compromise the integrity of the CFA Institute or its programs.</p>
+                    </div>
+                    <div class="sub-standard">
+                        <h4>
+                            <div class="sub-standard-letter">B</div>
+                            Reference to CFA Institute, the CFA Designation, and the CFA Program
+                        </h4>
+                        <p>Do not misrepresent or exaggerate the meaning or implications of membership, holding the designation, or candidacy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="chapter-navigation">
+            <div class="flex justify-between items-center">
+                <a href="chapter1.html" class="nav-button secondary">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Previous: Ethics & Trust
+                </a>
+                <div class="text-center">
+                    <p class="text-sm text-gray-600 mb-2">Next Chapter</p>
+                    <a href="chapter3.html" class="nav-button primary">
+                        Guidance for Standards of Professional Conduct
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Reading progress indicator
+        function updateReadingProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('reading-progress').style.width = scrollPercent + '%';
+        }
+
+        window.addEventListener('scroll', updateReadingProgress);
+
+        // Mark chapter as completed when user scrolls to bottom
+        function checkCompletion() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            if (scrollPercent > 90) {
+                localStorage.setItem('chapter2_completed', 'true');
+            }
+        }
+
+        window.addEventListener('scroll', checkCompletion);
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Estimate reading time
+        const wordCount = document.body.innerText.split(' ').length;
+        const readingTime = Math.ceil(wordCount / 200); // 200 words per minute
+        document.getElementById('time-estimate').textContent = `${readingTime} min read`;
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

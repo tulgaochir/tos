@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFA Ethical and Professional Standards - Study Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .chapter-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 6px solid transparent;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        .chapter-card.chapter-1 {
+            border-left-color: #10b981;
+        }
+        .chapter-card.chapter-2 {
+            border-left-color: #3b82f6;
+        }
+        .chapter-card.chapter-3 {
+            border-left-color: #8b5cf6;
+        }
+        .chapter-card.chapter-4 {
+            border-left-color: #f59e0b;
+        }
+        .chapter-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        .chapter-1 .chapter-number {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        .chapter-2 .chapter-number {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+        .chapter-3 .chapter-number {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+        .chapter-4 .chapter-number {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .chapter-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+        .chapter-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+        .chapter-topics {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        .chapter-topics li {
+            padding: 0.5rem 0;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+        }
+        .chapter-topics li:before {
+            content: "•";
+            color: #6b7280;
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+        .read-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+        .read-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        .progress-section {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #10b981, #059669);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 relative overflow-hidden">
+        <div class="floating-elements">
+            <div class="floating-circle" style="width: 60px; height: 60px; top: 10%; left: 10%; animation-delay: 0s;"></div>
+            <div class="floating-circle" style="width: 40px; height: 40px; top: 20%; right: 15%; animation-delay: 2s;"></div>
+            <div class="floating-circle" style="width: 80px; height: 80px; bottom: 20%; left: 20%; animation-delay: 4s;"></div>
+            <div class="floating-circle" style="width: 50px; height: 50px; bottom: 30%; right: 10%; animation-delay: 1s;"></div>
+        </div>
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-6">CFA Ethical and Professional Standards</h1>
+                <p class="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+                    Master the foundational principles of ethical conduct in the investment profession with this comprehensive study guide covering all essential topics for CFA Level I.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-book mr-2"></i>4 Comprehensive Chapters
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-users mr-2"></i>Professional Standards
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-shield-alt mr-2"></i>Ethics & Trust
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-chart-line mr-2"></i>GIPS Standards
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section class="max-w-6xl mx-auto px-6 -mt-10 relative z-20">
+        <div class="progress-section">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Study Progress</h3>
+                <span class="text-sm text-gray-600" id="progress-text">0% Complete</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p class="text-sm text-gray-600 mt-2">Track your progress as you complete each chapter</p>
+        </div>
+    </section>
+
+    <!-- Chapters Grid -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Study Chapters</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Explore each chapter to build a comprehensive understanding of ethical and professional standards in investment management.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Chapter 1 -->
+            <div class="chapter-card chapter-1" data-chapter="1">
+                <div class="chapter-number">1</div>
+                <h3 class="chapter-title">Ethics & Trust in the Investment Profession</h3>
+                <p class="chapter-description">
+                    Understand the foundational importance of ethics and trust in investment management. Learn about the nature of professions, challenges to ethical conduct, and frameworks for ethical decision-making.
+                </p>
+                <ul class="chapter-topics">
+                    <li>The Importance of Ethics and Trust</li>
+                    <li>The Nature of a Profession</li>
+                    <li>Challenges to Ethical Conduct</li>
+                    <li>Ethical vs. Legal Standards</li>
+                    <li>Ethical Decision-Making Framework</li>
+                </ul>
+                <a href="chapter1.html" class="read-button">
+                    <i class="fas fa-book-open mr-2"></i>
+                    Start Reading
+                </a>
+            </div>
+
+            <!-- Chapter 2 -->
+            <div class="chapter-card chapter-2" data-chapter="2">
+                <div class="chapter-number">2</div>
+                <h3 class="chapter-title">The CFA Institute Code of Ethics & Standards</h3>
+                <p class="chapter-description">
+                    Explore the comprehensive framework of the CFA Institute Code of Ethics and the seven Standards of Professional Conduct that guide investment professionals worldwide.
+                </p>
+                <ul class="chapter-topics">
+                    <li>The Six Principles of the Code of Ethics</li>
+                    <li>Standard I: Professionalism</li>
+                    <li>Standard II: Integrity of Capital Markets</li>
+                    <li>Standard III: Duties to Clients</li>
+                    <li>Standards IV-VII: Complete Framework</li>
+                </ul>
+                <a href="chapter2.html" class="read-button">
+                    <i class="fas fa-book-open mr-2"></i>
+                    Start Reading
+                </a>
+            </div>
+
+            <!-- Chapter 3 -->
+            <div class="chapter-card chapter-3" data-chapter="3">
+                <div class="chapter-number">3</div>
+                <h3 class="chapter-title">Guidance for Standards of Professional Conduct</h3>
+                <p class="chapter-description">
+                    Dive deep into the practical application and detailed guidance for each of the seven Standards of Professional Conduct with real-world examples and best practices.
+                </p>
+                <ul class="chapter-topics">
+                    <li>Detailed Standard I Guidance</li>
+                    <li>Capital Markets Integrity Applications</li>
+                    <li>Client Duties in Practice</li>
+                    <li>Employer Responsibilities</li>
+                    <li>Conflict Management Strategies</li>
+                </ul>
+                <a href="chapter3.html" class="read-button">
+                    <i class="fas fa-book-open mr-2"></i>
+                    Start Reading
+                </a>
+            </div>
+
+            <!-- Chapter 4 -->
+            <div class="chapter-card chapter-4" data-chapter="4">
+                <div class="chapter-number">4</div>
+                <h3 class="chapter-title">Introduction to GIPS Standards</h3>
+                <p class="chapter-description">
+                    Learn about the Global Investment Performance Standards (GIPS) and how they ensure fair representation and full disclosure of investment performance across the industry.
+                </p>
+                <ul class="chapter-topics">
+                    <li>Why GIPS Matter</li>
+                    <li>The Problem of Misleading Reporting</li>
+                    <li>Understanding Composites</li>
+                    <li>GIPS Verification Process</li>
+                    <li>Implementation Best Practices</li>
+                </ul>
+                <a href="chapter4.html" class="read-button">
+                    <i class="fas fa-book-open mr-2"></i>
+                    Start Reading
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Study Features</h2>
+                <p class="text-lg text-gray-600">Designed to help you master ethical and professional standards</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="feature-icon bg-green-100 text-green-600 mx-auto">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Comprehensive Coverage</h3>
+                    <p class="text-gray-600">Complete coverage of all CFA Level I ethical and professional standards topics</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="feature-icon bg-blue-100 text-blue-600 mx-auto">
+                        <i class="fas fa-lightbulb text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Clear Examples</h3>
+                    <p class="text-gray-600">Real-world examples and practical applications of ethical principles</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="feature-icon bg-purple-100 text-purple-600 mx-auto">
+                        <i class="fas fa-mobile-alt text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Mobile Friendly</h3>
+                    <p class="text-gray-600">Study anywhere with responsive design optimized for all devices</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p>&copy; 2025 CFA Ethical and Professional Standards Study Guide. All rights reserved.</p>
+            <p class="mt-2 text-gray-400">Designed to help you succeed in your CFA Level I examination</p>
+        </div>
+    </footer>
+
+    <script>
+        // Progress tracking
+        function updateProgress() {
+            const chapters = ['chapter1', 'chapter2', 'chapter3', 'chapter4'];
+            let completed = 0;
+            
+            chapters.forEach(chapter => {
+                if (localStorage.getItem(chapter + '_completed')) {
+                    completed++;
+                }
+            });
+            
+            const percentage = (completed / chapters.length) * 100;
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            
+            progressFill.style.width = percentage + '%';
+            progressText.textContent = Math.round(percentage) + '% Complete';
+        }
+
+        // Hover effects for chapter cards
+        document.querySelectorAll('.chapter-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const chapter = this.dataset.chapter;
+                const colors = {
+                    1: '#10b981',
+                    2: '#3b82f6', 
+                    3: '#8b5cf6',
+                    4: '#f59e0b'
+                };
+                this.style.borderLeftColor = colors[chapter];
+            });
+        });
+
+        // Initialize progress on page load
+        updateProgress();
+
+        // Add scroll animation
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.chapter-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                if (isVisible) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

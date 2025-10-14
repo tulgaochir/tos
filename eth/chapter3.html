@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Guidance for Standards of Professional Conduct</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .chapter-nav {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid #8b5cf6;
+            transition: all 0.3s ease;
+        }
+        .content-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        .standard-card {
+            background: linear-gradient(135deg, #faf5ff, #f8fafc);
+            border-left: 6px solid #8b5cf6;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .standard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .standard-card:hover::before {
+            transform: scaleX(1);
+        }
+        .standard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(139, 92, 246, 0.15);
+        }
+        .standard-title {
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: #5b21b6;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .standard-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        .sub-standard-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: #5b21b6;
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 0.75rem;
+            border-left: 4px solid #a855f7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .sub-standard-title .icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            font-size: 0.875rem;
+        }
+        .key-term {
+            background: linear-gradient(135deg, #f3e8ff, #f5f3ff);
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            color: #6b21a8;
+            border: 1px solid #e9d5ff;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+        .highlight-box:hover::before {
+            transform: rotate(45deg) translateX(100%);
+        }
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .list-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #4b5563;
+        }
+        .list-item:before {
+            content: "•";
+            color: #8b5cf6;
+            font-weight: bold;
+            font-size: 1.25rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #f1f5f9;
+            z-index: 60;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .chapter-navigation {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            margin: 3rem 0;
+        }
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .nav-button.primary {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+        }
+        .nav-button.secondary {
+            background: #f8fafc;
+            color: #4b5563;
+            border: 1px solid #e2e8f0;
+        }
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .guidance-note {
+            background: linear-gradient(135deg, #f0f9ff, #f8fafc);
+            border: 1px solid #bfdbfe;
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+        .guidance-note .note-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .guidance-note .note-title i {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Chapter Navigation -->
+    <nav class="chapter-nav">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-white hover:text-purple-200 transition-colors mr-6">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                    </a>
+                    <div class="text-white">
+                        <span class="font-semibold">Chapter 3:</span>
+                        <span class="opacity-90">Guidance for Standards of Professional Conduct</span>
+                    </div>
+                </div>
+                <div class="text-white text-sm opacity-75" id="reading-time">
+                    <i class="fas fa-clock mr-1"></i>
+                    <span id="time-estimate">25 min read</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-6 py-8">
+        <!-- Chapter Header -->
+        <header class="text-center mb-12 py-12 bg-gradient-to-r from-purple-800 to-purple-600 text-white rounded-xl shadow-lg relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-white bg-opacity-20 rounded-full mb-6">
+                    <span class="text-2xl font-bold">3</span>
+                </div>
+                <h1 class="text-4xl font-bold mb-4">Guidance for the CFA Standards of Professional Conduct (I-VII)</h1>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto">A Detailed Application and Best Practices Guide</p>
+                <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-compass mr-2"></i>Practical Guidance
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-tools mr-2"></i>Best Practices
+                    </div>
+                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                        <i class="fas fa-lightbulb mr-2"></i>Real-World Applications
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative elements -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white bg-opacity-5 rounded-full -translate-y-32 translate-x-32"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-white bg-opacity-5 rounded-full translate-y-24 -translate-x-24"></div>
+        </header>
+
+        <!-- Standard I: Professionalism -->
+        <div class="content-section" id="standard-1">
+            <div class="standard-card">
+                <div class="standard-title">
+                    <div class="standard-icon">I</div>
+                    <h2>Professionalism</h2>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-file-alt"></i>
+                    </span>
+                    A. Knowledge of the Law
+                </div>
+                <p class="mb-4">Members must understand and comply with all applicable laws, rules, and regulations of any country, government, or regulatory body governing their professional activities. In the event of a conflict, you must always follow the more strict law or standard. You must not knowingly participate or assist in any violation.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-info-circle"></i>
+                        Key Guidance
+                    </div>
+                    <p>When laws conflict with the CFA Standards, follow whichever is stricter. If uncertain about legal requirements, seek competent legal advice and document your efforts to comply.</p>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-heart"></i>
+                    </span>
+                    B. Independence and Objectivity
+                </div>
+                <p class="mb-4">Members must use reasonable care and judgment to achieve and maintain independence and objectivity. You must not offer, solicit, or accept any gift, benefit, or compensation that could reasonably be expected to compromise your own or another's independence and objectivity.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Common Violations
+                    </div>
+                    <p>Accepting expensive gifts from clients, allowing investment banking relationships to influence research recommendations, or receiving compensation tied to specific investment outcomes.</p>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                    C. Misrepresentation
+                </div>
+                <p class="mb-4">Members must not knowingly make any misrepresentations relating to investment analysis, recommendations, or other professional activities. This includes plagiarism and guaranteeing investment performance.</p>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-ban"></i>
+                    </span>
+                    D. Misconduct
+                </div>
+                <p>Members must not engage in any professional conduct involving dishonesty, fraud, or deceit or commit any act that reflects adversely on their professional reputation, integrity, or competence.</p>
+            </div>
+        </div>
+        
+        <!-- Standard II: Integrity of Capital Markets -->
+        <div class="content-section" id="standard-2">
+            <div class="standard-card">
+                <div class="standard-title">
+                    <div class="standard-icon">II</div>
+                    <h2>Integrity of Capital Markets</h2>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                    A. Material Nonpublic Information
+                </div>
+                <p class="mb-4">Members who possess <span class="key-term">material nonpublic information</span> that could affect the value of an investment must not act or cause others to act on the information.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-key"></i>
+                        Definition: Material Information
+                    </div>
+                    <p>Information is material if its disclosure would probably have an impact on the price of a security or if reasonable investors would want to know the information before making an investment decision.</p>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </span>
+                    B. Market Manipulation
+                </div>
+                <p>Members must not engage in practices that distort prices or artificially inflate trading volume with the intent to mislead market participants.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-warning"></i>
+                        Examples of Manipulation
+                    </div>
+                    <p>Pump and dump schemes, wash trading, spreading false rumors, or coordinating trades to create artificial price movements.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Standard III: Duties to Clients -->
+        <div class="content-section" id="standard-3">
+            <div class="standard-card">
+                <div class="standard-title">
+                    <div class="standard-icon">III</div>
+                    <h2>Duties to Clients</h2>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-heart"></i>
+                    </span>
+                    A. Loyalty, Prudence, and Care
+                </div>
+                <p class="mb-4">Members have a duty of loyalty to their clients and must act with reasonable care and exercise prudent judgment. You must act for the benefit of your clients and place their interests before your employer's or your own interests.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-balance-scale"></i>
+                        Client vs. Employer Interests
+                    </div>
+                    <p>When conflicts arise between client and employer interests, the client's interests take priority. However, members should attempt to resolve conflicts through disclosure and discussion.</p>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-users"></i>
+                    </span>
+                    B. Fair Dealing
+                </div>
+                <p class="mb-4">Members must deal fairly and objectively with all clients when providing investment analysis, making investment recommendations, or taking investment action.</p>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-check-circle"></i>
+                    </span>
+                    C. Suitability
+                </div>
+                <p class="mb-4">When in an advisory relationship with a client, members must make a reasonable inquiry into the client's circumstances and constraints, and then determine if an investment is suitable. You must judge the suitability of investments in the context of the client's total portfolio.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        Suitability Factors
+                    </div>
+                    <p>Consider: client's investment experience, risk tolerance, return objectives, time horizon, liquidity needs, tax considerations, and any unique circumstances or constraints.</p>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </span>
+                    D. Performance Presentation
+                </div>
+                <p class="mb-4">When communicating investment performance information, members must make reasonable efforts to ensure that it is fair, accurate, and complete.</p>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-user-secret"></i>
+                    </span>
+                    E. Preservation of Confidentiality
+                </div>
+                <p>Members must keep information about current, former, and prospective clients confidential unless the information concerns illegal activities, disclosure is required by law, or the client permits disclosure.</p>
+            </div>
+        </div>
+
+        <!-- Standard IV: Duties to Employers -->
+        <div class="content-section" id="standard-4">
+            <div class="standard-card">
+                <div class="standard-title">
+                    <div class="standard-icon">IV</div>
+                    <h2>Duties to Employers</h2>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-handshake"></i>
+                    </span>
+                    A. Loyalty
+                </div>
+                <p class="mb-4">In matters related to their employment, members must act for the benefit of their employer and not deprive their employer of the advantage of their skills, divulge confidential information, or otherwise cause harm.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-briefcase"></i>
+                        Preparing to Leave Employment
+                    </div>
+                    <p>Members may prepare to leave their employer (update resumes, interview) but must not breach their duty of loyalty by soliciting clients or taking proprietary information.</p>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </span>
+                    B. Additional Compensation Arrangements
+                </div>
+                <p class="mb-4">Members must not accept gifts, benefits, or compensation that competes with, or might create a conflict of interest with, their employer's interest unless they obtain written consent from all parties involved.</p>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-user-tie"></i>
+                    </span>
+                    C. Responsibilities of Supervisors
+                </div>
+                <p>Members must make reasonable efforts to ensure that anyone subject to their supervision or authority complies with applicable laws, rules, regulations, and the Code and Standards.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-clipboard-check"></i>
+                        Supervisory System
+                    </div>
+                    <p>Establish adequate compliance systems, delegate supervision only to qualified personnel, and take prompt action when violations are detected.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Standard V: Investment Analysis, Recommendations, and Actions -->
+        <div class="content-section" id="standard-5">
+            <div class="standard-card">
+                <div class="standard-title">
+                    <div class="standard-icon">V</div>
+                    <h2>Investment Analysis, Recommendations, and Actions</h2>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    A. Diligence and Reasonable Basis
+                </div>
+                <p class="mb-4">Members must exercise diligence, independence, and thoroughness in analyzing investments, making recommendations, and taking action. You must have a reasonable and adequate basis, supported by research, for any analysis, recommendation, or action.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-microscope"></i>
+                        Elements of Diligence
+                    </div>
+                    <p>Thorough investigation, independent analysis, proper documentation, and ongoing monitoring of recommendations and portfolio actions.</p>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-comments"></i>
+                    </span>
+                    B. Communication with Clients and Prospective Clients
+                </div>
+                <p class="mb-4">Members must disclose to clients the basic format and general principles of their investment processes. You must use reasonable judgment in identifying which factors are important to your analyses and include those in communications with clients. Distinguish between fact and opinion.</p>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-folder"></i>
+                    </span>
+                    C. Record Retention
+                </div>
+                <p>Members must develop and maintain appropriate records to support their investment analyses, recommendations, actions, and other investment-related communications with clients.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-archive"></i>
+                        Record Keeping Best Practices
+                    </div>
+                    <p>Maintain records of research sources, analysis methodology, recommendation rationale, and client communications. Follow firm policies or applicable regulations for retention periods.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Standard VI: Conflicts of Interest -->
+        <div class="content-section" id="standard-6">
+            <div class="standard-card">
+                <div class="standard-title">
+                    <div class="standard-icon">VI</div>
+                    <h2>Conflicts of Interest</h2>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                    A. Disclosure of Conflicts
+                </div>
+                <p class="mb-4">Members must make full and fair disclosure of all matters that could reasonably be expected to impair their independence and objectivity or interfere with respective duties to clients, prospective clients, and their employer.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-eye"></i>
+                        Types of Conflicts to Disclose
+                    </div>
+                    <p>Ownership positions, board memberships, employment relationships, family connections, or any other situation that might bias your judgment or recommendations.</p>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-sort-numeric-up"></i>
+                    </span>
+                    B. Priority of Transactions
+                </div>
+                <p class="mb-4">Investment transactions for clients and employers must have priority over investment transactions in which a member is the beneficial owner.</p>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </span>
+                    C. Referral Fees
+                </div>
+                <p>Members must disclose to their employers, clients, and prospective clients, as appropriate, any compensation, consideration, or benefit received from, or paid to, others for the recommendation of products or services.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-transparency"></i>
+                        Disclosure Requirements
+                    </div>
+                    <p>Disclosure must be made before entering into any formal agreement and should include the nature and estimated dollar value of any benefits.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Standard VII: Responsibilities as a CFA Institute Member or CFA Candidate -->
+        <div class="content-section" id="standard-7">
+            <div class="standard-card">
+                <div class="standard-title">
+                    <div class="standard-icon">VII</div>
+                    <h2>Responsibilities as a CFA Institute Member or CFA Candidate</h2>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-certificate"></i>
+                    </span>
+                    A. Conduct as Participants in CFA Institute Programs
+                </div>
+                <p class="mb-4">Members must not engage in any conduct that compromises the reputation or integrity of CFA Institute or the CFA designation or the integrity, validity, or security of CFA Institute programs.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-shield-alt"></i>
+                        Program Integrity
+                    </div>
+                    <p>This includes not sharing exam questions, not violating exam policies, and not engaging in misconduct during the exam process.</p>
+                </div>
+                
+                <div class="sub-standard-title">
+                    <span class="icon">
+                        <i class="fas fa-id-badge"></i>
+                    </span>
+                    B. Reference to CFA Institute, the CFA Designation, and the CFA Program
+                </div>
+                <p>When referring to CFA Institute, CFA Institute membership, the CFA designation, or candidacy in the CFA Program, members must not misrepresent or exaggerate the meaning or implications of membership in CFA Institute, holding the CFA designation, or candidacy in the CFA Program.</p>
+                
+                <div class="guidance-note">
+                    <div class="note-title">
+                        <i class="fas fa-pen"></i>
+                        Proper Usage Examples
+                    </div>
+                    <p>Correct: "John Smith, CFA" or "Jane Doe is a CFA candidate." Incorrect: Implying the designation guarantees investment success or using "CFA" as a noun.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="chapter-navigation">
+            <div class="flex justify-between items-center">
+                <a href="chapter2.html" class="nav-button secondary">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Previous: Code & Standards
+                </a>
+                <div class="text-center">
+                    <p class="text-sm text-gray-600 mb-2">Next Chapter</p>
+                    <a href="chapter4.html" class="nav-button primary">
+                        Introduction to GIPS Standards
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Reading progress indicator
+        function updateReadingProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('reading-progress').style.width = scrollPercent + '%';
+        }
+
+        window.addEventListener('scroll', updateReadingProgress);
+
+        // Mark chapter as completed when user scrolls to bottom
+        function checkCompletion() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            if (scrollPercent > 90) {
+                localStorage.setItem('chapter3_completed', 'true');
+            }
+        }
+
+        window.addEventListener('scroll', checkCompletion);
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Estimate reading time
+        const wordCount = document.body.innerText.split(' ').length;
+        const readingTime = Math.ceil(wordCount / 200); // 200 words per minute
+        document.getElementById('time-estimate').textContent = `${readingTime} min read`;
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
