@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Portfolio Planning & Construction - CFA Portfolio Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .content-section {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-left: 4px solid #2c5282;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #2c5282;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .card {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            font-weight: 600;
+            color: #2c5282;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .card-title svg {
+            margin-right: 0.5rem;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #2c5282 0%, #4a90e2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        .key-term {
+            background-color: #edf2f7;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        .list-item {
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .list-item:before {
+            content: "•";
+            color: #2c5282;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .sub-section {
+            margin-top: 1.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid #e2e8f0;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #2c5282;
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        tr:hover {
+            background-color: #edf2f7;
+        }
+        .ips-components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .ips-component {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .ips-component h4 {
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 0.5rem;
+        }
+        .risk-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .risk-type {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 2px solid;
+        }
+        .risk-type.absolute {
+            border-color: #4299e1;
+            background: #bee3f8;
+        }
+        .risk-type.relative {
+            border-color: #38a169;
+            background: #c6f6d5;
+        }
+        .risk-type h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .risk-type.absolute h4 {
+            color: #4299e1;
+        }
+        .risk-type.relative h4 {
+            color: #38a169;
+        }
+        .constraint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .constraint {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #2c5282;
+        }
+        .constraint h3 {
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .portfolio-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .portfolio-step {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .portfolio-step h3 {
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .nav-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .nav-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-btn-primary {
+            background: white;
+            color: #1e3a8a;
+        }
+        .nav-btn-primary:hover {
+            background: #f1f5f9;
+        }
+        .nav-btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .nav-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .chapter-nav {
+            position: sticky;
+            bottom: 2rem;
+            margin-top: 3rem;
+        }
+        .chapter-nav-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
+            <div class="nav-content">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="nav-btn nav-btn-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to Home
+                    </a>
+                    <div class="nav-title">Chapter 4: Portfolio Planning & Construction</div>
+                </div>
+                <div class="nav-buttons">
+                    <a href="chapter3.html" class="nav-btn nav-btn-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Previous
+                    </a>
+                    <a href="chapter5.html" class="nav-btn nav-btn-primary">
+                        Next Chapter
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-5xl mx-auto p-4 sm:p-6 md:p-8">
+        <header class="text-center mb-12 py-8 bg-gradient-to-r from-blue-800 to-blue-600 text-white rounded-xl shadow-lg">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
+                <span class="text-2xl font-bold">4</span>
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Basics of Portfolio Planning & Construction</h1>
+            <p class="text-xl opacity-90">A Guide to Creating the Investment Policy Statement and Building Portfolios</p>
+        </header>
+
+        <!-- 1. The Investment Policy Statement (IPS) -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="text-2xl font-bold text-gray-800">The Investment Policy Statement (IPS)</h2>
+            </div>
+            <p class="text-lg">The foundation of portfolio planning is a thorough understanding of the client's needs, circumstances, and constraints. This understanding is formalized in the <span class="key-term">Investment Policy Statement (IPS)</span>, a crucial document that serves as the roadmap for the entire portfolio management process.</p>
+            
+            <div class="sub-section">
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">Major Components of an IPS</h3>
+                <p>A well-drafted IPS should be a clear and comprehensive document that typically includes:</p>
+                
+                <div class="ips-components">
+                    <div class="ips-component">
+                        <h4>Client & Purpose</h4>
+                        <p>A description of the client and the purpose of the IPS.</p>
+                    </div>
+                    <div class="ips-component">
+                        <h4>Duties & Responsibilities</h4>
+                        <p>A statement of duties and responsibilities for all parties (investment manager, custodian, client).</p>
+                    </div>
+                    <div class="ips-component">
+                        <h4>Investment Objectives</h4>
+                        <p>The investment objectives (risk and return).</p>
+                    </div>
+                    <div class="ips-component">
+                        <h4>Investment Constraints</h4>
+                        <p>The investment constraints.</p>
+                    </div>
+                    <div class="ips-component">
+                        <h4>Investment Guidelines</h4>
+                        <p>Investment guidelines and a list of permissible asset classes.</p>
+                    </div>
+                    <div class="ips-component">
+                        <h4>Asset Allocation</h4>
+                        <p>The strategic asset allocation and rebalancing policy.</p>
+                    </div>
+                    <div class="ips-component">
+                        <h4>Benchmark</h4>
+                        <p>The benchmark to be used for performance evaluation.</p>
+                    </div>
+                    <div class="ips-component">
+                        <h4>Update Procedures</h4>
+                        <p>Procedures for updating the IPS.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2. Investment Objectives -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="text-2xl font-bold text-gray-800">Investment Objectives</h2>
+            </div>
+            <p class="text-lg mb-6">The investment objectives section of the IPS defines the client's goals in terms of risk and return. These two objectives are inseparable and must be consistent with each other.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-6">
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        Risk Objective
+                    </h3>
+                    <p>The risk objective specifies how much risk the client is willing and able to take. It can be stated in absolute or relative terms.</p>
+                    
+                    <div class="risk-types mt-4">
+                        <div class="risk-type absolute">
+                            <h4>Absolute Risk</h4>
+                            <p>Stated independently of market performance, e.g., "The portfolio shall not experience a loss of more than 5% in any 12-month period."</p>
+                        </div>
+                        <div class="risk-type relative">
+                            <h4>Relative Risk</h4>
+                            <p>Stated in relation to a benchmark, e.g., "The portfolio's tracking risk should not exceed 2% relative to the S&P 500."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                        </svg>
+                        Return Objective
+                    </h3>
+                    <p>The return objective specifies the desired rate of return. Like risk, it can be absolute or relative.</p>
+                    
+                    <div class="risk-types mt-4">
+                        <div class="risk-type absolute">
+                            <h4>Absolute Return</h4>
+                            <p>Stated as a specific target, e.g., "Achieve a nominal return of 8% per year" or a real return of "inflation + 3%."</p>
+                        </div>
+                        <div class="risk-type relative">
+                            <h4>Relative Return</h4>
+                            <p>Stated in relation to a benchmark, e.g., "Outperform the benchmark by 1.5% annually."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">Assessing Risk Tolerance: Ability vs. Willingness</h3>
+                <p>A client's overall risk tolerance is a function of two factors:</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 mt-6">
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Ability to Bear Risk
+                        </h3>
+                        <p>An objective assessment based on financial circumstances like wealth, time horizon, and income needs. A longer time horizon and greater wealth generally mean a higher ability to take risk.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                            Willingness to Bear Risk
+                        </h3>
+                        <p>A subjective assessment of the client's psychological attitude towards risk, often determined through questionnaires.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box mt-6">
+                    <h3 class="text-xl font-semibold">Conflict Resolution</h3>
+                    <p>If a conflict arises (e.g., high willingness but low ability), the investment approach should conform to the lower of the two. The advisor's role is to educate the client and find a suitable middle ground.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Investment Constraints -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="text-2xl font-bold text-gray-800">Investment Constraints</h2>
+            </div>
+            <p class="text-lg mb-6">Constraints are limitations or preferences that must be considered when constructing the portfolio.</p>
+            
+            <div class="constraint-grid">
+                <div class="constraint">
+                    <h3>Liquidity</h3>
+                    <p>The need to access cash from the portfolio on short notice. High liquidity needs may restrict investment in illiquid assets like private equity or hedge funds.</p>
+                </div>
+                <div class="constraint">
+                    <h3>Time Horizon</h3>
+                    <p>The length of time over which the portfolio is expected to generate returns. Generally, a longer time horizon allows for a higher risk tolerance and investment in less liquid assets.</p>
+                </div>
+                <div class="constraint">
+                    <h3>Tax Situations</h3>
+                    <p>The tax treatment of various investment returns (e.g., capital gains vs. dividends) can significantly impact portfolio decisions. The focus should be on after-tax returns.</p>
+                </div>
+                <div class="constraint">
+                    <h3>Legal & Regulatory</h3>
+                    <p>Any laws or regulations that constrain investment choices, such as rules governing trusts or corporate pension plans.</p>
+                </div>
+                <div class="constraint">
+                    <h3>Unique Circumstances</h3>
+                    <p>Any specific preferences or restrictions unique to the client, such as ethical considerations (ESG), religious beliefs, or a desire to avoid certain industries.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. Portfolio Construction -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="text-2xl font-bold text-gray-800">Portfolio Construction</h2>
+            </div>
+            <p class="text-lg mb-6">Once the IPS is complete, the manager begins constructing the portfolio. This is a multi-step process.</p>
+            
+            <div class="portfolio-steps">
+                <div class="portfolio-step">
+                    <h3>Strategic Asset Allocation (SAA)</h3>
+                    <p>This is the long-term, target allocation of capital across permissible asset classes, based on the IPS. It is the primary determinant of a portfolio's risk and return characteristics. The goal is to use asset classes with low correlation to each other to maximize diversification.</p>
+                </div>
+                <div class="portfolio-step">
+                    <h3>Tactical Asset Allocation (TAA)</h3>
+                    <p>This involves making short-term, temporary deviations from the SAA to capitalize on perceived market opportunities.</p>
+                </div>
+                <div class="portfolio-step">
+                    <h3>Security Selection</h3>
+                    <p>This is the process of selecting individual securities within each asset class to be included in the portfolio.</p>
+                </div>
+                <div class="portfolio-step">
+                    <h3>Risk Budgeting</h3>
+                    <p>This involves setting an overall risk limit for the portfolio and then allocating that risk across the different levels of decision-making (strategic, tactical, and security selection).</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 5. ESG Considerations -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="text-2xl font-bold text-gray-800">ESG Considerations in Portfolio Planning</h2>
+            </div>
+            <p class="text-lg mb-6">Environmental, Social, and Governance (ESG) factors are increasingly being integrated into the portfolio planning process, often as part of the "Unique Circumstances" constraint or as a core part of the investment strategy.</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Examples of Issues</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Environmental</strong></td>
+                            <td>Climate change, pollution, energy efficiency, water scarcity, deforestation.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Social</strong></td>
+                            <td>Data protection, gender equality, human rights, labor standards, community relations.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Governance</strong></td>
+                            <td>Board composition, executive compensation, political contributions, whistleblower schemes.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="chapter-nav">
+            <div class="chapter-nav-content">
+                <div class="flex items-center">
+                    <div class="progress-indicator">
+                        <span>Chapter 4 of 6</span>
+                        <div class="w-24 bg-gray-200 rounded-full h-2 ml-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 66.67%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="chapter3.html" class="px-4 py-2 text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        ← Previous: Portfolio Management Overview
+                    </a>
+                    <a href="chapter5.html" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Next: Behavioral Biases →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

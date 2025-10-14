@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Portfolio Risk and Return Part I - CFA Portfolio Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .content-section {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-left: 4px solid #2c5282;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #2c5282;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .card {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            font-weight: 600;
+            color: #2c5282;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .card-title svg {
+            margin-right: 0.5rem;
+        }
+        .formula {
+            background-color: #edf2f7;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #2d3748;
+            border-left: 4px solid #4299e1;
+            position: relative;
+        }
+        .formula-label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #4299e1;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .example {
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            background-color: #f7fafc;
+            border-left: 4px solid #38a169;
+        }
+        .example-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .example-title svg {
+            margin-right: 0.5rem;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #2c5282 0%, #4a90e2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        .key-term {
+            background-color: #edf2f7;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        .list-item {
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .list-item:before {
+            content: "•";
+            color: #2c5282;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .sub-section {
+            margin-top: 1.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid #e2e8f0;
+        }
+        .investor-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .investor-type {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 2px solid;
+        }
+        .investor-type.risk-averse {
+            border-color: #e53e3e;
+            background: #fed7d7;
+        }
+        .investor-type.risk-neutral {
+            border-color: #d69e2e;
+            background: #fefcbf;
+        }
+        .investor-type.risk-seeking {
+            border-color: #38a169;
+            background: #c6f6d5;
+        }
+        .investor-type h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .investor-type.risk-averse h4 {
+            color: #e53e3e;
+        }
+        .investor-type.risk-neutral h4 {
+            color: #d69e2e;
+        }
+        .investor-type.risk-seeking h4 {
+            color: #38a169;
+        }
+        .portfolio-concepts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .portfolio-concept {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .portfolio-concept h3 {
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .nav-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .nav-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-btn-primary {
+            background: white;
+            color: #1e3a8a;
+        }
+        .nav-btn-primary:hover {
+            background: #f1f5f9;
+        }
+        .nav-btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .nav-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .chapter-nav {
+            position: sticky;
+            bottom: 2rem;
+            margin-top: 3rem;
+        }
+        .chapter-nav-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
+            <div class="nav-content">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="nav-btn nav-btn-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to Home
+                    </a>
+                    <div class="nav-title">Chapter 1: Portfolio Risk and Return Part I</div>
+                </div>
+                <div class="nav-buttons">
+                    <a href="chapter2.html" class="nav-btn nav-btn-primary">
+                        Next Chapter
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-5xl mx-auto p-4 sm:p-6 md:p-8">
+        <header class="text-center mb-12 py-8 bg-gradient-to-r from-blue-800 to-blue-600 text-white rounded-xl shadow-lg">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
+                <span class="text-2xl font-bold">1</span>
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Portfolio Risk and Return: Part I</h1>
+            <p class="text-xl opacity-90">Foundational Concepts for Building Optimal Portfolios</p>
+        </header>
+
+        <!-- 1. Introduction to Portfolio Management -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="text-2xl font-bold text-gray-800">The Basics: Risk and Return</h2>
+            </div>
+            <p class="text-lg">The fundamental principle of investing is the <span class="key-term">risk-return trade-off</span>: to achieve higher potential returns, an investor must accept a higher level of risk. Portfolio management aims to construct an optimal portfolio that provides the highest possible return for a given level of risk, considering the investor's individual risk tolerance.</p>
+            <p class="mt-4"><span class="key-term">Expected return</span> is a forward-looking estimate, while <span class="key-term">historical return</span> is the actual return earned in the past. The expected return can be broken down into the risk-free rate, expected inflation, and a risk premium.</p>
+            <div class="formula">
+                <div class="formula-label">FORMULA</div>
+                1 + E(R) = (1 + R<sub>f</sub>) × (1 + E(π)) × (1 + E(RP))
+            </div>
+        </div>
+        
+        <!-- 2. Investor Profiles: Risk Aversion and Utility Theory -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="text-2xl font-bold text-gray-800">Investor Profiles: Risk Aversion and Utility Theory</h2>
+            </div>
+            <p class="text-lg mb-6">Investors have different attitudes toward risk, which can be broadly categorized:</p>
+            
+            <div class="investor-types">
+                <div class="investor-type risk-averse">
+                    <h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                        </svg>
+                        RISK-AVERSE
+                    </h4>
+                    <p>Prefers a certain outcome over an uncertain one with the same expected value. Most investors are risk-averse.</p>
+                </div>
+                <div class="investor-type risk-neutral">
+                    <h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                        </svg>
+                        RISK-NEUTRAL
+                    </h4>
+                    <p>Indifferent between a certain and an uncertain outcome with the same expected value.</p>
+                </div>
+                <div class="investor-type risk-seeking">
+                    <h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" />
+                        </svg>
+                        RISK-SEEKING
+                    </h4>
+                    <p>Prefers an uncertain outcome over a certain one, even if the expected value is lower.</p>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">Utility Theory and Indifference Curves</h3>
+                <p><span class="key-term">Utility theory</span> provides a framework for understanding investor preferences. A utility function assigns a "satisfaction" score to different risk-return combinations.</p>
+                <div class="formula">
+                    <div class="formula-label">UTILITY FUNCTION</div>
+                    U = E(r) - ½ × A × σ²
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mt-4">
+                    <div>
+                        <p class="font-semibold">Where:</p>
+                        <ul class="space-y-2 mt-2">
+                            <li class="list-item"><span class="key-term">U</span> = Utility</li>
+                            <li class="list-item"><span class="key-term">E(r)</span> = Expected return</li>
+                            <li class="list-item"><span class="key-term">A</span> = Risk aversion coefficient (higher A means more risk-averse)</li>
+                            <li class="list-item"><span class="key-term">σ²</span> = Variance (risk)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold"><span class="key-term">Indifference Curve</span>:</p>
+                        <p class="mt-2">Plots all risk-return combinations that provide the same utility level. For risk-averse investors, these curves are convex, showing that increasingly higher returns are required to take on additional risk.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Combining Assets into a Portfolio -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="text-2xl font-bold text-gray-800">Combining Assets into a Portfolio</h2>
+            </div>
+            <p class="text-lg mb-6">The risk and return of a portfolio are not simply the weighted average of the individual assets' risk and return. The interaction between the assets, measured by <span class="key-term">covariance and correlation</span>, is crucial.</p>
+
+            <div class="sub-section">
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">Portfolio Return and Risk Formulas</h3>
+                
+                <div class="portfolio-concepts">
+                    <div class="portfolio-concept">
+                        <h3>Portfolio Expected Return</h3>
+                        <p>The weighted average of the expected returns of the individual assets.</p>
+                        <div class="formula mt-3">
+                            <div class="formula-label">FORMULA</div>
+                            E(R<sub>p</sub>) = w₁E(R₁) + w₂E(R₂) + ... + wₙE(Rₙ)
+                        </div>
+                    </div>
+                    <div class="portfolio-concept">
+                        <h3>Portfolio Variance (Risk)</h3>
+                        <p>A more complex calculation involving the variance of each asset and the covariance between each pair of assets.</p>
+                        <div class="formula mt-3">
+                            <div class="formula-label">FORMULA</div>
+                            σ²<sub>p</sub> = w₁²σ₁² + w₂²σ₂² + 2w₁w₂Cov(R₁,R₂)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <p class="example-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                        The Power of Diversification
+                    </p>
+                    <p>The key takeaway is that by combining assets that are not perfectly correlated (correlation coefficient ρ < +1), an investor can reduce the overall portfolio risk without sacrificing expected return. This is the essence of diversification. The lower the correlation between assets, the greater the diversification benefit.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. The Efficient Frontier and Optimal Portfolios -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="text-2xl font-bold text-gray-800">The Efficient Frontier and Optimal Portfolios</h2>
+            </div>
+            <p class="text-lg mb-6">Modern Portfolio Theory (MPT) provides a framework for creating optimal portfolios.</p>
+            
+            <div class="portfolio-concepts">
+                <div class="portfolio-concept">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+                        </svg>
+                        The Investment Opportunity Set
+                    </h3>
+                    <p>This represents all possible combinations of risky assets an investor can hold. When plotted on a risk-return graph, it forms a specific region.</p>
+                </div>
+                <div class="portfolio-concept">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Minimum-Variance Frontier (MVF)
+                    </h3>
+                    <p>The left boundary of the opportunity set. For any given level of expected return, the portfolio on the MVF has the lowest possible risk (variance). The leftmost point on this frontier is the <span class="key-term">Global Minimum-Variance (GMV) Portfolio</span>.</p>
+                </div>
+                <div class="portfolio-concept md:col-span-2">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        The Efficient Frontier
+                    </h3>
+                    <p>The portion of the Minimum-Variance Frontier that lies above the GMV Portfolio. Portfolios on the efficient frontier are "efficient" because they offer the highest possible expected return for a given level of risk. Rational, risk-averse investors will only choose portfolios that lie on the efficient frontier.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Introducing a Risk-Free Asset: The Capital Allocation Line (CAL) -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="text-2xl font-bold text-gray-800">Introducing a Risk-Free Asset: The Capital Allocation Line (CAL)</h2>
+            </div>
+            <p class="text-lg mb-6">When a risk-free asset is combined with a portfolio of risky assets, the new set of investment opportunities is represented by a straight line called the <span class="key-term">Capital Allocation Line (CAL)</span>. The CAL connects the risk-free asset on the vertical axis to a risky portfolio on the efficient frontier.</p>
+            
+            <div class="sub-section">
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">The Optimal Risky Portfolio and the "Best" CAL</h3>
+                <p>The CAL that is tangent to the efficient frontier is the "best" possible CAL. The point of tangency represents the <span class="key-term">optimal risky portfolio</span>—the single portfolio of risky assets that, when combined with the risk-free asset, provides the best risk-return trade-off.</p>
+                
+                <div class="highlight-box mt-4">
+                    <h3 class="text-xl font-semibold">Two-Fund Separation Theorem</h3>
+                    <p>According to this theorem, all investors, regardless of their risk tolerance, will hold a combination of just two "funds": the risk-free asset and this single optimal risky portfolio.</p>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">The Final Step: The Optimal Investor Portfolio</h3>
+                <p>An investor's final, optimal portfolio is found at the point where their highest possible indifference curve is tangent to the best CAL. A more risk-averse investor will hold more of the risk-free asset, while a less risk-averse investor will hold more of the optimal risky portfolio (and may even borrow at the risk-free rate to invest more).</p>
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="chapter-nav">
+            <div class="chapter-nav-content">
+                <div class="flex items-center">
+                    <div class="progress-indicator">
+                        <span>Chapter 1 of 6</span>
+                        <div class="w-24 bg-gray-200 rounded-full h-2 ml-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 16.67%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="index.html" class="px-4 py-2 text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        ← Back to Home
+                    </a>
+                    <a href="chapter2.html" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Next: Risk and Return Part II →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

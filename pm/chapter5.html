@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Behavioral Biases of Individuals - CFA Portfolio Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .content-section {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-left: 4px solid #2c5282;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #2c5282;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .card {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .card-title svg {
+            margin-right: 0.5rem;
+        }
+        .cognitive-card .card-title { 
+            color: #2c5282; 
+        }
+        .emotional-card .card-title { 
+            color: #97266d; 
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #2c5282 0%, #4a90e2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        .key-term {
+            background-color: #edf2f7;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        .list-item {
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .list-item:before {
+            content: "•";
+            color: #2c5282;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .sub-section {
+            margin-top: 1.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid #e2e8f0;
+        }
+        .bias-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .bias-category {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 2px solid;
+        }
+        .bias-category.cognitive {
+            border-color: #2c5282;
+            background: #bee3f8;
+        }
+        .bias-category.emotional {
+            border-color: #97266d;
+            background: #fbb6ce;
+        }
+        .bias-category h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .bias-category.cognitive h3 {
+            color: #2c5282;
+        }
+        .bias-category.emotional h3 {
+            color: #97266d;
+        }
+        .cognitive-biases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .cognitive-bias {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #2c5282;
+        }
+        .cognitive-bias h4 {
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 0.5rem;
+        }
+        .emotional-biases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .emotional-bias {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #97266d;
+        }
+        .emotional-bias h4 {
+            font-weight: 600;
+            color: #97266d;
+            margin-bottom: 0.5rem;
+        }
+        .market-effects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .market-effect {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .market-effect h4 {
+            font-weight: 600;
+            color: #2c5282;
+            margin-bottom: 0.5rem;
+        }
+        .nav-header {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #c084fc 100%);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .nav-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-btn-primary {
+            background: white;
+            color: #7c3aed;
+        }
+        .nav-btn-primary:hover {
+            background: #f1f5f9;
+        }
+        .nav-btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .nav-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .chapter-nav {
+            position: sticky;
+            bottom: 2rem;
+            margin-top: 3rem;
+        }
+        .chapter-nav-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
+            <div class="nav-content">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="nav-btn nav-btn-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to Home
+                    </a>
+                    <div class="nav-title">Chapter 5: Behavioral Biases of Individuals</div>
+                </div>
+                <div class="nav-buttons">
+                    <a href="chapter4.html" class="nav-btn nav-btn-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Previous
+                    </a>
+                    <a href="chapter6.html" class="nav-btn nav-btn-primary">
+                        Next Chapter
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-5xl mx-auto p-4 sm:p-6 md:p-8">
+        <header class="text-center mb-12 py-8 bg-gradient-to-r from-purple-800 to-purple-600 text-white rounded-xl shadow-lg">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
+                <span class="text-2xl font-bold">5</span>
+            </div>
+            <h1 class="text-4xl font-bold mb-4">The Behavioral Biases of Individuals</h1>
+            <p class="text-xl opacity-90">A Guide to Understanding the Psychology of Investing</p>
+        </header>
+
+        <!-- 1. Introduction: Traditional vs. Behavioral Finance -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="text-2xl font-bold text-gray-800">Traditional vs. Behavioral Finance</h2>
+            </div>
+            <p class="text-lg">Traditional finance is built on the assumptions that investors are perfectly rational and that markets are perfectly efficient. <span class="key-term">Behavioral finance</span> challenges these assumptions, arguing that investors are human and are subject to psychological biases that can lead to irrational decisions and market anomalies.</p>
+        </div>
+        
+        <!-- 2. The Two Categories of Behavioral Biases -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="text-2xl font-bold text-gray-800">The Two Categories of Behavioral Biases</h2>
+            </div>
+            <p class="text-lg mb-6">Behavioral biases are systematic patterns of deviation from rational judgment. They can be broadly divided into two categories.</p>
+            
+            <div class="bias-categories">
+                <div class="bias-category cognitive">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        Cognitive Errors
+                    </h3>
+                    <p>These biases stem from faulty reasoning, memory errors, or an inability to process information correctly. Because they are errors in thinking, they can be easier to correct with education, better information, and logical analysis.</p>
+                </div>
+                <div class="bias-category emotional">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                        </svg>
+                        Emotional Biases
+                    </h3>
+                    <p>These biases arise from feelings, impulses, or intuition. They are about what an investor *feels* rather than what they *think*. Because they are rooted in emotion, they are much more difficult to correct and often must be adapted to rather than eliminated.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Cognitive Errors in Detail -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="text-2xl font-bold text-gray-800">Cognitive Errors in Detail</h2>
+            </div>
+            
+            <div class="sub-section">
+                <h3 class="text-xl font-semibold mb-3 text-blue-700">A) Belief Perseverance Biases</h3>
+                <p>These errors occur when investors irrationally cling to their prior beliefs, even when new information is presented.</p>
+                
+                <div class="cognitive-biases">
+                    <div class="cognitive-bias">
+                        <h4>Conservatism</h4>
+                        <p>Reluctance to update a belief, even when presented with new information. Investors underreact to new data.</p>
+                    </div>
+                    <div class="cognitive-bias">
+                        <h4>Confirmation</h4>
+                        <p>The tendency to seek out and interpret information that confirms one's existing beliefs, while ignoring contradictory evidence.</p>
+                    </div>
+                    <div class="cognitive-bias">
+                        <h4>Representativeness</h4>
+                        <p>Classifying new information based on past experiences or stereotypes (e.g., "this tech stock is just like the last one that boomed").</p>
+                    </div>
+                    <div class="cognitive-bias">
+                        <h4>Illusion of Control</h4>
+                        <p>The belief that one can control or influence outcomes when, in reality, they cannot. This often leads to excessive trading.</p>
+                    </div>
+                    <div class="cognitive-bias">
+                        <h4>Hindsight</h4>
+                        <p>The tendency to see past events as having been predictable. This can lead to an unfair assessment of past performance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3 class="text-xl font-semibold mb-3 text-blue-700">B) Processing Errors</h3>
+                <p>These errors occur when the brain takes a mental shortcut to process information, leading to a flawed decision.</p>
+                
+                <div class="cognitive-biases">
+                    <div class="cognitive-bias">
+                        <h4>Anchoring & Adjustment</h4>
+                        <p>Relying too heavily on the first piece of information received (the "anchor") when making decisions.</p>
+                    </div>
+                    <div class="cognitive-bias">
+                        <h4>Mental Accounting</h4>
+                        <p>Treating different sums of money differently based on where they came from or their intended use, leading to inefficient portfolio decisions.</p>
+                    </div>
+                    <div class="cognitive-bias">
+                        <h4>Framing</h4>
+                        <p>Making a different decision based on how the same information is presented (or "framed"). People are often risk-averse when a choice is framed as a gain, but risk-seeking when it's framed as a loss.</p>
+                    </div>
+                    <div class="cognitive-bias">
+                        <h4>Availability</h4>
+                        <p>Overestimating the probability of events that are recent, vivid, or easy to recall, while ignoring less memorable but more relevant statistical data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. Emotional Biases in Detail -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="text-2xl font-bold text-gray-800">Emotional Biases in Detail</h2>
+            </div>
+            
+            <div class="emotional-biases">
+                <div class="emotional-bias">
+                    <h4>Loss Aversion</h4>
+                    <p>The pain of a loss is felt more strongly than the pleasure of an equivalent gain. This leads to the "disposition effect": holding on to losing positions too long and selling winning positions too soon.</p>
+                </div>
+                <div class="emotional-bias">
+                    <h4>Overconfidence</h4>
+                    <p>Overestimating one's own knowledge and ability. This can lead to under-diversification and underestimation of risks.</p>
+                </div>
+                <div class="emotional-bias">
+                    <h4>Self-Control</h4>
+                    <p>The tendency to consume today at the expense of saving for tomorrow (hyperbolic discounting), leading to insufficient savings for long-term goals.</p>
+                </div>
+                <div class="emotional-bias">
+                    <h4>Status Quo</h4>
+                    <p>A preference for keeping things as they are. An investor might fail to make necessary portfolio changes out of inertia.</p>
+                </div>
+                <div class="emotional-bias">
+                    <h4>Endowment</h4>
+                    <p>Valuing an asset more highly simply because one owns it. This leads people to hold on to familiar or inherited assets, even if they are inappropriate for their portfolio.</p>
+                </div>
+                <div class="emotional-bias">
+                    <h4>Regret Aversion</h4>
+                    <p>Avoiding making a decision out of fear that the decision will be wrong in hindsight. This can lead to overly conservative portfolios or herding behavior.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. How Biases Influence Market Behavior -->
+        <div class="content-section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="text-2xl font-bold text-gray-800">How Biases Influence Market Behavior</h2>
+            </div>
+            <p class="text-lg mb-6">These individual biases can aggregate to create predictable patterns and anomalies in financial markets.</p>
+            
+            <div class="market-effects">
+                <div class="market-effect">
+                    <h4>Momentum</h4>
+                    <p>The tendency for past winning stocks to continue winning can be explained by biases like availability (investors focus on recent performance) and hindsight bias.</p>
+                </div>
+                <div class="market-effect">
+                    <h4>Bubbles and Crashes</h4>
+                    <p>Bubbles can be fueled by a combination of overconfidence, confirmation bias, and herding. Crashes are often exacerbated by loss aversion and regret aversion.</p>
+                </div>
+                <div class="market-effect">
+                    <h4>Value vs. Growth Anomalies</h4>
+                    <p>The historical outperformance of value stocks over growth stocks can be partly explained by investors' overconfidence in predicting high growth rates for growth stocks, leading to their overvaluation.</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box mt-6">
+                <h3 class="text-xl font-semibold">Key Insight</h3>
+                <p>Understanding these behavioral biases is crucial for both individual investors seeking to improve their decision-making and professional portfolio managers aiming to identify market inefficiencies and better serve their clients.</p>
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="chapter-nav">
+            <div class="chapter-nav-content">
+                <div class="flex items-center">
+                    <div class="progress-indicator">
+                        <span>Chapter 5 of 6</span>
+                        <div class="w-24 bg-gray-200 rounded-full h-2 ml-2">
+                            <div class="bg-purple-600 h-2 rounded-full" style="width: 83.33%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="chapter4.html" class="px-4 py-2 text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        ← Previous: Portfolio Planning & Construction
+                    </a>
+                    <a href="chapter6.html" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                        Next: Risk Management →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
