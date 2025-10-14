@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Competitive Strategy Analysis - CFA Equity Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .chapter-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Content styling */
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #1a202c;
+        }
+        
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4299e1, #48bb78, #ed8936);
+        }
+        
+        .content-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f8fafc, #f0fff4);
+            border: 2px solid #e2e8f0;
+            border-radius: 0.875rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4299e1, #48bb78);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: #4299e1;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: #2c5282;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title i {
+            margin-right: 0.5rem;
+            color: #4299e1;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #cbd5e0, transparent);
+            margin: 3rem 0;
+        }
+        
+        .key-point {
+            background: linear-gradient(135deg, #ebf8ff, #e6fffa);
+            border-left: 4px solid #4299e1;
+            padding: 1.25rem 1.25rem 1.25rem 1.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.1);
+        }
+        
+        .key-point strong {
+            color: #2c5282;
+        }
+
+        .force-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .classification-method {
+            background: linear-gradient(135deg, #f0fff4, #e6fffa);
+            border-left: 4px solid #48bb78;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.1);
+        }
+        
+        .survey-metric {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .survey-metric::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #4299e1, #48bb78);
+            border-radius: 2px;
+        }
+        
+        .pestle-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.75rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .pestle-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .pestle-item h3 {
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pestle-item h3 i {
+            margin-right: 0.5rem;
+            width: 1.5rem;
+        }
+        
+        .strategy-card {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .strategy-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #4299e1, #48bb78);
+            border-radius: 2px;
+        }
+        
+        /* Floating navigation */
+        .floating-toc {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            z-index: 1000;
+            max-width: 200px;
+        }
+        
+        .toc-item {
+            display: block;
+            padding: 0.5rem;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-item:hover,
+        .toc-item.active {
+            background: #ebf8ff;
+            color: #2c5282;
+        }
+
+        @media (max-width: 768px) {
+            .floating-toc {
+                display: none;
+            }
+            .content-section {
+                padding: 1.5rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Chapter Navigation -->
+    <nav class="chapter-nav text-white sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="chapter6.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Previous Chapter</span>
+                    </a>
+                    <div class="hidden md:block text-lg font-semibold">
+                        Chapter 7: Competitive Strategy Analysis
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm opacity-75">Progress</span>
+                    <div class="w-24 progress-bar">
+                        <div class="progress-fill" style="width: 87.5%"></div>
+                    </div>
+                    <a href="chapter8.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <span>Next Chapter</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Table of Contents -->
+    <div class="floating-toc hidden lg:block">
+        <div class="text-sm font-semibold text-gray-700 mb-2">Contents</div>
+        <a href="#section1" class="toc-item active">Role of Industry Analysis</a>
+        <a href="#section2" class="toc-item">Industry Classification</a>
+        <a href="#section3" class="toc-item">Industry Survey</a>
+        <a href="#section4" class="toc-item">Porter's Five Forces</a>
+        <a href="#section5" class="toc-item">PESTLE Analysis</a>
+        <a href="#section6" class="toc-item">Competitive Strategy</a>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-rose-100 rounded-full mb-6">
+                <i class="fas fa-chess text-2xl text-rose-600"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Competitive Strategy Analysis</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Deep Dive into Strategic Frameworks and Competitive Positioning</p>
+            <div class="section-divider"></div>
+        </header>
+
+        <!-- 1. The Role of Industry Analysis -->
+        <div id="section1" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">1</span>
+                The Role of Industry Analysis
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Industry analysis provides the essential context for understanding a company's performance and potential. Because companies within the same industry often share similar business models, risks, and profitability drivers, analyzing the industry is a critical step in equity valuation.</p>
+            
+            <div class="key-point">
+                This analysis is the second tier in the <strong>three-tiered analytical framework</strong>, bridging the gap between understanding a company's past performance and forecasting its future.
+            </div>
+        </div>
+        
+        <!-- 2. Industry Classification -->
+        <div id="section2" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">2</span>
+                Industry Classification
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Classifying companies into industries groups them with firms that offer similar products or services. However, this process can be challenging due to substitute products, multi-industry companies, and evolving markets.</p>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-sitemap mr-2 text-blue-600"></i>
+                Third-Party Classification Schemes
+            </h3>
+            <div class="key-point">
+                Several global systems exist, such as the Global Industry Classification Standard (GICS), which group companies hierarchically from broad sectors down to specific sub-industries. These systems typically classify a company based on its dominant business activity (where it earns the majority of its revenue).
+            </div>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-filter mr-2 text-green-600"></i>
+                Alternative Classification Methods
+            </h3>
+            <p class="mb-4 text-gray-700">Analysts may also group companies based on:</p>
+            <div class="space-y-3">
+                <div class="classification-method">
+                    <strong>Geography:</strong> Grouping by location (e.g., developed vs. emerging markets).
+                </div>
+                <div class="classification-method">
+                    <strong>Business Cycle Sensitivity:</strong> Classifying as cyclical (sensitive to economic cycles) or defensive (less sensitive).
+                </div>
+                <div class="classification-method">
+                    <strong>Statistical Similarities:</strong> Grouping based on correlations in financial metrics and stock price performance.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Conducting an Industry Survey -->
+        <div id="section3" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">3</span>
+                Conducting an Industry Survey
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">A thorough industry survey provides a high-level overview of the industry's health and competitive intensity.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="survey-metric">
+                    <h3 class="text-xl mb-4 font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-chart-area mr-2 text-blue-600"></i>
+                        Industry Size and Growth
+                    </h3>
+                    <p class="text-gray-700">Measure the industry's total annual sales and its historical growth rate. This helps to classify the industry into a growth style box (e.g., Growth vs. Mature, Cyclical vs. Defensive).</p>
+                </div>
+                 <div class="survey-metric">
+                    <h3 class="text-xl mb-4 font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-dollar-sign mr-2 text-green-600"></i>
+                        Industry Profitability
+                    </h3>
+                    <p class="text-gray-700">Assess the overall profitability using metrics like Return on Invested Capital (ROIC). This reveals the average profitability an analyst can expect from a company in that industry.</p>
+                </div>
+                 <div class="md:col-span-2">
+                    <h3 class="text-xl mb-4 font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-chart-pie mr-2 text-purple-600"></i>
+                        Market Share and Concentration
+                    </h3>
+                    <p class="text-gray-700">Analyze market share trends to identify major players and gauge competitive dynamics. Industry concentration can be measured using the <strong>Herfindahl-Hirschman Index (HHI)</strong>. A higher HHI indicates a more concentrated industry with less competition, which often leads to higher profitability.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. Industry Structure: Porter's Five Forces -->
+        <div id="section4" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">4</span>
+                Industry Structure: Porter's Five Forces
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">This framework is a cornerstone of industry analysis, helping to identify the sources of competitive pressure in an industry. The collective strength of these five forces determines the industry's long-term profit potential.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                <div class="card force-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-door-open"></i>
+                        1. Threat of New Entrants
+                    </h3>
+                    <p class="flex-grow text-gray-700">How easy is it for new competitors to enter the market? High barriers to entry (e.g., high capital requirements, strong brands, regulation) protect incumbent firms and allow for higher profitability.</p>
+                </div>
+                <div class="card force-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-exchange-alt"></i>
+                        2. Threat of Substitutes
+                    </h3>
+                    <p class="flex-grow text-gray-700">How easily can customers switch to a different product or service that meets the same need? The availability of close substitutes limits an industry's pricing power.</p>
+                </div>
+                <div class="card force-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-shopping-cart"></i>
+                        3. Bargaining Power of Customers
+                    </h3>
+                    <p class="flex-grow text-gray-700">How much power do buyers have to drive down prices? Power is high when buyers are concentrated, purchase in large volumes, or when products are undifferentiated.</p>
+                </div>
+                <div class="card force-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-truck"></i>
+                        4. Bargaining Power of Suppliers
+                    </h3>
+                    <p class="flex-grow text-gray-700">How much power do suppliers have to raise input prices? Power is high when suppliers are concentrated, offer unique resources, or when switching costs are high for the buyers.</p>
+                </div>
+                <div class="card force-card lg:col-span-2">
+                    <h3 class="card-title">
+                        <i class="fas fa-fist-raised"></i>
+                        5. Rivalry Among Existing Competitors
+                    </h3>
+                    <p class="flex-grow text-gray-700">How intense is the competition between existing firms in the industry? Rivalry is high when there are many competitors, high fixed costs, or undifferentiated products, which leads to reduced pricing power and profitability.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. External Influences: PESTLE Analysis -->
+        <div id="section5" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">5</span>
+                External Influences: PESTLE Analysis
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Beyond the industry structure, broader macro-environmental factors can significantly influence industry growth and profitability. The PESTLE framework helps to analyze these external forces.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                <div class="pestle-item">
+                    <h3 class="font-bold text-lg mb-2">
+                        <i class="fas fa-landmark"></i>
+                        Political
+                    </h3>
+                    <p>Government policies, regulations, and geopolitical events.</p>
+                </div>
+                <div class="pestle-item">
+                    <h3 class="font-bold text-lg mb-2">
+                        <i class="fas fa-chart-line"></i>
+                        Economic
+                    </h3>
+                    <p>GDP growth, inflation, interest rates, and exchange rates.</p>
+                </div>
+                <div class="pestle-item">
+                    <h3 class="font-bold text-lg mb-2">
+                        <i class="fas fa-users"></i>
+                        Social
+                    </h3>
+                    <p>Cultural trends, demographics, and consumer preferences.</p>
+                </div>
+                <div class="pestle-item">
+                    <h3 class="font-bold text-lg mb-2">
+                        <i class="fas fa-microchip"></i>
+                        Technological
+                    </h3>
+                    <p>Innovations that can create or disrupt industries.</p>
+                </div>
+                <div class="pestle-item">
+                    <h3 class="font-bold text-lg mb-2">
+                        <i class="fas fa-gavel"></i>
+                        Legal
+                    </h3>
+                    <p>Laws and regulations governing industry practices.</p>
+                </div>
+                <div class="pestle-item">
+                    <h3 class="font-bold text-lg mb-2">
+                        <i class="fas fa-leaf"></i>
+                        Environmental
+                    </h3>
+                    <p>Pressures related to climate change and sustainability.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 6. Competitive Strategy and Positioning -->
+        <div id="section6" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">6</span>
+                Competitive Strategy and Positioning
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">After analyzing the industry, the final step is to evaluate a specific company's competitive strategy and its position within that industry.</p>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-chess mr-2 text-blue-600"></i>
+                Generic Competitive Strategies
+            </h3>
+            <div class="grid md:grid-cols-3 gap-6 mt-8">
+                <div class="card strategy-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-coins"></i>
+                        Cost Leadership
+                    </h3>
+                    <p class="text-gray-700">Aiming to become the lowest-cost producer in the industry for a broad market. Defense comes from the high capital requirements and operational efficiency that rivals struggle to match.</p>
+                </div>
+                <div class="card strategy-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-star"></i>
+                        Differentiation
+                    </h3>
+                    <p class="text-gray-700">Offering unique products or services that are valued by a broad market, allowing the company to command a premium price. Defense comes from brand loyalty and product uniqueness.</p>
+                </div>
+                <div class="card strategy-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-bullseye"></i>
+                        Focus
+                    </h3>
+                    <p class="text-gray-700">Targeting a niche market with either a low-cost or a differentiated offering tailored to that specific segment's needs. Defense comes from deep customer loyalty within the niche.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="flex justify-between items-center mt-12 pt-8 border-t border-gray-200">
+            <a href="chapter6.html" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Industry & Competitive Analysis
+            </a>
+            <div class="text-center">
+                <div class="text-sm text-gray-500 mb-1">Chapter 7 of 8</div>
+                <div class="text-lg font-semibold text-gray-800">Competitive Strategy Analysis</div>
+            </div>
+            <a href="chapter8.html" class="flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors">
+                Next: Equity Valuation
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Update progress on page load
+        window.addEventListener('load', () => {
+            // Mark this chapter as visited
+            let visited = JSON.parse(localStorage.getItem('visitedChapters') || '[]');
+            if (!visited.includes('chapter7')) {
+                visited.push('chapter7');
+                localStorage.setItem('visitedChapters', JSON.stringify(visited));
+            }
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-item').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Update active TOC item
+                    document.querySelectorAll('.toc-item').forEach(item => item.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Update TOC active state on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('[id^="section"]');
+            const tocItems = document.querySelectorAll('.toc-item');
+            
+            let current = 0;
+            sections.forEach((section, index) => {
+                if (window.scrollY >= section.offsetTop - 200) {
+                    current = index;
+                }
+            });
+            
+            tocItems.forEach((item, index) => {
+                item.classList.toggle('active', index === current);
+            });
+        });
+    </script>
+</body>
+</html>

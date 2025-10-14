@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Company Analysis - CFA Equity Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .chapter-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Content styling */
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #1a202c;
+        }
+        
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4299e1, #48bb78, #ed8936);
+        }
+        
+        .content-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .formula {
+            background: linear-gradient(135deg, #f8fafc, #ebf8ff);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+            font-size: 1.125rem;
+            color: #2d3748;
+            border-left: 4px solid #4299e1;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.1);
+        }
+        
+        .example {
+            border: 2px solid #e2e8f0;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #f8fafc, #f7fafc);
+            position: relative;
+        }
+        
+        .example::before {
+            content: 'Example';
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: #4299e1;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #cbd5e0, transparent);
+            margin: 3rem 0;
+        }
+        
+        .key-point {
+            background: linear-gradient(135deg, #ebf8ff, #e6fffa);
+            border-left: 4px solid #4299e1;
+            padding: 1.25rem 1.25rem 1.25rem 1.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.1);
+        }
+        
+        .key-point strong {
+            color: #2c5282;
+        }
+
+        .framework-tier {
+            padding: 1.75rem;
+            border-radius: 1rem;
+            margin-bottom: 1.25rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .framework-tier:hover {
+            transform: translateX(8px);
+        }
+        
+        .framework-tier h4 {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .framework-tier i {
+            margin-right: 0.5rem;
+            width: 1.5rem;
+        }
+
+        .tier-1 {
+            background: linear-gradient(135deg, #ebf8ff, #e6fffa);
+            border-left: 4px solid #4299e1;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.1);
+        }
+        
+        .tier-2 {
+            background: linear-gradient(135deg, #f0fff4, #e6fffa);
+            border-left: 4px solid #48bb78;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.1);
+        }
+        
+        .tier-3 {
+            background: linear-gradient(135deg, #fffaf0, #fff5e6);
+            border-left: 4px solid #ed8936;
+            box-shadow: 0 4px 12px rgba(237, 137, 54, 0.1);
+        }
+
+        .analysis-card {
+            background: linear-gradient(135deg, #f8fafc, #f0fff4);
+            border: 2px solid #e2e8f0;
+            border-radius: 0.875rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .analysis-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4299e1, #48bb78);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .analysis-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .analysis-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: #4299e1;
+        }
+
+        .analysis-card h3 {
+            font-weight: 700;
+            color: #2c5282;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .analysis-card h3 i {
+            margin-right: 0.5rem;
+            color: #4299e1;
+        }
+
+        .report-element {
+            background: linear-gradient(135deg, #f0fff4, #e6fffa);
+            border-left: 4px solid #48bb78;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.1);
+        }
+        
+        .profitability-metric {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .profitability-metric::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #4299e1, #48bb78);
+            border-radius: 2px;
+        }
+        
+        /* Floating navigation */
+        .floating-toc {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            z-index: 1000;
+            max-width: 200px;
+        }
+        
+        .toc-item {
+            display: block;
+            padding: 0.5rem;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-item:hover,
+        .toc-item.active {
+            background: #ebf8ff;
+            color: #2c5282;
+        }
+
+        @media (max-width: 768px) {
+            .floating-toc {
+                display: none;
+            }
+            .content-section {
+                padding: 1.5rem;
+            }
+            .analysis-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Chapter Navigation -->
+    <nav class="chapter-nav text-white sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="chapter4.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Previous Chapter</span>
+                    </a>
+                    <div class="hidden md:block text-lg font-semibold">
+                        Chapter 5: Company Analysis
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm opacity-75">Progress</span>
+                    <div class="w-24 progress-bar">
+                        <div class="progress-fill" style="width: 62.5%"></div>
+                    </div>
+                    <a href="chapter6.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <span>Next Chapter</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Table of Contents -->
+    <div class="floating-toc hidden lg:block">
+        <div class="text-sm font-semibold text-gray-700 mb-2">Contents</div>
+        <a href="#section1" class="toc-item active">Research Report</a>
+        <a href="#section2" class="toc-item">Analytical Framework</a>
+        <a href="#section3" class="toc-item">Revenue Analysis</a>
+        <a href="#section4" class="toc-item">Profitability & Working Capital</a>
+        <a href="#section5" class="toc-item">Capital Investments</a>
+        <a href="#section6" class="toc-item">ROE Decomposition</a>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-teal-100 rounded-full mb-6">
+                <i class="fas fa-search text-2xl text-teal-600"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Company Analysis</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Past, Present, and Future - A Guide to Creating Comprehensive Equity Research Reports</p>
+            <div class="section-divider"></div>
+        </header>
+
+        <!-- 1. The Company Research Report -->
+        <div id="section1" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">1</span>
+                The Company Research Report
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">A <strong>company research report</strong> is a comprehensive document that helps investors make informed decisions by analyzing a company's business model, financial health, and market position. These reports synthesize vast amounts of information into a clear investment recommendation.</p>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-clipboard-list mr-2 text-blue-600"></i>
+                Key Elements of a Research Report
+            </h3>
+            <div class="space-y-3">
+                <div class="report-element">
+                    <strong>Recommendation:</strong> The analyst's stance (e.g., Buy, Sell, Hold) and the reasoning behind it.
+                </div>
+                <div class="report-element">
+                    <strong>Company Description:</strong> An overview of the business model, strategy, and products.
+                </div>
+                <div class="report-element">
+                    <strong>Industry & Competitive Analysis:</strong> An assessment of the industry landscape, often using tools like Porter's Five Forces.
+                </div>
+                <div class="report-element">
+                    <strong>Financial Analysis & Model:</strong> Evaluation of historical performance and forecasts for future revenue and profitability.
+                </div>
+                <div class="report-element">
+                    <strong>Valuation:</strong> An assessment of the company's intrinsic value.
+                </div>
+                <div class="report-element">
+                    <strong>ESG Considerations:</strong> A review of Environmental, Social, and Governance metrics.
+                </div>
+                <div class="report-element">
+                    <strong>Risks:</strong> Identification and assessment of potential risks to the investment thesis.
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2. The Analytical Framework -->
+        <div id="section2" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">2</span>
+                The Three-Tiered Analytical Framework
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Effective company analysis follows a structured, three-tiered approach to build a complete picture of the company.</p>
+            
+            <div class="space-y-4 mt-8">
+                <div class="framework-tier tier-1">
+                    <h4>
+                        <i class="fas fa-chart-bar text-blue-600"></i>
+                        Tier 1: Company Analysis (Past and Present)
+                    </h4>
+                    <p class="text-gray-700">Analyze the business model, historical revenue drivers, profitability, and capital structure.</p>
+                </div>
+                 <div class="framework-tier tier-2">
+                    <h4>
+                        <i class="fas fa-industry text-green-600"></i>
+                        Tier 2: Industry and Competitive Analysis
+                    </h4>
+                    <p class="text-gray-700">Understand industry dynamics, the company's competitive position, and its growth prospects.</p>
+                </div>
+                 <div class="framework-tier tier-3">
+                    <h4>
+                        <i class="fas fa-crystal-ball text-orange-600"></i>
+                        Tier 3: Company Analysis (Forecasting)
+                    </h4>
+                    <p class="text-gray-700">Forecast future profitability, investment needs, and potential risks based on the first two tiers of analysis.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Revenue Analysis -->
+        <div id="section3" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">3</span>
+                Revenue Analysis
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Understanding a company's revenue drivers is crucial for forecasting. Analysts typically use a combination of two approaches:</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="analysis-card">
+                    <h3>
+                        <i class="fas fa-arrow-down"></i>
+                        Top-Down Analysis
+                    </h3>
+                    <p class="text-gray-700">This approach starts with macroeconomic and industry-level data, such as total market size and the company's market share, to forecast revenue.</p>
+                </div>
+                <div class="analysis-card">
+                    <h3>
+                        <i class="fas fa-arrow-up"></i>
+                        Bottom-Up Analysis
+                    </h3>
+                    <p class="text-gray-700">This approach focuses on the company-specific drivers, such as sales volume by product line, pricing, and distribution channels, to build a detailed revenue forecast.</p>
+                </div>
+            </div>
+            
+            <div class="key-point mt-8">
+                A key factor in revenue analysis is the company's <strong>pricing power</strong>—its ability to raise prices without losing significant sales. This is higher in less competitive markets.
+            </div>
+        </div>
+        
+        <!-- 4. Operating Profitability and Working Capital -->
+        <div id="section4" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">4</span>
+                Operating Profitability and Working Capital
+            </h2>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-dollar-sign mr-2 text-blue-600"></i>
+                Analyzing Operating Costs
+            </h3>
+            <p class="mb-6 text-gray-700">Operating costs can be classified by their behavior (fixed vs. variable) or by their function (e.g., cost of goods sold, SG&A). Understanding this cost structure is key to analyzing profitability.</p>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-chart-line mr-2 text-green-600"></i>
+                Measures of Operating Profitability
+            </h3>
+            <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="profitability-metric">
+                    <h4 class="font-semibold text-lg mb-2 text-blue-700">Gross Profit</h4>
+                    <p class="text-gray-700">Revenue - Cost of Sales</p>
+                </div>
+                <div class="profitability-metric">
+                    <h4 class="font-semibold text-lg mb-2 text-green-700">EBITDA</h4>
+                    <p class="text-gray-700">Earnings Before Interest, Taxes, Depreciation, and Amortization</p>
+                </div>
+                <div class="profitability-metric">
+                    <h4 class="font-semibold text-lg mb-2 text-purple-700">Operating Profit (EBIT)</h4>
+                    <p class="text-gray-700">EBITDA - Depreciation & Amortization</p>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                These are often expressed as margins (e.g., Gross Margin = Gross Profit / Revenue) to facilitate comparisons.
+            </div>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-lever mr-2 text-orange-600"></i>
+                Operating Leverage (DOL)
+            </h3>
+            <p class="mb-4 text-gray-700">The Degree of Operating Leverage measures how a company's operating income changes in response to a change in sales. A higher DOL means that profits are more sensitive to changes in sales, which amplifies both gains and losses.</p>
+            
+            <div class="formula">DOL = % Change in Operating Profit / % Change in Sales</div>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-coins mr-2 text-teal-600"></i>
+                Working Capital
+            </h3>
+            <div class="key-point">
+                Efficient management of working capital is crucial for operations and growth. Key indicators include the cash conversion cycle and activity ratios, which assess the effectiveness of inventory, receivables, and payables management.
+            </div>
+        </div>
+
+        <!-- 5. Evaluating Capital Investments and Structure -->
+        <div id="section5" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">5</span>
+                Evaluating Capital Investments and Capital Structure
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Analysts must assess how effectively a company uses its capital and manages its debt.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="analysis-card">
+                    <h3>
+                        <i class="fas fa-hammer"></i>
+                        Evaluating Capital Investments
+                    </h3>
+                    <p class="text-gray-700">Assess whether the returns on the company's investments (using metrics like IRR and NPV) are meeting or exceeding investor expectations.</p>
+                </div>
+                <div class="analysis-card">
+                    <h3>
+                        <i class="fas fa-balance-scale"></i>
+                        Evaluating Capital Structure
+                    </h3>
+                    <p class="text-gray-700">Analyze leverage and coverage ratios to assess the company's debt burden and its ability to meet its obligations. The Degree of Financial Leverage (DFL) measures the sensitivity of net income to changes in operating income.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 6. ROE Decomposition -->
+        <div id="section6" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">6</span>
+                ROE Decomposition (DuPont Analysis)
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Return on Equity (ROE) is a key measure of profitability. Decomposing it helps to identify the drivers of a company's performance.</p>
+            
+            <div class="formula">ROE = Net Margin × Asset Turnover × Equity Multiplier</div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mt-8">
+                <div class="analysis-card">
+                    <h3>
+                        <i class="fas fa-percentage"></i>
+                        Net Margin (Profitability)
+                    </h3>
+                    <p class="text-gray-700">How much profit the company makes from its revenue.</p>
+                </div>
+                <div class="analysis-card">
+                    <h3>
+                        <i class="fas fa-sync-alt"></i>
+                        Asset Turnover (Efficiency)
+                    </h3>
+                    <p class="text-gray-700">How effectively the company uses its assets to generate sales.</p>
+                </div>
+                <div class="analysis-card">
+                    <h3>
+                        <i class="fas fa-times"></i>
+                        Equity Multiplier (Leverage)
+                    </h3>
+                    <p class="text-gray-700">How much the company relies on debt to finance its assets.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="flex justify-between items-center mt-12 pt-8 border-t border-gray-200">
+            <a href="chapter4.html" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Overview of Equity Securities
+            </a>
+            <div class="text-center">
+                <div class="text-sm text-gray-500 mb-1">Chapter 5 of 8</div>
+                <div class="text-lg font-semibold text-gray-800">Company Analysis</div>
+            </div>
+            <a href="chapter6.html" class="flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors">
+                Next: Industry & Competitive Analysis
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Update progress on page load
+        window.addEventListener('load', () => {
+            // Mark this chapter as visited
+            let visited = JSON.parse(localStorage.getItem('visitedChapters') || '[]');
+            if (!visited.includes('chapter5')) {
+                visited.push('chapter5');
+                localStorage.setItem('visitedChapters', JSON.stringify(visited));
+            }
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-item').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Update active TOC item
+                    document.querySelectorAll('.toc-item').forEach(item => item.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Update TOC active state on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('[id^="section"]');
+            const tocItems = document.querySelectorAll('.toc-item');
+            
+            let current = 0;
+            sections.forEach((section, index) => {
+                if (window.scrollY >= section.offsetTop - 200) {
+                    current = index;
+                }
+            });
+            
+            tocItems.forEach((item, index) => {
+                item.classList.toggle('active', index === current);
+            });
+        });
+    </script>
+</body>
+</html>

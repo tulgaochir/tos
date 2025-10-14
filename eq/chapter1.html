@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Market Organization and Structure - CFA Equity Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .chapter-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Content styling */
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #1a202c;
+        }
+        
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4299e1, #48bb78, #ed8936);
+        }
+        
+        .content-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card {
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.875rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4299e1, #48bb78);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: #4299e1;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: #2c5282;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title i {
+            margin-right: 0.5rem;
+            color: #4299e1;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e2e8f0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #2c5282, #2a4365);
+            color: white;
+            text-align: left;
+            padding: 1.25rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        td {
+            padding: 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background-color 0.2s ease;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tr:hover {
+            background-color: #ebf8ff;
+        }
+
+        .formula {
+            background: linear-gradient(135deg, #f8fafc, #ebf8ff);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+            font-size: 1.125rem;
+            color: #2d3748;
+            border-left: 4px solid #4299e1;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.1);
+        }
+
+        .key-point {
+            background: linear-gradient(135deg, #ebf8ff, #e6fffa);
+            border-left: 4px solid #4299e1;
+            padding: 1.25rem 1.25rem 1.25rem 1.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.1);
+        }
+        
+        .key-point strong {
+            color: #2c5282;
+        }
+
+        .position-type {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .position-type::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #4299e1, #48bb78);
+            border-radius: 2px;
+        }
+
+        .market-characteristic {
+            background: linear-gradient(135deg, #f0fff4, #e6fffa);
+            border-left: 4px solid #48bb78;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.1);
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #cbd5e0, transparent);
+            margin: 3rem 0;
+        }
+        
+        /* Floating navigation */
+        .floating-toc {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            z-index: 1000;
+            max-width: 200px;
+        }
+        
+        .toc-item {
+            display: block;
+            padding: 0.5rem;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-item:hover,
+        .toc-item.active {
+            background: #ebf8ff;
+            color: #2c5282;
+        }
+
+        @media (max-width: 768px) {
+            .floating-toc {
+                display: none;
+            }
+            .content-section {
+                padding: 1.5rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Chapter Navigation -->
+    <nav class="chapter-nav text-white sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Back to Home</span>
+                    </a>
+                    <div class="hidden md:block text-lg font-semibold">
+                        Chapter 1: Market Organization and Structure
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm opacity-75">Progress</span>
+                    <div class="w-24 progress-bar">
+                        <div class="progress-fill" style="width: 12.5%"></div>
+                    </div>
+                    <a href="chapter2.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <span>Next Chapter</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Table of Contents -->
+    <div class="floating-toc hidden lg:block">
+        <div class="text-sm font-semibold text-gray-700 mb-2">Contents</div>
+        <a href="#section1" class="toc-item active">Financial System</a>
+        <a href="#section2" class="toc-item">Assets & Contracts</a>
+        <a href="#section3" class="toc-item">Security Types</a>
+        <a href="#section4" class="toc-item">Positions & Orders</a>
+        <a href="#section5" class="toc-item">Market Structures</a>
+        <a href="#section6" class="toc-item">Regulation</a>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6">
+                <i class="fas fa-building text-2xl text-blue-600"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Market Organization and Structure</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Understanding the Foundation of the Financial System</p>
+            <div class="section-divider"></div>
+        </header>
+
+        <!-- 1. The Functions of the Financial System -->
+        <div id="section1" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">1</span>
+                The Functions of the Financial System
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">The financial system, comprising markets and intermediaries, is the backbone of a modern economy. It facilitates the transfer of assets and risks, enabling key economic activities.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                <div class="card">
+                    <h3 class="card-title">
+                        <i class="fas fa-piggy-bank"></i>
+                        Core Purposes
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Saving & Borrowing:</strong> Allows individuals and companies to save for the future and borrow for current needs.</li>
+                        <li><strong>Raising Equity Capital:</strong> Enables companies to raise funds for growth by issuing stock.</li>
+                        <li><strong>Managing Risks:</strong> Provides tools like derivatives and insurance to hedge against various financial risks.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">
+                        <i class="fas fa-cogs"></i>
+                        Main Functions
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Determine equilibrium interest rates.</li>
+                        <li>Ensure the efficient allocation of capital to its most productive uses.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-line"></i>
+                        Benefits of a Well-Functioning System
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Improves overall economic welfare.</li>
+                        <li>Lowers transaction costs.</li>
+                        <li>Promotes efficient use of scarce resources.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2. Assets and Contracts -->
+        <div id="section2" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">2</span>
+                Assets and Contracts
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">The financial system revolves around the trading of various assets and contracts.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div>
+                    <h3 class="text-xl mb-4 font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-file-contract mr-2 text-blue-600"></i>
+                        Types of Assets
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="key-point">
+                            <strong>Financial Assets:</strong> Claims on future cash flows, including securities (stocks, bonds), currencies, and contracts.
+                        </div>
+                        <div class="key-point">
+                            <strong>Physical Assets:</strong> Tangible assets like commodities (gold, oil) and real estate.
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl mb-4 font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-layer-group mr-2 text-green-600"></i>
+                        Market Classifications
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="key-point">
+                            <strong>Primary Markets:</strong> Where issuers sell new securities directly to investors (e.g., an IPO).
+                        </div>
+                        <div class="key-point">
+                            <strong>Secondary Markets:</strong> Where existing securities are traded among investors.
+                        </div>
+                        <div class="key-point">
+                            <strong>Money Markets:</strong> For short-term debt instruments.
+                        </div>
+                        <div class="key-point">
+                            <strong>Capital Markets:</strong> For longer-term instruments like stocks and bonds.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Key Security Types -->
+        <div id="section3" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">3</span>
+                Key Security Types
+            </h2>
+            
+            <div class="space-y-6 mt-8">
+                <div class="card position-type">
+                    <h3 class="card-title">
+                        <i class="fas fa-percent"></i>
+                        Fixed Income
+                    </h3>
+                    <p class="text-gray-700">Represents a promise to repay borrowed money. Includes bills, notes, and bonds. <strong>Convertible bonds</strong> can be converted into equity.</p>
+                </div>
+                <div class="card position-type">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-pie"></i>
+                        Equities
+                    </h3>
+                    <p class="text-gray-700">Represents ownership in a company. <strong>Common shares</strong> typically have voting rights, while <strong>preferred shares</strong> have priority for dividends and liquidation claims.</p>
+                </div>
+                <div class="card position-type">
+                    <h3 class="card-title">
+                        <i class="fas fa-layer-group"></i>
+                        Pooled Investments
+                    </h3>
+                    <p class="text-gray-700">Represents shared ownership in a portfolio of assets, offering diversification at a lower cost. Examples include mutual funds, ETFs, and hedge funds.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Positions, Leveraging, and Orders -->
+        <div id="section4" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">4</span>
+                Positions, Leveraging, and Orders
+            </h2>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-balance-scale mr-2 text-purple-600"></i>
+                Long vs. Short Positions
+            </h3>
+            <div class="table-container">
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Action</th>
+                            <th>Profit Condition</th>
+                            <th>Gain/Loss Potential</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Long</strong></td>
+                            <td>Owns an asset</td>
+                            <td>Price Increases</td>
+                            <td>Unlimited Gain / Limited Loss</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Short</strong></td>
+                            <td>Sells a borrowed asset</td>
+                            <td>Price Decreases</td>
+                            <td>Limited Gain / Unlimited Loss</td>
+                        </tr>
+                    </tbody>
+                 </table>
+            </div>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-lever mr-2 text-orange-600"></i>
+                Leveraged Positions (Margin Trading)
+            </h3>
+            <p class="mb-4 text-gray-700">Leverage involves borrowing funds from a broker to purchase securities. This magnifies both potential gains and losses.</p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div class="card">
+                    <h4 class="font-semibold text-lg mb-2 text-blue-700">Initial Margin</h4>
+                    <p class="text-gray-700">The minimum equity portion required to enter a leveraged position.</p>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-lg mb-2 text-green-700">Maintenance Margin</h4>
+                    <p class="text-gray-700">The minimum equity that must be maintained in the account.</p>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-lg mb-2 text-red-700">Margin Call</h4>
+                    <p class="text-gray-700">A demand from the broker to deposit additional equity if the account value falls below the maintenance margin.</p>
+                </div>
+            </div>
+            
+            <div class="formula mt-6">Margin Call Price (for Long Position) = P₀ × (1 - Initial Margin %) / (1 - Maintenance Margin %)</div>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-shopping-cart mr-2 text-indigo-600"></i>
+                Order Types and Execution
+            </h3>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div class="card">
+                    <h4 class="font-semibold text-lg mb-2 text-blue-700">Market Order</h4>
+                    <p class="text-gray-700">Executes immediately at the best available price.</p>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-lg mb-2 text-green-700">Limit Order</h4>
+                    <p class="text-gray-700">Executes only at a specified price or better.</p>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-lg mb-2 text-red-700">Stop Order</h4>
+                    <p class="text-gray-700">Becomes a market order once a specified price (the "stop price") is reached. Used to limit losses or lock in profits.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 5. Market Structures -->
+        <div id="section5" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">5</span>
+                Market Structures
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Markets can be organized in several ways to facilitate trading.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="card">
+                    <h3 class="card-title">
+                        <i class="fas fa-exchange-alt"></i>
+                        Execution Mechanisms
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Quote-Driven Markets (Dealer Markets):</strong> Dealers provide liquidity by quoting bid and ask prices.</li>
+                        <li><strong>Order-Driven Markets:</strong> Orders from buyers and sellers are matched directly on an exchange based on pricing rules.</li>
+                        <li><strong>Brokered Markets:</strong> Brokers connect buyers and sellers for unique or illiquid assets.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">
+                        <i class="fas fa-clock"></i>
+                        Trading Sessions
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Call Markets:</strong> Trades occur at specific times through auctions.</li>
+                        <li><strong>Continuous Trading Markets:</strong> Trades occur at any time while the market is open.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Well-Functioning Financial Systems and Regulation -->
+        <div id="section6" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">6</span>
+                Well-Functioning Financial Systems and Regulation
+            </h2>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-check-circle mr-2 text-green-600"></i>
+                Characteristics of a Well-Functioning System
+            </h3>
+            <div class="space-y-3">
+                <div class="market-characteristic">
+                    <strong>Complete Markets:</strong> All necessary assets and contracts are available.
+                </div>
+                <div class="market-characteristic">
+                    <strong>Operational Efficiency:</strong> Liquid markets with low transaction costs.
+                </div>
+                <div class="market-characteristic">
+                    <strong>Informational Efficiency:</strong> Asset prices reflect all available information.
+                </div>
+            </div>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-gavel mr-2 text-blue-600"></i>
+                Market Regulation
+            </h3>
+            <p class="mb-4 text-gray-700">Regulation aims to ensure fair, orderly, and efficient markets. Key objectives include:</p>
+            
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div class="card">
+                    <h4 class="font-semibold text-lg mb-2 text-red-700">Protection & Prevention</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>Protecting customers from fraud</li>
+                        <li>Prohibiting insider trading</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4 class="font-semibold text-lg mb-2 text-blue-700">Standardization & Stability</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>Standardizing information for better company comparison</li>
+                        <li>Ensuring financial institutions hold sufficient reserves</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="key-point mt-6">
+                Regulation is carried out by government agencies and Self-Regulating Organizations (SROs).
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="flex justify-between items-center mt-12 pt-8 border-t border-gray-200">
+            <a href="index.html" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Back to Home
+            </a>
+            <div class="text-center">
+                <div class="text-sm text-gray-500 mb-1">Chapter 1 of 8</div>
+                <div class="text-lg font-semibold text-gray-800">Market Organization and Structure</div>
+            </div>
+            <a href="chapter2.html" class="flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors">
+                Next: Security Market Indices
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Update progress on page load
+        window.addEventListener('load', () => {
+            // Mark this chapter as visited
+            let visited = JSON.parse(localStorage.getItem('visitedChapters') || '[]');
+            if (!visited.includes('chapter1')) {
+                visited.push('chapter1');
+                localStorage.setItem('visitedChapters', JSON.stringify(visited));
+            }
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-item').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Update active TOC item
+                    document.querySelectorAll('.toc-item').forEach(item => item.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Update TOC active state on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('[id^="section"]');
+            const tocItems = document.querySelectorAll('.toc-item');
+            
+            let current = 0;
+            sections.forEach((section, index) => {
+                if (window.scrollY >= section.offsetTop - 200) {
+                    current = index;
+                }
+            });
+            
+            tocItems.forEach((item, index) => {
+                item.classList.toggle('active', index === current);
+            });
+        });
+    </script>
+</body>
+</html>

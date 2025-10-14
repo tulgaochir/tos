@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Equity Valuation - CFA Equity Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .chapter-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Content styling */
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #1a202c;
+        }
+        
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4299e1, #48bb78, #ed8936);
+        }
+        
+        .content-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .formula {
+            background: linear-gradient(135deg, #f8fafc, #ebf8ff);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+            font-size: 1.125rem;
+            color: #2d3748;
+            border-left: 4px solid #4299e1;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.1);
+        }
+        
+        .example {
+            border: 2px solid #e2e8f0;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #f8fafc, #f7fafc);
+            position: relative;
+        }
+        
+        .example::before {
+            content: 'Example';
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: #4299e1;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f8fafc, #f0fff4);
+            border: 2px solid #e2e8f0;
+            border-radius: 0.875rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4299e1, #48bb78);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: #4299e1;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: #2c5282;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title i {
+            margin-right: 0.5rem;
+            color: #4299e1;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #cbd5e0, transparent);
+            margin: 3rem 0;
+        }
+        
+        .key-point {
+            background: linear-gradient(135deg, #ebf8ff, #e6fffa);
+            border-left: 4px solid #4299e1;
+            padding: 1.25rem 1.25rem 1.25rem 1.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.1);
+        }
+        
+        .key-point strong {
+            color: #2c5282;
+        }
+
+        .valuation-comparison {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        .model-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .multiple-item {
+            background: linear-gradient(135deg, #f0fff4, #e6fffa);
+            border-left: 4px solid #48bb78;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.1);
+        }
+        
+        .asset-use-case {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .asset-use-case::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #4299e1, #48bb78);
+            border-radius: 2px;
+        }
+        
+        /* Floating navigation */
+        .floating-toc {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            z-index: 1000;
+            max-width: 200px;
+        }
+        
+        .toc-item {
+            display: block;
+            padding: 0.5rem;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-item:hover,
+        .toc-item.active {
+            background: #ebf8ff;
+            color: #2c5282;
+        }
+
+        @media (max-width: 768px) {
+            .floating-toc {
+                display: none;
+            }
+            .content-section {
+                padding: 1.5rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Chapter Navigation -->
+    <nav class="chapter-nav text-white sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="chapter7.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Previous Chapter</span>
+                    </a>
+                    <div class="hidden md:block text-lg font-semibold">
+                        Chapter 8: Equity Valuation
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm opacity-75">Progress</span>
+                    <div class="w-24 progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <a href="index.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <span>Complete</span>
+                        <i class="fas fa-check ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Table of Contents -->
+    <div class="floating-toc hidden lg:block">
+        <div class="text-sm font-semibold text-gray-700 mb-2">Contents</div>
+        <a href="#section1" class="toc-item active">Goal of Valuation</a>
+        <a href="#section2" class="toc-item">Three Categories</a>
+        <a href="#section3" class="toc-item">Present Value Models</a>
+        <a href="#section4" class="toc-item">Multiplier Models</a>
+        <a href="#section5" class="toc-item">Asset-Based Valuation</a>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-100 rounded-full mb-6">
+                <i class="fas fa-calculator text-2xl text-amber-600"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Equity Valuation</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Concepts and Basic Tools - A Guide to Estimating the Intrinsic Value of a Security</p>
+            <div class="section-divider"></div>
+        </header>
+
+        <!-- 1. The Goal of Equity Valuation -->
+        <div id="section1" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">1</span>
+                The Goal of Equity Valuation
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">The core of equity valuation is to determine a security's <strong>intrinsic value</strong>—its true, underlying worth based on investment fundamentals like earnings, cash flows, and growth prospects. This estimated value is then compared to the security's current <strong>market price</strong>.</p>
+            
+            <div class="valuation-comparison">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-white bg-opacity-20 rounded-full mb-3">
+                            <i class="fas fa-arrow-down text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Undervalued</h3>
+                        <p class="text-xl">Intrinsic Value > Market Price</p>
+                        <p class="text-sm mt-2 opacity-90">Potential Buy</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-white bg-opacity-20 rounded-full mb-3">
+                            <i class="fas fa-arrow-up text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Overvalued</h3>
+                        <p class="text-xl">Intrinsic Value < Market Price</p>
+                        <p class="text-sm mt-2 opacity-90">Potential Sell</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 bg-white bg-opacity-20 rounded-full mb-3">
+                            <i class="fas fa-equals text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Fairly Valued</h3>
+                        <p class="text-xl">Intrinsic Value = Market Price</p>
+                        <p class="text-sm mt-2 opacity-90">Hold Position</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2. The Three Main Categories of Valuation Models -->
+        <div id="section2" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">2</span>
+                The Three Main Categories of Valuation Models
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Analysts use three primary categories of models to estimate intrinsic value, often using multiple models to build a more confident conclusion.</p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mt-8">
+                <div class="card model-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-calculator"></i>
+                        1. Present Value Models (DCF)
+                    </h3>
+                    <p class="flex-grow text-gray-700">These models estimate intrinsic value as the present value of all expected future cash flows to the shareholder. The two main types are the Dividend Discount Model (DDM) and the Free-Cash-Flow-to-Equity (FCFE) Model.</p>
+                </div>
+                <div class="card model-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-copy"></i>
+                        2. Multiplier Models (Comps)
+                    </h3>
+                    <p class="flex-grow text-gray-700">These models value a stock by comparing its price multiple (e.g., P/E, P/S, P/B) to a benchmark, such as the average multiple of its peer group or its own historical average.</p>
+                </div>
+                <div class="card model-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-building"></i>
+                        3. Asset-Based Models
+                    </h3>
+                    <p class="flex-grow text-gray-700">These models determine value based on the estimated market value of the company's assets minus its liabilities and preferred shares. It focuses on the net asset value of the company.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Present Value Models in Detail -->
+        <div id="section3" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">3</span>
+                Present Value Models in Detail
+            </h2>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-money-bill-wave mr-2 text-blue-600"></i>
+                The Dividend Discount Model (DDM)
+            </h3>
+            <p class="mb-4 text-gray-700">The DDM values a stock as the present value of its expected future dividends. For a finite holding period, the value is the sum of the present values of the dividends plus the present value of the expected sales price (the terminal value).</p>
+            
+            <div class="formula">V₀ = Σ [Dₜ / (1 + r)ᵗ] + [Pₙ / (1 + r)ⁿ]</div>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-seedling mr-2 text-green-600"></i>
+                The Gordon Growth Model (GGM)
+            </h3>
+            <p class="mb-4 text-gray-700">The GGM is a special case of the DDM that assumes dividends grow at a constant rate (g) forever. It is best suited for mature, stable, dividend-paying companies.</p>
+            
+            <div class="formula">V₀ = D₁ / (r - g)</div>
+            
+            <div class="key-point">
+                Where V₀ = current stock value, D₁ = expected dividend next year, r = required rate of return, and g = constant dividend growth rate.
+            </div>
+            
+            <div class="example">
+                <p class="example-title">Illustrative Example: Gordon Growth Model</p>
+                <p class="text-gray-700">A company is expected to pay a dividend of $2.00 next year (D₁). The dividend is expected to grow at a constant rate of 5% per year (g), and the required rate of return is 10% (r).</p>
+                <div class="grid md:grid-cols-2 gap-6 mt-4">
+                    <div class="key-point">
+                        <strong>Step 1: Apply the GGM formula.</strong><br>
+                        V₀ = $2.00 / (0.10 - 0.05)<br>
+                        V₀ = $2.00 / 0.05 = $40.00
+                    </div>
+                    <div class="key-point">
+                        <strong>Conclusion:</strong> The intrinsic value of the stock is $40.00.
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-layer-group mr-2 text-purple-600"></i>
+                Multistage DDM
+            </h3>
+            <div class="key-point">
+                For companies with non-constant growth (e.g., a high-growth company that will eventually mature), a multistage DDM is more appropriate. These models use different growth rates for different periods before assuming a constant long-term growth rate to calculate a terminal value.
+            </div>
+        </div>
+        
+        <!-- 4. Multiplier Models (Method of Comparables) -->
+        <div id="section4" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">4</span>
+                Multiplier Models (Method of Comparables)
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">This approach is based on the law of one price: similar assets should trade at similar prices. It involves comparing a company's price multiple to a benchmark to determine its relative valuation.</p>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-chart-bar mr-2 text-blue-600"></i>
+                Common Price Multiples
+            </h3>
+            <div class="space-y-3">
+                <div class="multiple-item">
+                    <strong>Price-to-Earnings (P/E):</strong> Best for profitable, stable companies.
+                </div>
+                <div class="multiple-item">
+                    <strong>Price-to-Sales (P/S):</strong> Useful for companies with negative earnings.
+                </div>
+                <div class="multiple-item">
+                    <strong>Price-to-Book (P/B):</strong> Useful when book value is a good indicator of intrinsic value.
+                </div>
+                <div class="multiple-item">
+                    <strong>Enterprise Value to EBITDA (EV/EBITDA):</strong> Good for comparing companies with different capital structures and tax rates.
+                </div>
+            </div>
+            
+            <div class="key-point mt-6">
+                If a company's multiple is below the benchmark (e.g., peer average), it may be undervalued. If it is above, it may be overvalued.
+            </div>
+        </div>
+
+        <!-- 5. Asset-Based Valuation -->
+        <div id="section5" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">5</span>
+                Asset-Based Valuation
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">This method values a company based on the market value of its net assets.</p>
+            
+            <div class="formula">Value = Market Value of Assets - Market Value of Liabilities - Value of Preferred Shares</div>
+            
+            <p class="mt-6 mb-4 text-gray-700">This approach is most useful for:</p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="card asset-use-case">
+                    <h4 class="font-semibold text-lg mb-2 text-blue-700 flex items-center">
+                        <i class="fas fa-lock mr-2"></i>
+                        Private Firms & Liquidations
+                    </h4>
+                    <p class="text-gray-700">Valuing private firms or firms in liquidation.</p>
+                </div>
+                <div class="card asset-use-case">
+                    <h4 class="font-semibold text-lg mb-2 text-green-700 flex items-center">
+                        <i class="fas fa-warehouse mr-2"></i>
+                        Tangible Asset Companies
+                    </h4>
+                    <p class="text-gray-700">Companies with significant tangible assets (e.g., resource companies).</p>
+                </div>
+                <div class="card asset-use-case">
+                    <h4 class="font-semibold text-lg mb-2 text-purple-700 flex items-center">
+                        <i class="fas fa-layer-group mr-2"></i>
+                        Valuation Floor
+                    </h4>
+                    <p class="text-gray-700">Serving as a "valuation floor" when significant intangibles exist.</p>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                Its main limitation is that the market values of assets can be difficult to estimate, and it often excludes the value of intangible assets like brands and synergies.
+            </div>
+        </div>
+
+        <!-- Completion Message -->
+        <div class="content-section bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-500">
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
+                    <i class="fas fa-trophy text-2xl text-green-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Congratulations!</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    You have completed all 8 chapters of the CFA Equity Investments study guide. You now have a comprehensive understanding of:
+                </p>
+                <div class="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto">
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        Market Organization and Structure
+                    </div>
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        Security Market Indices
+                    </div>
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        Market Efficiency
+                    </div>
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        Overview of Equity Securities
+                    </div>
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        Company Analysis
+                    </div>
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        Industry and Competitive Analysis
+                    </div>
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        Competitive Strategy Analysis
+                    </div>
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        Equity Valuation Concepts
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <a href="index.html" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-blue-700 transition-colors inline-flex items-center">
+                        <i class="fas fa-home mr-2"></i>
+                        Return to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="flex justify-between items-center mt-12 pt-8 border-t border-gray-200">
+            <a href="chapter7.html" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Competitive Strategy Analysis
+            </a>
+            <div class="text-center">
+                <div class="text-sm text-gray-500 mb-1">Chapter 8 of 8</div>
+                <div class="text-lg font-semibold text-gray-800">Equity Valuation</div>
+            </div>
+            <a href="index.html" class="flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors">
+                Complete Course
+                <i class="fas fa-trophy ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Update progress on page load
+        window.addEventListener('load', () => {
+            // Mark this chapter as visited
+            let visited = JSON.parse(localStorage.getItem('visitedChapters') || '[]');
+            if (!visited.includes('chapter8')) {
+                visited.push('chapter8');
+                localStorage.setItem('visitedChapters', JSON.stringify(visited));
+            }
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-item').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Update active TOC item
+                    document.querySelectorAll('.toc-item').forEach(item => item.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Update TOC active state on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('[id^="section"]');
+            const tocItems = document.querySelectorAll('.toc-item');
+            
+            let current = 0;
+            sections.forEach((section, index) => {
+                if (window.scrollY >= section.offsetTop - 200) {
+                    current = index;
+                }
+            });
+            
+            tocItems.forEach((item, index) => {
+                item.classList.toggle('active', index === current);
+            });
+        });
+    </script>
+</body>
+</html>

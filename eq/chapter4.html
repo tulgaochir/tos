@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Overview of Equity Securities - CFA Equity Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .chapter-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Content styling */
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #1a202c;
+        }
+        
+        .content-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4299e1, #48bb78, #ed8936);
+        }
+        
+        .content-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .formula {
+            background: linear-gradient(135deg, #f8fafc, #ebf8ff);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+            font-size: 1.125rem;
+            color: #2d3748;
+            border-left: 4px solid #4299e1;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.1);
+        }
+        
+        .example {
+            border: 2px solid #e2e8f0;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #f8fafc, #f7fafc);
+            position: relative;
+        }
+        
+        .example::before {
+            content: 'Example';
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: #4299e1;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #cbd5e0, transparent);
+            margin: 3rem 0;
+        }
+        
+        .key-point {
+            background: linear-gradient(135deg, #ebf8ff, #e6fffa);
+            border-left: 4px solid #4299e1;
+            padding: 1.25rem 1.25rem 1.25rem 1.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.1);
+        }
+        
+        .key-point strong {
+            color: #2c5282;
+        }
+
+        .equity-type-card {
+            background: linear-gradient(135deg, #f8fafc, #f0fff4);
+            border: 2px solid #e2e8f0;
+            border-radius: 0.875rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .equity-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4299e1, #48bb78);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .equity-type-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .equity-type-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: #4299e1;
+        }
+
+        .equity-type-card h3 {
+            font-weight: 700;
+            color: #2c5282;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .equity-type-card h3 i {
+            margin-right: 0.5rem;
+            color: #4299e1;
+        }
+
+        .feature-item {
+            background: linear-gradient(135deg, #f0fff4, #e6fffa);
+            border-left: 4px solid #48bb78;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.1);
+        }
+        
+        .comparison-card {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .comparison-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #4299e1, #48bb78);
+            border-radius: 2px;
+        }
+        
+        .market-metric {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Floating navigation */
+        .floating-toc {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            z-index: 1000;
+            max-width: 200px;
+        }
+        
+        .toc-item {
+            display: block;
+            padding: 0.5rem;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-item:hover,
+        .toc-item.active {
+            background: #ebf8ff;
+            color: #2c5282;
+        }
+
+        @media (max-width: 768px) {
+            .floating-toc {
+                display: none;
+            }
+            .content-section {
+                padding: 1.5rem;
+            }
+            .equity-type-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Chapter Navigation -->
+    <nav class="chapter-nav text-white sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="chapter3.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Previous Chapter</span>
+                    </a>
+                    <div class="hidden md:block text-lg font-semibold">
+                        Chapter 4: Overview of Equity Securities
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm opacity-75">Progress</span>
+                    <div class="w-24 progress-bar">
+                        <div class="progress-fill" style="width: 50%"></div>
+                    </div>
+                    <a href="chapter5.html" class="flex items-center text-white hover:text-blue-200 transition-colors">
+                        <span>Next Chapter</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Table of Contents -->
+    <div class="floating-toc hidden lg:block">
+        <div class="text-sm font-semibold text-gray-700 mb-2">Contents</div>
+        <a href="#section1" class="toc-item active">Importance of Equities</a>
+        <a href="#section2" class="toc-item">Types of Equity Securities</a>
+        <a href="#section3" class="toc-item">Public vs Private Equity</a>
+        <a href="#section4" class="toc-item">Foreign Equity Investing</a>
+        <a href="#section5" class="toc-item">Risk & Return</a>
+        <a href="#section6" class="toc-item">Equity & Company Value</a>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-6">
+                <i class="fas fa-chart-pie text-2xl text-indigo-600"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Overview of Equity Securities</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Understanding Ownership, Types, and Valuation of Equities</p>
+            <div class="section-divider"></div>
+        </header>
+
+        <!-- 1. The Importance of Equity Securities -->
+        <div id="section1" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">1</span>
+                The Importance of Equity Securities
+            </h2>
+            <p class="text-lg mb-6 text-gray-700"><strong>Equity securities</strong> represent a partial ownership stake in a corporation. This ownership grants the holder rights to a portion of the company's profits (dividends), voting power in key corporate decisions, and a residual claim on assets in the event of liquidation. As a key asset class, equities offer higher potential returns than government bonds, but also come with higher risk and volatility.</p>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-globe mr-2 text-blue-600"></i>
+                Market Capitalization vs. GDP
+            </h3>
+            <div class="key-point">
+                The ratio of a country's total stock market capitalization to its Gross Domestic Product (GDP) is often used as a valuation metric for the overall equity market. A short-term ratio that is significantly above its long-term average may suggest the market is overvalued, while a ratio below the average may suggest it is undervalued.
+            </div>
+        </div>
+        
+        <!-- 2. Types of Equity Securities -->
+        <div id="section2" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">2</span>
+                Types of Equity Securities
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Equity securities are broadly categorized into common shares and preference shares, each with distinct features.</p>
+
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="equity-type-card">
+                    <h3>
+                        <i class="fas fa-vote-yea"></i>
+                        Common Shares
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="feature-item">
+                            <strong>Ownership Interest:</strong> Represent the primary ownership and control of the company.
+                        </div>
+                        <div class="feature-item">
+                            <strong>Voting Rights:</strong> Holders can vote on the board of directors, mergers, and other major issues.
+                        </div>
+                        <div class="feature-item">
+                            <strong>Residual Claim:</strong> Have a claim on assets and income after all liabilities and preference shareholders have been paid.
+                        </div>
+                        <div class="feature-item">
+                            <strong>Dividends:</strong> Not fixed or guaranteed.
+                        </div>
+                        <div class="feature-item">
+                            <strong>Callable/Putable Features:</strong> Can include options for the company to repurchase shares (callable) or for the investor to sell them back (putable).
+                        </div>
+                    </div>
+                </div>
+                <div class="equity-type-card">
+                    <h3>
+                        <i class="fas fa-star"></i>
+                        Preference Shares (Preferred Stock)
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="feature-item">
+                            <strong>Hybrid Nature:</strong> Combines features of both debt (fixed payments) and equity (ownership).
+                        </div>
+                        <div class="feature-item">
+                            <strong>Dividend Priority:</strong> Receive dividends before common shareholders. Dividends are often fixed.
+                        </div>
+                        <div class="feature-item">
+                            <strong>Liquidation Priority:</strong> Have a higher claim on assets than common shareholders in a liquidation, but rank below debt holders.
+                        </div>
+                        <div class="feature-item">
+                            <strong>No Voting Rights:</strong> Typically do not have voting rights.
+                        </div>
+                        <div class="feature-item">
+                            <strong>Types:</strong> Can be cumulative (missed dividends must be paid later), participating (can receive extra dividends), or convertible (can be converted to common stock).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Public vs. Private Equity -->
+        <div id="section3" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">3</span>
+                Public vs. Private Equity
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                 <div class="comparison-card">
+                    <h3 class="text-xl mb-4 font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-building mr-2 text-blue-600"></i>
+                        Public Equity
+                    </h3>
+                    <p class="text-gray-700">Securities of publicly listed companies that trade on stock exchanges. They are liquid, have transparent pricing, and are subject to strict regulatory and disclosure requirements.</p>
+                </div>
+                <div class="comparison-card">
+                    <h3 class="text-xl mb-4 font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-lock mr-2 text-green-600"></i>
+                        Private Equity
+                    </h3>
+                    <p class="mb-4 text-gray-700">Issued via private placements and not listed on public exchanges. Private equity is illiquid, has no public pricing, and involves less disclosure. Types include:</p>
+                    <div class="space-y-2">
+                        <div class="key-point">
+                            <strong>Venture Capital (VC):</strong> Funding for early-stage companies.
+                        </div>
+                        <div class="key-point">
+                            <strong>Leveraged Buyouts (LBOs):</strong> Acquiring an established company using a significant amount of borrowed money.
+                        </div>
+                        <div class="key-point">
+                            <strong>Private Investment in Public Equity (PIPE):</strong> A public company selling shares at a discount to private investors.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. Investing in Foreign Equity -->
+        <div id="section4" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">4</span>
+                Investing in Foreign Equity
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Investors can gain exposure to foreign companies through direct or indirect methods.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="comparison-card">
+                    <h3 class="text-xl mb-4 font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-direct-hit mr-2 text-red-600"></i>
+                        Direct Investing
+                    </h3>
+                    <p class="text-gray-700">Buying shares directly on a foreign stock exchange. This requires knowledge of local market systems and currency exchange.</p>
+                </div>
+                <div class="comparison-card">
+                    <h3 class="text-xl mb-4 font-semibold text-gray-800 flex items-center">
+                        <i class="fas fa-receipt mr-2 text-purple-600"></i>
+                        Indirect Investing (Depositary Receipts)
+                    </h3>
+                    <p class="mb-4 text-gray-700">Buying securities that represent ownership in foreign shares.</p>
+                    <div class="space-y-2">
+                        <div class="key-point">
+                            <strong>American Depositary Receipts (ADRs):</strong> Trade on U.S. exchanges in U.S. dollars.
+                        </div>
+                        <div class="key-point">
+                            <strong>Global Depositary Receipts (GDRs):</strong> Traded outside both the issuer's home country and the United States.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Risk and Return Characteristics -->
+        <div id="section5" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">5</span>
+                Risk and Return Characteristics
+            </h2>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-calculator mr-2 text-blue-600"></i>
+                Calculating Total Return
+            </h3>
+            <p class="mb-4 text-gray-700">The total return from an equity investment comes from two sources: capital appreciation (price changes) and dividend income.</p>
+            
+            <div class="formula">Total Return (Rₜ) = (Pₜ - Pₜ₋₁ + Dₜ) / Pₜ₋₁</div>
+            <p class="mt-4 text-gray-700">Where Pₜ is the price at time t, Pₜ₋₁ is the price at time t-1, and Dₜ is the dividend paid during the period.</p>
+            
+            <div class="example">
+                <p class="example-title">Illustrative Example: Total Return</p>
+                <p class="text-gray-700">An investor buys a stock for $50. After one year, the stock price is $54, and it paid a dividend of $1.</p>
+                <div class="grid md:grid-cols-2 gap-6 mt-4">
+                    <div class="key-point">
+                        <strong>Capital Gain</strong> = $54 - $50 = $4
+                    </div>
+                    <div class="key-point">
+                        <strong>Total Return</strong> = ($54 - $50 + $1) / $50 = $5 / $50 = 10%
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-exclamation-triangle mr-2 text-orange-600"></i>
+                Understanding Equity Risk
+            </h3>
+            <div class="key-point">
+                The primary risk in equity investing is the uncertainty of the total return, measured by the standard deviation. This risk stems from uncertainty about future cash flows and dividend payments. Generally, common stock is riskier than preferred stock, and callable shares are riskier than non-callable shares.
+            </div>
+        </div>
+
+        <!-- 6. Equity and Company Value -->
+        <div id="section6" class="content-section">
+            <h2 class="text-2xl mb-6 flex items-center">
+                <span class="section-number">6</span>
+                Equity and Company Value
+            </h2>
+            <p class="text-lg mb-6 text-gray-700">Companies issue equity to raise capital for various purposes, such as funding operations, acquisitions, and expansion. The goal is to maximize shareholder wealth by maximizing both the book value and the market value of equity.</p>
+
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-balance-scale mr-2 text-green-600"></i>
+                Book Value vs. Market Value
+            </h3>
+            <div class="grid md:grid-cols-2 gap-8 mb-6">
+                <div class="equity-type-card">
+                    <h3>
+                        <i class="fas fa-book"></i>
+                        Book Value of Equity
+                    </h3>
+                    <p class="text-gray-700">The value of the company's assets minus its liabilities, reflecting historical costs.</p>
+                </div>
+                <div class="equity-type-card">
+                    <h3>
+                        <i class="fas fa-chart-line"></i>
+                        Market Value of Equity (Market Cap)
+                    </h3>
+                    <p class="text-gray-700">The current share price multiplied by the number of shares outstanding, reflecting investor expectations about future cash flows.</p>
+                </div>
+            </div>
+            
+            <div class="market-metric">
+                <p class="text-xl font-semibold">The Price-to-Book (P/B) ratio compares these two values</p>
+                <p class="text-lg mt-2 opacity-90">A high P/B ratio suggests investors have high growth expectations</p>
+            </div>
+             
+            <h3 class="text-xl mt-8 mb-4 flex items-center">
+                <i class="fas fa-percentage mr-2 text-purple-600"></i>
+                Cost of Equity and ROE
+            </h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="comparison-card">
+                    <h4 class="font-semibold text-lg mb-2 text-red-700">Cost of Equity</h4>
+                    <p class="text-gray-700">The minimum rate of return shareholders require to invest in the company. It is a key input for the Weighted Average Cost of Capital (WACC).</p>
+                </div>
+                <div class="comparison-card">
+                    <h4 class="font-semibold text-lg mb-2 text-blue-700">Return on Equity (ROE)</h4>
+                    <p class="text-gray-700">Measures how effectively management generates profits from shareholders' equity. A higher ROE indicates more efficient use of capital.</p>
+                </div>
+            </div>
+            
+            <div class="formula mt-6">ROE = Net Income / Average Book Value of Equity</div>
+        </div>
+
+        <!-- Chapter Navigation -->
+        <div class="flex justify-between items-center mt-12 pt-8 border-t border-gray-200">
+            <a href="chapter3.html" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous: Market Efficiency
+            </a>
+            <div class="text-center">
+                <div class="text-sm text-gray-500 mb-1">Chapter 4 of 8</div>
+                <div class="text-lg font-semibold text-gray-800">Overview of Equity Securities</div>
+            </div>
+            <a href="chapter5.html" class="flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors">
+                Next: Company Analysis
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Update progress on page load
+        window.addEventListener('load', () => {
+            // Mark this chapter as visited
+            let visited = JSON.parse(localStorage.getItem('visitedChapters') || '[]');
+            if (!visited.includes('chapter4')) {
+                visited.push('chapter4');
+                localStorage.setItem('visitedChapters', JSON.stringify(visited));
+            }
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-item').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Update active TOC item
+                    document.querySelectorAll('.toc-item').forEach(item => item.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Update TOC active state on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('[id^="section"]');
+            const tocItems = document.querySelectorAll('.toc-item');
+            
+            let current = 0;
+            sections.forEach((section, index) => {
+                if (window.scrollY >= section.offsetTop - 200) {
+                    current = index;
+                }
+            });
+            
+            tocItems.forEach((item, index) => {
+                item.classList.toggle('active', index === current);
+            });
+        });
+    </script>
+</body>
+</html>
