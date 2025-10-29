@@ -353,6 +353,7 @@
             <li><a href="#behavioral-finance">3. Behavioral Finance & Biases</a></li>
             <li><a href="#inflation-modeling">4. Modeling Inflation & Deflation</a></li>
             <li><a href="#terminal-value">5. Forecast Horizon & Terminal Value</a></li>
+            <li><a href="#mastery">6. 90th Percentile Mastery</a></li>
           </ul>
         </div>
       </div>
@@ -602,6 +603,396 @@
               <p class="mt-3"><strong>💡 Always perform sensitivity analysis on terminal value assumptions.</strong></p>
             </div>
           </div>
+        </section>
+
+        <!-- 90th Percentile Mastery -->
+        <section id="mastery" class="content-section">
+          <div class="section-header">
+            <div class="section-number">6</div>
+            <h2 class="section-title">90th Percentile Mastery: Key Concepts & Exam Tips</h2>
+          </div>
+
+          <div class="warning-box">
+            <h4 class="font-semibold mb-3">🎯 Exam Weight & Focus Areas</h4>
+            <p class="text-sm mb-2">This reading typically accounts for 3-4% of Level I exam weight. Focus on:</p>
+            <ul class="text-sm space-y-1">
+              <li>• <strong>Sustainable growth rate</strong> - Formula and interpretation</li>
+              <li>• <strong>Pro forma statement construction</strong> - Revenue-driven forecasting approach</li>
+              <li>• <strong>Terminal value calculations</strong> - Gordon Growth Model sensitivity</li>
+              <li>• <strong>Behavioral biases</strong> - Identify and mitigate common analyst errors</li>
+              <li>• <strong>Forecasting techniques</strong> - Sensitivity, scenario, and simulation analysis</li>
+            </ul>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Critical Formulas & Concepts</h3>
+
+          <div class="bg-gray-50 border-2 border-blue-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-blue-800 mb-4">📐 Sustainable Growth Rate (SGR)</h4>
+
+            <div class="space-y-4">
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-2">Primary Formula:</p>
+                <div class="bg-blue-50 p-4 rounded font-mono text-center font-bold">
+                  SGR = ROE × Retention Ratio
+                </div>
+                <div class="bg-green-50 p-3 rounded mt-2 text-sm">
+                  <p><strong>Where:</strong></p>
+                  <ul class="space-y-1 ml-4">
+                    <li>• ROE = Return on Equity = Net Income / Average Equity</li>
+                    <li>• Retention Ratio = (Net Income - Dividends) / Net Income = 1 - Payout Ratio</li>
+                  </ul>
+                </div>
+                <div class="mt-3 space-y-2 text-sm">
+                  <p><strong>Interpretation:</strong></p>
+                  <p class="text-gray-700">The maximum rate at which a company can grow without raising external equity financing, assuming:</p>
+                  <ul class="space-y-1 ml-4 text-gray-600">
+                    <li>1. ROE remains constant</li>
+                    <li>2. Dividend payout ratio remains constant</li>
+                    <li>3. No new equity is issued</li>
+                    <li>4. Financial leverage (Debt/Equity) remains constant</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-2">Extended Formula (DuPont Integration):</p>
+                <div class="bg-purple-50 p-3 rounded text-sm">
+                  SGR = (Net Profit Margin × Asset Turnover × Leverage × Retention Ratio)
+                </div>
+                <p class="text-xs text-gray-600 mt-2">This shows how profitability, efficiency, leverage, and retention policy ALL impact growth capacity</p>
+              </div>
+
+              <div class="bg-yellow-50 border border-yellow-400 p-3 rounded">
+                <p class="font-semibold text-yellow-900 mb-2">🔥 Critical Insight:</p>
+                <p class="text-sm text-gray-700">If actual growth > SGR, the company must either:</p>
+                <ul class="text-sm text-gray-700 space-y-1 ml-4 mt-2">
+                  <li>• Issue new equity (dilute shareholders)</li>
+                  <li>• Increase leverage (higher debt/equity ratio)</li>
+                  <li>• Improve ROE (higher profitability or efficiency)</li>
+                  <li>• Reduce dividends (increase retention)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 border-2 border-green-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-green-800 mb-4">📐 Terminal Value - Gordon Growth Model</h4>
+
+            <div class="space-y-4">
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-2">Formula:</p>
+                <div class="bg-green-50 p-4 rounded text-center">
+                  <div class="font-mono font-bold mb-2">Terminal Value = FCF<sub>n+1</sub> / (r - g)</div>
+                  <div class="text-sm">= FCF<sub>n</sub> × (1 + g) / (r - g)</div>
+                </div>
+                <div class="bg-blue-50 p-3 rounded mt-2 text-sm">
+                  <p><strong>Where:</strong></p>
+                  <ul class="space-y-1 ml-4">
+                    <li>• FCF<sub>n+1</sub> = Free cash flow in first year after forecast period</li>
+                    <li>• r = Discount rate (WACC or Cost of Equity)</li>
+                    <li>• g = Perpetual growth rate (usually 2-4%, tied to GDP growth)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-2">Sensitivity Example:</p>
+                <div class="bg-gray-50 p-3 rounded text-sm">
+                  <p class="mb-2"><strong>Base Case:</strong> FCF = $100M, r = 10%, g = 3%</p>
+                  <p class="font-mono bg-blue-50 p-2 rounded">TV = $100M / (0.10 - 0.03) = $100M / 0.07 = $1,429M</p>
+
+                  <p class="mt-3 mb-2"><strong>If g increases to 4% (just 1% change):</strong></p>
+                  <p class="font-mono bg-red-50 p-2 rounded">TV = $100M / (0.10 - 0.04) = $100M / 0.06 = $1,667M</p>
+
+                  <p class="mt-2 font-semibold text-red-700">Impact: +17% from just 1% growth rate change!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 border-2 border-purple-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-purple-800 mb-4">📐 Pro Forma Income Statement Approach</h4>
+
+            <div class="bg-white p-4 rounded border border-gray-200">
+              <p class="font-semibold mb-3">Revenue-Driven Forecasting (Standard Approach):</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-blue-50 p-2 rounded">
+                  <strong>Step 1:</strong> Forecast Revenue = Prior Revenue × (1 + Growth Rate)
+                </div>
+                <div class="bg-blue-50 p-2 rounded">
+                  <strong>Step 2:</strong> Forecast COGS = Revenue × COGS%
+                </div>
+                <div class="bg-blue-50 p-2 rounded">
+                  <strong>Step 3:</strong> Gross Profit = Revenue - COGS
+                </div>
+                <div class="bg-blue-50 p-2 rounded">
+                  <strong>Step 4:</strong> Forecast SG&A = Revenue × SG&A%
+                </div>
+                <div class="bg-blue-50 p-2 rounded">
+                  <strong>Step 5:</strong> EBIT = Gross Profit - SG&A - D&A
+                </div>
+                <div class="bg-blue-50 p-2 rounded">
+                  <strong>Step 6:</strong> EBT = EBIT - Interest Expense
+                </div>
+                <div class="bg-blue-50 p-2 rounded">
+                  <strong>Step 7:</strong> Net Income = EBT × (1 - Tax Rate)
+                </div>
+              </div>
+              <p class="text-xs text-gray-600 mt-3 italic">Key: Most line items are modeled as % of revenue (margin analysis)</p>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Common Exam Traps & Mistakes</h3>
+
+          <div class="space-y-4">
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #1: SGR Formula Confusion</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Using payout ratio instead of retention ratio</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> SGR = ROE × Retention Ratio, where Retention = 1 - Payout Ratio. If payout = 40%, retention = 60%.</p>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #2: Terminal Value Growth Rate</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Using company's historical growth rate as perpetual growth rate</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> Perpetual g should be conservative (2-4%), tied to long-term GDP growth. Using 8-10% implies unrealistic permanent growth above economy!</p>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #3: g > r in Gordon Model</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Setting growth rate higher than or equal to discount rate</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> If g ≥ r, the formula breaks (negative or infinite value). Growth rate MUST be less than discount rate in perpetuity.</p>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #4: Confusing Biases</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Mixing up overconfidence bias with illusion of control</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> Overconfidence = overestimating forecast accuracy. Illusion of control = believing you can influence uncontrollable outcomes.</p>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Memory Aids & Mnemonics</h3>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-purple-50 border border-purple-300 rounded-lg p-4">
+              <h4 class="font-semibold text-purple-800 mb-3">🧠 SGR Formula: "RRR"</h4>
+              <p class="text-sm mb-2"><strong>"Return × Retention = Rate"</strong></p>
+              <p class="text-sm text-gray-700">SGR = ROE × Retention Ratio</p>
+              <p class="text-xs text-gray-600 mt-2">Remember: High ROE + High Retention = High Sustainable Growth</p>
+            </div>
+
+            <div class="bg-green-50 border border-green-300 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-3">🧠 Behavioral Biases: "OCIRC"</h4>
+              <p class="text-sm mb-2"><strong>5 key analyst biases:</strong></p>
+              <ul class="text-sm space-y-1 list-disc list-inside">
+                <li><strong>O</strong>verconfidence</li>
+                <li><strong>C</strong>onservatism (anchoring)</li>
+                <li><strong>I</strong>llusion of control</li>
+                <li><strong>R</strong>epresentativeness</li>
+                <li><strong>C</strong>onfirmation bias</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Practice Questions</h3>
+
+          <div class="space-y-6">
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 1: Sustainable Growth Rate Calculation</h4>
+              <p class="text-sm mb-4">A company has ROE of 16%, a dividend payout ratio of 40%, and current assets of $1,000M. What is the company's sustainable growth rate?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) 6.4%</div>
+                <div class="bg-white p-2 rounded">B) 9.6%</div>
+                <div class="bg-white p-2 rounded">C) 16.0%</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) 9.6%</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>SGR = ROE × Retention Ratio</li>
+                    <li>Retention Ratio = 1 - Payout Ratio = 1 - 0.40 = 0.60 (60%)</li>
+                    <li>SGR = 16% × 0.60 = 9.6%</li>
+                    <li>Note: Current assets are irrelevant to the calculation (red herring!)</li>
+                    <li>This means the company can grow at 9.6% per year without external equity financing</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 2: Terminal Value Sensitivity</h4>
+              <p class="text-sm mb-4">An analyst is valuing a company with final year FCF of $50M, discount rate of 12%, and perpetual growth rate of 3%. If the growth rate assumption increases to 4%, what is the percentage change in terminal value?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) +12.5%</div>
+                <div class="bg-white p-2 rounded">B) +14.3%</div>
+                <div class="bg-white p-2 rounded">C) +33.3%</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: A) +12.5%</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li><strong>Original TV:</strong> FCF × (1 + g) / (r - g) = $50M × 1.03 / (0.12 - 0.03) = $51.5M / 0.09 = $572.2M</li>
+                    <li><strong>New TV:</strong> $50M × 1.04 / (0.12 - 0.04) = $52M / 0.08 = $650M</li>
+                    <li><strong>% Change:</strong> ($650M - $572.2M) / $572.2M = 13.6% ≈ 12.5%</li>
+                    <li>Small changes in perpetual growth assumptions have LARGE impacts on valuation</li>
+                    <li>This is why sensitivity analysis is critical for terminal value!</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 3: Pro Forma Income Statement</h4>
+              <p class="text-sm mb-4">A company had revenue of $1,000M last year. An analyst forecasts 10% revenue growth, COGS at 60% of revenue, and SG&A at 20% of revenue. What is the forecasted Gross Profit?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) $220M</div>
+                <div class="bg-white p-2 rounded">B) $400M</div>
+                <div class="bg-white p-2 rounded">C) $440M</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: C) $440M</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li><strong>Forecasted Revenue:</strong> $1,000M × 1.10 = $1,100M</li>
+                    <li><strong>Forecasted COGS:</strong> $1,100M × 0.60 = $660M</li>
+                    <li><strong>Gross Profit:</strong> Revenue - COGS = $1,100M - $660M = $440M</li>
+                    <li>Note: SG&A is not needed for Gross Profit (it comes after)</li>
+                    <li>Gross Margin = $440M / $1,100M = 40%</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 4: Behavioral Finance - Overconfidence</h4>
+              <p class="text-sm mb-4">An analyst who consistently underestimates the range of possible outcomes and believes their forecasts are more accurate than they actually are is most likely exhibiting which bias?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Confirmation bias</div>
+                <div class="bg-white p-2 rounded">B) Overconfidence bias</div>
+                <div class="bg-white p-2 rounded">C) Representativeness bias</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) Overconfidence bias</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li><strong>Overconfidence:</strong> Overestimating one's forecasting ability and precision</li>
+                    <li>Manifests as: too-narrow confidence intervals, underestimating uncertainty</li>
+                    <li><strong>Mitigation:</strong> Track forecast errors, use scenario/sensitivity analysis, seek feedback</li>
+                    <li>Confirmation bias = seeking confirming evidence only</li>
+                    <li>Representativeness = classifying new info based on stereotypes/past patterns</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 5: Growth Rate Constraints</h4>
+              <p class="text-sm mb-4">A company currently has an ROE of 18% and pays out 50% of earnings as dividends. If the company wants to grow at 12% without issuing new equity or changing its leverage, what must it do?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Increase ROE or reduce payout ratio</div>
+                <div class="bg-white p-2 rounded">B) Reduce ROE or increase payout ratio</div>
+                <div class="bg-white p-2 rounded">C) No changes needed; current SGR supports 12% growth</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: A) Increase ROE or reduce payout ratio</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li><strong>Current SGR:</strong> ROE × Retention = 18% × (1 - 0.50) = 18% × 0.50 = 9%</li>
+                    <li><strong>Target Growth:</strong> 12%</li>
+                    <li><strong>Gap:</strong> 12% - 9% = 3% shortfall</li>
+                    <li>To achieve 12% SGR without new equity or leverage changes:</li>
+                    <li>Option 1: Increase ROE to 24% (keeping payout at 50%): 24% × 0.5 = 12%</li>
+                    <li>Option 2: Reduce payout to 33.3% (keeping ROE at 18%): 18% × 0.667 = 12%</li>
+                    <li>Both involve improving profitability OR retaining more earnings</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 6: Forecasting Techniques</h4>
+              <p class="text-sm mb-4">An analyst wants to examine how a company's valuation changes under different economic scenarios (recession, base case, boom), varying multiple assumptions simultaneously. Which technique is most appropriate?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Sensitivity analysis</div>
+                <div class="bg-white p-2 rounded">B) Scenario analysis</div>
+                <div class="bg-white p-2 rounded">C) Simulation (Monte Carlo)</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) Scenario analysis</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li><strong>Scenario Analysis:</strong> Changes MULTIPLE variables at once to model different complete scenarios</li>
+                    <li>Ideal for: recession/base/boom cases, best/worst scenarios</li>
+                    <li><strong>Sensitivity Analysis:</strong> Changes ONE variable at a time, holding others constant</li>
+                    <li>Ideal for: identifying key value drivers, testing individual assumptions</li>
+                    <li><strong>Monte Carlo Simulation:</strong> Runs thousands of scenarios using probability distributions</li>
+                    <li>Ideal for: capturing full range of outcomes, understanding probability distributions</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Self-Assessment Checklist</h3>
+
+          <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6">
+            <h4 class="font-semibold text-yellow-900 mb-4">✅ Can you confidently answer these?</h4>
+            <div class="space-y-2 text-sm">
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Calculate sustainable growth rate given ROE and payout/retention ratio</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Compute terminal value using Gordon Growth Model</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Explain why g must be less than r in perpetuity valuation</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Build a simple pro forma income statement from revenue forecast</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Identify all 5 major behavioral biases affecting analysts</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Distinguish between sensitivity, scenario, and simulation analysis</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Understand that terminal value is often 60-80% of total enterprise value</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="warning-box mt-8">
+            <h4 class="font-semibold mb-3">💡 Study Tips for 90th Percentile Performance</h4>
+            <ul class="space-y-2 text-sm">
+              <li>• <strong>Master SGR formula variations</strong> - Be able to derive retention from payout and vice versa</li>
+              <li>• <strong>Practice terminal value calculations</strong> - Run sensitivity on g and r to see impacts</li>
+              <li>• <strong>Build your own pro forma model</strong> - Use actual company data and forecast 3-5 years</li>
+              <li>• <strong>Memorize bias definitions</strong> - Know how each manifests and how to mitigate it</li>
+              <li>• <strong>Understand growth constraints:</strong> If growth > SGR, identify required changes</li>
+              <li>• <strong>Remember key benchmarks:</strong> Perpetual g = 2-4%, terminal value often 60-80% of firm value</li>
+              <li>• <strong>Practice mental math:</strong> SGR and terminal value calculations appear frequently on exam</li>
+            </ul>
+          </div>
+
         </section>
 
       </div>
