@@ -312,6 +312,7 @@
             <li><a href="#discipline-mechanisms">5. Discipline Mechanisms</a></li>
             <li><a href="#detecting-issues">6. Detecting Quality Issues</a></li>
             <li><a href="#warning-signs">7. Warning Signs</a></li>
+            <li><a href="#mastery">8. 90th Percentile Mastery</a></li>
           </ul>
         </div>
       </div>
@@ -634,6 +635,380 @@
           <div class="info-box">
             <p><strong>🔍 Analyst Best Practice:</strong> Always compare key metrics and trends against industry benchmarks and peer companies. Outliers often indicate areas requiring deeper investigation.</p>
           </div>
+        </section>
+
+        <!-- 90th Percentile Mastery -->
+        <section id="mastery" class="content-section">
+          <div class="section-header">
+            <div class="section-number">8</div>
+            <h2 class="section-title">90th Percentile Mastery: Key Concepts & Exam Tips</h2>
+          </div>
+
+          <div class="warning-box">
+            <h4 class="font-semibold mb-3">🎯 Exam Weight & Focus Areas</h4>
+            <p class="text-sm mb-2">This reading typically accounts for 3-5% of Level I exam weight. Focus on:</p>
+            <ul class="text-sm space-y-1">
+              <li>• <strong>Earnings quality indicators</strong> - Distinguish high vs. low quality earnings</li>
+              <li>• <strong>Beneish M-Score</strong> - Know the formula components and interpretation</li>
+              <li>• <strong>Altman Z-Score</strong> - Understand bankruptcy prediction thresholds</li>
+              <li>• <strong>Red flags</strong> - Identify warning signs of manipulation across all statements</li>
+              <li>• <strong>Conservative vs. aggressive accounting</strong> - Impact on current and future periods</li>
+            </ul>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Critical Formulas & Models</h3>
+
+          <div class="bg-gray-50 border-2 border-blue-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-blue-800 mb-4">📐 Beneish M-Score (Earnings Manipulation Detector)</h4>
+
+            <div class="space-y-4">
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-2">M-Score Formula (8-Variable Model):</p>
+                <div class="bg-blue-50 p-3 rounded font-mono text-sm">
+                  M = -4.84 + 0.92×DSRI + 0.528×GMI + 0.404×AQI + 0.892×SGI + 0.115×DEPI<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;- 0.172×SGAI + 4.679×TATA - 0.327×LVGI
+                </div>
+                <div class="mt-3 space-y-2 text-sm">
+                  <p><strong>Interpretation:</strong></p>
+                  <ul class="space-y-1 ml-4">
+                    <li>• M-Score > -1.78 = <strong>High likelihood of manipulation</strong></li>
+                    <li>• M-Score < -1.78 = <strong>Low likelihood of manipulation</strong></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-3">Key Variables:</p>
+                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <p><strong>DSRI</strong> = Days Sales in Receivables Index</p>
+                    <p class="text-xs text-gray-600">= (AR_t / Sales_t) / (AR_t-1 / Sales_t-1)</p>
+                  </div>
+                  <div>
+                    <p><strong>GMI</strong> = Gross Margin Index</p>
+                    <p class="text-xs text-gray-600">= Gross Margin_t-1 / Gross Margin_t</p>
+                  </div>
+                  <div>
+                    <p><strong>AQI</strong> = Asset Quality Index</p>
+                    <p class="text-xs text-gray-600">= [1-(CA+PPE)/TA]_t / [1-(CA+PPE)/TA]_t-1</p>
+                  </div>
+                  <div>
+                    <p><strong>SGI</strong> = Sales Growth Index</p>
+                    <p class="text-xs text-gray-600">= Sales_t / Sales_t-1</p>
+                  </div>
+                  <div>
+                    <p><strong>DEPI</strong> = Depreciation Index</p>
+                    <p class="text-xs text-gray-600">= Depr Rate_t-1 / Depr Rate_t</p>
+                  </div>
+                  <div>
+                    <p><strong>SGAI</strong> = SG&A Index</p>
+                    <p class="text-xs text-gray-600">= (SG&A/Sales)_t / (SG&A/Sales)_t-1</p>
+                  </div>
+                  <div>
+                    <p><strong>TATA</strong> = Total Accruals to Total Assets</p>
+                    <p class="text-xs text-gray-600">= (Income - CFO) / Total Assets</p>
+                  </div>
+                  <div>
+                    <p><strong>LVGI</strong> = Leverage Index</p>
+                    <p class="text-xs text-gray-600">= Leverage_t / Leverage_t-1</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 border-2 border-green-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-green-800 mb-4">📐 Altman Z-Score (Bankruptcy Predictor)</h4>
+
+            <div class="space-y-4">
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-2">Z-Score Formula (Original - Public Manufacturing):</p>
+                <div class="bg-green-50 p-3 rounded font-mono text-sm">
+                  Z = 1.2×(Working Capital / Total Assets)<br>
+                  &nbsp;&nbsp;+ 1.4×(Retained Earnings / Total Assets)<br>
+                  &nbsp;&nbsp;+ 3.3×(EBIT / Total Assets)<br>
+                  &nbsp;&nbsp;+ 0.6×(Market Value of Equity / Book Value of Total Liabilities)<br>
+                  &nbsp;&nbsp;+ 1.0×(Sales / Total Assets)
+                </div>
+                <div class="mt-3 space-y-2 text-sm">
+                  <p><strong>Interpretation:</strong></p>
+                  <ul class="space-y-1 ml-4">
+                    <li>• Z > 2.99 = <strong>Safe Zone</strong> (Low bankruptcy risk)</li>
+                    <li>• 1.81 < Z < 2.99 = <strong>Grey Zone</strong> (Moderate risk)</li>
+                    <li>• Z < 1.81 = <strong>Distress Zone</strong> (High bankruptcy risk)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-2">Modified Z-Score (Private Companies):</p>
+                <div class="bg-green-50 p-3 rounded font-mono text-sm">
+                  Z' = 0.717×X1 + 0.847×X2 + 3.107×X3 + 0.420×X4 + 0.998×X5
+                </div>
+                <p class="text-xs text-gray-600 mt-2">Where X4 = Book Value of Equity / Total Liabilities</p>
+                <div class="mt-3 space-y-2 text-sm">
+                  <p><strong>Interpretation:</strong></p>
+                  <ul class="space-y-1 ml-4">
+                    <li>• Z' > 2.9 = Safe Zone</li>
+                    <li>• 1.23 < Z' < 2.9 = Grey Zone</li>
+                    <li>• Z' < 1.23 = Distress Zone</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Common Exam Traps & Mistakes</h3>
+
+          <div class="space-y-4">
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #1: Confusing Reporting Quality with Earnings Quality</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Thinking high-quality GAAP reporting automatically means high-quality earnings</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> A company can have perfect GAAP compliance (high reporting quality) but still have low-quality, unsustainable earnings (e.g., one-time gains, favorable FX rates).</p>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #2: M-Score Threshold</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Getting the threshold direction wrong</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> M-Score > -1.78 indicates HIGHER manipulation risk (remember: less negative = more manipulation)</p>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #3: Conservative = High Quality</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Thinking conservative accounting always means high quality</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> Both aggressive AND conservative accounting can lower reporting quality by not faithfully representing economic reality. The key is neutrality.</p>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #4: Cash Flow > Net Income Always Bad</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Thinking that CFO < NI is always a red flag</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> Fast-growing companies often have CFO < NI due to working capital investments. It's only a red flag when PERSISTENT and not explained by business fundamentals.</p>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Memory Aids & Mnemonics</h3>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-purple-50 border border-purple-300 rounded-lg p-4">
+              <h4 class="font-semibold text-purple-800 mb-3">🧠 Earnings Quality Indicators</h4>
+              <p class="text-sm mb-2"><strong>"SCRAP"</strong> for High-Quality Earnings:</p>
+              <ul class="text-sm space-y-1 list-disc list-inside">
+                <li><strong>S</strong>ustainable (core operations)</li>
+                <li><strong>C</strong>ash-backed (CFO ≈ NI)</li>
+                <li><strong>R</strong>ealistic assumptions</li>
+                <li><strong>A</strong>bove cost of capital (value creation)</li>
+                <li><strong>P</strong>ersistent over time</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-50 border border-green-300 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-3">🧠 Red Flags: "CRIME"</h4>
+              <p class="text-sm mb-2"><strong>Watch for these manipulation signs:</strong></p>
+              <ul class="text-sm space-y-1 list-disc list-inside">
+                <li><strong>C</strong>ash flow < Net Income (consistently)</li>
+                <li><strong>R</strong>eceivables growing faster than sales</li>
+                <li><strong>I</strong>nventory growing faster than COGS</li>
+                <li><strong>M</strong>argins diverging from peers</li>
+                <li><strong>E</strong>xpenses capitalized aggressively</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Practice Questions</h3>
+
+          <div class="space-y-6">
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 1: Beneish M-Score Interpretation</h4>
+              <p class="text-sm mb-4">A company has a Beneish M-Score of -1.50. This most likely indicates:</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Low likelihood of earnings manipulation</div>
+                <div class="bg-white p-2 rounded">B) High likelihood of earnings manipulation</div>
+                <div class="bg-white p-2 rounded">C) The company is in the grey zone and requires further analysis</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) High likelihood of earnings manipulation</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>M-Score threshold is -1.78</li>
+                    <li>Scores GREATER than -1.78 indicate higher manipulation risk</li>
+                    <li>-1.50 > -1.78 (less negative), so HIGH manipulation likelihood</li>
+                    <li>Think of it as: the closer to zero (or positive), the worse it is</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 2: Earnings Quality vs. Reporting Quality</h4>
+              <p class="text-sm mb-4">A company reports a 30% increase in earnings primarily due to favorable currency translation from a weakening home currency. The financial statements comply fully with IFRS. Which statement is most accurate?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Both reporting quality and earnings quality are high</div>
+                <div class="bg-white p-2 rounded">B) Reporting quality is high, but earnings quality is low</div>
+                <div class="bg-white p-2 rounded">C) Reporting quality is low, but earnings quality is high</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) Reporting quality is high, but earnings quality is low</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li><strong>Reporting quality:</strong> The statements comply with IFRS, are likely decision-useful, and faithfully represent transactions → HIGH quality</li>
+                    <li><strong>Earnings quality:</strong> The earnings increase is driven by temporary FX gains, not sustainable core operations → LOW quality</li>
+                    <li>This example perfectly illustrates that GAAP compliance ≠ sustainable earnings</li>
+                    <li>High-quality earnings must be sustainable and from core economic activities</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 3: Altman Z-Score Analysis</h4>
+              <p class="text-sm mb-4">An analyst calculates an Altman Z-Score of 2.5 for a public manufacturing company. This score suggests the company is:</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) In the safe zone with low bankruptcy risk</div>
+                <div class="bg-white p-2 rounded">B) In the grey zone with moderate bankruptcy risk</div>
+                <div class="bg-white p-2 rounded">C) In the distress zone with high bankruptcy risk</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) In the grey zone with moderate bankruptcy risk</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li><strong>Altman Z-Score zones for public companies:</strong></li>
+                    <li>Safe Zone: Z > 2.99</li>
+                    <li>Grey Zone: 1.81 < Z < 2.99 ← 2.5 falls here</li>
+                    <li>Distress Zone: Z < 1.81</li>
+                    <li>A score of 2.5 indicates the company has some financial stress but is not in immediate danger</li>
+                    <li>Further analysis of trends and industry context is warranted</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 4: Red Flags in Cash Flow</h4>
+              <p class="text-sm mb-4">An analyst reviewing a company's financials notices that for the past three years, net income has averaged $100 million annually, while cash flow from operations has averaged $60 million. Which action is most appropriate?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) No action needed; this is normal for growing companies</div>
+                <div class="bg-white p-2 rounded">B) Investigate accrual accounting practices and working capital trends</div>
+                <div class="bg-white p-2 rounded">C) Recommend the stock as it shows strong profitability</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) Investigate accrual accounting practices and working capital trends</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>CFO consistently less than NI (60% ratio) is a <strong>major red flag</strong></li>
+                    <li>Suggests aggressive accrual accounting or poor working capital management</li>
+                    <li>Possible causes: channel stuffing, capitalizing expenses, building inventory</li>
+                    <li>The analyst should examine: DSO trends, inventory turnover, capitalization policies</li>
+                    <li>While growing companies can show this pattern temporarily, PERSISTENT divergence requires investigation</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 5: Conservative vs. Aggressive Accounting</h4>
+              <p class="text-sm mb-4">Which of the following choices would most likely be considered aggressive accounting?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Using a 3-year useful life for computer equipment when the industry average is 5 years</div>
+                <div class="bg-white p-2 rounded">B) Recognizing revenue using FOB destination terms</div>
+                <div class="bg-white p-2 rounded">C) Capitalizing software development costs after achieving technical feasibility under U.S. GAAP</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: C) Capitalizing software development costs after achieving technical feasibility under U.S. GAAP</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>A is CONSERVATIVE: Shorter useful life = higher depreciation = lower current income</li>
+                    <li>B is CONSERVATIVE: FOB destination delays revenue recognition until customer receives goods</li>
+                    <li>C is AGGRESSIVE: While allowed under GAAP, capitalizing costs increases current income and assets (vs. expensing immediately)</li>
+                    <li>Aggressive accounting overstates current performance at the expense of future periods</li>
+                    <li>Note: The question asks which is "most likely" aggressive - C is the only one that inflates current earnings</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 6: SEC Non-GAAP Regulations</h4>
+              <p class="text-sm mb-4">A company reports "adjusted EBITDA" that excludes restructuring charges. The company has reported restructuring charges in each of the past three years. According to SEC regulations, this non-GAAP measure is:</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Acceptable as long as it's reconciled to GAAP EBITDA</div>
+                <div class="bg-white p-2 rounded">B) Not acceptable because restructuring charges are recurring</div>
+                <div class="bg-white p-2 rounded">C) Acceptable only if disclosed in the footnotes</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) Not acceptable because restructuring charges are recurring</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>The SEC uses a <strong>2-year lookback period</strong> to determine if items are recurring</li>
+                    <li>If charges appear in 2+ of the past 3 years, they're considered RECURRING</li>
+                    <li>Non-GAAP measures <strong>cannot exclude recurring items</strong></li>
+                    <li>Even with reconciliation, this would violate SEC Regulation G</li>
+                    <li>This rule prevents companies from painting an artificially rosy picture by excluding "non-recurring" items that recur regularly</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Self-Assessment Checklist</h3>
+
+          <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6">
+            <h4 class="font-semibold text-yellow-900 mb-4">✅ Can you confidently answer these?</h4>
+            <div class="space-y-2 text-sm">
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Distinguish between high-quality financial reporting and high-quality earnings</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Calculate and interpret the Beneish M-Score (know threshold: -1.78)</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Calculate and interpret the Altman Z-Score and identify the three zones</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Identify at least 5 red flags indicating potential earnings manipulation</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Explain the difference between aggressive and conservative accounting choices</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Understand SEC regulations on non-GAAP measures and the 2-year rule</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Recognize when CFO < NI is a red flag vs. normal business pattern</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="warning-box mt-8">
+            <h4 class="font-semibold mb-3">💡 Study Tips for 90th Percentile Performance</h4>
+            <ul class="space-y-2 text-sm">
+              <li>• <strong>Practice calculating M-Scores and Z-Scores</strong> with real company data from 10-Ks</li>
+              <li>• <strong>Create a red flags checklist</strong> and apply it to 3-5 different companies</li>
+              <li>• <strong>Study actual fraud cases</strong> (Enron, WorldCom, Wirecard) to see red flags in action</li>
+              <li>• <strong>Compare aggressive vs. conservative firms</strong> in the same industry to see impact on financials</li>
+              <li>• <strong>Focus on the "why"</strong> - understand the economic incentives behind earnings management</li>
+              <li>• <strong>Memorize key thresholds:</strong> M-Score (-1.78), Z-Score zones (1.81, 2.99), SEC 2-year rule</li>
+            </ul>
+          </div>
+
         </section>
 
       </div>

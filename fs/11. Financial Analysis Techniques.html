@@ -366,6 +366,7 @@
             <li><a href="#profitability-ratios">4D. Profitability Ratios</a></li>
             <li><a href="#dupont-analysis">5. DuPont Analysis</a></li>
             <li><a href="#modeling-forecasting">6. Model Building</a></li>
+            <li><a href="#mastery">7. 90th Percentile Mastery</a></li>
           </ul>
         </div>
       </div>
@@ -825,6 +826,475 @@
           <div class="info-box">
             <p><strong>💡 Best Practice:</strong> Combine multiple forecasting techniques and always validate models against historical performance and industry benchmarks. Remember that financial analysis is as much art as science, requiring judgment and experience to interpret results correctly.</p>
           </div>
+        </section>
+
+        <!-- 90th Percentile Mastery -->
+        <section id="mastery" class="content-section">
+          <div class="section-header">
+            <div class="section-number">7</div>
+            <h2 class="section-title">90th Percentile Mastery: Key Concepts & Exam Tips</h2>
+          </div>
+
+          <div class="warning-box">
+            <h4 class="font-semibold mb-3">🎯 Exam Weight & Focus Areas</h4>
+            <p class="text-sm mb-2">This reading typically accounts for 5-8% of Level I exam weight. This is HIGH-YIELD! Focus on:</p>
+            <ul class="text-sm space-y-1">
+              <li>• <strong>DuPont Analysis</strong> - Both 3-part and 5-part decomposition formulas</li>
+              <li>• <strong>All ratio formulas</strong> - Activity, liquidity, solvency, and profitability</li>
+              <li>• <strong>Ratio interpretation</strong> - What's good vs. bad, industry context matters</li>
+              <li>• <strong>Common-size analysis</strong> - Vertical vs. horizontal analysis</li>
+              <li>• <strong>Cash conversion cycle</strong> - Formula and interpretation</li>
+            </ul>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Critical Formulas - Must Memorize</h3>
+
+          <div class="bg-gray-50 border-2 border-blue-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-blue-800 mb-4">📐 DuPont Analysis (THE Most Important)</h4>
+
+            <div class="space-y-4">
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-2 text-green-800">3-Part DuPont Model:</p>
+                <div class="bg-green-50 p-4 rounded font-mono text-sm font-bold text-center">
+                  ROE = Net Profit Margin × Asset Turnover × Financial Leverage
+                </div>
+                <div class="bg-blue-50 p-3 rounded mt-2 text-sm">
+                  ROE = (Net Income / Revenue) × (Revenue / Avg Total Assets) × (Avg Total Assets / Avg Total Equity)
+                </div>
+                <p class="text-xs text-gray-600 mt-2 italic">Note: Revenue cancels, Assets cancel → ROE = Net Income / Avg Equity</p>
+              </div>
+
+              <div class="bg-white p-4 rounded border border-gray-200">
+                <p class="font-semibold mb-2 text-purple-800">5-Part DuPont Model (Extended):</p>
+                <div class="bg-purple-50 p-4 rounded text-xs font-bold text-center">
+                  ROE = Tax Burden × Interest Burden × EBIT Margin × Asset Turnover × Leverage
+                </div>
+                <div class="bg-blue-50 p-3 rounded mt-2 text-xs">
+                  ROE = (NI/EBT) × (EBT/EBIT) × (EBIT/Rev) × (Rev/Avg Assets) × (Avg Assets/Avg Equity)
+                </div>
+                <div class="mt-3 grid md:grid-cols-2 gap-2 text-xs">
+                  <div class="bg-yellow-50 p-2 rounded">
+                    <strong>Tax Burden:</strong> Net Income / EBT<br>
+                    <span class="text-gray-600">Higher is better (lower tax rate)</span>
+                  </div>
+                  <div class="bg-yellow-50 p-2 rounded">
+                    <strong>Interest Burden:</strong> EBT / EBIT<br>
+                    <span class="text-gray-600">Higher is better (less interest expense)</span>
+                  </div>
+                  <div class="bg-yellow-50 p-2 rounded">
+                    <strong>EBIT Margin:</strong> EBIT / Revenue<br>
+                    <span class="text-gray-600">Operating profitability before financing</span>
+                  </div>
+                  <div class="bg-yellow-50 p-2 rounded">
+                    <strong>Asset Turnover:</strong> Revenue / Avg Assets<br>
+                    <span class="text-gray-600">Efficiency in using assets</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 border-2 border-green-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-green-800 mb-4">📐 Activity Ratios (Efficiency)</h4>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Inventory Turnover</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= COGS / Avg Inventory</div>
+                <p class="text-xs text-gray-600 mt-1">Higher = faster inventory movement</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Days Inventory on Hand (DOH)</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= 365 / Inventory Turnover</div>
+                <p class="text-xs text-gray-600 mt-1">Lower = faster movement</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Receivables Turnover</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Revenue / Avg AR</div>
+                <p class="text-xs text-gray-600 mt-1">Higher = faster collection</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Days Sales Outstanding (DSO)</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= 365 / Receivables Turnover</div>
+                <p class="text-xs text-gray-600 mt-1">Lower = faster collection</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Payables Turnover</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Purchases / Avg AP</div>
+                <p class="text-xs text-gray-600 mt-1">Higher = faster payment</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Days Payables Outstanding</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= 365 / Payables Turnover</div>
+                <p class="text-xs text-gray-600 mt-1">Higher = slower payment (can be good!)</p>
+              </div>
+            </div>
+
+            <div class="bg-yellow-100 border border-yellow-400 p-3 rounded mt-4">
+              <p class="font-semibold text-yellow-900 mb-2">🔥 CRITICAL: Cash Conversion Cycle</p>
+              <div class="bg-white p-3 rounded font-mono text-center font-bold">
+                CCC = DOH + DSO - Days Payables
+              </div>
+              <p class="text-sm text-gray-700 mt-2"><strong>Interpretation:</strong> Measures how long cash is tied up in operations. <strong>LOWER IS BETTER</strong> - means faster cash generation!</p>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 border-2 border-purple-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-purple-800 mb-4">📐 Liquidity Ratios (Short-Term Solvency)</h4>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Current Ratio</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Current Assets / Current Liab</div>
+                <p class="text-xs text-gray-600 mt-1">Benchmark: > 1.0 (varies by industry)</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Quick Ratio (Acid-Test)</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= (Cash + MS + AR) / Current Liab</div>
+                <p class="text-xs text-gray-600 mt-1">More conservative - excludes inventory</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Cash Ratio</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= (Cash + MS) / Current Liab</div>
+                <p class="text-xs text-gray-600 mt-1">Most conservative liquidity measure</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Defensive Interval</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= (Cash+MS+AR) / Daily Exp</div>
+                <p class="text-xs text-gray-600 mt-1">Days company can operate w/o new funding</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 border-2 border-red-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-red-800 mb-4">📐 Solvency Ratios (Long-Term Debt Capacity)</h4>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Debt-to-Assets</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Total Debt / Total Assets</div>
+                <p class="text-xs text-gray-600 mt-1">% of assets financed by debt</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Debt-to-Equity</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Total Debt / Total Equity</div>
+                <p class="text-xs text-gray-600 mt-1">Financial leverage measure</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Debt-to-Capital</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Total Debt / (Debt + Equity)</div>
+                <p class="text-xs text-gray-600 mt-1">% of capital structure that is debt</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Financial Leverage</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Avg Assets / Avg Equity</div>
+                <p class="text-xs text-gray-600 mt-1">Used in DuPont analysis</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Interest Coverage</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= EBIT / Interest Expense</div>
+                <p class="text-xs text-gray-600 mt-1">Higher = safer (can cover interest)</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Fixed Charge Coverage</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= (EBIT+Lease) / (Int+Lease)</div>
+                <p class="text-xs text-gray-600 mt-1">Includes lease obligations</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 border-2 border-orange-300 rounded-lg p-6 mb-6">
+            <h4 class="font-semibold text-orange-800 mb-4">📐 Profitability Ratios (Returns)</h4>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Gross Profit Margin</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Gross Profit / Revenue</div>
+                <p class="text-xs text-gray-600 mt-1">Profitability after COGS</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Operating Profit Margin</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Operating Income / Revenue</div>
+                <p class="text-xs text-gray-600 mt-1">Core business profitability</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Net Profit Margin</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Net Income / Revenue</div>
+                <p class="text-xs text-gray-600 mt-1">Bottom-line profitability</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">ROA (Return on Assets)</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Net Income / Avg Total Assets</div>
+                <p class="text-xs text-gray-600 mt-1">How well assets generate profit</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">ROE (Return on Equity)</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= Net Income / Avg Total Equity</div>
+                <p class="text-xs text-gray-600 mt-1">Return to shareholders (KEY metric!)</p>
+              </div>
+              <div class="bg-white p-3 rounded border border-gray-200 text-sm">
+                <p class="font-semibold text-blue-800">Return on Common Equity</p>
+                <div class="bg-blue-50 p-2 rounded mt-1 font-mono">= (NI - Pref Div) / Avg Common Eq</div>
+                <p class="text-xs text-gray-600 mt-1">Return to common shareholders only</p>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Common Exam Traps & Mistakes</h3>
+
+          <div class="space-y-4">
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #1: DuPont Component Confusion</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Mixing up which components are in 3-part vs. 5-part model</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> 3-Part = NPM × Asset Turnover × Leverage. 5-Part adds Tax Burden, Interest Burden, and uses EBIT margin instead of NPM.</p>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #2: Days vs. Turnover</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Confusing when higher is better vs. lower is better</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> TURNOVER ratios: Higher = Better (faster movement). DAYS ratios: Lower = Better (except Days Payables where higher can be good for cash management).</p>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #3: Cash Conversion Cycle Calculation</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Adding all three components together</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> CCC = DOH + DSO - Days Payables (SUBTRACT payables because delaying payment helps cash!)</p>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #4: Forgetting "Average"</h4>
+              <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Using ending balance instead of average for balance sheet items</p>
+              <p class="text-sm text-gray-700"><strong>Reality:</strong> ROE, ROA, turnover ratios ALL use AVERAGE balance sheet values: (Beginning + Ending) / 2</p>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Memory Aids & Mnemonics</h3>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-purple-50 border border-purple-300 rounded-lg p-4">
+              <h4 class="font-semibold text-purple-800 mb-3">🧠 DuPont 5-Part: "TIBET"</h4>
+              <p class="text-sm mb-2"><strong>"Tibet Is Beautiful Every Time"</strong></p>
+              <ul class="text-sm space-y-1 list-disc list-inside">
+                <li><strong>T</strong>ax Burden (NI/EBT)</li>
+                <li><strong>I</strong>nterest Burden (EBT/EBIT)</li>
+                <li><strong>B</strong>usiness Margin (EBIT/Rev)</li>
+                <li><strong>E</strong>fficiency (Rev/Assets)</li>
+                <li><strong>T</strong>otal Leverage (Assets/Equity)</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-50 border border-green-300 rounded-lg p-4">
+              <h4 class="font-semibold text-green-800 mb-3">🧠 Ratio Categories: "ALPS"</h4>
+              <p class="text-sm mb-2"><strong>4 main categories:</strong></p>
+              <ul class="text-sm space-y-1 list-disc list-inside">
+                <li><strong>A</strong>ctivity (efficiency/turnover)</li>
+                <li><strong>L</strong>iquidity (short-term)</li>
+                <li><strong>P</strong>rofitability (margins/returns)</li>
+                <li><strong>S</strong>olvency (long-term debt)</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Practice Questions</h3>
+
+          <div class="space-y-6">
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 1: DuPont Analysis Components</h4>
+              <p class="text-sm mb-4">A company has ROE of 15%, Net Profit Margin of 5%, and Financial Leverage of 2.0. What is the company's Asset Turnover ratio?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) 1.0</div>
+                <div class="bg-white p-2 rounded">B) 1.5</div>
+                <div class="bg-white p-2 rounded">C) 3.0</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) 1.5</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>Using 3-Part DuPont: ROE = NPM × Asset Turnover × Leverage</li>
+                    <li>15% = 5% × Asset Turnover × 2.0</li>
+                    <li>15% = 10% × Asset Turnover</li>
+                    <li>Asset Turnover = 15% / 10% = 1.5</li>
+                    <li>This means the company generates $1.50 in sales for every $1 of assets</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 2: Cash Conversion Cycle</h4>
+              <p class="text-sm mb-4">A company has the following: DOH = 60 days, DSO = 45 days, Days Payables = 30 days. What is the Cash Conversion Cycle?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) 135 days</div>
+                <div class="bg-white p-2 rounded">B) 75 days</div>
+                <div class="bg-white p-2 rounded">C) 15 days</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) 75 days</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>CCC = DOH + DSO - Days Payables</li>
+                    <li>CCC = 60 + 45 - 30 = 75 days</li>
+                    <li>This means it takes 75 days for the company to convert its investments in inventory and receivables back into cash</li>
+                    <li>Remember: We SUBTRACT payables because delaying supplier payments helps conserve cash</li>
+                    <li>A shorter CCC is generally better (faster cash generation)</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 3: Quick Ratio vs. Current Ratio</h4>
+              <p class="text-sm mb-4">A company has: Cash $100K, Marketable Securities $50K, AR $200K, Inventory $300K, Current Liabilities $400K. Which statement is correct?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Current Ratio = 1.63; Quick Ratio = 0.88</div>
+                <div class="bg-white p-2 rounded">B) Current Ratio = 0.88; Quick Ratio = 1.63</div>
+                <div class="bg-white p-2 rounded">C) Current Ratio = 1.50; Quick Ratio = 0.75</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: A) Current Ratio = 1.63; Quick Ratio = 0.88</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li><strong>Current Ratio:</strong> (100 + 50 + 200 + 300) / 400 = 650 / 400 = 1.625 ≈ 1.63</li>
+                    <li><strong>Quick Ratio:</strong> (100 + 50 + 200) / 400 = 350 / 400 = 0.875 ≈ 0.88</li>
+                    <li>Quick ratio EXCLUDES inventory (less liquid asset)</li>
+                    <li>Current ratio > 1.0 suggests adequate short-term liquidity</li>
+                    <li>Quick ratio < 1.0 suggests potential liquidity concerns if inventory can't be sold quickly</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 4: Inventory Turnover Interpretation</h4>
+              <p class="text-sm mb-4">Company A has Inventory Turnover of 8×, while Company B (same industry) has 4×. What is the most likely interpretation?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Company B is managing inventory more efficiently</div>
+                <div class="bg-white p-2 rounded">B) Company A is managing inventory more efficiently</div>
+                <div class="bg-white p-2 rounded">C) Both companies have the same efficiency</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) Company A is managing inventory more efficiently</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>Inventory Turnover = COGS / Average Inventory</li>
+                    <li>HIGHER turnover = BETTER (more efficient inventory management)</li>
+                    <li>Company A turns over inventory 8 times per year vs. 4 times for Company B</li>
+                    <li>This means Company A holds inventory for ~46 days (365/8) vs. ~91 days (365/4) for Company B</li>
+                    <li>Faster turnover typically means: less obsolescence risk, lower holding costs, better cash flow</li>
+                    <li>Caveat: Very high turnover might indicate stockouts and lost sales</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 5: Interest Coverage Ratio</h4>
+              <p class="text-sm mb-4">A company has EBIT of $500K and Interest Expense of $50K. If EBIT decreases by 40%, will the company still be able to cover its interest?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Yes, with coverage ratio of 6.0</div>
+                <div class="bg-white p-2 rounded">B) Yes, with coverage ratio of 3.0</div>
+                <div class="bg-white p-2 rounded">C) No, coverage will fall below 1.0</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: B) Yes, with coverage ratio of 6.0</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Solution:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li><strong>Current Interest Coverage:</strong> 500K / 50K = 10.0×</li>
+                    <li><strong>After 40% EBIT decline:</strong> New EBIT = 500K × 0.60 = 300K</li>
+                    <li><strong>New Interest Coverage:</strong> 300K / 50K = 6.0×</li>
+                    <li>The company can still comfortably cover interest (6× is generally considered healthy)</li>
+                    <li>Coverage > 2.5× typically indicates low financial distress risk</li>
+                    <li>This demonstrates the company's earnings cushion before defaulting on debt</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+
+            <div class="border-2 border-blue-300 rounded-lg p-5 bg-blue-50">
+              <h4 class="font-semibold text-blue-900 mb-3">Question 6: ROE vs. ROA Relationship</h4>
+              <p class="text-sm mb-4">Company X has ROE of 20% and ROA of 10%. Company Y has ROE of 12% and ROA of 10%. Which statement is most accurate?</p>
+              <div class="space-y-2 text-sm">
+                <div class="bg-white p-2 rounded">A) Company X has higher financial leverage than Company Y</div>
+                <div class="bg-white p-2 rounded">B) Company Y has higher financial leverage than Company X</div>
+                <div class="bg-white p-2 rounded">C) Both companies have the same financial leverage</div>
+              </div>
+              <details class="mt-4">
+                <summary class="cursor-pointer font-semibold text-green-700 hover:text-green-900">Show Answer & Explanation</summary>
+                <div class="mt-3 p-4 bg-green-50 border border-green-300 rounded">
+                  <p class="font-semibold mb-2">Answer: A) Company X has higher financial leverage than Company Y</p>
+                  <p class="text-sm text-gray-700 mb-2"><strong>Explanation:</strong></p>
+                  <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>ROE = ROA × Financial Leverage (from DuPont)</li>
+                    <li><strong>Company X:</strong> 20% = 10% × Leverage → Leverage = 2.0</li>
+                    <li><strong>Company Y:</strong> 12% = 10% × Leverage → Leverage = 1.2</li>
+                    <li>Both companies generate the same return on assets (10%)</li>
+                    <li>Company X uses more debt financing, amplifying ROE to 20% vs. 12% for Company Y</li>
+                    <li>Higher leverage = higher ROE but also higher financial risk</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Self-Assessment Checklist</h3>
+
+          <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6">
+            <h4 class="font-semibold text-yellow-900 mb-4">✅ Can you confidently answer these?</h4>
+            <div class="space-y-2 text-sm">
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Recite both 3-part and 5-part DuPont formulas from memory</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Calculate all 4 liquidity ratios (Current, Quick, Cash, Defensive Interval)</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Know when higher vs. lower is better for each ratio type</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Calculate Cash Conversion Cycle correctly (remember to SUBTRACT payables)</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Explain the relationship between ROE, ROA, and Financial Leverage</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Remember to use AVERAGE balance sheet values for turnover ratios</span>
+              </label>
+              <label class="flex items-start cursor-pointer hover:bg-yellow-100 p-2 rounded">
+                <input type="checkbox" class="mt-1 mr-3">
+                <span>Distinguish between Inventory Turnover (COGS-based) and Receivables Turnover (Revenue-based)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="warning-box mt-8">
+            <h4 class="font-semibold mb-3">💡 Study Tips for 90th Percentile Performance</h4>
+            <ul class="space-y-2 text-sm">
+              <li>• <strong>Create formula flashcards</strong> - Write formula on one side, interpretation on the other</li>
+              <li>• <strong>Practice with real companies</strong> - Calculate ratios for 3-5 companies in same industry and compare</li>
+              <li>• <strong>Build a ratio cheat sheet</strong> - One page with ALL formulas organized by category (ALPS)</li>
+              <li>• <strong>Master DuPont analysis</strong> - This appears in EVERY CFA exam, often multiple times</li>
+              <li>• <strong>Memorize key benchmarks:</strong> Current ratio > 1.0, Interest coverage > 2.5×, Quick ratio ~1.0</li>
+              <li>• <strong>Understand the story</strong> - Ratios tell a story about efficiency, profitability, leverage, and liquidity</li>
+              <li>• <strong>Time yourself:</strong> Practice calculating 5-10 ratios in under 10 minutes</li>
+            </ul>
+          </div>
+
         </section>
 
       </div>
