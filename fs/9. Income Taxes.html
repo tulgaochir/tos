@@ -90,31 +90,33 @@
     }
 
     .info-box {
-      background: #eff6ff;
-      border-left: 4px solid var(--accent);
+      background: var(--card-bg);
+      border-left: 4px solid #000000;
       padding: 1rem 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0;
     }
 
     .formula-box {
-      background: #f0f9ff;
-      border: 2px solid var(--accent);
+      font-family: 'Courier New', monospace;
+      background: #f5f5f5;
+      border: 2px solid #000000;
+      border-left: 6px solid #000000;
       padding: 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 12px;
-      text-align: center;
-      font-family: 'Courier New', monospace;
       font-size: 1.1rem;
+      line-height: 1.8;
       font-weight: 600;
+      letter-spacing: 0.02em;
+      text-align: center;
     }
 
     .highlight-box {
-      background: #fef3c7;
-      border: 1px solid #f59e0b;
+      background: var(--card-bg);
+      border: 2px solid #000000;
       padding: 1rem 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 8px;
+      border-radius: 0;
     }
 
     .comparison-table {
@@ -128,7 +130,7 @@
     }
 
     .comparison-table th {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      background: var(--primary);
       color: white;
       padding: 1rem;
       text-align: left;
@@ -142,20 +144,20 @@
     }
 
     .comparison-table tr:nth-child(even) {
-      background: #f8fafc;
+      background: var(--card-bg);
     }
 
     .comparison-table tr:hover {
-      background: #eff6ff;
+      background: var(--card-bg);
     }
 
     .tax-positive {
-      color: #dc2626;
+      color: var(--text);
       font-weight: 600;
     }
 
     .tax-negative {
-      color: #16a34a;
+      color: var(--text);
       font-weight: 600;
     }
 
@@ -202,28 +204,29 @@
       position: fixed;
       bottom: 2rem;
       left: 2rem;
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      background: var(--primary);
       color: white;
       padding: 0.75rem 1.5rem;
-      border-radius: 50px;
+      border-radius: 0;
       text-decoration: none;
       font-weight: 500;
-      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       transition: transform 0.2s, box-shadow 0.2s;
       z-index: 100;
+      border: 2px solid #000000;
     }
 
     .back-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
 
     .exam-tip {
-      background: #fef2f2;
-      border-left: 4px solid #dc2626;
+      background: var(--card-bg);
+      border-left: 4px solid #000000;
       padding: 1rem 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0;
     }
 
     @media (max-width: 1024px) {
@@ -402,14 +405,14 @@
                 <td><strong>When does it arise?</strong></td>
                 <td>When accounting profit is <strong>less than</strong> taxable income now, but will be higher in the future. This happens when:
                   <ul class="mt-2 space-y-1">
-                    <li>â€The carrying amount of an asset > its tax base.</li>
-                    <li>â€The tax base of a liability > its carrying amount.</li>
+                    <li>ï¿½The carrying amount of an asset > its tax base.</li>
+                    <li>ï¿½The tax base of a liability > its carrying amount.</li>
                   </ul>
                 </td>
                 <td>When accounting profit is <strong>greater than</strong> taxable income now, but will be lower in the future. This happens when:
                   <ul class="mt-2 space-y-1">
-                    <li>â€The tax base of an asset > its carrying amount.</li>
-                    <li>â€The carrying amount of a liability > its tax base.</li>
+                    <li>ï¿½The tax base of an asset > its carrying amount.</li>
+                    <li>ï¿½The carrying amount of a liability > its tax base.</li>
                   </ul>
                 </td>
               </tr>
@@ -539,8 +542,8 @@
             <h3>Offsetting DTAs and DTLs</h3>
             <p>A company can only present a single net deferred tax asset or liability if specific conditions are met:</p>
             <ul class="space-y-2 mt-3">
-              <li>â€The entity must have a legally enforceable right to offset current tax assets and liabilities.</li>
-              <li>â€The deferred tax items must relate to the same tax authority (e.g., both are federal taxes in the same country).</li>
+              <li>ï¿½The entity must have a legally enforceable right to offset current tax assets and liabilities.</li>
+              <li>ï¿½The deferred tax items must relate to the same tax authority (e.g., both are federal taxes in the same country).</li>
             </ul>
           </div>
 
@@ -552,17 +555,17 @@
               <div class="info-box">
                 <h4 class="font-semibold text-primary mb-2">IFRS Requirements:</h4>
                 <ul class="space-y-1">
-                  <li>â€Required for both public and private companies</li>
-                  <li>â€Allows two formats: monetary amounts or tax rates</li>
-                  <li>â€Can compare average effective rate to applicable rate</li>
+                  <li>ï¿½Required for both public and private companies</li>
+                  <li>ï¿½Allows two formats: monetary amounts or tax rates</li>
+                  <li>ï¿½Can compare average effective rate to applicable rate</li>
                 </ul>
               </div>
               <div class="info-box">
                 <h4 class="font-semibold text-primary mb-2">U.S. GAAP Requirements:</h4>
                 <ul class="space-y-1">
-                  <li>â€Required only for public companies</li>
-                  <li>â€Must use domestic federal statutory tax rate</li>
-                  <li>â€Reconciliation shows specific adjustments</li>
+                  <li>ï¿½Required only for public companies</li>
+                  <li>ï¿½Must use domestic federal statutory tax rate</li>
+                  <li>ï¿½Reconciliation shows specific adjustments</li>
                 </ul>
               </div>
             </div>
@@ -580,11 +583,11 @@
             <h4 class="font-semibold mb-3">Exam Weight & High-Yield Topics</h4>
             <p class="mb-2">Income taxes typically account for 2-3 questions on the CFA Level I exam. Focus on:</p>
             <ul class="space-y-1">
-              <li>â€Calculating income tax expense from current tax and changes in deferred taxes</li>
-              <li>â€Identifying situations that create DTAs vs. DTLs</li>
-              <li>â€Distinguishing temporary from permanent differences</li>
-              <li>â€Effective tax rate calculations and interpretation</li>
-              <li>â€Impact of tax rate changes on deferred tax balances</li>
+              <li>ï¿½Calculating income tax expense from current tax and changes in deferred taxes</li>
+              <li>ï¿½Identifying situations that create DTAs vs. DTLs</li>
+              <li>ï¿½Distinguishing temporary from permanent differences</li>
+              <li>ï¿½Effective tax rate calculations and interpretation</li>
+              <li>ï¿½Impact of tax rate changes on deferred tax balances</li>
             </ul>
           </div>
 
@@ -593,9 +596,9 @@
           <div class="subsection">
             <h4>1. Income Tax Expense</h4>
             <div class="formula-box">
-              Income Tax Expense = Current Tax Payable + ÎDTL ÎDTA
+              Income Tax Expense = Current Tax Payable + ï¿½DTL ï¿½DTA
             </div>
-            <p class="text-sm text-gray-600 mt-2">where Î= Change in deferred tax asset or liability during the period</p>
+            <p class="text-sm text-gray-600 mt-2">where ï¿½= Change in deferred tax asset or liability during the period</p>
           </div>
 
           <div class="subsection">
@@ -609,7 +612,7 @@
           <div class="subsection">
             <h4>3. Current Tax Payable</h4>
             <div class="formula-box">
-              Current Tax Payable = Taxable Income ÃStatutory Tax Rate
+              Current Tax Payable = Taxable Income ï¿½Statutory Tax Rate
             </div>
             <p class="text-sm text-gray-600 mt-2">Actual cash tax owed to tax authorities</p>
           </div>
@@ -617,7 +620,7 @@
           <div class="subsection">
             <h4>4. Deferred Tax Liability or Asset</h4>
             <div class="formula-box">
-              DTL or DTA = Temporary Difference ÃTax Rate
+              DTL or DTA = Temporary Difference ï¿½Tax Rate
             </div>
             <p class="text-sm text-gray-600 mt-2">DTL when accounting income < taxable income; DTA when accounting income > taxable income</p>
           </div>

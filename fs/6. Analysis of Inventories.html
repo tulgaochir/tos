@@ -89,46 +89,47 @@
     }
 
     .info-box {
-      background: #eff6ff;
-      border-left: 4px solid var(--accent);
+      background: var(--card-bg);
+      border-left: 4px solid #000000;
       padding: 1rem 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0;
     }
 
     .formula-box {
-      background: #f0f9ff;
-      border: 1px solid #0ea5e9;
-      border-left: 5px solid var(--accent);
-      border-radius: 0 8px 8px 0;
+      font-family: 'Courier New', monospace;
+      background: #f5f5f5;
+      border: 2px solid #000000;
+      border-left: 6px solid #000000;
       padding: 1.5rem;
       margin: 1.5rem 0;
-      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      font-weight: 600;
+      letter-spacing: 0.02em;
       text-align: center;
-      font-weight: 500;
-      font-size: 1.05em;
     }
 
     .example-box {
-      background: #fefce8;
-      border: 1px solid #facc15;
-      border-radius: 8px;
+      background: var(--card-bg);
+      border: 2px solid #000000;
+      border-radius: 0;
       padding: 1.5rem;
       margin: 1.5rem 0;
     }
 
     .example-box h4 {
       margin-top: 0;
-      color: #a16207;
+      color: var(--primary);
       font-weight: 600;
     }
 
     .highlight-box {
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-      border-left: 4px solid #f59e0b;
+      background: var(--card-bg);
+      border-left: 4px solid #000000;
       padding: 1rem 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0;
     }
 
     .comparison-table {
@@ -155,11 +156,11 @@
     }
 
     .comparison-table tr:nth-child(even) {
-      background: #f8fafc;
+      background: var(--card-bg);
     }
 
     .comparison-table tr:hover {
-      background: #f1f5f9;
+      background: var(--card-bg);
     }
 
     .key-term {
@@ -232,18 +233,18 @@
 
     .tag {
       display: inline-block;
-      background: #eef7ff;
-      color: #114488;
+      background: var(--card-bg);
+      color: var(--text);
       padding: 2px 8px;
-      border-radius: 12px;
+      border-radius: 0;
       font-size: 12px;
       margin-left: 8px;
     }
 
     .model-card {
-      background: #f8fafc;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
+      background: var(--card-bg);
+      border: 2px solid #000000;
+      border-radius: 0;
       padding: 1.5rem;
       margin: 1.5rem 0;
     }
@@ -256,11 +257,12 @@
     }
 
     .shortcut-box {
-      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      background: var(--primary);
       color: white;
-      border-radius: 8px;
+      border-radius: 0;
       padding: 1.5rem;
       margin: 1.5rem 0;
+      border: 2px solid #000000;
     }
 
     .shortcut-box h3 {
@@ -459,9 +461,9 @@
           <div class="subsection">
             <h3>Effects of Inventory Write-Downs</h3>
             <ul class="space-y-2">
-              <li>â€Reduces reported profit and the inventory carrying amount.</li>
-              <li>â€Negatively impacts profitability, liquidity, and solvency ratios.</li>
-              <li>â€Positively impacts activity ratios like inventory turnover, which may falsely suggest improved efficiency.</li>
+              <li>ï¿½Reduces reported profit and the inventory carrying amount.</li>
+              <li>ï¿½Negatively impacts profitability, liquidity, and solvency ratios.</li>
+              <li>ï¿½Positively impacts activity ratios like inventory turnover, which may falsely suggest improved efficiency.</li>
             </ul>
           </div>
 
@@ -674,8 +676,8 @@
             <h2>Formula Recap</h2>
             <ul>
               <li><strong>Inventory (LIFO FIFO):</strong> <code>FIFO Inventory = LIFO Inventory + LIFO Reserve</code> (add under rising prices; subtract under falling prices)</li>
-              <li><strong>COGS (LIFO FIFO):</strong> <code>FIFO COGS = LIFO COGS ÎLIFO Reserve</code> (<code>Î”</code> = Ending Beginning)</li>
-              <li><strong>Equity (optional):</strong> <code>Adjusted Equity = Reported Equity + LIFO Reserve Ã(1 Tax Rate)</code></li>
+              <li><strong>COGS (LIFO FIFO):</strong> <code>FIFO COGS = LIFO COGS ï¿½LIFO Reserve</code> (<code>Î”</code> = Ending Beginning)</li>
+              <li><strong>Equity (optional):</strong> <code>Adjusted Equity = Reported Equity + LIFO Reserve ï¿½(1 Tax Rate)</code></li>
               <li><strong>Inventory Turnover:</strong> <code>COGS / Average Inventory (FIFO)</code></li>
             </ul>
             <div class="info-box">
@@ -705,8 +707,8 @@
             </div>
             <h4>Fair Value Model rule:</h4>
             <ul class="space-y-2">
-              <li>â€Re-measure at fair value every year.</li>
-              <li>â€Gains/losses go to Profit or Loss affects net income.</li>
+              <li>ï¿½Re-measure at fair value every year.</li>
+              <li>ï¿½Gains/losses go to Profit or Loss affects net income.</li>
             </ul>
           </div>
 
@@ -719,8 +721,8 @@
             </div>
             <h4>Revaluation Model rule:</h4>
             <ul class="space-y-2">
-              <li>â€Re-measure at fair value.</li>
-              <li>â€Gains go to OCI (Revaluation Surplus) NOT net income.</li>
+              <li>ï¿½Re-measure at fair value.</li>
+              <li>ï¿½Gains go to OCI (Revaluation Surplus) NOT net income.</li>
             </ul>
           </div>
 
@@ -732,8 +734,8 @@
           <div class="shortcut-box">
             <h3>Quick Reference:</h3>
             <ul class="space-y-2">
-              <li>â€IAS 40 Fair Value Model Profit or Loss</li>
-              <li>â€IAS 16 Revaluation Model OCI</li>
+              <li>ï¿½IAS 40 Fair Value Model Profit or Loss</li>
+              <li>ï¿½IAS 16 Revaluation Model OCI</li>
             </ul>
           </div>
         </div>
@@ -748,17 +750,17 @@
             <h4 class="font-semibold mb-3">High-Yield Topics</h4>
             <p class="mb-2">Focus your study time on these key areas:</p>
             <ul class="space-y-1">
-              <li>â€LIFO reserve adjustments and LIFO to FIFO conversions - expect 2-4 questions</li>
-              <li>â€Inventory turnover and DOH calculations</li>
-              <li>â€LIFO liquidation effects on financial statements</li>
-              <li>â€Lower of cost or market/NRV rules (IFRS vs US GAAP)</li>
-              <li>â€Impact of inventory methods during inflation/deflation</li>
-              <li>â€COGS adjustments for comparability</li>
+              <li>ï¿½LIFO reserve adjustments and LIFO to FIFO conversions - expect 2-4 questions</li>
+              <li>ï¿½Inventory turnover and DOH calculations</li>
+              <li>ï¿½LIFO liquidation effects on financial statements</li>
+              <li>ï¿½Lower of cost or market/NRV rules (IFRS vs US GAAP)</li>
+              <li>ï¿½Impact of inventory methods during inflation/deflation</li>
+              <li>ï¿½COGS adjustments for comparability</li>
             </ul>
           </div>
 
           <h3 class="text-xl font-semibold mt-8 mb-4">ESSENTIAL FORMULAS</h3>
-          <div class="bg-gray-50 border-2 border-blue-300 rounded-lg p-6 mb-6">
+          <div class="bg-card-bg border-2 border-black p-6 mb-6">
             <div class="space-y-4">
               <div>
                 <h4 class="font-semibold font-bold mb-2">1. LIFO Reserve (Definition)</h4>
@@ -778,15 +780,15 @@
               <div>
                 <h4 class="font-semibold font-bold mb-2">3. Convert LIFO COGS to FIFO COGS</h4>
                 <div class="formula-box">
-                  FIFO COGS = LIFO COGS ÎLIFO Reserve
+                  FIFO COGS = LIFO COGS ï¿½LIFO Reserve
                 </div>
-                <p class="text-sm text-gray-600 mt-1">ÎLIFO Reserve = Ending LIFO Reserve Beginning LIFO Reserve</p>
+                <p class="text-sm text-gray-600 mt-1">ï¿½LIFO Reserve = Ending LIFO Reserve Beginning LIFO Reserve</p>
               </div>
 
               <div>
                 <h4 class="font-semibold font-bold mb-2">4. Adjust Retained Earnings</h4>
                 <div class="formula-box">
-                  FIFO Retained Earnings = LIFO RE + LIFO Reserve Ã(1 Tax Rate)
+                  FIFO Retained Earnings = LIFO RE + LIFO Reserve ï¿½(1 Tax Rate)
                 </div>
               </div>
 
@@ -803,7 +805,7 @@
                 <div class="formula-box">
                   DOH = 365 / Inventory Turnover
                 </div>
-                <p class="text-sm text-gray-600 mt-1">Or: DOH = (Average Inventory / COGS) Ã365</p>
+                <p class="text-sm text-gray-600 mt-1">Or: DOH = (Average Inventory / COGS) ï¿½365</p>
               </div>
 
               <div>
@@ -818,27 +820,27 @@
 
           <h3 class="text-xl font-semibold mt-8 mb-4">COMMON EXAM PITFALLS</h3>
           <div class="space-y-4">
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 1: Wrong Sign on COGS Adjustment</h4>
               <p class="text-sm">To convert LIFO COGS to FIFO: <strong>SUBTRACT</strong> the change in LIFO reserve, not add. If reserve increases, FIFO COGS is LOWER than LIFO COGS (in rising prices).</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 2: Forgetting Tax Effects on Equity</h4>
               <p class="text-sm">When adjusting retained earnings, multiply LIFO reserve by <strong>(1 Tax Rate)</strong>. The full reserve doesn't flow to equity; some went to taxes.</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 3: Using Ending Instead of Average Inventory</h4>
               <p class="text-sm">Inventory turnover requires <strong>average inventory</strong> (Beginning + Ending) / 2. Using only ending inventory is wrong and gives incorrect turnover.</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 4: Confusing LIFO Liquidation with LIFO Reserve</h4>
               <p class="text-sm">LIFO liquidation occurs when sales > purchases, selling old cheaper inventory and inflating profits. LIFO reserve is the difference between FIFO and LIFO inventory values. Different concepts!</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 5: Reversing Inflation Effects</h4>
               <p class="text-sm">In rising prices: LIFO has lower inventory, higher COGS, lower net income. In falling prices: effects reverse. Don't mix them up!</p>
             </div>
@@ -858,10 +860,10 @@
         </div>
 
         <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
-          <a href="5. Advanced Analysis of Cash Flow Statements.html" class="flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+          <a href="5. Advanced Analysis of Cash Flow Statements.html" class="flex items-center px-4 py-2 text-sm font-medium text-black bg-card-bg border-2 border-black transition-colors">
             Chapter 5: Advanced Cash Flow Analysis
           </a>
-          <a href="7. Analysis of Long-Term Assets.html" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+          <a href="7. Analysis of Long-Term Assets.html" class="flex items-center px-4 py-2 text-sm font-medium text-white bg-black border-2 border-black transition-colors">
             Chapter 7: Long-Term Assets â†’
           </a>
         </div>
@@ -871,7 +873,7 @@
   </div>
 
   <div class="fixed bottom-6 left-6 z-50">
-    <a href="index.html" class="flex items-center px-4 py-3 bg-indigo-600 text-white rounded-lg shadow-lg hover:bg-indigo-700 transition-colors">
+    <a href="index.html" class="flex items-center px-4 py-3 bg-black text-white border-2 border-black shadow-lg transition-colors">
       Back to Menu
     </a>
   </div>
