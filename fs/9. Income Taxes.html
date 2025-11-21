@@ -11,14 +11,14 @@
 
   <style>
     :root {
-      --primary: #1e40af;
-      --primary-light: #3b82f6;
-      --accent: #06b6d4;
-      --text: #1f2937;
-      --text-light: #6b7280;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: #e5e7eb;
+      --primary: #000000;
+      --primary-light: #333333;
+      --accent: #666666;
+      --text: #000000;
+      --text-light: #666666;
+      --bg: #ffffff;
+      --card-bg: #f5f5f5;
+      --border: #d0d0d0;
     }
 
     body {
@@ -28,17 +28,15 @@
       background-color: var(--bg);
     }
 
-    .gradient-bg {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
-    }
+    .gradient-bg { background: #000000; }
 
     .content-section {
       background: var(--card-bg);
-      border-radius: 16px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border-radius: 0;
+      box-shadow: none;
       padding: 2rem;
       margin-bottom: 2rem;
-      border: 1px solid var(--border);
+      border: 2px solid #000000;
     }
 
     .section-header {
@@ -46,15 +44,15 @@
       align-items: center;
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
-      border-bottom: 2px solid #f1f5f9;
+      border-bottom: 2px solid #d0d0d0;
     }
 
     .section-number {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      background: #000000;
       color: white;
       width: 2.5rem;
       height: 2.5rem;
-      border-radius: 50%;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -291,7 +289,7 @@
         <section id="introduction" class="content-section">
           <div class="section-header">
             <div class="section-number">1</div>
-            <h2 class="section-title">Introduction to Income Tax Accounting</h2>
+            <h2 class="section-title">INTRODUCTION TO INCOME TAX ACCOUNTING</h2>
           </div>
 
           <p>A company's financial statements are prepared using accounting principles (like IFRS or U.S. GAAP), while its tax obligations are determined by tax laws set by the government. These two sets of rules are often different, leading to discrepancies between the profit a company reports to investors and the income on which it actually pays taxes.</p>
@@ -311,7 +309,7 @@
         <section id="key-differences" class="content-section">
           <div class="section-header">
             <div class="section-number">2</div>
-            <h2 class="section-title">Key Differences: Accounting Profit vs. Taxable Income</h2>
+            <h2 class="section-title">KEY DIFFERENCES: ACCOUNTING PROFIT VS. TAXABLE INCOME</h2>
           </div>
 
           <p>Understanding the following core terms is essential for income tax analysis:</p>
@@ -377,7 +375,7 @@
         <section id="deferred-taxes" class="content-section">
           <div class="section-header">
             <div class="section-number">3</div>
-            <h2 class="section-title">Deferred Tax Assets and Liabilities (DTAs and DTLs)</h2>
+            <h2 class="section-title">DEFERRED TAX ASSETS AND LIABILITIES (DTAS AND DTLS)</h2>
           </div>
 
           <p>Deferred taxes arise from temporary differences between accounting profit and taxable income. They represent future tax effects of transactions that have already been recognized in the financial statements.</p>
@@ -404,14 +402,14 @@
                 <td><strong>When does it arise?</strong></td>
                 <td>When accounting profit is <strong>less than</strong> taxable income now, but will be higher in the future. This happens when:
                   <ul class="mt-2 space-y-1">
-                    <li>‚Ä¢ The carrying amount of an asset > its tax base.</li>
-                    <li>‚Ä¢ The tax base of a liability > its carrying amount.</li>
+                    <li>‚ÄThe carrying amount of an asset > its tax base.</li>
+                    <li>‚ÄThe tax base of a liability > its carrying amount.</li>
                   </ul>
                 </td>
                 <td>When accounting profit is <strong>greater than</strong> taxable income now, but will be lower in the future. This happens when:
                   <ul class="mt-2 space-y-1">
-                    <li>‚Ä¢ The tax base of an asset > its carrying amount.</li>
-                    <li>‚Ä¢ The carrying amount of a liability > its tax base.</li>
+                    <li>‚ÄThe tax base of an asset > its carrying amount.</li>
+                    <li>‚ÄThe carrying amount of a liability > its tax base.</li>
                   </ul>
                 </td>
               </tr>
@@ -471,7 +469,7 @@
         <section id="tax-rates" class="content-section">
           <div class="section-header">
             <div class="section-number">4</div>
-            <h2 class="section-title">Corporate Income Tax Rates for Analysis</h2>
+            <h2 class="section-title">CORPORATE INCOME TAX RATES FOR ANALYSIS</h2>
           </div>
 
           <p>Analysts use different tax rates to evaluate a company's earnings and cash flows:</p>
@@ -520,7 +518,7 @@
         <section id="presentation" class="content-section">
           <div class="section-header">
             <div class="section-number">5</div>
-            <h2 class="section-title">Presentation and Disclosure in Financial Statements</h2>
+            <h2 class="section-title">PRESENTATION AND DISCLOSURE IN FINANCIAL STATEMENTS</h2>
           </div>
 
           <div class="subsection">
@@ -541,8 +539,8 @@
             <h3>Offsetting DTAs and DTLs</h3>
             <p>A company can only present a single net deferred tax asset or liability if specific conditions are met:</p>
             <ul class="space-y-2 mt-3">
-              <li>‚Ä¢ The entity must have a legally enforceable right to offset current tax assets and liabilities.</li>
-              <li>‚Ä¢ The deferred tax items must relate to the same tax authority (e.g., both are federal taxes in the same country).</li>
+              <li>‚ÄThe entity must have a legally enforceable right to offset current tax assets and liabilities.</li>
+              <li>‚ÄThe deferred tax items must relate to the same tax authority (e.g., both are federal taxes in the same country).</li>
             </ul>
           </div>
 
@@ -554,17 +552,17 @@
               <div class="info-box">
                 <h4 class="font-semibold text-primary mb-2">IFRS Requirements:</h4>
                 <ul class="space-y-1">
-                  <li>‚Ä¢ Required for both public and private companies</li>
-                  <li>‚Ä¢ Allows two formats: monetary amounts or tax rates</li>
-                  <li>‚Ä¢ Can compare average effective rate to applicable rate</li>
+                  <li>‚ÄRequired for both public and private companies</li>
+                  <li>‚ÄAllows two formats: monetary amounts or tax rates</li>
+                  <li>‚ÄCan compare average effective rate to applicable rate</li>
                 </ul>
               </div>
               <div class="info-box">
                 <h4 class="font-semibold text-primary mb-2">U.S. GAAP Requirements:</h4>
                 <ul class="space-y-1">
-                  <li>‚Ä¢ Required only for public companies</li>
-                  <li>‚Ä¢ Must use domestic federal statutory tax rate</li>
-                  <li>‚Ä¢ Reconciliation shows specific adjustments</li>
+                  <li>‚ÄRequired only for public companies</li>
+                  <li>‚ÄMust use domestic federal statutory tax rate</li>
+                  <li>‚ÄReconciliation shows specific adjustments</li>
                 </ul>
               </div>
             </div>
@@ -575,29 +573,29 @@
         <section id="exam-focus" class="content-section">
           <div class="section-header">
             <div class="section-number">6</div>
-            <h2 class="section-title">Exam Focus & Key Formulas</h2>
+            <h2 class="section-title">EXAM FOCUS & KEY FORMULAS</h2>
           </div>
 
           <div class="exam-tip">
             <h4 class="font-semibold mb-3">Exam Weight & High-Yield Topics</h4>
             <p class="mb-2">Income taxes typically account for 2-3 questions on the CFA Level I exam. Focus on:</p>
             <ul class="space-y-1">
-              <li>‚Ä¢ Calculating income tax expense from current tax and changes in deferred taxes</li>
-              <li>‚Ä¢ Identifying situations that create DTAs vs. DTLs</li>
-              <li>‚Ä¢ Distinguishing temporary from permanent differences</li>
-              <li>‚Ä¢ Effective tax rate calculations and interpretation</li>
-              <li>‚Ä¢ Impact of tax rate changes on deferred tax balances</li>
+              <li>‚ÄCalculating income tax expense from current tax and changes in deferred taxes</li>
+              <li>‚ÄIdentifying situations that create DTAs vs. DTLs</li>
+              <li>‚ÄDistinguishing temporary from permanent differences</li>
+              <li>‚ÄEffective tax rate calculations and interpretation</li>
+              <li>‚ÄImpact of tax rate changes on deferred tax balances</li>
             </ul>
           </div>
 
-          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Essential Formulas</h3>
+          <h3 class="text-xl font-semibold mt-8 mb-4">ESSENTIAL FORMULAS</h3>
 
           <div class="subsection">
             <h4>1. Income Tax Expense</h4>
             <div class="formula-box">
-              Income Tax Expense = Current Tax Payable + Œî DTL ‚àí Œî DTA
+              Income Tax Expense = Current Tax Payable + ŒDTL ŒDTA
             </div>
-            <p class="text-sm text-gray-600 mt-2">where Œî = Change in deferred tax asset or liability during the period</p>
+            <p class="text-sm text-gray-600 mt-2">where Œ= Change in deferred tax asset or liability during the period</p>
           </div>
 
           <div class="subsection">
@@ -611,7 +609,7 @@
           <div class="subsection">
             <h4>3. Current Tax Payable</h4>
             <div class="formula-box">
-              Current Tax Payable = Taxable Income √ó Statutory Tax Rate
+              Current Tax Payable = Taxable Income √Statutory Tax Rate
             </div>
             <p class="text-sm text-gray-600 mt-2">Actual cash tax owed to tax authorities</p>
           </div>
@@ -619,7 +617,7 @@
           <div class="subsection">
             <h4>4. Deferred Tax Liability or Asset</h4>
             <div class="formula-box">
-              DTL or DTA = Temporary Difference √ó Tax Rate
+              DTL or DTA = Temporary Difference √Tax Rate
             </div>
             <p class="text-sm text-gray-600 mt-2">DTL when accounting income < taxable income; DTA when accounting income > taxable income</p>
           </div>
@@ -636,7 +634,7 @@
             <h4 class="font-semibold mb-3">Critical Exam Concepts</h4>
             <ul class="space-y-2">
               <li><strong>DTA Recognition:</strong> DTAs require probable future taxable income. Increases in valuation allowances signal deteriorating prospects.</li>
-              <li><strong>Tax Rate Changes:</strong> When tax rates change, existing DTAs and DTLs must be revalued using the new rate. Rate increase ‚Üí DTL increases (expense), DTA increases (income).</li>
+              <li><strong>Tax Rate Changes:</strong> When tax rates change, existing DTAs and DTLs must be revalued using the new rate. Rate increase DTL increases (expense), DTA increases (income).</li>
               <li><strong>Permanent vs. Temporary:</strong> Permanent differences affect only ETR, not deferred taxes. Temporary differences reverse over time and create DTAs/DTLs.</li>
               <li><strong>Cash Flow Impact:</strong> Deferred taxes are non-cash items. Increases in DTLs are added back to net income in operating cash flow.</li>
             </ul>
@@ -650,7 +648,7 @@
 
   <!-- Back to Menu Button -->
   <a href="./index.html" class="back-button">
-    ‚Üê Back to Menu
+    Back to Menu
   </a>
 
 </body>
