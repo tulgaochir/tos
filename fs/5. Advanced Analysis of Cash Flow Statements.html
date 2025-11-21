@@ -76,24 +76,23 @@
     }
 
     .formula-box {
-      font-family: 'Fira Code', monospace;
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-      border: 1px solid #0ea5e9;
-      border-left: 5px solid var(--accent);
+      font-family: 'Courier New', monospace;
+      background: #f5f5f5;
+      border: 2px solid #000000;
+      border-left: 6px solid #000000;
       padding: 1.5rem;
-      margin: 2rem 0;
-      font-size: 1.05em;
-      overflow-x: auto;
-      border-radius: 0 8px 8px 0;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
       line-height: 1.8;
+      font-weight: 600;
+      letter-spacing: 0.02em;
       text-align: center;
     }
 
     .example-box {
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-      border: 1px solid #0ea5e9;
-      border-radius: 12px;
+      background: var(--card-bg);
+      border: 2px solid #000000;
+      border-radius: 0;
       padding: 1.5rem;
       margin: 1.5rem 0;
       position: relative;
@@ -104,20 +103,20 @@
       position: absolute;
       top: -12px;
       left: 1rem;
-      background: #0ea5e9;
+      background: #000000;
       color: white;
       padding: 0.25rem 0.75rem;
-      border-radius: 4px;
+      border-radius: 0;
       font-size: 0.875rem;
       font-weight: 600;
     }
 
     .highlight-box {
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-      border-left: 4px solid #f59e0b;
+      background: var(--card-bg);
+      border-left: 4px solid #000000;
       padding: 1rem 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0;
     }
 
     .nav-buttons {
@@ -193,9 +192,9 @@
     .ratio-section {
       margin-bottom: 1.8rem;
       padding: 1rem;
-      background-color: #f8faff;
-      border: 1px dashed #d0e7ff;
-      border-radius: 8px;
+      background-color: var(--card-bg);
+      border: 1px dashed #000000;
+      border-radius: 0;
     }
 
     .ratio-section p {
@@ -213,10 +212,10 @@
     .flex-item {
       flex: 1 1 300px;
       padding: 1rem;
-      background-color: #f1f8ff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      background-color: var(--card-bg);
+      border: 2px solid #000000;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .flex-item h4 {
@@ -303,7 +302,7 @@
                 <span>Assess ability to meet obligations (debt, dividends)</span>
               </div>
               <div class="flex items-center">
-                <span class="text-purple-600 mr-2">â€¢</span>
+                <span class="font-semibold mr-2">â€¢</span>
                 <span>Determine need for external financing</span>
               </div>
             </div>
@@ -324,15 +323,15 @@
             <div class="flex-item">
               <h4>Growth Companies</h4>
               <ul class="text-sm space-y-1">
-                <li>â€Operating cash flow (CFO) may be negative initially due to heavy reinvestment</li>
-                <li>â€Sustained positive CFO is key to long-term viability</li>
+                <li>ï¿½Operating cash flow (CFO) may be negative initially due to heavy reinvestment</li>
+                <li>ï¿½Sustained positive CFO is key to long-term viability</li>
               </ul>
             </div>
             <div class="flex-item">
               <h4>Mature Companies</h4>
               <ul class="text-sm space-y-1">
-                <li>â€Operating activities should be the primary source of cash</li>
-                <li>â€Negative CFO may signal strategic payouts (dividends, buybacks)</li>
+                <li>ï¿½Operating activities should be the primary source of cash</li>
+                <li>ï¿½Negative CFO may signal strategic payouts (dividends, buybacks)</li>
               </ul>
             </div>
           </div>
@@ -405,12 +404,12 @@
           <p class="mb-4">The cash available to all investors (debt and equity holders).</p>
 
           <div class="formula-box">
-            FCFF = CFO + Interest Ã(1 Tax Rate) FCInv
+            FCFF = CFO + Interest ï¿½(1 Tax Rate) FCInv
           </div>
 
           <p class="mb-2">Or from Net Income:</p>
           <div class="formula-box">
-            FCFF = NI + NCC + Interest Ã(1 Tax Rate) FCInv WCInv
+            FCFF = NI + NCC + Interest ï¿½(1 Tax Rate) FCInv WCInv
           </div>
 
           <p class="text-sm text-gray-600 italic mb-6">Where: NI = Net Income, NCC = Non-Cash Charges, FCInv = Fixed Capital Investment, WCInv = Working Capital Investment.</p>
@@ -418,8 +417,8 @@
           <div class="example-box">
             <h4 class="font-semibold font-bold mb-2">FCFF Calculation</h4>
             <p class="mb-3">CFO = $500K, Interest = $50K, Tax Rate = 30%, FCInv = $120K</p>
-            <p class="mb-2">After-tax interest = <span class="bg-yellow-100 px-2 py-1 rounded text-sm font-mono">$50K Ã(1 0.30) = $35K</span></p>
-            <p>FCFF = <span class="bg-green-100 px-2 py-1 rounded text-sm font-mono">$500K + $35K $120K = $415K</span></p>
+            <p class="mb-2">After-tax interest = <span class="bg-card-bg px-2 py-1 text-sm font-mono border-2 border-black">$50K ï¿½(1 0.30) = $35K</span></p>
+            <p>FCFF = <span class="bg-card-bg px-2 py-1 text-sm font-mono border-2 border-black">$500K + $35K $120K = $415K</span></p>
           </div>
 
           <h4 class="font-semibold mt-8 mb-3 text-gray-800">Free Cash Flow to Equity (FCFE)</h4>
@@ -439,13 +438,13 @@
           <div class="example-box">
             <h4 class="font-semibold font-bold mb-2">FCFE Calculation</h4>
             <p class="mb-3">CFO = $500K, FCInv = $120K, New Debt = $80K, Debt Repaid = $50K</p>
-            <p class="mb-2">Net Borrowing = <span class="bg-yellow-100 px-2 py-1 rounded text-sm font-mono">$80K $50K = $30K</span></p>
-            <p>FCFE = <span class="bg-green-100 px-2 py-1 rounded text-sm font-mono">$500K $120K + $30K = $410K</span></p>
+            <p class="mb-2">Net Borrowing = <span class="bg-card-bg px-2 py-1 text-sm font-mono border-2 border-black">$80K $50K = $30K</span></p>
+            <p>FCFE = <span class="bg-card-bg px-2 py-1 text-sm font-mono border-2 border-black">$500K $120K + $30K = $410K</span></p>
           </div>
 
           <h4 class="font-semibold mt-8 mb-3 text-gray-800">Converting Between FCFF and FCFE</h4>
           <div class="formula-box">
-            FCFE = FCFF Interest Ã(1 Tax Rate) + Net Borrowing
+            FCFE = FCFF Interest ï¿½(1 Tax Rate) + Net Borrowing
           </div>
           <p class="text-sm text-gray-600 italic mt-2">Exam tip: Remember to use after-tax interest when converting between FCFF and FCFE</p>
         </section>
@@ -567,23 +566,23 @@
             <h4 class="font-semibold mb-3">High-Yield Topics</h4>
             <p class="mb-2">Focus your study time on these key areas:</p>
             <ul class="space-y-1">
-              <li>â€Free Cash Flow calculations (FCFF vs. FCFE) - expect 2-3 questions</li>
-              <li>â€Cash flow quality assessment and red flags</li>
-              <li>â€Converting between different FCF formulas</li>
-              <li>â€Coverage ratio interpretations</li>
-              <li>â€Common-size analysis applications</li>
+              <li>ï¿½Free Cash Flow calculations (FCFF vs. FCFE) - expect 2-3 questions</li>
+              <li>ï¿½Cash flow quality assessment and red flags</li>
+              <li>ï¿½Converting between different FCF formulas</li>
+              <li>ï¿½Coverage ratio interpretations</li>
+              <li>ï¿½Common-size analysis applications</li>
             </ul>
           </div>
 
           <h3 class="text-xl font-semibold mt-8 mb-4">ESSENTIAL FORMULAS</h3>
-          <div class="bg-gray-50 border-2 border-blue-300 rounded-lg p-6 mb-6">
+          <div class="bg-card-bg border-2 border-black p-6 mb-6">
             <div class="space-y-4">
               <div>
                 <h4 class="font-semibold font-bold mb-2">1. FCFF (Free Cash Flow to the Firm)</h4>
                 <div class="formula-box text-base">
-                  FCFF = CFO + Interest Ã(1 Tax Rate) FCInv
+                  FCFF = CFO + Interest ï¿½(1 Tax Rate) FCInv
                 </div>
-                <p class="text-sm text-gray-600 mt-1">Alternative: FCFF = NI + NCC + Interest Ã(1 T) FCInv WCInv</p>
+                <p class="text-sm text-gray-600 mt-1">Alternative: FCFF = NI + NCC + Interest ï¿½(1 T) FCInv WCInv</p>
               </div>
 
               <div>
@@ -597,7 +596,7 @@
               <div>
                 <h4 class="font-semibold font-bold mb-2">3. Converting FCFF to FCFE</h4>
                 <div class="formula-box text-base">
-                  FCFE = FCFF Interest Ã(1 Tax Rate) + Net Borrowing
+                  FCFE = FCFF Interest ï¿½(1 Tax Rate) + Net Borrowing
                 </div>
               </div>
 
@@ -628,27 +627,27 @@
 
           <h3 class="text-xl font-semibold mt-8 mb-4">COMMON EXAM PITFALLS</h3>
           <div class="space-y-4">
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 1: Forgetting After-Tax Interest</h4>
-              <p class="text-sm">When calculating FCFF from CFO, add back <strong>after-tax interest</strong>: Interest Ã(1 Tax Rate). Don't use gross interest.</p>
+              <p class="text-sm">When calculating FCFF from CFO, add back <strong>after-tax interest</strong>: Interest ï¿½(1 Tax Rate). Don't use gross interest.</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 2: Confusing Net Borrowing with Total Debt</h4>
               <p class="text-sm">Net Borrowing = New Debt Issued Debt Repaid. This is the change in debt, not the total outstanding balance.</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 3: Working Capital Sign Errors</h4>
               <p class="text-sm">Increase in working capital = USE of cash (negative). Decrease in working capital = SOURCE of cash (positive).</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 4: Using Ending Instead of Average Balances</h4>
               <p class="text-sm">For CROA and CROE, use <strong>average</strong> balances: (Beginning + Ending) / 2. Don't use just ending balance.</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="bg-card-bg border-l-4 border-black p-4">
               <h4 class="font-semibold font-bold mb-2">Pitfall 5: Missing Cash Flow Quality Signals</h4>
               <p class="text-sm">Red flags: High net income but low CFO, declining CFO/Revenue ratio, CFO consistently < Net Income, negative CFO in mature companies.</p>
             </div>

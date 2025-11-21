@@ -87,27 +87,27 @@
     }
 
     .info-box {
-      background: #eff6ff;
-      border-left: 4px solid var(--accent);
+      background: var(--card-bg);
+      border-left: 4px solid #000000;
       padding: 1rem 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0;
     }
 
     .success-box {
-      background: #ecfdf5;
+      background: var(--card-bg);
       border-left: 4px solid var(--success);
       padding: 1rem 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0;
     }
 
     .warning-box {
-      background: #fffbeb;
+      background: var(--card-bg);
       border-left: 4px solid var(--warning);
       padding: 1rem 1.5rem;
       margin: 1.5rem 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0;
     }
 
     .comparison-table {
@@ -115,13 +115,13 @@
       border-collapse: collapse;
       margin: 1.5rem 0;
       background: white;
-      border-radius: 12px;
+      border-radius: 0;
       overflow: hidden;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
 
     .comparison-table th {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      background: var(--primary);
       color: white;
       padding: 1rem;
       text-align: left;
@@ -135,18 +135,18 @@
     }
 
     .comparison-table tr:nth-child(even) {
-      background: #f8fafc;
+      background: var(--card-bg);
     }
 
     .comparison-table tr:hover {
-      background: #eff6ff;
+      background: var(--card-bg);
     }
 
     .ifrs-badge {
       background: var(--ifrs);
       color: white;
       padding: 0.25rem 0.75rem;
-      border-radius: 12px;
+      border-radius: 0;
       font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
@@ -157,7 +157,7 @@
       background: var(--gaap);
       color: white;
       padding: 0.25rem 0.75rem;
-      border-radius: 12px;
+      border-radius: 0;
       font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
@@ -165,17 +165,17 @@
     }
 
     .difference-highlight {
-      background: #fef3c7;
-      border: 1px solid #f59e0b;
+      background: var(--card-bg);
+      border: 2px solid #000000;
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: 0;
       margin: 1rem 0;
     }
 
     .impact-card {
-      background: #f0f9ff;
+      background: #f5f5f5;
       border: 1px solid #bfdbfe;
-      border-radius: 12px;
+      border-radius: 0;
       padding: 1.5rem;
       margin: 1rem 0;
     }
@@ -195,18 +195,18 @@
     }
 
     .standard-card {
-      border-radius: 12px;
+      border-radius: 0;
       padding: 1.5rem;
       text-align: center;
     }
 
     .ifrs-card {
-      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      background: var(--card-bg);
       border: 2px solid var(--ifrs);
     }
 
     .gaap-card {
-      background: linear-gradient(135deg, #fee2e2, #fecaca);
+      background: var(--card-bg);
       border: 2px solid var(--gaap);
     }
 
@@ -214,7 +214,7 @@
       position: sticky;
       top: 2rem;
       background: var(--card-bg);
-      border-radius: 12px;
+      border-radius: 0;
       padding: 1.5rem;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       border: 1px solid var(--border);
@@ -253,7 +253,7 @@
       position: fixed;
       bottom: 2rem;
       left: 2rem;
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      background: var(--primary);
       color: white;
       padding: 0.75rem 1.5rem;
       border-radius: 50px;
@@ -339,13 +339,13 @@
             <div class="standard-card ifrs-card">
               <div class="ifrs-badge mb-3">IFRS</div>
               <h3 class="text-lg font-semibold font-bold">International Financial Reporting Standards</h3>
-              <p class="text-green-700">Principles-based approach with broad frameworks requiring significant professional judgment</p>
+              <p class="text-black">Principles-based approach with broad frameworks requiring significant professional judgment</p>
               <p class="text-sm font-semibold mt-2">Issued by IASB</p>
             </div>
             <div class="standard-card gaap-card">
               <div class="gaap-badge mb-3">U.S. GAAP</div>
               <h3 class="text-lg font-semibold font-bold">Generally Accepted Accounting Principles</h3>
-              <p class="text-red-700">Rules-based approach with detailed, prescriptive guidance for specific transactions</p>
+              <p class="text-black">Rules-based approach with detailed, prescriptive guidance for specific transactions</p>
               <p class="text-sm font-semibold mt-2">Issued by FASB</p>
             </div>
           </div>
@@ -470,7 +470,7 @@
               <tr>
                 <td><strong>Goodwill</strong></td>
                 <td colspan="2" class="text-center">
-                  <div class="bg-blue-50 p-3 rounded">
+                  <div class="bg-card-bg 50 p-3 rounded">
                     Not amortized under either standard. Tested annually for impairment.<br>
                     Impairment losses <strong>cannot be reversed</strong> under both standards.
                   </div>
@@ -623,7 +623,7 @@
 
           <h3 class="text-xl font-semibold mt-8 mb-4">COMPREHENSIVE IFRS VS. GAAP QUICK REFERENCE</h3>
 
-          <div class="bg-gray-50 border-2 border-blue-300 rounded-lg p-6 mb-6">
+          <div class="bg-gray-50 border-2 border-black 300 rounded-lg p-6 mb-6">
             <h4 class="font-semibold font-bold mb-4">Complete Differences Table</h4>
 
             <table class="comparison-table text-xs">
@@ -652,15 +652,15 @@
                 </tr>
                 <tr>
                   <td>Write-down Reversals</td>
-                  <td class="bg-green-50"><strong>ALLOWED</strong></td>
-                  <td class="bg-red-50"><strong>PROHIBITED</strong></td>
+                  <td class="bg-card-bg 50"><strong>ALLOWED</strong></td>
+                  <td class="bg-card-bg 50"><strong>PROHIBITED</strong></td>
                   <td>IFRS can boost future profits</td>
                 </tr>
                 <tr>
                   <td rowspan="3"><strong>LONG-LIVED ASSETS</strong></td>
                   <td>PPE Revaluation</td>
-                  <td class="bg-green-50"><strong>PERMITTED</strong></td>
-                  <td class="bg-red-50"><strong>NOT ALLOWED</strong></td>
+                  <td class="bg-card-bg 50"><strong>PERMITTED</strong></td>
+                  <td class="bg-card-bg 50"><strong>NOT ALLOWED</strong></td>
                   <td>IFRS can inflate asset values</td>
                 </tr>
                 <tr>
@@ -671,20 +671,20 @@
                 </tr>
                 <tr>
                   <td>Impairment Reversals</td>
-                  <td class="bg-green-50"><strong>ALLOWED</strong> (except goodwill)</td>
-                  <td class="bg-red-50"><strong>PROHIBITED</strong></td>
+                  <td class="bg-card-bg 50"><strong>ALLOWED</strong> (except goodwill)</td>
+                  <td class="bg-card-bg 50"><strong>PROHIBITED</strong></td>
                   <td>IFRS more volatile asset values</td>
                 </tr>
                 <tr>
                   <td rowspan="2"><strong>INTANGIBLES</strong></td>
                   <td>Development Costs</td>
-                  <td class="bg-green-50"><strong>CAPITALIZED</strong> if criteria met</td>
-                  <td class="bg-red-50"><strong>EXPENSED</strong></td>
+                  <td class="bg-card-bg 50"><strong>CAPITALIZED</strong> if criteria met</td>
+                  <td class="bg-card-bg 50"><strong>EXPENSED</strong></td>
                   <td>IFRS higher profit & assets</td>
                 </tr>
                 <tr>
                   <td>Research Costs</td>
-                  <td colspan="2" class="text-center bg-blue-50">BOTH expense as incurred</td>
+                  <td colspan="2" class="text-center bg-card-bg 50">BOTH expense as incurred</td>
                   <td>No difference</td>
                 </tr>
                 <tr>
@@ -721,7 +721,7 @@
                 </tr>
                 <tr>
                   <td>Revenue Recognition</td>
-                  <td colspan="2" class="text-center bg-blue-50">BOTH use 5-step model (ASC 606 / IFRS 15)</td>
+                  <td colspan="2" class="text-center bg-card-bg 50">BOTH use 5-step model (ASC 606 / IFRS 15)</td>
                   <td>Converged since 2018</td>
                 </tr>
                 <tr>
@@ -734,14 +734,14 @@
                 <tr>
                   <td><strong>TAXES</strong></td>
                   <td>Deferred Tax Classification</td>
-                  <td colspan="2" class="text-center bg-blue-50">BOTH classify as non-current</td>
+                  <td colspan="2" class="text-center bg-card-bg 50">BOTH classify as non-current</td>
                   <td>Now converged</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <div class="bg-gray-50 border-2 border-purple-300 rounded-lg p-6 mb-6">
+          <div class="bg-gray-50 border-2 border-black 300 rounded-lg p-6 mb-6">
             <h4 class="font-semibold font-bold mb-4">Convergence Status Update</h4>
 
             <div class="space-y-4">
@@ -781,25 +781,25 @@
           <h3 class="text-xl font-semibold mt-8 mb-4">COMMON EXAM TRAPS & MISTAKES</h3>
 
           <div class="space-y-4">
-            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+            <div class="bg-card-bg 50 border-l-4 border-black 500 p-4">
               <h4 class="font-semibold font-bold mb-2">Trap #1: Assuming Convergence</h4>
               <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Thinking all standards have converged post-2018</p>
               <p class="text-sm text-gray-700"><strong>Reality:</strong> While revenue recognition converged, major differences persist in inventory (LIFO), development costs, and reversals. Don't assume similarity!</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+            <div class="bg-card-bg 50 border-l-4 border-black 500 p-4">
               <h4 class="font-semibold font-bold mb-2">Trap #2: Reversal Applicability</h4>
               <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Thinking IFRS allows ALL impairment reversals</p>
               <p class="text-sm text-gray-700"><strong>Reality:</strong> IFRS allows reversals for PPE and inventory, but NOT for goodwill. Goodwill impairment is permanent under BOTH standards.</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+            <div class="bg-card-bg 50 border-l-4 border-black 500 p-4">
               <h4 class="font-semibold font-bold mb-2">Trap #3: Cash Flow Comparability</h4>
               <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Directly comparing CFO between IFRS and GAAP companies</p>
               <p class="text-sm text-gray-700"><strong>Reality:</strong> IFRS flexibility in classifying interest/dividends means CFO may not be comparable. Analysts must reclassify for apples-to-apples comparison.</p>
             </div>
 
-            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+            <div class="bg-card-bg 50 border-l-4 border-black 500 p-4">
               <h4 class="font-semibold font-bold mb-2">Trap #4: Development vs. Research</h4>
               <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Thinking IFRS capitalizes ALL R&D</p>
               <p class="text-sm text-gray-700"><strong>Reality:</strong> IFRS capitalizes DEVELOPMENT costs only (after technical feasibility). Research costs are ALWAYS expensed under both standards.</p>
