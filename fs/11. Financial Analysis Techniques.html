@@ -11,14 +11,14 @@
 
   <style>
     :root {
-      --primary: #1e40af;
-      --primary-light: #3b82f6;
-      --accent: #06b6d4;
-      --text: #1f2937;
-      --text-light: #6b7280;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: #e5e7eb;
+      --primary: #000000;
+      --primary-light: #333333;
+      --accent: #666666;
+      --text: #000000;
+      --text-light: #666666;
+      --bg: #ffffff;
+      --card-bg: #f5f5f5;
+      --border: #d0d0d0;
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
@@ -31,17 +31,15 @@
       background-color: var(--bg);
     }
 
-    .gradient-bg {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
-    }
+    .gradient-bg { background: #000000; }
 
     .content-section {
       background: var(--card-bg);
-      border-radius: 16px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border-radius: 0;
+      box-shadow: none;
       padding: 2rem;
       margin-bottom: 2rem;
-      border: 1px solid var(--border);
+      border: 2px solid #000000;
     }
 
     .section-header {
@@ -49,15 +47,15 @@
       align-items: center;
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
-      border-bottom: 2px solid #f1f5f9;
+      border-bottom: 2px solid #d0d0d0;
     }
 
     .section-number {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      background: #000000;
       color: white;
       width: 2.5rem;
       height: 2.5rem;
-      border-radius: 50%;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -354,7 +352,7 @@
       <!-- Table of Contents -->
       <div class="lg:w-1/4">
         <div class="toc">
-          <h3>📋 Chapter Contents</h3>
+          <h3>Chapter Contents</h3>
           <ul>
             <li><a href="#introduction">1. Introduction</a></li>
             <li><a href="#analysis-process">2. Analysis Process</a></li>
@@ -378,13 +376,13 @@
         <section id="introduction" class="content-section">
           <div class="section-header">
             <div class="section-number">1</div>
-            <h2 class="section-title">Introduction</h2>
+            <h2 class="section-title">INTRODUCTION</h2>
           </div>
           
           <p>Financial analysis is the process of interpreting a company's financial data to assess its performance, valuation, and risk. It forms the foundation of informed investment and credit decisions.</p>
           
           <div class="info-box">
-            <p><strong>🎯 Purpose:</strong> Financial analysis helps investors, creditors, and other stakeholders make informed decisions by providing insights into a company's financial health, operational efficiency, and future prospects.</p>
+            <p><strong>Purpose:</strong> Financial analysis helps investors, creditors, and other stakeholders make informed decisions by providing insights into a company's financial health, operational efficiency, and future prospects.</p>
           </div>
         </section>
 
@@ -392,13 +390,13 @@
         <section id="analysis-process" class="content-section">
           <div class="section-header">
             <div class="section-number">2</div>
-            <h2 class="section-title">The Financial Analysis Process</h2>
+            <h2 class="section-title">THE FINANCIAL ANALYSIS PROCESS</h2>
           </div>
           
           <p>A thorough financial analysis follows a structured, multi-phase framework to ensure a comprehensive and objective outcome.</p>
 
           <div class="subsection">
-            <h3>🔄 The Six Phases of Financial Statement Analysis</h3>
+            <h3>The Six Phases of Financial Statement Analysis</h3>
             <div class="process-steps">
               <div class="process-step">
                 <div class="step-number">1</div>
@@ -438,33 +436,33 @@
         <section id="analytical-tools" class="content-section">
           <div class="section-header">
             <div class="section-number">3</div>
-            <h2 class="section-title">Analytical Tools and Techniques</h2>
+            <h2 class="section-title">ANALYTICAL TOOLS AND TECHNIQUES</h2>
           </div>
           
           <p>Analysts use several core tools to dissect financial statements. These tools are designed to be "size-neutral" to allow for effective comparison between companies of different scales.</p>
           
           <div class="tools-grid">
             <div class="tool-card">
-              <h4>📊 Financial Ratio Analysis</h4>
+              <h4>Financial Ratio Analysis</h4>
               <p>The calculation and interpretation of ratios that relate different financial statement items to each other. This is the cornerstone of financial analysis.</p>
             </div>
             <div class="tool-card">
-              <h4>📈 Vertical Analysis (Common-Size)</h4>
+              <h4>Vertical Analysis (Common-Size)</h4>
               <p>Expresses each line item as a percentage of a common base item. For income statements, the base is total revenue; for balance sheets, it's total assets.</p>
             </div>
             <div class="tool-card">
-              <h4>📉 Horizontal Analysis (Trend)</h4>
+              <h4>Horizontal Analysis (Trend)</h4>
               <p>Compares financial statement items across different time periods to identify patterns and growth trends.</p>
             </div>
           </div>
 
           <div class="warning-box">
-            <h4 class="font-semibold mb-2">⚠️ Considerations for Comparison</h4>
+            <h4 class="font-semibold mb-2">Considerations for Comparison</h4>
             <p>When comparing companies, especially internationally, analysts must make adjustments for differences in:</p>
             <ul class="mt-2 space-y-1">
-              <li><strong>💱 Currency:</strong> Translate statements into a common currency</li>
-              <li><strong>📋 Accounting Standards:</strong> Adjust for differences between IFRS and U.S. GAAP</li>
-              <li><strong>📅 Fiscal Year-Ends:</strong> Be mindful of seasonality and economic conditions</li>
+              <li><strong>Currency:</strong> Translate statements into a common currency</li>
+              <li><strong>Accounting Standards:</strong> Adjust for differences between IFRS and U.S. GAAP</li>
+              <li><strong>Fiscal Year-Ends:</strong> Be mindful of seasonality and economic conditions</li>
             </ul>
           </div>
         </section>
@@ -473,28 +471,28 @@
         <section id="ratio-categories" class="content-section">
           <div class="section-header">
             <div class="section-number">4</div>
-            <h2 class="section-title">Categories of Financial Ratios</h2>
+            <h2 class="section-title">CATEGORIES OF FINANCIAL RATIOS</h2>
           </div>
           
           <p>Financial ratios are typically grouped into categories that measure different aspects of a company's performance and financial health.</p>
 
           <div class="success-box">
-            <h4 class="font-semibold mb-2">✅ The Value and Limitations of Ratio Analysis</h4>
+            <h4 class="font-semibold mb-2">The Value and Limitations of Ratio Analysis</h4>
             <div class="grid md:grid-cols-2 gap-4 mt-3">
               <div>
                 <p><strong>Benefits:</strong></p>
                 <ul class="space-y-1">
-                  <li>• Allow comparison of companies of different sizes</li>
-                  <li>• Help analyze past performance and future potential</li>
-                  <li>• Monitor effectiveness of management strategies</li>
+                  <li>�Allow comparison of companies of different sizes</li>
+                  <li>�Help analyze past performance and future potential</li>
+                  <li>�Monitor effectiveness of management strategies</li>
                 </ul>
               </div>
               <div>
                 <p><strong>Limitations:</strong></p>
                 <ul class="space-y-1">
-                  <li>• Require context and comparison</li>
-                  <li>• Affected by different accounting policies</li>
-                  <li>• Can be manipulated</li>
+                  <li>�Require context and comparison</li>
+                  <li>�Affected by different accounting policies</li>
+                  <li>�Can be manipulated</li>
                 </ul>
               </div>
             </div>
@@ -503,7 +501,7 @@
 
         <!-- Activity Ratios -->
         <section id="activity-ratios" class="ratio-category">
-          <h3>A. 🔄 Activity Ratios (Efficiency Ratios)</h3>
+          <h3>A. Activity Ratios (Efficiency Ratios)</h3>
           <p>These ratios measure how efficiently a company is managing its assets and operations.</p>
           
           <table class="comparison-table">
@@ -637,7 +635,7 @@
 
         <!-- Solvency Ratios -->
         <section id="solvency-ratios" class="ratio-category">
-          <h3>C. 🏦 Solvency Ratios</h3>
+          <h3>C. Solvency Ratios</h3>
           <p>These ratios assess a company's ability to meet its long-term debt obligations.</p>
           
           <table class="comparison-table">
@@ -697,7 +695,7 @@
 
         <!-- Profitability Ratios -->
         <section id="profitability-ratios" class="ratio-category">
-          <h3>D. 💰 Profitability Ratios</h3>
+          <h3>D. Profitability Ratios</h3>
           <p>These ratios measure a company's ability to generate profits from its sales and assets.</p>
           
           <table class="comparison-table">
@@ -759,40 +757,40 @@
         <section id="dupont-analysis" class="content-section">
           <div class="section-header">
             <div class="section-number">5</div>
-            <h2 class="section-title">DuPont Analysis: The Decomposition of ROE</h2>
+            <h2 class="section-title">DUPONT ANALYSIS: THE DECOMPOSITION OF ROE</h2>
           </div>
           
           <p>DuPont analysis breaks down Return on Equity (ROE) into its key components, providing deeper insight into what drives a company's profitability.</p>
 
           <div class="dupont-box">
-            <h3 class="text-lg font-semibold mb-4">🔍 The DuPont Models</h3>
+            <h3 class="text-lg font-semibold mb-4">The DuPont Models</h3>
             
             <div class="dupont-formula">
               <h4 class="font-semibold text-primary mb-2">3-Part Model:</h4>
-              <div class="text-lg font-bold">ROE = Net Profit Margin × Asset Turnover × Financial Leverage</div>
-              <div class="text-sm mt-2 text-gray-600">ROE = (Net Income ÷ Revenue) × (Revenue ÷ Avg Assets) × (Avg Assets ÷ Avg Equity)</div>
+              <div class="text-lg font-bold">ROE = Net Profit Margin �Asset Turnover �Financial Leverage</div>
+              <div class="text-sm mt-2 text-gray-600">ROE = (Net Income ÷ Revenue) �(Revenue ÷ Avg Assets) �(Avg Assets ÷ Avg Equity)</div>
             </div>
             
             <div class="dupont-formula">
               <h4 class="font-semibold text-primary mb-2">5-Part Model:</h4>
-              <div class="text-lg font-bold">ROE = Tax Burden × Interest Burden × EBIT Margin × Asset Turnover × Financial Leverage</div>
-              <div class="text-sm mt-2 text-gray-600">ROE = (Net Income ÷ EBT) × (EBT ÷ EBIT) × (EBIT ÷ Revenue) × (Revenue ÷ Avg Assets) × (Avg Assets ÷ Avg Equity)</div>
+              <div class="text-lg font-bold">ROE = Tax Burden �Interest Burden �EBIT Margin �Asset Turnover �Financial Leverage</div>
+              <div class="text-sm mt-2 text-gray-600">ROE = (Net Income ÷ EBT) �(EBT ÷ EBIT) �(EBIT ÷ Revenue) �(Revenue ÷ Avg Assets) �(Avg Assets ÷ Avg Equity)</div>
             </div>
           </div>
 
           <div class="success-box">
-            <h4 class="font-semibold mb-2">🔑 Key Insights from DuPont Analysis:</h4>
+            <h4 class="font-semibold mb-2">Key Insights from DuPont Analysis:</h4>
             <div class="grid md:grid-cols-2 gap-4 mt-3">
               <div>
                 <ul class="space-y-2">
-                  <li><strong>💹 Profit Margin:</strong> A measure of operating efficiency</li>
-                  <li><strong>🔄 Asset Turnover:</strong> A measure of asset use efficiency</li>
+                  <li><strong>Profit Margin:</strong> A measure of operating efficiency</li>
+                  <li><strong>Asset Turnover:</strong> A measure of asset use efficiency</li>
                 </ul>
               </div>
               <div>
                 <ul class="space-y-2">
-                  <li><strong>⚖️ Financial Leverage:</strong> Shows how the company uses debt to amplify returns</li>
-                  <li><strong>🏦 Tax & Interest Burden:</strong> Isolate the effects of financing and tax strategy</li>
+                  <li><strong>Financial Leverage:</strong> Shows how the company uses debt to amplify returns</li>
+                  <li><strong>Tax & Interest Burden:</strong> Isolate the effects of financing and tax strategy</li>
                 </ul>
               </div>
             </div>
@@ -803,14 +801,14 @@
         <section id="modeling-forecasting" class="content-section">
           <div class="section-header">
             <div class="section-number">6</div>
-            <h2 class="section-title">Model Building and Forecasting</h2>
+            <h2 class="section-title">MODEL BUILDING AND FORECASTING</h2>
           </div>
           
           <p>Ratio analysis is a critical input for building pro-forma financial statements and forecasting future performance. Analysts use several techniques to handle uncertainty.</p>
           
           <div class="tools-grid">
             <div class="tool-card">
-              <h4>📈 Sensitivity Analysis</h4>
+              <h4>Sensitivity Analysis</h4>
               <p>A "what-if" analysis that shows how changing one variable (e.g., sales growth) impacts a forecast. Helps identify key value drivers.</p>
             </div>
             <div class="tool-card">
@@ -824,7 +822,7 @@
           </div>
 
           <div class="info-box">
-            <p><strong>💡 Best Practice:</strong> Combine multiple forecasting techniques and always validate models against historical performance and industry benchmarks. Remember that financial analysis is as much art as science, requiring judgment and experience to interpret results correctly.</p>
+            <p><strong>Best Practice:</strong> Combine multiple forecasting techniques and always validate models against historical performance and industry benchmarks. Remember that financial analysis is as much art as science, requiring judgment and experience to interpret results correctly.</p>
           </div>
         </section>
 
@@ -832,35 +830,35 @@
         <section id="mastery" class="content-section">
           <div class="section-header">
             <div class="section-number">7</div>
-            <h2 class="section-title">Essential Formulas and Exam Focus</h2>
+            <h2 class="section-title">ESSENTIAL FORMULAS AND EXAM FOCUS</h2>
           </div>
 
           <div class="highlight-box">
             <h4 class="font-semibold mb-3">Key Exam Areas</h4>
             <p class="text-sm mb-2">Financial analysis techniques are high-yield exam material. Master these areas:</p>
             <ul class="text-sm space-y-1">
-              <li>• DuPont Analysis - Both 3-part and 5-part decomposition formulas</li>
-              <li>• All ratio formulas - Activity, liquidity, solvency, and profitability</li>
-              <li>• Ratio interpretation - Higher vs. lower is better varies by ratio type</li>
-              <li>• Cash conversion cycle - Formula and interpretation</li>
-              <li>• Average vs. ending balance sheet values in ratios</li>
+              <li>�DuPont Analysis - Both 3-part and 5-part decomposition formulas</li>
+              <li>�All ratio formulas - Activity, liquidity, solvency, and profitability</li>
+              <li>�Ratio interpretation - Higher vs. lower is better varies by ratio type</li>
+              <li>�Cash conversion cycle - Formula and interpretation</li>
+              <li>�Average vs. ending balance sheet values in ratios</li>
             </ul>
           </div>
 
-          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Essential Formulas</h3>
+          <h3 class="text-xl font-semibold mt-8 mb-4">ESSENTIAL FORMULAS</h3>
 
           <h4 class="text-lg font-semibold mt-6 mb-3 text-gray-800">DuPont Analysis</h4>
 
           <div class="formula-box">
             3-Part DuPont Model:<br>
-            ROE = Net Profit Margin × Asset Turnover × Financial Leverage<br>
-            ROE = (Net Income / Revenue) × (Revenue / Avg Total Assets) × (Avg Total Assets / Avg Total Equity)
+            ROE = Net Profit Margin �Asset Turnover �Financial Leverage<br>
+            ROE = (Net Income / Revenue) �(Revenue / Avg Total Assets) �(Avg Total Assets / Avg Total Equity)
           </div>
 
           <div class="formula-box">
             5-Part DuPont Model (Extended):<br>
-            ROE = Tax Burden × Interest Burden × EBIT Margin × Asset Turnover × Leverage<br>
-            ROE = (NI/EBT) × (EBT/EBIT) × (EBIT/Rev) × (Rev/Avg Assets) × (Avg Assets/Avg Equity)
+            ROE = Tax Burden �Interest Burden �EBIT Margin �Asset Turnover �Leverage<br>
+            ROE = (NI/EBT) �(EBT/EBIT) �(EBIT/Rev) �(Rev/Avg Assets) �(Avg Assets/Avg Equity)
           </div>
 
           <h4 class="text-lg font-semibold mt-6 mb-3 text-gray-800">Activity Ratios (Efficiency)</h4>
@@ -896,7 +894,7 @@
           </div>
 
           <div class="formula-box">
-            Cash Conversion Cycle (CCC) = DOH + DSO − Days Payables<br>
+            Cash Conversion Cycle (CCC) = DOH + DSO Days Payables<br>
             <span class="text-sm">(Lower = Better; measures days cash is tied up in operations)</span>
           </div>
 
@@ -973,21 +971,21 @@
           </div>
 
           <div class="formula-box">
-            Return on Common Equity = (Net Income − Preferred Dividends) / Average Common Equity
+            Return on Common Equity = (Net Income Preferred Dividends) / Average Common Equity
           </div>
 
-          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Common Pitfalls</h3>
+          <h3 class="text-xl font-semibold mt-8 mb-4">COMMON PITFALLS</h3>
 
           <div class="space-y-3">
             <p><strong>DuPont Component Confusion:</strong> The 3-part model uses Net Profit Margin, Asset Turnover, and Financial Leverage. The 5-part model decomposes NPM further into Tax Burden, Interest Burden, and EBIT Margin while keeping Asset Turnover and Leverage. Don't mix up the components.</p>
 
             <p><strong>Turnover vs. Days Ratios:</strong> Turnover ratios (higher = better) measure how many times an asset cycles per period. Days ratios (lower = better, except DPO) measure the length of time assets are held. Days Payables is an exception—higher DPO can be good because it means the company delays payments and conserves cash longer.</p>
 
-            <p><strong>Cash Conversion Cycle Formula:</strong> The formula is CCC = DOH + DSO − Days Payables. Many candidates mistakenly add all three components. Remember to SUBTRACT payables because delaying supplier payments improves cash flow.</p>
+            <p><strong>Cash Conversion Cycle Formula:</strong> The formula is CCC = DOH + DSO Days Payables. Many candidates mistakenly add all three components. Remember to SUBTRACT payables because delaying supplier payments improves cash flow.</p>
 
             <p><strong>Average vs. Ending Balances:</strong> ROE, ROA, and all turnover ratios must use AVERAGE balance sheet values, calculated as (Beginning + Ending) / 2. Using only ending balances will produce incorrect results.</p>
 
-            <p><strong>ROE and Financial Leverage:</strong> From DuPont, ROE = ROA × Financial Leverage. If two companies have the same ROA but different ROEs, the difference is due to leverage. Higher leverage amplifies ROE but also increases financial risk.</p>
+            <p><strong>ROE and Financial Leverage:</strong> From DuPont, ROE = ROA �Financial Leverage. If two companies have the same ROA but different ROEs, the difference is due to leverage. Higher leverage amplifies ROE but also increases financial risk.</p>
 
             <p><strong>Inventory vs. Receivables Turnover Bases:</strong> Inventory Turnover uses COGS in the numerator, while Receivables Turnover uses Revenue. Don't confuse the two—they measure different aspects of efficiency.</p>
           </div>
@@ -1000,7 +998,7 @@
 
   <!-- Back to Menu Button -->
   <a href="./index.html" class="back-button">
-    ← Back to Menu
+    Back to Menu
   </a>
 
 </body>

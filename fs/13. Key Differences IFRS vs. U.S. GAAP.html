@@ -11,14 +11,14 @@
 
   <style>
     :root {
-      --primary: #1e40af;
-      --primary-light: #3b82f6;
-      --accent: #06b6d4;
-      --text: #1f2937;
-      --text-light: #6b7280;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: #e5e7eb;
+      --primary: #000000;
+      --primary-light: #333333;
+      --accent: #666666;
+      --text: #000000;
+      --text-light: #666666;
+      --bg: #ffffff;
+      --card-bg: #f5f5f5;
+      --border: #d0d0d0;
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
@@ -33,17 +33,15 @@
       background-color: var(--bg);
     }
 
-    .gradient-bg {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent) 100%);
-    }
+    .gradient-bg { background: #000000; }
 
     .content-section {
       background: var(--card-bg);
-      border-radius: 16px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border-radius: 0;
+      box-shadow: none;
       padding: 2rem;
       margin-bottom: 2rem;
-      border: 1px solid var(--border);
+      border: 2px solid #000000;
     }
 
     .section-header {
@@ -51,15 +49,15 @@
       align-items: center;
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
-      border-bottom: 2px solid #f1f5f9;
+      border-bottom: 2px solid #d0d0d0;
     }
 
     .section-number {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      background: #000000;
       color: white;
       width: 2.5rem;
       height: 2.5rem;
-      border-radius: 50%;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -320,7 +318,7 @@
       <!-- Table of Contents -->
       <div class="lg:w-1/4">
         <div class="toc">
-          <h3>📋 Chapter Contents</h3>
+          <h3>Chapter Contents</h3>
           <ul>
             <li><a href="#framework">1. General Framework</a></li>
             <li><a href="#income-statement">2. Income Statement</a></li>
@@ -340,15 +338,15 @@
           <div class="standards-comparison">
             <div class="standard-card ifrs-card">
               <div class="ifrs-badge mb-3">IFRS</div>
-              <h3 class="text-lg font-semibold text-green-800">International Financial Reporting Standards</h3>
+              <h3 class="text-lg font-semibold font-bold">International Financial Reporting Standards</h3>
               <p class="text-green-700">Principles-based approach with broad frameworks requiring significant professional judgment</p>
-              <p class="text-sm text-green-600 mt-2">Issued by IASB</p>
+              <p class="text-sm font-semibold mt-2">Issued by IASB</p>
             </div>
             <div class="standard-card gaap-card">
               <div class="gaap-badge mb-3">U.S. GAAP</div>
-              <h3 class="text-lg font-semibold text-red-800">Generally Accepted Accounting Principles</h3>
+              <h3 class="text-lg font-semibold font-bold">Generally Accepted Accounting Principles</h3>
               <p class="text-red-700">Rules-based approach with detailed, prescriptive guidance for specific transactions</p>
-              <p class="text-sm text-red-600 mt-2">Issued by FASB</p>
+              <p class="text-sm font-semibold mt-2">Issued by FASB</p>
             </div>
           </div>
         </section>
@@ -357,7 +355,7 @@
         <section id="framework" class="content-section">
           <div class="section-header">
             <div class="section-number">1</div>
-            <h2 class="section-title">General Framework</h2>
+            <h2 class="section-title">GENERAL FRAMEWORK</h2>
           </div>
           
           <p>Understanding the foundational differences in standard-setting and philosophy is key to interpreting financial statements accurately.</p>
@@ -385,7 +383,7 @@
           </table>
           
           <div class="difference-highlight">
-            <p><strong>🔑 Key Difference:</strong> This is the most fundamental difference. IFRS allows more flexibility but requires deeper judgment. U.S. GAAP reduces ambiguity but can lead to mechanical application.</p>
+            <p><strong>Key Difference:</strong> This is the most fundamental difference. IFRS allows more flexibility but requires deeper judgment. U.S. GAAP reduces ambiguity but can lead to mechanical application.</p>
           </div>
         </section>
 
@@ -393,7 +391,7 @@
         <section id="income-statement" class="content-section">
           <div class="section-header">
             <div class="section-number">2</div>
-            <h2 class="section-title">Income Statement</h2>
+            <h2 class="section-title">INCOME STATEMENT</h2>
           </div>
           
           <p>Key differences in revenue recognition and expense treatment impact profitability reporting.</p>
@@ -426,7 +424,7 @@
           </table>
           
           <div class="impact-card">
-            <h4>📊 Impact Analysis</h4>
+            <h4>Impact Analysis</h4>
             <p>IFRS companies may report higher profits and stronger balance sheets due to capitalization of development costs. Revenue timing differences are usually minor but can affect growth trends.</p>
           </div>
         </section>
@@ -435,7 +433,7 @@
         <section id="balance-sheet" class="content-section">
           <div class="section-header">
             <div class="section-number">3</div>
-            <h2 class="section-title">Balance Sheet</h2>
+            <h2 class="section-title">BALANCE SHEET</h2>
           </div>
           
           <p>Differences in asset valuation and impairment rules affect reported equity and asset quality.</p>
@@ -487,7 +485,7 @@
           </table>
           
           <div class="warning-box">
-            <h4 class="font-semibold mb-2">⚠️ Analytical Implications</h4>
+            <h4 class="font-semibold mb-2">Analytical Implications</h4>
             <p>In inflation, U.S. GAAP LIFO users show lower profits and inventory values. IFRS companies can boost profits later via reversal of write-downs. Revaluation can inflate asset values on IFRS balance sheets.</p>
           </div>
         </section>
@@ -496,7 +494,7 @@
         <section id="cash-flow" class="content-section">
           <div class="section-header">
             <div class="section-number">4</div>
-            <h2 class="section-title">Cash Flow Statement</h2>
+            <h2 class="section-title">CASH FLOW STATEMENT</h2>
           </div>
           
           <p>Classification differences affect comparability of operating cash flow.</p>
@@ -539,7 +537,7 @@
           </table>
           
           <div class="info-box">
-            <p><strong>💡 Analyst Adjustment:</strong> These differences make CFO less comparable. Analysts often reclassify interest/dividends to ensure consistency. Overdraft treatment affects reported cash balances.</p>
+            <p><strong>Analyst Adjustment:</strong> These differences make CFO less comparable. Analysts often reclassify interest/dividends to ensure consistency. Overdraft treatment affects reported cash balances.</p>
           </div>
         </section>
 
@@ -547,7 +545,7 @@
         <section id="other-areas" class="content-section">
           <div class="section-header">
             <div class="section-number">5</div>
-            <h2 class="section-title">Other Key Areas</h2>
+            <h2 class="section-title">OTHER KEY AREAS</h2>
           </div>
           
           <p>Additional differences that impact financial analysis and comparability.</p>
@@ -575,29 +573,29 @@
           </table>
           
           <div class="success-box">
-            <h4 class="font-semibold mb-2">📈 Summary Impact</h4>
+            <h4 class="font-semibold mb-2">Summary Impact</h4>
             <p>Lease differences affect income statement expense patterns. Pension differences can cause smoother reported pension expense under U.S. GAAP due to amortization.</p>
           </div>
 
           <div class="subsection">
-            <h3>🔍 Key Takeaways for Analysts</h3>
+            <h3>Key Takeaways for Analysts</h3>
             <div class="grid md:grid-cols-2 gap-4">
               <div class="impact-card">
-                <h4>🎯 Comparability Challenges</h4>
+                <h4>Comparability Challenges</h4>
                 <ul class="space-y-1">
-                  <li>• Cash flow classifications vary significantly</li>
-                  <li>• Asset valuation methods differ</li>
-                  <li>• Revenue recognition timing can vary</li>
-                  <li>• Impairment reversals create asymmetry</li>
+                  <li>�Cash flow classifications vary significantly</li>
+                  <li>�Asset valuation methods differ</li>
+                  <li>�Revenue recognition timing can vary</li>
+                  <li>�Impairment reversals create asymmetry</li>
                 </ul>
               </div>
               <div class="impact-card">
-                <h4>🛠️ Analyst Adjustments Needed</h4>
+                <h4>Analyst Adjustments Needed</h4>
                 <ul class="space-y-1">
-                  <li>• Reclassify cash flow items for consistency</li>
-                  <li>• Adjust for development cost capitalization</li>
-                  <li>• Consider LIFO inventory effects</li>
-                  <li>• Normalize for revaluation gains</li>
+                  <li>�Reclassify cash flow items for consistency</li>
+                  <li>�Adjust for development cost capitalization</li>
+                  <li>�Consider LIFO inventory effects</li>
+                  <li>�Normalize for revaluation gains</li>
                 </ul>
               </div>
             </div>
@@ -608,25 +606,25 @@
         <section id="mastery" class="content-section">
           <div class="section-header">
             <div class="section-number">6</div>
-            <h2 class="section-title">90th Percentile Mastery: Key Concepts & Exam Tips</h2>
+            <h2 class="section-title">90TH PERCENTILE MASTERY: KEY CONCEPTS & EXAM TIPS</h2>
           </div>
 
           <div class="warning-box">
-            <h4 class="font-semibold mb-3">🎯 Exam Weight & Focus Areas</h4>
+            <h4 class="font-semibold mb-3">Exam Weight & Focus Areas</h4>
             <p class="text-sm mb-2">This reading typically accounts for 2-4% of Level I exam weight. Focus on:</p>
             <ul class="text-sm space-y-1">
-              <li>• <strong>LIFO prohibition under IFRS</strong> - This is THE most tested difference</li>
-              <li>• <strong>Development cost capitalization</strong> - IFRS allows, GAAP expenses</li>
-              <li>• <strong>Impairment reversals</strong> - IFRS allows (except goodwill), GAAP prohibits</li>
-              <li>• <strong>Cash flow classification differences</strong> - Interest, dividends treatment</li>
-              <li>• <strong>Principles vs. rules-based</strong> - Fundamental philosophical difference</li>
+              <li>�<strong>LIFO prohibition under IFRS</strong> - This is THE most tested difference</li>
+              <li>�<strong>Development cost capitalization</strong> - IFRS allows, GAAP expenses</li>
+              <li>�<strong>Impairment reversals</strong> - IFRS allows (except goodwill), GAAP prohibits</li>
+              <li>�<strong>Cash flow classification differences</strong> - Interest, dividends treatment</li>
+              <li>�<strong>Principles vs. rules-based</strong> - Fundamental philosophical difference</li>
             </ul>
           </div>
 
-          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Comprehensive IFRS vs. GAAP Quick Reference</h3>
+          <h3 class="text-xl font-semibold mt-8 mb-4">COMPREHENSIVE IFRS VS. GAAP QUICK REFERENCE</h3>
 
           <div class="bg-gray-50 border-2 border-blue-300 rounded-lg p-6 mb-6">
-            <h4 class="font-semibold text-blue-800 mb-4">📊 Complete Differences Table</h4>
+            <h4 class="font-semibold font-bold mb-4">Complete Differences Table</h4>
 
             <table class="comparison-table text-xs">
               <thead>
@@ -744,11 +742,11 @@
           </div>
 
           <div class="bg-gray-50 border-2 border-purple-300 rounded-lg p-6 mb-6">
-            <h4 class="font-semibold text-purple-800 mb-4">📈 Convergence Status Update</h4>
+            <h4 class="font-semibold font-bold mb-4">Convergence Status Update</h4>
 
             <div class="space-y-4">
               <div class="bg-white p-4 rounded border border-gray-200">
-                <h5 class="font-semibold text-green-800 mb-2">✅ Areas of Convergence (Fully Aligned)</h5>
+                <h5 class="font-semibold font-bold mb-2">Areas of Convergence (Fully Aligned)</h5>
                 <ul class="text-sm space-y-1 list-disc list-inside">
                   <li><strong>Revenue Recognition:</strong> Both use IFRS 15 / ASC 606 (5-step model) since 2018</li>
                   <li><strong>Deferred Taxes:</strong> Both classify as non-current on balance sheet</li>
@@ -759,7 +757,7 @@
               </div>
 
               <div class="bg-white p-4 rounded border border-gray-200">
-                <h5 class="font-semibold text-yellow-800 mb-2">⚠️ Partial Convergence (Some Differences Remain)</h5>
+                <h5 class="font-semibold font-bold mb-2">Partial Convergence (Some Differences Remain)</h5>
                 <ul class="text-sm space-y-1 list-disc list-inside">
                   <li><strong>Lease Accounting:</strong> Both require capitalization, but GAAP has dual model</li>
                   <li><strong>Financial Instruments:</strong> Similar impairment approach (expected credit loss), minor differences</li>
@@ -768,7 +766,7 @@
               </div>
 
               <div class="bg-white p-4 rounded border border-gray-200">
-                <h5 class="font-semibold text-red-800 mb-2">❌ Key Persistent Differences (Unlikely to Converge)</h5>
+                <h5 class="font-semibold font-bold mb-2">Key Persistent Differences (Unlikely to Converge)</h5>
                 <ul class="text-sm space-y-1 list-disc list-inside">
                   <li><strong>LIFO:</strong> IFRS prohibition vs. GAAP allowance (for tax reasons in U.S.)</li>
                   <li><strong>Development Costs:</strong> IFRS capitalization vs. GAAP expensing</li>
@@ -780,35 +778,35 @@
             </div>
           </div>
 
-          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Common Exam Traps & Mistakes</h3>
+          <h3 class="text-xl font-semibold mt-8 mb-4">COMMON EXAM TRAPS & MISTAKES</h3>
 
           <div class="space-y-4">
             <div class="bg-red-50 border-l-4 border-red-500 p-4">
-              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #1: Assuming Convergence</h4>
+              <h4 class="font-semibold font-bold mb-2">Trap #1: Assuming Convergence</h4>
               <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Thinking all standards have converged post-2018</p>
               <p class="text-sm text-gray-700"><strong>Reality:</strong> While revenue recognition converged, major differences persist in inventory (LIFO), development costs, and reversals. Don't assume similarity!</p>
             </div>
 
             <div class="bg-red-50 border-l-4 border-red-500 p-4">
-              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #2: Reversal Applicability</h4>
+              <h4 class="font-semibold font-bold mb-2">Trap #2: Reversal Applicability</h4>
               <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Thinking IFRS allows ALL impairment reversals</p>
               <p class="text-sm text-gray-700"><strong>Reality:</strong> IFRS allows reversals for PPE and inventory, but NOT for goodwill. Goodwill impairment is permanent under BOTH standards.</p>
             </div>
 
             <div class="bg-red-50 border-l-4 border-red-500 p-4">
-              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #3: Cash Flow Comparability</h4>
+              <h4 class="font-semibold font-bold mb-2">Trap #3: Cash Flow Comparability</h4>
               <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Directly comparing CFO between IFRS and GAAP companies</p>
               <p class="text-sm text-gray-700"><strong>Reality:</strong> IFRS flexibility in classifying interest/dividends means CFO may not be comparable. Analysts must reclassify for apples-to-apples comparison.</p>
             </div>
 
             <div class="bg-red-50 border-l-4 border-red-500 p-4">
-              <h4 class="font-semibold text-red-800 mb-2">⚠️ Trap #4: Development vs. Research</h4>
+              <h4 class="font-semibold font-bold mb-2">Trap #4: Development vs. Research</h4>
               <p class="text-sm text-gray-700 mb-2"><strong>Mistake:</strong> Thinking IFRS capitalizes ALL R&D</p>
               <p class="text-sm text-gray-700"><strong>Reality:</strong> IFRS capitalizes DEVELOPMENT costs only (after technical feasibility). Research costs are ALWAYS expensed under both standards.</p>
             </div>
           </div>
 
-          <h3 class="text-xl font-semibold mt-8 mb-4 text-gray-800">Common Pitfalls</h3>
+          <h3 class="text-xl font-semibold mt-8 mb-4">COMMON PITFALLS</h3>
 
           <div class="space-y-3">
             <p><strong>LIFO Prohibition (Most Tested):</strong> IFRS prohibits LIFO; U.S. GAAP allows it. During rising prices, LIFO results in higher COGS, lower ending inventory, and lower net income compared to FIFO. This is the #1 tested IFRS/GAAP difference on the exam.</p>
@@ -838,7 +836,7 @@
 
   <!-- Back to Menu Button -->
   <a href="./index.html" class="back-button">
-    ← Back to Menu
+    Back to Menu
   </a>
 
 </body>

@@ -9,29 +9,41 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .nav-card {
-            transition: all 0.3s ease-in-out;
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            transition: all 0.2s ease-in-out;
+            background: #f5f5f5;
+            border: 2px solid #000000;
         }
         .nav-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: none;
+            box-shadow: none;
+            background: #e8e8e8;
         }
         .chapter-number {
-            background: linear-gradient(135deg, #3b82f6, #1e40af);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #000000;
+            font-weight: 700;
         }
         .hero-gradient {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+            background: #000000;
+        }
+        .arrow-icon {
+            width: 32px;
+            height: 32px;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .nav-card:hover .arrow-icon {
+            background: #333333;
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-white">
     <div class="hero-gradient text-white">
         <div class="container mx-auto px-6 py-16 text-center">
-            <h1 class="text-5xl md:text-6xl font-bold mb-6">Financial Statement Analysis</h1>
-            <p class="text-xl opacity-90 max-w-2xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">FINANCIAL STATEMENT ANALYSIS</h1>
+            <p class="text-xl max-w-2xl mx-auto">
                 A comprehensive guide covering all essential topics for the CFA Level 1 exam.
             </p>
         </div>
@@ -40,152 +52,152 @@
     <div class="container mx-auto px-6 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             
-            <a href="./1. Introduction to Financial Statement Analysis.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./1. Introduction to Financial Statement Analysis.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">01</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Introduction to FSA</h3>
+                <h3 class="text-lg font-bold mb-3">Introduction to FSA</h3>
                 <p class="text-gray-600 text-sm">Framework, users, scope, and regulatory sources.</p>
             </a>
 
-            <a href="./2. Analyzing Income Statements.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./2. Analyzing Income Statements.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">02</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Analyzing Income Statements</h3>
+                <h3 class="text-lg font-bold mb-3">Analyzing Income Statements</h3>
                 <p class="text-gray-600 text-sm">Revenue recognition, expense analysis, and EPS calculations.</p>
             </a>
 
-            <a href="./3. Analysis of Balance Sheets.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./3. Analysis of Balance Sheets.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">03</span>
-                     <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Analysis of Balance Sheets</h3>
+                <h3 class="text-lg font-bold mb-3">Analysis of Balance Sheets</h3>
                 <p class="text-gray-600 text-sm">Assets, liabilities, equity, and financial instruments analysis.</p>
             </a>
 
-            <a href="./4. Analyzing the Statement of Cash Flows.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./4. Analyzing the Statement of Cash Flows.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">04</span>
-                     <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Analyzing Cash Flow Statements</h3>
+                <h3 class="text-lg font-bold mb-3">Analyzing Cash Flow Statements</h3>
                 <p class="text-gray-600 text-sm">Operating, investing, and financing activities; direct vs. indirect method.</p>
             </a>
 
-            <a href="./5. Advanced Analysis of Cash Flow Statements.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./5. Advanced Analysis of Cash Flow Statements.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">05</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Advanced Cash Flow Analysis</h3>
+                <h3 class="text-lg font-bold mb-3">Advanced Cash Flow Analysis</h3>
                 <p class="text-gray-600 text-sm">Free cash flow, cash flow ratios, and advanced techniques.</p>
             </a>
 
-            <a href="./6. Analysis of Inventories.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./6. Analysis of Inventories.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">06</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Analysis of Inventories</h3>
+                <h3 class="text-lg font-bold mb-3">Analysis of Inventories</h3>
                 <p class="text-gray-600 text-sm">Valuation methods (FIFO vs. LIFO) and management ratios.</p>
             </a>
 
-            <a href="./7. Analysis of Long-Term Assets.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./7. Analysis of Long-Term Assets.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">07</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Analysis of Long-Term Assets</h3>
+                <h3 class="text-lg font-bold mb-3">Analysis of Long-Term Assets</h3>
                 <p class="text-gray-600 text-sm">PP&E, intangible assets, impairment, and depreciation methods.</p>
             </a>
 
-            <a href="./8. Topics in Long-Term Liabilities and Equity.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./8. Topics in Long-Term Liabilities and Equity.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">08</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Long-Term Liabilities & Equity</h3>
+                <h3 class="text-lg font-bold mb-3">Long-Term Liabilities & Equity</h3>
                 <p class="text-gray-600 text-sm">Leases, pension plans, and share-based compensation.</p>
             </a>
 
-            <a href="./9. Income Taxes.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./9. Income Taxes.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">09</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Income Taxes</h3>
+                <h3 class="text-lg font-bold mb-3">Income Taxes</h3>
                 <p class="text-gray-600 text-sm">Deferred taxes, temporary differences, and tax accounting.</p>
             </a>
 
-            <a href="./10. Financial Reporting Quality.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./10. Financial Reporting Quality.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">10</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Financial Reporting Quality</h3>
+                <h3 class="text-lg font-bold mb-3">Financial Reporting Quality</h3>
                 <p class="text-gray-600 text-sm">Earnings quality, red flags, and manipulation detection.</p>
             </a>
 
-            <a href="./11. Financial Analysis Techniques.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./11. Financial Analysis Techniques.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">11</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Financial Analysis Techniques</h3>
+                <h3 class="text-lg font-bold mb-3">Financial Analysis Techniques</h3>
                 <p class="text-gray-600 text-sm">Ratio analysis, DuPont framework, and comparative methods.</p>
             </a>
 
-            <a href="./12. Financial Statement Modeling.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./12. Financial Statement Modeling.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">12</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Financial Statement Modeling</h3>
+                <h3 class="text-lg font-bold mb-3">Financial Statement Modeling</h3>
                 <p class="text-gray-600 text-sm">Building pro-forma statements and forecasting techniques.</p>
             </a>
 
-            <a href="./13. Key Differences IFRS vs. U.S. GAAP.html" class="nav-card block rounded-2xl shadow-sm border border-gray-100 p-6 group">
+            <a href="./13. Key Differences IFRS vs. U.S. GAAP.html" class="nav-card block p-6 group">
                 <div class="flex items-start justify-between mb-4">
                     <span class="chapter-number text-2xl font-bold">13</span>
-                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <i class="fas fa-arrow-right text-blue-600 text-sm"></i>
+                    <div class="arrow-icon">
+                        <span class="text-white text-sm">→</span>
                     </div>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">IFRS vs. U.S. GAAP</h3>
+                <h3 class="text-lg font-bold mb-3">IFRS vs. U.S. GAAP</h3>
                 <p class="text-gray-600 text-sm">Comparative analysis of international and U.S. accounting standards.</p>
             </a>
         </div>
     </div>
 
-    <footer class="bg-gray-900 text-white py-8 mt-16">
+    <footer class="bg-black text-white py-8 mt-16">
         <div class="container mx-auto px-6 text-center">
             <p class="text-gray-400">&copy; 2025 CFA Study Materials | Financial Statement Analysis</p>
         </div>
