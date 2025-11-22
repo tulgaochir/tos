@@ -386,12 +386,19 @@
 
             <h3>Converting Between Periodicities</h3>
             <p>We can convert an annual percentage rate (APR) from one compounding frequency to another using the following formula:</p>
-            <div class="formula">
-                (1 + APRₘ/m)ᵐ = (1 + APRₙ/n)ⁿ<br><br>
-                Where:<br>
-                <strong>APRₘ</strong> = APR with m compounding periods per year.<br>
-                <strong>APRₙ</strong> = APR with n compounding periods per year.
-            </div>
+            <div class="formula-box">
+                    <span class="formula-title">Periodicity Conversion Formula</span><br><br>
+                    <span class="formula-main">
+                        (1 + APRₘ/m)ᵐ = (1 + APRₙ/n)ⁿ
+                    </span><br><br>
+                    <span class="formula-where">
+                        <strong>Where:</strong><br>
+                        APRₘ = APR with m compounding periods per year<br>
+                        APRₙ = APR with n compounding periods per year<br>
+                        m = Number of compounding periods for first rate<br>
+                        n = Number of compounding periods for second rate
+                    </span>
+                </div>
             <div class="example">
                 <strong>Example: Converting Yields</strong><br>
                 A bond has a semiannual bond basis yield (APR with m=2) of 6%. What is its equivalent yield if it were compounded quarterly (n=4)?<br>
@@ -461,7 +468,17 @@
                         <tr>
                             <td><strong>Value of the Call Option</strong></td>
                             <td>The value of the embedded call option can be calculated as:
-                                <div class="formula">Value of Call Option = Price of Option-Free Bond - Price of Callable Bond</div>
+                                <div class="formula-box">
+                    <span class="formula-title">Call Option Value Formula</span><br><br>
+                    <span class="formula-main">
+                        Value of Call Option =<br>
+                        Price of Option-Free Bond − Price of Callable Bond
+                    </span><br><br>
+                    <span class="formula-where">
+                        <strong>Note:</strong> The call option has value to the issuer,<br>
+                        reducing the price investors pay for callable bonds
+                    </span>
+                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -508,7 +525,18 @@
                         <tr>
                             <td><strong>Option-Adjusted Spread (OAS)</strong></td>
                             <td>The most advanced spread measure, used for bonds with embedded options. It is the Z-spread adjusted to remove the value of the embedded option.
-                                <div class="formula">OAS = Z-Spread - Option Value</div>
+                                <div class="formula-box">
+                    <span class="formula-title">Option-Adjusted Spread (OAS) Formula</span><br><br>
+                    <span class="formula-main">
+                        OAS = Z-Spread − Option Value
+                    </span><br><br>
+                    <span class="formula-where">
+                        <strong>Where:</strong><br>
+                        OAS = Option-Adjusted Spread<br>
+                        Z-Spread = Zero-Volatility Spread<br>
+                        Option Value = Value of embedded options
+                    </span>
+                </div>
                                 The OAS represents the pure credit and liquidity spread of a bond.
                             </td>
                             <td>Government Spot Rate Curve (adjusted for interest rate volatility)</td>
