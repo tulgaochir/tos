@@ -115,7 +115,8 @@
 
     h4 {
       color: var(--primary-light);
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      line-height: 2;
       font-weight: 600;
       margin-top: 1.5rem;
       margin-bottom: 0.75rem;
@@ -166,13 +167,15 @@
     }
 
     .formula, .formula-box {
+      display: block;
       background: #ffffff;
       border: 2px solid #000000;
       border-radius: 0;
-      padding: 1.5rem;
+      padding: 2rem 2.5rem;
       margin: 2rem 0;
       font-family: 'Courier New', monospace;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      line-height: 2;
       font-weight: 500;
       text-align: center;
     }
@@ -180,7 +183,7 @@
     .explanation, .note, .example, .warning, .info-box, .highlight-box {
       background: var(--card-bg);
       border-left: 4px solid #000000;
-      padding: 1.5rem;
+      padding: 2rem 2.5rem;
       margin: 2rem 0;
       border-radius: 0;
     }
@@ -261,10 +264,38 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
 
+    ul {
+      margin: 1rem 0;
+      padding-left: 2rem;
+      list-style-type: disc;
+    }
+
+    ol {
+      margin: 1rem 0;
+      padding-left: 2rem;
+      list-style-type: decimal;
+    }
+
+    li {
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+      display: list-item;
+    }
+
+    .info-box ul,
+    .highlight-box ul,
+    .note ul,
+    .example ul,
+    .warning ul,
+    .explanation ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
     @media (max-width: 768px) {
       h1 { font-size: 2rem; }
       .container { padding: 2rem 1rem; }
-      .section-card { padding: 1.5rem; }
+      .section-card { padding: 2rem 2.5rem; }
       h2 { font-size: 1.5rem; }
       .footer-nav { flex-direction: column; gap: 1rem; }
       .back-button {
