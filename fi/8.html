@@ -364,7 +364,15 @@
                 </ul>
 
                 <div class="formula-box">
-                    Coupon Rate = Reference Rate + Quoted Margin
+                    <span class="formula-title">Floating-Rate Coupon Formula</span><br><br>
+                    <span class="formula-main">
+                        Coupon Rate = Reference Rate + Quoted Margin
+                    </span><br><br>
+                    <span class="formula-where">
+                        <strong>Where:</strong><br>
+                        Reference Rate = Benchmark rate (e.g., LIBOR, SOFR)<br>
+                        Quoted Margin = Fixed spread over reference rate
+                    </span>
                 </div>
             </div>
 
@@ -387,7 +395,20 @@
                 </div>
 
                 <div class="formula-box">
-                    PV = Σ[(Reference Rate + Quoted Margin) × Principal / n] / (1 + (Reference Rate + DM) / n)^t + Principal / (1 + (Reference Rate + DM) / n)^N
+                    <span class="formula-title">Discount Margin Present Value Formula</span><br><br>
+                    <span class="formula-main">
+                        PV = Σ[(Reference Rate + Quoted Margin) × Principal / n]<br>
+                        ÷ (1 + (Reference Rate + DM) / n)^t<br>
+                        + Principal / (1 + (Reference Rate + DM) / n)^N
+                    </span><br><br>
+                    <span class="formula-where">
+                        <strong>Where:</strong><br>
+                        PV = Present Value (market price)<br>
+                        DM = Discount Margin<br>
+                        n = Number of coupon payments per year<br>
+                        N = Total number of periods<br>
+                        t = Period number
+                    </span>
                 </div>
 
                 <div class="note-box">
@@ -535,7 +556,14 @@
                 </div>
 
                 <div class="formula-box">
-                    Modified Duration ≈ Time to Next Reset Date
+                    <span class="formula-title">Floating-Rate Bond Duration Approximation</span><br><br>
+                    <span class="formula-main">
+                        Modified Duration ≈ Time to Next Reset Date
+                    </span><br><br>
+                    <span class="formula-where">
+                        <strong>Note:</strong> Floating-rate bonds have very low duration<br>
+                        because coupons adjust with market rates
+                    </span>
                 </div>
 
                 <div class="subsection-title">
@@ -583,13 +611,17 @@
                 </div>
 
                 <div class="formula-box">
-<span class="formula-title"></span>
-<span class="formula-main">Inverse Floater Coupon = C - L × (Reference Rate)
-                    <br></span>
-
-<span class="formula-where">where:
-C = Maximum coupon rate, L = Leverage factor</span>
-</div>
+                    <span class="formula-title">Inverse Floater Coupon Formula</span><br><br>
+                    <span class="formula-main">
+                        Inverse Floater Coupon = C − L × (Reference Rate)
+                    </span><br><br>
+                    <span class="formula-where">
+                        <strong>Where:</strong><br>
+                        C = Maximum coupon rate<br>
+                        L = Leverage factor<br>
+                        Reference Rate = Benchmark interest rate
+                    </span>
+                </div>
 
                 <div class="warning-box">
                     <div class="warning-header">

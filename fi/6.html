@@ -444,7 +444,19 @@
             <ul>
                 <li><strong>Flat Price (Clean Price)</strong>: The price of the bond excluding any accrued interest. This is the price that is typically quoted.</li>
                 <li><strong>Accrued Interest (AI)</strong>: The proportional share of the next coupon payment that belongs to the seller.
-                    <div class="formula">AI = (t / T) × PMT</div>
+                    <div class="formula-box">
+                        <span class="formula-title">Accrued Interest Formula</span><br><br>
+                        <span class="formula-main">
+                            AI = (t / T) × PMT
+                        </span><br><br>
+                        <span class="formula-where">
+                            <strong>Where:</strong><br>
+                            AI = Accrued Interest<br>
+                            t = Days from last coupon to settlement<br>
+                            T = Total days in coupon period<br>
+                            PMT = Coupon payment
+                        </span>
+                    </div>
                     Where: <strong>t</strong> = number of days from the last coupon date to the settlement date, and <strong>T</strong> = total number of days in the coupon period.
                 </li>
                 <li><strong>Full Price (Dirty Price)</strong>: The total price the buyer pays, which is the sum of the flat price and the accrued interest. This represents the true economic cost.</li>
